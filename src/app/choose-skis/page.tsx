@@ -53,7 +53,7 @@ type SkiChoice = {
   neige: Neige[];
   prix: number | null;
   tailles: number[];
-  poidsRanges?: Record<string, PoidsRange>;
+  poidsRanges?: Record<string, PoidsRange | undefined>;
   productUrl?: string;
   imageUrl?: string;
 };
