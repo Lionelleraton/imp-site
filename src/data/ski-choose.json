@@ -1,0 +1,1328 @@
+[
+  {
+    "code": "RHOCW01",
+    "nom": "DELTA SPORT CLASSIC",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      184,
+      189,
+      196,
+      201,
+      206
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHOCQ01",
+    "nom": "DELTA COURSE SKATING",
+    "technique": "Skating",
+    "niveau": [
+      "Confirmé"
+    ],
+    "frequence": [
+      "Intensive"
+    ],
+    "type": [
+      "Performance"
+    ],
+    "but": [
+      "Performance"
+    ],
+    "priorites": [
+      "Stabilité",
+      "Dynamisme"
+    ],
+    "neige": [
+      "Universel"
+    ],
+    "prix": 380.0,
+    "tailles": [
+      173,
+      180,
+      186,
+      192
+    ],
+    "poidsRanges": {
+      "173": {
+        "min": 45,
+        "max": 60
+      },
+      "180": {
+        "min": 55,
+        "max": 70
+      },
+      "186": {
+        "min": 65,
+        "max": 85
+      },
+      "192": {
+        "min": 80,
+        "max": 999
+      }
+    },
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHOCQ02",
+    "nom": "DELTA COMP SKATING",
+    "technique": "Skating",
+    "niveau": [
+      "Intermédiaire"
+    ],
+    "frequence": [
+      "Régulier",
+      "Intensive"
+    ],
+    "type": [
+      "Plaisir",
+      "Performance"
+    ],
+    "but": [
+      "Progression technique",
+      "Performance"
+    ],
+    "priorites": [
+      "Maniabilité",
+      "Stabilité"
+    ],
+    "neige": [
+      "Universel"
+    ],
+    "prix": 320.0,
+    "tailles": [
+      173,
+      180,
+      186,
+      192
+    ],
+    "poidsRanges": {
+      "173": {
+        "min": 45,
+        "max": 60
+      },
+      "180": {
+        "min": 55,
+        "max": 70
+      },
+      "186": {
+        "min": 65,
+        "max": 85
+      },
+      "192": {
+        "min": 80,
+        "max": 999
+      }
+    },
+    "productUrl": "https://www.rossignol.com/fr-fr/skis-de-fond-unisexe-racing-delta-comp-skating-RHMCQ01000.html",
+    "imageUrl": "https://www.rossignol.com/dw/image/v2/BJJZ_PRD/on/demandware.static/-/Sites-rossignol-catalog/default/dwe3517c1f/images/large/RHMCQ01_DELTA_COMP_SKATING_72DPI_01.jpg?sw=800"
+  },
+  {
+    "code": "RHOCQ03",
+    "nom": "DELTA SPORT SKATING",
+    "technique": "Skating",
+    "niveau": [
+      "Intermédiaire"
+    ],
+    "frequence": [
+      "Régulier",
+      "Intensive"
+    ],
+    "type": [
+      "Plaisir",
+      "Performance"
+    ],
+    "but": [
+      "Progression technique",
+      "Performance"
+    ],
+    "priorites": [
+      "Maniabilité",
+      "Stabilité"
+    ],
+    "neige": [
+      "Universel"
+    ],
+    "prix": 250.0,
+    "tailles": [
+      163,
+      173,
+      180,
+      186,
+      192
+    ],
+    "poidsRanges": {
+      "163": {
+        "min": 35,
+        "max": 50
+      },
+      "173": {
+        "min": 45,
+        "max": 60
+      },
+      "180": {
+        "min": 55,
+        "max": 70
+      },
+      "186": {
+        "min": 65,
+        "max": 85
+      },
+      "192": {
+        "min": 80,
+        "max": 999
+      }
+    },
+    "productUrl": "https://www.rossignol.com/fr-fr/skis-de-fond-unisexe-racing-delta-sport-skating-RHMCQ02000.html",
+    "imageUrl": "https://www.rossignol.com/dw/image/v2/BJJZ_PRD/on/demandware.static/-/Sites-rossignol-catalog/default/dw223db40c/images/large/RHMCQ02_DELTA_SPORT_SKATING_RGB72DPI_01.jpg?sw=800"
+  },
+  {
+    "code": "RHOYC01",
+    "nom": "ULTRA SKATING",
+    "technique": "Skating",
+    "niveau": [
+      "Débutant"
+    ],
+    "frequence": [
+      "Occasionnel",
+      "Régulier"
+    ],
+    "type": [
+      "Initiation",
+      "Plaisir"
+    ],
+    "but": [
+      "Plaisir",
+      "Confort"
+    ],
+    "priorites": [
+      "Maniabilité",
+      "Stabilité",
+      "Tolérance"
+    ],
+    "neige": [
+      "Universel"
+    ],
+    "prix": 270.0,
+    "tailles": [
+      168,
+      174,
+      181,
+      187
+    ],
+    "poidsRanges": {
+      "168": {
+        "min": 45,
+        "max": 60
+      },
+      "174": {
+        "min": 50,
+        "max": 65
+      },
+      "181": {
+        "min": 55,
+        "max": 75
+      },
+      "187": {
+        "min": 65,
+        "max": 999
+      }
+    },
+    "productUrl": "https://www.rossignol.com/fr-fr/skis-rossignol-ultra-skate-RHOYC01000.html",
+    "imageUrl": "https://www.rossignol.com/dw/image/v2/BJJZ_PRD/on/demandware.static/-/Sites-rossignol-catalog/default/dwf402e3ec/images/large/RHOYC01_000_72DPI_01.jpg?sw=800"
+  },
+  {
+    "code": "RHOCP01",
+    "nom": "DELTA COURSE R-SKIN",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      176,
+      186,
+      191,
+      198,
+      203,
+      208
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHOCV01",
+    "nom": "DELTA COURSE R-SKIN STIFF",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      176,
+      186,
+      191,
+      198,
+      203,
+      208
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHOCP02",
+    "nom": "DELTA COMP R-SKIN",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      176,
+      186,
+      191,
+      198,
+      203,
+      208
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHOCV02",
+    "nom": "DELTA COMP R-SKIN STIFF",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      176,
+      186,
+      191,
+      198,
+      203,
+      208
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHOCW02",
+    "nom": "DELTA SPORT R-SKIN",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      184,
+      189,
+      196,
+      201,
+      206
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHOCX01",
+    "nom": "DELTA SPORT R-SKIN STIFF",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      184,
+      189,
+      196,
+      201,
+      206
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHPYE01",
+    "nom": "X-IUM CLASSIC PREMIUM+ C1",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      197,
+      202,
+      207
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHPYE04",
+    "nom": "X-IUM CLASSIC PREMIUM+C2 STIFF",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      197,
+      202,
+      207
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHPYE05",
+    "nom": "X-IUM CLASSIC PREMIUM+ C3",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      197,
+      202,
+      207
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHPYE06",
+    "nom": "X-IUM PREMIUM+ R-SKIN",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      197,
+      202,
+      207
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHPCV01",
+    "nom": "X-IUM R-SKIN STIFF",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      186,
+      191,
+      198,
+      203,
+      208
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHPCY01",
+    "nom": "X-IUM SKATING WCS+",
+    "technique": "Skating",
+    "niveau": [
+      "Confirmé"
+    ],
+    "frequence": [
+      "Intensive",
+      "Compétition"
+    ],
+    "type": [
+      "Performance",
+      "Course"
+    ],
+    "but": [
+      "Performance"
+    ],
+    "priorites": [
+      "Glisse",
+      "Dynamisme"
+    ],
+    "neige": [
+      "Universel"
+    ],
+    "prix": 575.0,
+    "tailles": [
+      168,
+      174,
+      181,
+      187,
+      193
+    ],
+    "poidsRanges": {
+      "168": {
+        "min": 45,
+        "max": 55
+      },
+      "174": {
+        "min": 50,
+        "max": 60
+      },
+      "181": {
+        "min": 55,
+        "max": 70
+      },
+      "187": {
+        "min": 65,
+        "max": 80
+      },
+      "193": {
+        "min": 75,
+        "max": 95
+      }
+    },
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHPCZ03",
+    "nom": "X-IUM SKATING PREMIUM+ S3",
+    "technique": "Skating",
+    "niveau": [
+      "Compétiteur"
+    ],
+    "frequence": [
+      "Compétition"
+    ],
+    "type": [
+      "Course"
+    ],
+    "but": [
+      "Compétition"
+    ],
+    "priorites": [
+      "Glisse",
+      "Dynamisme",
+      "Rigidité"
+    ],
+    "neige": [
+      "Humide / printemps"
+    ],
+    "prix": 725.0,
+    "tailles": [
+      178,
+      183,
+      188,
+      193
+    ],
+    "poidsRanges": {
+      "178": {
+        "min": 45,
+        "max": 60
+      },
+      "183": {
+        "min": 52,
+        "max": 65
+      },
+      "188": {
+        "min": 65,
+        "max": 76
+      },
+      "193": {
+        "min": 72,
+        "max": 84
+      }
+    },
+    "productUrl": "https://www.rossignol.com/fr-fr/skis-de-fond-unisexe-x-ium-skating-premium-s3-stiff---ifp-RHNCZ02000.html",
+    "imageUrl": "https://www.rossignol.com/dw/image/v2/BJJZ_PRD/on/demandware.static/-/Sites-rossignol-catalog/default/dw1c1e0d4b/images/large/RHNCZ02_000_RGB72DPI_01.jpg?sw=800"
+  },
+  {
+    "code": "RHPCZ04",
+    "nom": "X-IUM SKATING PREMIUM+ SX",
+    "technique": "Skating",
+    "niveau": [
+      "Compétiteur"
+    ],
+    "frequence": [
+      "Compétition"
+    ],
+    "type": [
+      "Course"
+    ],
+    "but": [
+      "Compétition"
+    ],
+    "priorites": [
+      "Glisse",
+      "Dynamisme",
+      "Rigidité"
+    ],
+    "neige": [
+      "Universel"
+    ],
+    "prix": 725.0,
+    "tailles": [
+      173,
+      178,
+      183,
+      188,
+      193
+    ],
+    "poidsRanges": {
+      "173": {
+        "min": 35,
+        "max": 50
+      },
+      "178": {
+        "min": 45,
+        "max": 60
+      },
+      "183": {
+        "min": 52,
+        "max": 65
+      },
+      "188": {
+        "min": 65,
+        "max": 76
+      },
+      "193": {
+        "min": 72,
+        "max": 84
+      }
+    },
+    "productUrl": "https://www.rossignol.com/fr-fr/unisex-nordic-racing-skis-x-ium-skating-premium-sx-RHNCZ03000.html",
+    "imageUrl": "https://www.rossignol.com/dw/image/v2/BJJZ_PRD/on/demandware.static/-/Sites-rossignol-catalog/default/dw52320f3a/images/large/RHNCZ03_000_RGB72DPI_01.jpg?sw=800"
+  },
+  {
+    "code": "RHPCP02",
+    "nom": "X-IUM R-SKIN",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      186,
+      191,
+      198,
+      203,
+      208
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHPCQ01",
+    "nom": "X-IUM SKATING",
+    "technique": "Skating",
+    "niveau": [
+      "Confirmé"
+    ],
+    "frequence": [
+      "Régulier",
+      "Intensive"
+    ],
+    "type": [
+      "Plaisir",
+      "Performance"
+    ],
+    "but": [
+      "Progression technique",
+      "Performance"
+    ],
+    "priorites": [
+      "Maniabilité",
+      "Stabilité"
+    ],
+    "neige": [
+      "Universel"
+    ],
+    "prix": 450.0,
+    "tailles": [
+      173,
+      180,
+      186,
+      192
+    ],
+    "poidsRanges": {
+      "173": {
+        "min": 45,
+        "max": 60
+      },
+      "180": {
+        "min": 55,
+        "max": 70
+      },
+      "186": {
+        "min": 65,
+        "max": 85
+      },
+      "192": {
+        "min": 80,
+        "max": 999
+      }
+    },
+    "productUrl": "https://www.rossignol.com/fr-fr/skis-de-fond-racing-unisexe-x-ium-skating-wcs--RHNCY01000.html",
+    "imageUrl": "https://www.rossignol.com/dw/image/v2/BJJZ_PRD/on/demandware.static/-/Sites-rossignol-catalog/default/dw8267badd/images/large/RHNCY01_000_RGB72DPI_01.jpg?sw=800"
+  },
+  {
+    "code": "RHPCP01",
+    "nom": "X-IUM CLASSIC",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      186,
+      191,
+      198,
+      203,
+      208
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHPCT01",
+    "nom": "R-SKIN ULTRA",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      176,
+      181,
+      186,
+      191,
+      196,
+      201
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHPCT03",
+    "nom": "R-SKIN ULTRA STIFF",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      176,
+      181,
+      186,
+      191,
+      196,
+      201
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHPCU03",
+    "nom": "X-IUM SKATING PREMIUM+S2 STIFF",
+    "technique": "Skating",
+    "niveau": [
+      "Compétiteur"
+    ],
+    "frequence": [
+      "Compétition"
+    ],
+    "type": [
+      "Course"
+    ],
+    "but": [
+      "Compétition"
+    ],
+    "priorites": [
+      "Glisse",
+      "Dynamisme"
+    ],
+    "neige": [
+      "Universel"
+    ],
+    "prix": 725.0,
+    "tailles": [
+      183,
+      188,
+      193
+    ],
+    "poidsRanges": {
+      "183": {
+        "min": 63,
+        "max": 75
+      },
+      "188": {
+        "min": 75,
+        "max": 85
+      },
+      "193": {
+        "min": 82,
+        "max": 95
+      }
+    },
+    "productUrl": "https://www.rossignol.com/fr-fr/skis-de-fond-unisexe-x-ium-skating-premium-s2-stiff---ifp-RHNCU05000.html",
+    "imageUrl": "https://www.rossignol.com/dw/image/v2/BJJZ_PRD/on/demandware.static/-/Sites-rossignol-catalog/default/dwe8f7ddf0/images/large/RHNCU05_X-IUM_SKATING_PREMIUM+_S2_STIFF_RGB72DPI_01.jpg?sw=800"
+  },
+  {
+    "code": "RHPCU04",
+    "nom": "X-IUM SKATING PREMIUM+ S1",
+    "technique": "Skating",
+    "niveau": [
+      "Compétiteur"
+    ],
+    "frequence": [
+      "Compétition"
+    ],
+    "type": [
+      "Course"
+    ],
+    "but": [
+      "Compétition"
+    ],
+    "priorites": [
+      "Glisse",
+      "Dynamisme",
+      "Rigidité"
+    ],
+    "neige": [
+      "Froide"
+    ],
+    "prix": 725.0,
+    "tailles": [
+      178,
+      183,
+      188,
+      193
+    ],
+    "poidsRanges": {
+      "178": {
+        "min": 45,
+        "max": 60
+      },
+      "183": {
+        "min": 52,
+        "max": 65
+      },
+      "188": {
+        "min": 65,
+        "max": 76
+      },
+      "193": {
+        "min": 72,
+        "max": 84
+      }
+    },
+    "productUrl": "https://www.rossignol.com/fr-fr/skis-de-fond-unisexe-x-ium-skating-premium%C2%A0-%C2%A0s1-medium-RHNCU03000.html",
+    "imageUrl": "https://www.rossignol.com/dw/image/v2/BJJZ_PRD/on/demandware.static/-/Sites-rossignol-catalog/default/dwb79a416d/images/large/RHNCU03_000_RGB72DPI_01.jpg?sw=800"
+  },
+  {
+    "code": "RHPCU07",
+    "nom": "X-IUM SKATING PREMIUM+ S2",
+    "technique": "Skating",
+    "niveau": [
+      "Compétiteur"
+    ],
+    "frequence": [
+      "Compétition"
+    ],
+    "type": [
+      "Course"
+    ],
+    "but": [
+      "Compétition"
+    ],
+    "priorites": [
+      "Glisse",
+      "Dynamisme",
+      "Rigidité"
+    ],
+    "neige": [
+      "Universel"
+    ],
+    "prix": 725.0,
+    "tailles": [
+      173,
+      178,
+      183,
+      188,
+      193
+    ],
+    "poidsRanges": {
+      "173": {
+        "min": 35,
+        "max": 50
+      },
+      "178": {
+        "min": 45,
+        "max": 60
+      },
+      "183": {
+        "min": 52,
+        "max": 65
+      },
+      "188": {
+        "min": 65,
+        "max": 76
+      },
+      "193": {
+        "min": 72,
+        "max": 84
+      }
+    },
+    "productUrl": "https://www.rossignol.com/fr-fr/skis-de-fond-unisexe-x-ium-skating-premium%C2%A0-%C2%A0s2-ifp-medium-RHNCU02000.html",
+    "imageUrl": "https://www.rossignol.com/dw/image/v2/BJJZ_PRD/on/demandware.static/-/Sites-rossignol-catalog/default/dw55ddedcd/images/large/RHNCU02_X-IUM_SKATING_PREMIUM+_S2_RGB72DPI_01.jpg?sw=800"
+  },
+  {
+    "code": "RHPCZ06",
+    "nom": "X-IUM  PREMIUM+ DP",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      193
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHPYE02",
+    "nom": "X-IUM CLASSIC PREMIUM+ C2",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      190,
+      197,
+      202,
+      207
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHMZA01",
+    "nom": "X-TOUR ESCAPE R-SKIN",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      176,
+      186,
+      191,
+      196,
+      201,
+      206
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHMZA04",
+    "nom": "X-TOUR ESCAPE POSITRACK",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      176,
+      186,
+      191,
+      196,
+      201,
+      206
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHMZA05",
+    "nom": "X-TOUR VENTURE WAXLESS",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      176,
+      186,
+      191,
+      196,
+      201,
+      206
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHMZB01",
+    "nom": "EVO XC 55 R-SKIN",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      165,
+      175,
+      185,
+      195
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHMZC01",
+    "nom": "EVO XC 60 R-SKIN",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      165,
+      175,
+      185,
+      195
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHMZD01",
+    "nom": "EVO XC 65 R-SKIN",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      165,
+      175,
+      185,
+      195
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHMZB02",
+    "nom": "EVO XT 55 POSITRACK",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      165,
+      175,
+      185,
+      195
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHMZC02",
+    "nom": "EVO XT 60 POSITRACK",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      165,
+      175,
+      185,
+      195
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHMZD02",
+    "nom": "EVO XT 65 POSITRACK",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      165,
+      175,
+      185,
+      195
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHMZC03",
+    "nom": "EVO OT 60 POSITRACK IFP",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      165,
+      175,
+      185,
+      195,
+      205
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHMZD03",
+    "nom": "EVO OT 65 POSITRACK IFP",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      165,
+      175,
+      185,
+      195
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHLZD03",
+    "nom": "EVO OT 65 POSITRACK",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      165,
+      175,
+      185,
+      195
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHLZD02",
+    "nom": "BC 65 POSITRACK",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      165,
+      175,
+      185,
+      195
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHOZI01",
+    "nom": "XP 85 POSITRACK",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      165,
+      175,
+      185,
+      195
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHOZJ01",
+    "nom": "XP 105 POSITRACK",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      160,
+      170,
+      180,
+      190
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  },
+  {
+    "code": "RHPZH01",
+    "nom": "XP 120 POSITRACK 2.0",
+    "technique": "Classique",
+    "niveau": [],
+    "frequence": [],
+    "type": [],
+    "but": [],
+    "priorites": [],
+    "neige": [],
+    "prix": null,
+    "tailles": [
+      160,
+      170,
+      180
+    ],
+    "poidsRanges": {},
+    "productUrl": "",
+    "imageUrl": ""
+  }
+]
