@@ -105,7 +105,7 @@ export default function ChooseSkisPage() {
   const [budgetMax, setBudgetMax] = useState<number>(BUDGET_MAX);
   const [step, setStep] = useState(0);
 
-  const prioritesDisponibles = useMemo(() => {
+  const prioritesDisponibles = useMemo<Priorite[]>(() => {
     if (technique === "Classique") {
       return [...PRIORITES_BASE, "Accroche"];
     }
