@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Solutions numériques pour le ski nordique",
+  title: "InMotion Performance",
   description:
-    "Applications terrain, recommandations skis et tableaux de bord décisionnels pour le ski nordique.",
+    "Solutions numériques pour le ski nordique : applications terrain, recommandations skis et tableaux de bord décisionnels.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Solutions numériques pour le ski nordique",
+    title: "InMotion Performance",
     description:
-      "Applications terrain, recommandations skis et tableaux de bord décisionnels pour le ski nordique.",
+      "Solutions numériques pour le ski nordique : applications terrain, recommandations skis et tableaux de bord décisionnels.",
     url: "/",
   },
 };

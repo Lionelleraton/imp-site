@@ -70,26 +70,40 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: siteName,
-    url: baseUrl,
-    description: siteDescription,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Chamonix-Mont-Blanc",
-      addressCountry: "FR",
-    },
-    contactPoint: [
-      {
-        "@type": "ContactPoint",
-        contactType: "sales",
-        telephone: "+33 6 65 62 00 84",
-        email: "inmotionperformance@icloud.com",
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: siteName,
+      url: baseUrl,
+      description: siteDescription,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Chamonix-Mont-Blanc",
+        addressCountry: "FR",
       },
-    ],
-  };
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "sales",
+          telephone: "+33 6 65 62 00 84",
+          email: "inmotionperformance@icloud.com",
+        },
+      ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: siteName,
+      alternateName: "InMotion",
+      url: baseUrl,
+      publisher: {
+        "@type": "Organization",
+        name: siteName,
+        url: baseUrl,
+      },
+    },
+  ];
 
   return (
     <html lang="fr">
