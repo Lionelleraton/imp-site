@@ -1,4 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Service 3D",
+  description:
+    "Rendus 3D et visuels immersifs pour présenter clairement vos produits.",
+  alternates: {
+    canonical: "/services/3d",
+  },
+  openGraph: {
+    title: "Service 3D",
+    description:
+      "Rendus 3D et visuels immersifs pour présenter clairement vos produits.",
+    url: "/services/3d",
+  },
+};
 
 export default function Services3dPage() {
   return (

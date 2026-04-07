@@ -1,9 +1,26 @@
 // ⚠️ AUCUN header/nav ici.
 // Le seul header du site doit venir de src/app/layout.tsx via <SiteHeader />.
 
+import type { Metadata } from "next";
+
 const CALENDLY_URL = "https://calendly.com/lioneljouannaud";
 const CALENDLY_EMBED_URL =
   "https://calendly.com/lioneljouannaud?hide_event_type_details=1&hide_gdpr_banner=1&background_color=f0f2f2&text_color=233036&primary_color=244357";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Prendre un rendez-vous pour clarifier vos besoins et activer des solutions terrain adaptées.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact",
+    description:
+      "Prendre un rendez-vous pour clarifier vos besoins et activer des solutions terrain adaptées.",
+    url: "/contact",
+  },
+};
 
 export default function ContactPage() {
   return (

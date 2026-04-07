@@ -1,7 +1,23 @@
 // ⚠️ AUCUN header/nav ici.
 // Le seul header du site doit venir de src/app/layout.tsx via <SiteHeader />.
 
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Nos solutions",
+  description:
+    "Des outils numériques pour structurer les données terrain et accélérer les décisions en ski nordique.",
+  alternates: {
+    canonical: "/solutions",
+  },
+  openGraph: {
+    title: "Nos solutions",
+    description:
+      "Des outils numériques pour structurer les données terrain et accélérer les décisions en ski nordique.",
+    url: "/solutions",
+  },
+};
 
 export default function SolutionsPage() {
   return (

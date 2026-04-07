@@ -1,4 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Service iOS",
+  description:
+    "Applications iOS terrain, offline-first, rapides et fiables pour les staffs.",
+  alternates: {
+    canonical: "/services/ios",
+  },
+  openGraph: {
+    title: "Service iOS",
+    description:
+      "Applications iOS terrain, offline-first, rapides et fiables pour les staffs.",
+    url: "/services/ios",
+  },
+};
 
 export default function ServicesIosPage() {
   return (

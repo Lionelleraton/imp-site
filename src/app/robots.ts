@@ -1,8 +1,17 @@
 import type { MetadataRoute } from "next";
 
 const getBaseUrl = () => {
-  const raw = process.env.NEXT_PUBLIC_SITE_URL || "https://example.com";
-  return raw.replace(/\/+$/, "");
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
+  if (explicit && explicit.trim().length > 0) {
+    return explicit.replace(/\/+$/, "");
+  }
+
+  const vercelUrl = process.env.VERCEL_URL;
+  if (vercelUrl && vercelUrl.trim().length > 0) {
+    return `https://${vercelUrl.replace(/\/+$/, "")}`;
+  }
+
+  return "https://inmotionperformance.com";
 };
 
 export default function robots(): MetadataRoute.Robots {

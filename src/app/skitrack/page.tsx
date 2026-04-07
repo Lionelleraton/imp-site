@@ -1,4 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "SkiTrack",
+  description:
+    "Application mobile terrain pour centraliser les tests matériel et guider les décisions des staffs.",
+  alternates: {
+    canonical: "/skitrack",
+  },
+  openGraph: {
+    title: "SkiTrack",
+    description:
+      "Application mobile terrain pour centraliser les tests matériel et guider les décisions des staffs.",
+    url: "/skitrack",
+  },
+};
 
 export default function SkiTrackPage() {
   return (

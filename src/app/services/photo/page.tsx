@@ -1,7 +1,23 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { readdirSync } from "fs";
 import path from "path";
 import PhotoGallery from "./PhotoGallery";
+
+export const metadata: Metadata = {
+  title: "Service photo",
+  description:
+    "Couverture photo terrain pour communication, sponsors et valorisation des événements.",
+  alternates: {
+    canonical: "/services/photo",
+  },
+  openGraph: {
+    title: "Service photo",
+    description:
+      "Couverture photo terrain pour communication, sponsors et valorisation des événements.",
+    url: "/services/photo",
+  },
+};
 
 export default function ServicesPhotoPage() {
   const images = (() => {

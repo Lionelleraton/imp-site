@@ -1,4 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Solutions numériques pour le ski nordique",
+  description:
+    "Applications terrain, recommandations skis et tableaux de bord décisionnels pour le ski nordique.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Solutions numériques pour le ski nordique",
+    description:
+      "Applications terrain, recommandations skis et tableaux de bord décisionnels pour le ski nordique.",
+    url: "/",
+  },
+};
 
 export default function Home() {
   return (

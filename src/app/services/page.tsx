@@ -1,10 +1,26 @@
 // ⚠️ AUCUN header/nav ici.
 // Le seul header du site doit venir de src/app/layout.tsx via <SiteHeader />.
 
+import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { readdirSync } from "fs";
 import path from "path";
+
+export const metadata: Metadata = {
+  title: "Nos services",
+  description:
+    "Services web, iOS, photo et 3D : des solutions claires, rapides et pensées pour vos usages terrain.",
+  alternates: {
+    canonical: "/services",
+  },
+  openGraph: {
+    title: "Nos services",
+    description:
+      "Services web, iOS, photo et 3D : des solutions claires, rapides et pensées pour vos usages terrain.",
+    url: "/services",
+  },
+};
 
 export default function ServicesPage() {
   const photoThumbs = (() => {

@@ -1,4 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Service web",
+  description:
+    "Sites vitrines, plateformes et dashboards pensés pour la lisibilité et la conversion.",
+  alternates: {
+    canonical: "/services/web",
+  },
+  openGraph: {
+    title: "Service web",
+    description:
+      "Sites vitrines, plateformes et dashboards pensés pour la lisibilité et la conversion.",
+    url: "/services/web",
+  },
+};
 
 export default function ServicesWebPage() {
   return (
