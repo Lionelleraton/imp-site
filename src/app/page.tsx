@@ -1,20 +1,4 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-
-export const metadata: Metadata = {
-  title: "InMotion Performance",
-  description:
-    "Solutions numériques pour le ski nordique : applications terrain, recommandations skis et tableaux de bord décisionnels.",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: "InMotion Performance",
-    description:
-      "Solutions numériques pour le ski nordique : applications terrain, recommandations skis et tableaux de bord décisionnels.",
-    url: "/",
-  },
-};
 
 export default function Home() {
   return (
