@@ -24,6 +24,10 @@
 .DS_Store
 *.pem
 
+# galleries (keep large photo sets out of git)
+/public/galleries/*
+!/public/galleries/README.txt
+
 # debug
 npm-debug.log*
 yarn-debug.log*

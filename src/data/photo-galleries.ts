@@ -16,14 +16,12 @@ export const PHOTO_GALLERIES: PhotoGallery[] = [
     title: "Galerie démo InMotion",
     description: "Exemple de galerie privée. Remplace par ta galerie client.",
     folder: "services/photo",
-    manifest: "/services/photo/manifest.json",
   },
   {
     code: "GALA-2026",
     slug: "gala-2026",
     title: "Gala 2026",
     description: "Photos officielles - InMotion Performance",
-    folder: "galleries/Gala-2026",
-    manifest: "/galleries/Gala-2026/manifest.json",
+    manifest: "/manifests/gala-2026.json",
   },
 ];
