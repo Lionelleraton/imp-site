@@ -4,6 +4,9 @@ export type PhotoGallery = {
   title: string;
   description?: string;
   folder?: string;
+  manifest?: string;
+  images?: string[];
+  downloadZip?: string;
 };
 
 export const PHOTO_GALLERIES: PhotoGallery[] = [
@@ -13,6 +16,7 @@ export const PHOTO_GALLERIES: PhotoGallery[] = [
     title: "Galerie démo InMotion",
     description: "Exemple de galerie privée. Remplace par ta galerie client.",
     folder: "services/photo",
+    manifest: "/services/photo/manifest.json",
   },
   {
     code: "GALA-2026",
@@ -20,5 +24,6 @@ export const PHOTO_GALLERIES: PhotoGallery[] = [
     title: "Gala 2026",
     description: "Photos officielles - InMotion Performance",
     folder: "galleries/Gala-2026",
+    manifest: "/galleries/Gala-2026/manifest.json",
   },
 ];

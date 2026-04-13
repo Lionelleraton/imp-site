@@ -11,7 +11,8 @@ export default function GalleryAccessClient() {
     event.preventDefault();
     const trimmed = code.trim();
     if (!trimmed) return;
-    router.push(`/services/photo/galerie/${encodeURIComponent(trimmed)}`);
+    const normalized = trimmed.replace(/\s+/g, "-").toUpperCase();
+    router.push(`/services/photo/galerie/${encodeURIComponent(normalized)}`);
   };
 
   return (

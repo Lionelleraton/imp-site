@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PhotoGallery from "../../PhotoGallery";
+import GalleryViewClient from "../GalleryViewClient";
 import { PHOTO_GALLERIES } from "@/data/photo-galleries";
-import { getGalleryDownload, getGalleryImages } from "@/lib/gallery";
 
 type GalleryPageProps = {
   params: { code: string } | Promise<{ code: string }>;
 };
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  return PHOTO_GALLERIES.map((gallery) => ({
+    code: gallery.code,
+  }));
+}
 
 export const metadata: Metadata = {
   title: "Galerie privée",
@@ -61,8 +68,9 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
     );
   }
 
-  const images = getGalleryImages(gallery.slug, gallery.folder);
-  const downloadZip = getGalleryDownload(gallery.slug, gallery.folder);
+  const manifestUrl =
+    gallery.manifest ??
+    (gallery.folder ? `/${gallery.folder}/manifest.json` : undefined);
 
   return (
     <main className="pb-24">
@@ -80,17 +88,11 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
             </p>
           ) : null}
           <div className="mt-6">
-            {images.length > 0 ? (
-              <PhotoGallery
-                images={images}
-                unoptimized
-                downloadAllUrl={downloadZip ?? undefined}
-              />
-            ) : (
-              <div className="rounded-2xl border border-line bg-white/90 p-6 text-sm text-ink/70">
-                Aucune image disponible pour le moment.
-              </div>
-            )}
+            <GalleryViewClient
+              manifestUrl={manifestUrl}
+              initialImages={gallery.images ?? []}
+              downloadAllUrl={gallery.downloadZip}
+            />
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
