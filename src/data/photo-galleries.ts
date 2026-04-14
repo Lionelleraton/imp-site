@@ -22,6 +22,6 @@ export const PHOTO_GALLERIES: PhotoGallery[] = [
     slug: "gala-2026",
     title: "Gala 2026",
     description: "Photos officielles - InMotion Performance",
-    manifest: "/manifests/gala-2026.json",
+    manifest: "/api/blob/list?prefix=gala-2026/",
   },
 ];

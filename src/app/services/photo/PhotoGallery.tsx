@@ -15,6 +15,8 @@ export default function PhotoGallery({
   downloadAllUrl,
 }: PhotoGalleryProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [isZipping, setIsZipping] = useState(false);
+  const [zipProgress, setZipProgress] = useState(0);
   const activeSrc = activeIndex !== null ? images[activeIndex] : null;
 
   const close = () => setActiveIndex(null);
@@ -26,14 +28,45 @@ export default function PhotoGallery({
     if (activeIndex === null) return;
     setActiveIndex((activeIndex + 1) % images.length);
   };
-  const downloadAll = () => {
-    images.forEach((src, index) => {
+  const downloadAll = async () => {
+    if (isZipping) return;
+    setIsZipping(true);
+    setZipProgress(0);
+    try {
+      const JSZip = (await import("jszip")).default;
+      const zip = new JSZip();
+      const total = images.length;
+
+      for (let index = 0; index < total; index += 1) {
+        const src = images[index];
+        const response = await fetch(src);
+        const blob = await response.blob();
+        const filename = decodeURIComponent(
+          src.split("/").pop()?.split("?")[0] ?? `image-${index + 1}.jpg`
+        );
+        zip.file(filename, blob);
+        setZipProgress(Math.round(((index + 1) / total) * 100));
+      }
+
+      const zipBlob = await zip.generateAsync(
+        { type: "blob" },
+        (metadata) => {
+          setZipProgress(Math.round(metadata.percent));
+        }
+      );
+
       const link = document.createElement("a");
-      link.href = src;
-      link.download = "";
-      link.rel = "noopener";
-      setTimeout(() => link.click(), index * 250);
-    });
+      link.href = URL.createObjectURL(zipBlob);
+      link.download = "galerie.zip";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(link.href);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsZipping(false);
+    }
   };
 
   if (images.length === 0) {
@@ -62,9 +95,10 @@ export default function PhotoGallery({
           <button
             type="button"
             onClick={downloadAll}
-            className="inline-flex items-center justify-center rounded-full border border-deep/20 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep/5"
+            disabled={isZipping}
+            className="inline-flex items-center justify-center rounded-full border border-deep/20 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep/5 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            Télécharger tout
+            {isZipping ? `Création du ZIP… ${zipProgress}%` : "Télécharger tout"}
           </button>
         )}
       </div>
