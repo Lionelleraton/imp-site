@@ -32,6 +32,40 @@ const slugifyPrefix = (value: string) =>
     .replace(/-+/g, "-")
     .replace(/^[-/]+|[-/]+$/g, "");
 
+const buildPrefixCandidates = (raw: string) => {
+  const trimmed = raw.trim();
+  if (!trimmed) return [];
+
+  const variants = new Set<string>();
+  const add = (value: string) => {
+    const clean = value.trim();
+    if (!clean) return;
+    variants.add(clean);
+    if (!clean.endsWith("/")) variants.add(`${clean}/`);
+  };
+
+  add(trimmed);
+  add(trimmed.toLowerCase());
+  add(trimmed.toUpperCase());
+
+  const dashed = trimmed.replace(/\s+/g, "-");
+  const underscored = trimmed.replace(/\s+/g, "_");
+  add(dashed);
+  add(dashed.toLowerCase());
+  add(dashed.toUpperCase());
+  add(underscored);
+  add(underscored.toLowerCase());
+  add(underscored.toUpperCase());
+
+  const slug = slugifyPrefix(trimmed);
+  if (slug) {
+    add(slug);
+    add(slug.toUpperCase());
+  }
+
+  return Array.from(variants);
+};
+
 export default async function GalleryPage({ params }: GalleryPageProps) {
   const resolvedParams = await params;
   const rawCode = decodeURIComponent(resolvedParams.code ?? "");
@@ -77,13 +111,10 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
       );
     }
 
-    const prefix = fallbackPrefix.endsWith("/")
-      ? fallbackPrefix
-      : `${fallbackPrefix}/`;
-    const rawPrefix = rawCode.endsWith("/") ? rawCode : `${rawCode}/`;
-    const manifestUrl = `/api/blob/list?prefix=${encodeURIComponent(
-      prefix
-    )}&prefixAlt=${encodeURIComponent(rawPrefix)}`;
+    const prefixes = buildPrefixCandidates(rawCode);
+    const manifestUrl = `/api/blob/list?prefixes=${encodeURIComponent(
+      prefixes.join(",")
+    )}`;
 
     return (
       <main className="pb-24">

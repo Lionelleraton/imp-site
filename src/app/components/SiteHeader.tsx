@@ -66,20 +66,21 @@ export default function SiteHeader() {
 
   return (
     <header
+      style={{ paddingTop: "env(safe-area-inset-top)" }}
       className={
         "sticky top-0 z-50 w-full transition-transform duration-300 sm:translate-y-0 " +
         (isHidden ? "-translate-y-[120%]" : "translate-y-0")
       }
     >
-      <div className="mx-auto w-full max-w-[1400px] px-3 pt-3 sm:px-6 sm:pt-6">
-        <div className="rounded-[26px] border border-line bg-white/80 shadow-[0_16px_40px_rgba(35,48,54,0.12)] backdrop-blur">
+      <div className="mx-auto w-full max-w-[1400px] px-2 pt-2 sm:px-6 sm:pt-6">
+        <div className="overflow-hidden rounded-[26px] border border-line bg-white/85 shadow-[0_16px_40px_rgba(35,48,54,0.12)] backdrop-blur sm:rounded-full">
           {/* Mobile header */}
           <div className="flex items-center justify-between px-3 py-2 sm:hidden">
             <Link href="/" className="flex items-center gap-2">
               <img
                 src="/brand/logo-dark-blue.svg"
                 alt="InMotion Performance"
-                className="h-6 w-auto"
+                className="h-5 w-auto"
               />
             </Link>
             <button
