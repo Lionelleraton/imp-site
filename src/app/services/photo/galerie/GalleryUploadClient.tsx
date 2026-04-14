@@ -9,6 +9,7 @@ export default function GalleryUploadClient() {
   const [status, setStatus] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [uploadPercent, setUploadPercent] = useState(0);
 
   const onFilesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const list = Array.from(event.target.files ?? []);
@@ -19,16 +20,25 @@ export default function GalleryUploadClient() {
     if (files.length === 0) return;
     setIsUploading(true);
     setCurrentIndex(0);
+    setUploadPercent(0);
     setStatus("Upload en cours…");
     try {
       for (let index = 0; index < files.length; index += 1) {
         const file = files[index];
         setCurrentIndex(index + 1);
-        await upload(`${prefix}/${file.name}`, file, {
+        const path = `${prefix}/${file.name}`;
+        setStatus(`Upload en cours • ${path}`);
+        await upload(path, file, {
           access: "public",
           handleUploadUrl: "/api/blob/upload",
+          onUploadProgress: (progress) => {
+            const ratio =
+              (index + progress.percentage / 100) / files.length;
+            setUploadPercent(Math.round(ratio * 100));
+          },
         });
       }
+      setUploadPercent(100);
       setStatus("Upload terminé.");
     } catch (error) {
       const message =
@@ -97,18 +107,28 @@ export default function GalleryUploadClient() {
       {status ? (
         <div className="mt-4 space-y-2">
           <div className="flex items-center justify-between text-sm text-ink/70">
-            <span>{status}</span>
+            <span className="flex items-center gap-2">
+              {status}
+              {isUploading ? (
+                <span className="upload-dots" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </span>
+              ) : null}
+            </span>
             {isUploading ? (
               <span className="text-xs text-ink/50">
                 {currentIndex}/{files.length}
               </span>
             ) : null}
           </div>
-          {isUploading ? (
-            <div className="h-2 w-full overflow-hidden rounded-full bg-mist/40">
-              <div className="h-full w-1/3 animate-pulse rounded-full bg-deep/70" />
-            </div>
-          ) : null}
+          <div className="h-2 w-full overflow-hidden rounded-full bg-mist/40">
+            <div
+              className="h-full rounded-full bg-deep/80 transition-all duration-200"
+              style={{ width: `${uploadPercent}%` }}
+            />
+          </div>
         </div>
       ) : null}
     </div>

@@ -80,7 +80,10 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
     const prefix = fallbackPrefix.endsWith("/")
       ? fallbackPrefix
       : `${fallbackPrefix}/`;
-    const manifestUrl = `/api/blob/list?prefix=${encodeURIComponent(prefix)}`;
+    const rawPrefix = rawCode.endsWith("/") ? rawCode : `${rawCode}/`;
+    const manifestUrl = `/api/blob/list?prefix=${encodeURIComponent(
+      prefix
+    )}&prefixAlt=${encodeURIComponent(rawPrefix)}`;
 
     return (
       <main className="pb-24">
