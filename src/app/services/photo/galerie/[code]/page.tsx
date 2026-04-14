@@ -114,7 +114,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
     const prefixes = buildPrefixCandidates(rawCode);
     const manifestUrl = `/api/blob/list?prefixes=${encodeURIComponent(
       prefixes.join(",")
-    )}`;
+    )}&code=${encodeURIComponent(rawCode)}`;
 
     return (
       <main className="pb-24">

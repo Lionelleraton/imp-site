@@ -8,6 +8,7 @@ export async function GET(request: Request) {
   const prefix = searchParams.get("prefix") ?? "";
   const prefixAlt = searchParams.get("prefixAlt") ?? "";
   const prefixesParam = searchParams.get("prefixes") ?? "";
+  const code = searchParams.get("code") ?? "";
   const limit = Number(searchParams.get("limit") ?? 2000);
 
   const prefixes = prefixesParam
@@ -18,11 +19,14 @@ export async function GET(request: Request) {
     : [prefix, prefixAlt].filter(Boolean);
 
   if (prefixes.length === 0) {
-    return NextResponse.json([]);
+    // allow fallback on code search if provided
+    if (!code) return NextResponse.json([]);
   }
 
   const results = await Promise.all(
-    prefixes.map((item) => list({ prefix: item, limit }))
+    prefixes.length > 0
+      ? prefixes.map((item) => list({ prefix: item, limit }))
+      : []
   );
 
   const urls = new Set<string>();
@@ -32,6 +36,37 @@ export async function GET(request: Request) {
         urls.add(blob.url);
       }
     });
+  });
+
+  if (urls.size > 0 || !code) {
+    return NextResponse.json(Array.from(urls));
+  }
+
+  const normalize = (value: string) =>
+    value.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const base = normalize(code);
+  if (!base) return NextResponse.json([]);
+
+  const candidates = new Set<string>([base]);
+  candidates.add(normalize(code.replace(/\s+/g, "-")));
+  candidates.add(normalize(code.replace(/\s+/g, "_")));
+  candidates.add(normalize(code.replace(/-+/g, "")));
+
+  const { blobs } = await list({ prefix: "", limit });
+  blobs.forEach((blob) => {
+    if (!/\.(jpg|jpeg|png|webp)$/i.test(blob.url)) return;
+    try {
+      const pathname = new URL(blob.url).pathname;
+      const haystack = normalize(pathname);
+      for (const token of candidates) {
+        if (token && haystack.includes(token)) {
+          urls.add(blob.url);
+          break;
+        }
+      }
+    } catch {
+      // ignore invalid URLs
+    }
   });
 
   return NextResponse.json(Array.from(urls));
