@@ -19,6 +19,25 @@ export default function PhotoGallery({
   const [zipProgress, setZipProgress] = useState(0);
   const activeSrc = activeIndex !== null ? images[activeIndex] : null;
 
+  const downloadSingle = async (src: string, index: number) => {
+    try {
+      const response = await fetch(src);
+      const blob = await response.blob();
+      const filename = decodeURIComponent(
+        src.split("/").pop()?.split("?")[0] ?? `image-${index + 1}.jpg`
+      );
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename || "";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(link.href);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const close = () => setActiveIndex(null);
   const showPrev = () => {
     if (activeIndex === null) return;
@@ -129,13 +148,19 @@ export default function PhotoGallery({
             </button>
             <div className="flex items-center justify-between border-t border-line/70 px-3 py-2 text-[10px] uppercase tracking-[0.2em] text-ink/50">
               <span>Image {index + 1}</span>
-              <a
-                href={src}
-                download
+              <button
+                type="button"
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  downloadSingle(src, index);
+                }}
                 className="rounded-full border border-deep/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep/5"
+                aria-label={`Télécharger l'image ${index + 1}`}
               >
-                Télécharger
-              </a>
+                <span className="hidden sm:inline">Télécharger</span>
+                <span className="sm:hidden">↓</span>
+              </button>
             </div>
           </div>
         ))}
@@ -155,13 +180,17 @@ export default function PhotoGallery({
             </p>
             <div className="pointer-events-auto flex items-center gap-3">
               {activeSrc ? (
-                <a
-                  href={activeSrc}
-                  download
+                <button
+                  type="button"
+                  onClick={(event) => {
+                    event.preventDefault();
+                    downloadSingle(activeSrc, activeIndex ?? 0);
+                  }}
                   className="rounded-full border border-white/40 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur"
                 >
-                  Télécharger
-                </a>
+                  <span className="hidden sm:inline">Télécharger</span>
+                  <span className="sm:hidden">↓</span>
+                </button>
               ) : null}
               <button
                 type="button"
