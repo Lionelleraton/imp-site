@@ -1,23 +1,107 @@
 "use client";
 
 import { upload } from "@vercel/blob/client";
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+
+const DEFAULT_PREFIX = "RAE-17";
+
+type FolderStats = {
+  count: number;
+  totalBytes: number;
+};
+
+function sanitizePrefix(raw: string): string {
+  return raw.trim().replace(/^\/+/, "").replace(/\/+$/, "");
+}
+
+function formatBytes(bytes: number): string {
+  if (!Number.isFinite(bytes) || bytes <= 0) return "0 o";
+  const units = ["o", "Ko", "Mo", "Go", "To"];
+  let value = bytes;
+  let index = 0;
+  while (value >= 1024 && index < units.length - 1) {
+    value /= 1024;
+    index += 1;
+  }
+  const precision = value >= 100 ? 0 : value >= 10 ? 1 : 2;
+  return `${value.toFixed(precision)} ${units[index]}`;
+}
 
 export default function GalleryUploadClient() {
-  const [prefix, setPrefix] = useState("gala-2026");
+  const [prefix, setPrefix] = useState("");
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState<string>("");
   const [isUploading, setIsUploading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [uploadPercent, setUploadPercent] = useState(0);
+  const [folderStats, setFolderStats] = useState<FolderStats | null>(null);
+  const [statsLoading, setStatsLoading] = useState(false);
+  const [statsError, setStatsError] = useState<string | null>(null);
+
+  const effectivePrefix = sanitizePrefix(prefix) || DEFAULT_PREFIX;
+  const selectedBytes = useMemo(
+    () => files.reduce((sum, file) => sum + file.size, 0),
+    [files]
+  );
 
   const onFilesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const list = Array.from(event.target.files ?? []);
     setFiles(list);
   };
 
+  const refreshFolderStats = useCallback(
+    async (targetPrefix: string): Promise<FolderStats | null> => {
+      const safePrefix = sanitizePrefix(targetPrefix);
+      if (!safePrefix) {
+        setFolderStats({ count: 0, totalBytes: 0 });
+        return { count: 0, totalBytes: 0 };
+      }
+
+      setStatsLoading(true);
+      setStatsError(null);
+      try {
+        const response = await fetch(
+          `/api/blob/list?prefix=${encodeURIComponent(`${safePrefix}/`)}&includeMeta=1`,
+          { cache: "no-store" }
+        );
+        const data = (await response.json()) as {
+          count?: number;
+          totalBytes?: number;
+          error?: string;
+        };
+
+        if (!response.ok) {
+          setStatsError(data.error ?? "Impossible de lire la taille du dossier.");
+          return null;
+        }
+
+        const stats = {
+          count: typeof data.count === "number" ? data.count : 0,
+          totalBytes: typeof data.totalBytes === "number" ? data.totalBytes : 0,
+        };
+        setFolderStats(stats);
+        return stats;
+      } catch {
+        setStatsError("Erreur réseau pendant le calcul de la taille du dossier.");
+        return null;
+      } finally {
+        setStatsLoading(false);
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      refreshFolderStats(effectivePrefix);
+    }, 250);
+    return () => window.clearTimeout(timer);
+  }, [effectivePrefix, refreshFolderStats]);
+
   const startUpload = async () => {
     if (files.length === 0) return;
+    const targetPrefix = effectivePrefix;
+
     setIsUploading(true);
     setCurrentIndex(0);
     setUploadPercent(0);
@@ -26,7 +110,7 @@ export default function GalleryUploadClient() {
       for (let index = 0; index < files.length; index += 1) {
         const file = files[index];
         setCurrentIndex(index + 1);
-        const path = `${prefix}/${file.name}`;
+        const path = `${targetPrefix}/${file.name}`;
         setStatus(`Upload en cours • ${path}`);
         await upload(path, file, {
           access: "public",
@@ -39,7 +123,14 @@ export default function GalleryUploadClient() {
         });
       }
       setUploadPercent(100);
-      setStatus("Upload terminé.");
+      const updatedStats = await refreshFolderStats(targetPrefix);
+      if (updatedStats) {
+        setStatus(
+          `Upload terminé • ${updatedStats.count} fichier(s) • ${formatBytes(updatedStats.totalBytes)} dans ${targetPrefix}`
+        );
+      } else {
+        setStatus("Upload terminé.");
+      }
     } catch (error) {
       const message =
         error instanceof Error ? error.message : "Erreur inconnue.";
@@ -55,11 +146,11 @@ export default function GalleryUploadClient() {
         Upload galerie
       </p>
       <h1 className="mt-3 text-2xl font-semibold sm:text-3xl">
-        Ajouter des photos sur Vercel Blob
+        Ajouter des photos à la galerie
       </h1>
       <p className="mt-3 max-w-2xl text-sm text-ink/70">
-        Indique le nom de dossier (ex: <span className="font-semibold">gala-2026</span>)
-        puis sélectionne tes images. Elles seront envoyées dans Blob.
+        Indiquez le nom de dossier (ex: <span className="font-semibold">RAE-17</span>)
+        puis sélectionnez vos images. Elles seront envoyées dans la galerie.
       </p>
 
       <div className="mt-6 grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
@@ -67,9 +158,13 @@ export default function GalleryUploadClient() {
           Dossier Blob
           <input
             value={prefix}
-            onChange={(event) => setPrefix(event.target.value.trim())}
+            onChange={(event) => setPrefix(event.target.value)}
+            placeholder={DEFAULT_PREFIX}
             className="mt-2 w-full rounded-2xl border border-line bg-white/90 px-4 py-3 text-sm text-ink shadow-[0_10px_30px_rgba(35,48,54,0.08)] focus:border-deep/40 focus:outline-none"
           />
+          <span className="mt-2 block text-xs font-normal text-ink/55">
+            Laissez vide pour utiliser automatiquement <strong>{DEFAULT_PREFIX}</strong>.
+          </span>
         </label>
         <button
           type="button"
@@ -102,6 +197,23 @@ export default function GalleryUploadClient() {
         <p className="mt-2 text-xs text-ink/50">
           Formats acceptés : JPG, PNG, WebP.
         </p>
+        <div className="mt-3 grid gap-1 text-xs text-ink/65 sm:grid-cols-2">
+          <p>
+            Galerie <span className="font-semibold text-ink">{effectivePrefix}</span> :
+            {" "}
+            {statsLoading
+              ? "calcul en cours…"
+              : folderStats
+                ? `${folderStats.count} fichier(s) • ${formatBytes(folderStats.totalBytes)}`
+                : "taille indisponible"}
+          </p>
+          <p>
+            Sélection actuelle : {files.length} fichier(s) • {formatBytes(selectedBytes)}
+          </p>
+        </div>
+        {statsError ? (
+          <p className="mt-2 text-xs text-amber-700">{statsError}</p>
+        ) : null}
       </div>
 
       {status ? (

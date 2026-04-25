@@ -7,12 +7,27 @@ type PhotoGalleryProps = {
   images: string[];
   unoptimized?: boolean;
   downloadAllUrl?: string;
+  totalBytes?: number | null;
 };
+
+function formatBytes(bytes: number): string {
+  if (!Number.isFinite(bytes) || bytes <= 0) return "0 o";
+  const units = ["o", "Ko", "Mo", "Go", "To"];
+  let value = bytes;
+  let index = 0;
+  while (value >= 1024 && index < units.length - 1) {
+    value /= 1024;
+    index += 1;
+  }
+  const precision = value >= 100 ? 0 : value >= 10 ? 1 : 2;
+  return `${value.toFixed(precision)} ${units[index]}`;
+}
 
 export default function PhotoGallery({
   images,
   unoptimized,
   downloadAllUrl,
+  totalBytes,
 }: PhotoGalleryProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isZipping, setIsZipping] = useState(false);
@@ -101,6 +116,7 @@ export default function PhotoGallery({
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
         <p className="text-xs uppercase tracking-[0.25em] text-ink/50">
           {images.length} photos disponibles
+          {typeof totalBytes === "number" ? ` • ${formatBytes(totalBytes)}` : ""}
         </p>
         {downloadAllUrl ? (
           <a

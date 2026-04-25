@@ -4,6 +4,8 @@
 // Le header global est rendu uniquement via src/app/layout.tsx (<SiteHeader />).
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import skiData from "@/data/ski-choose.json";
 
 type Technique = "Classique" | "Skating";
@@ -329,11 +331,11 @@ export default function ChooseSkisClient() {
               Choisir ses skis
             </p>
             <h1 className="mt-3 text-3xl font-semibold leading-tight sm:text-4xl md:text-6xl">
-              Choisir ses skis
+              Trouvez vos skis idéaux en moins de 2 minutes
             </h1>
             <p className="mt-4 max-w-xl text-ink/70">
-              Profil skieur, technique, objectifs et priorités : on sort la paire
-              la plus cohérente avec ton usage.
+              Profil, technique, objectif et priorités: on vous propose les
+              meilleurs modèles pour progresser plus vite.
             </p>
           </div>
 
@@ -342,7 +344,7 @@ export default function ChooseSkisClient() {
               Méthode
             </p>
             <p className="mt-3 text-base font-semibold">
-              Parcours guidé, une étape à la fois.
+              Parcours guidé, résultat clair, décision rapide.
             </p>
           </div>
         </div>
@@ -371,7 +373,7 @@ export default function ChooseSkisClient() {
                         type="button"
                         onClick={() => setStep(index)}
                         className={
-                          "rounded-full px-3 py-1 border text-[10px] font-semibold uppercase tracking-[0.2em] transition " +
+                          "rounded-full px-3.5 py-2 border text-[11px] font-semibold uppercase tracking-[0.2em] transition " +
                           (active
                             ? "bg-deep text-white border-deep"
                             : "border-line text-ink/60 hover:bg-deep/5")
@@ -404,7 +406,7 @@ export default function ChooseSkisClient() {
                           e.target.value === "" ? "" : Number(e.target.value)
                         )
                       }
-                      className="mt-1 w-full rounded-xl border border-line bg-white/70 px-3 py-2 text-sm outline-none transition focus:border-sky focus:ring-4 focus:ring-sky/20"
+                      className="mt-1 w-full rounded-xl border border-line bg-white/70 px-3 py-3 text-base outline-none transition focus:border-sky focus:ring-4 focus:ring-sky/20 sm:text-sm"
                     />
                   </div>
                   <div>
@@ -417,7 +419,7 @@ export default function ChooseSkisClient() {
                           e.target.value === "" ? "" : Number(e.target.value)
                         )
                       }
-                      className="mt-1 w-full rounded-xl border border-line bg-white/70 px-3 py-2 text-sm outline-none transition focus:border-sky focus:ring-4 focus:ring-sky/20"
+                      className="mt-1 w-full rounded-xl border border-line bg-white/70 px-3 py-3 text-base outline-none transition focus:border-sky focus:ring-4 focus:ring-sky/20 sm:text-sm"
                     />
                   </div>
                 </div>
@@ -438,7 +440,7 @@ export default function ChooseSkisClient() {
                           type="button"
                         onClick={() => handleTechnique(item)}
                           className={
-                            "rounded-full px-4 py-1.5 border text-[11px] font-semibold uppercase tracking-[0.2em] transition " +
+                            "rounded-full px-4 py-2 border text-xs font-semibold uppercase tracking-[0.2em] transition " +
                             (active
                               ? "bg-deep text-white border-deep"
                               : "border-line text-ink/70 hover:bg-deep/5")
@@ -464,7 +466,7 @@ export default function ChooseSkisClient() {
                           type="button"
                           onClick={() => setNiveau(item)}
                           className={
-                            "rounded-full px-4 py-1.5 border text-[11px] font-semibold uppercase tracking-[0.2em] transition " +
+                            "rounded-full px-4 py-2 border text-xs font-semibold uppercase tracking-[0.2em] transition " +
                             (active
                               ? "bg-deep text-white border-deep"
                               : "border-line text-ink/70 hover:bg-deep/5")
@@ -494,7 +496,7 @@ export default function ChooseSkisClient() {
                             type="button"
                             onClick={() => setTypeRecherche(item)}
                             className={
-                              "rounded-full px-4 py-1.5 border text-[11px] font-semibold uppercase tracking-[0.2em] transition " +
+                              "rounded-full px-4 py-2 border text-xs font-semibold uppercase tracking-[0.2em] transition " +
                               (active
                                 ? "bg-deep text-white border-deep"
                                 : "border-line text-ink/70 hover:bg-deep/5")
@@ -527,7 +529,7 @@ export default function ChooseSkisClient() {
                           type="button"
                           onClick={() => setBut(item)}
                           className={
-                            "rounded-full px-4 py-1.5 border text-[11px] font-semibold uppercase tracking-[0.2em] transition " +
+                            "rounded-full px-4 py-2 border text-xs font-semibold uppercase tracking-[0.2em] transition " +
                             (active
                               ? "bg-sky text-deep border-sky"
                               : "border-line text-ink/70 hover:bg-deep/5")
@@ -558,7 +560,7 @@ export default function ChooseSkisClient() {
                           type="button"
                           onClick={() => togglePriorite(item)}
                           className={
-                            "rounded-full px-4 py-1.5 border text-[11px] font-semibold uppercase tracking-[0.2em] transition " +
+                            "rounded-full px-4 py-2 border text-xs font-semibold uppercase tracking-[0.2em] transition " +
                             (active
                               ? "bg-deep text-white border-deep"
                               : "border-line text-ink/70 hover:bg-deep/5")
@@ -585,7 +587,7 @@ export default function ChooseSkisClient() {
                               setNeige((prev) => (prev === item ? null : item))
                             }
                             className={
-                              "rounded-full px-4 py-1.5 border text-[11px] font-semibold uppercase tracking-[0.2em] transition " +
+                              "rounded-full px-4 py-2 border text-xs font-semibold uppercase tracking-[0.2em] transition " +
                               (active
                                 ? "bg-deep text-white border-deep"
                                 : "border-line text-ink/70 hover:bg-deep/5")
@@ -622,13 +624,13 @@ export default function ChooseSkisClient() {
               </div>
             )}
 
-            <div className="mt-8 flex items-center justify-between border-t border-line/60 pt-6">
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-line/60 pt-6">
               <button
                 type="button"
                 onClick={() => setStep((prev) => Math.max(0, prev - 1))}
                 disabled={!canGoBack}
                 className={
-                  "rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition " +
+                  "rounded-full px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] transition " +
                   (canGoBack
                     ? "border border-deep text-deep hover:bg-deep hover:text-white"
                     : "border border-line text-ink/40")
@@ -636,7 +638,7 @@ export default function ChooseSkisClient() {
               >
                 Précédent
               </button>
-              <span className="text-xs uppercase tracking-[0.3em] text-ink/50">
+              <span className="text-xs uppercase tracking-[0.24em] text-ink/50">
                 Étape {step + 1} sur {STEPS.length}
               </span>
               <button
@@ -645,7 +647,7 @@ export default function ChooseSkisClient() {
                   setStep((prev) => Math.min(STEPS.length - 1, prev + 1))
                 }
                 className={
-                  "rounded-full px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition " +
+                  "rounded-full px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] transition " +
                   (canGoNext
                     ? "bg-deep text-white hover:bg-deep/90"
                     : "bg-deep/40 text-white/70")
@@ -660,23 +662,24 @@ export default function ChooseSkisClient() {
           <div className="mt-8 rounded-3xl border border-line bg-white/85 p-5 shadow-[0_18px_50px_rgba(35,48,54,0.1)] sm:p-6">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <h2 className="text-lg font-semibold">
-                Skis proposés {technique ? `(${technique})` : ""}
+                Recommandations personnalisées {technique ? `(${technique})` : ""}
               </h2>
               {recommendations.length > 0 && (
                 <span className="rounded-full border border-line px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink/60">
-                  3 meilleurs triés taille/poids + critères
+                  Top 3 selon taille, poids et objectifs
                 </span>
               )}
             </div>
 
             {!isReady ? (
               <p className="mt-4 text-ink/60">
-                Sélectionne au minimum la technique et le type de ski pour
-                afficher une recommandation.
+                Renseignez au minimum la technique et le type de ski pour afficher
+                vos recommandations.
               </p>
             ) : recommendations.length === 0 ? (
               <p className="mt-4 text-ink/60">
                 Aucun ski ne correspond parfaitement à ce profil pour le moment.
+                Ajustez un critère pour élargir les propositions.
               </p>
             ) : (
               <div className="mt-4 space-y-4">
@@ -688,9 +691,12 @@ export default function ChooseSkisClient() {
                     <div className="flex flex-col gap-4 md:flex-row md:items-center">
                       <div className="flex items-center justify-center rounded-2xl border border-line bg-white/90 p-3 md:h-28 md:w-28">
                         {rec.ski.imageUrl ? (
-                          <img
+                          <Image
                             src={rec.ski.imageUrl}
                             alt={rec.ski.nom}
+                            width={240}
+                            height={160}
+                            unoptimized
                             className="max-h-20 w-auto"
                           />
                         ) : (
@@ -775,8 +781,16 @@ export default function ChooseSkisClient() {
             )}
 
             <div className="mt-6 rounded-2xl bg-deep/5 p-4 text-sm text-ink/70">
-              V1 : filtre + scoring simple. Prochaine étape : intégration complète
-              des critères terrain et des stocks.
+              Besoin d’un avis expert pour valider le choix final ? On peut affiner
+              la recommandation ensemble selon votre contexte terrain.
+              <div className="mt-3">
+                <Link
+                  href="/contact"
+                  className="inline-flex w-full items-center justify-center rounded-full border border-deep/20 bg-white px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep/5 sm:w-auto"
+                >
+                  Demander un accompagnement
+                </Link>
+              </div>
             </div>
           </div>
         </div>

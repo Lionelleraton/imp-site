@@ -8,22 +8,25 @@ export default function SiteFooter() {
           <div className="grid gap-8 md:grid-cols-[1.2fr_0.8fr] md:items-center">
             <div>
               <p className="text-[10px] uppercase tracking-[0.25em] text-ink/60 sm:text-[11px] sm:tracking-[0.3em]">
-                Informations clés
+                Dernière étape
               </p>
               <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">
-                InMotion Performance
+                Parlons de votre prochain cap
               </h2>
               <div className="mt-4 space-y-2 text-sm text-ink/70 sm:text-base">
                 <p>inmotionperformance@icloud.com</p>
                 <p>+33 6 65 62 00 84</p>
                 <p>Chamonix Mont-Blanc, France</p>
               </div>
+              <p className="mt-3 text-xs uppercase tracking-[0.2em] text-ink/45">
+                Réponse rapide en 24h ouvrées
+              </p>
               <div className="mt-6">
                 <Link
                   href="/contact"
-                  className="inline-flex items-center justify-center rounded-full bg-deep px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-deep/90 sm:px-7 sm:py-3.5 sm:text-sm"
+                  className="inline-flex w-full items-center justify-center rounded-full bg-deep px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-deep/90 sm:w-auto sm:px-7 sm:py-3.5 sm:text-sm"
                 >
-                  Nous contacter
+                  Réserver un appel
                 </Link>
               </div>
             </div>

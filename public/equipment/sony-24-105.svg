@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 360" fill="none">
+  <!-- Lens body - medium zoom -->
+  <rect x="192" y="55" width="96" height="240" rx="16" fill="#2A2E33"/>
+  <!-- Top ring -->
+  <rect x="188" y="80" width="104" height="20" rx="5" fill="#1E2226"/>
+  <!-- Barrel middle ring -->
+  <rect x="188" y="120" width="104" height="16" rx="4" fill="#1A1D20"/>
+  <!-- Zoom ring -->
+  <rect x="180" y="148" width="120" height="60" rx="6" fill="#333"/>
+  <!-- Zoom ring texture -->
+  <rect x="188" y="148" width="1.5" height="60" fill="#3D4045"/>
+  <rect x="196" y="148" width="1.5" height="60" fill="#3D4045"/>
+  <rect x="204" y="148" width="1.5" height="60" fill="#3D4045"/>
+  <rect x="212" y="148" width="1.5" height="60" fill="#3D4045"/>
+  <rect x="220" y="148" width="1.5" height="60" fill="#3D4045"/>
+  <rect x="228" y="148" width="1.5" height="60" fill="#3D4045"/>
+  <rect x="236" y="148" width="1.5" height="60" fill="#3D4045"/>
+  <rect x="244" y="148" width="1.5" height="60" fill="#3D4045"/>
+  <rect x="252" y="148" width="1.5" height="60" fill="#3D4045"/>
+  <rect x="260" y="148" width="1.5" height="60" fill="#3D4045"/>
+  <rect x="268" y="148" width="1.5" height="60" fill="#3D4045"/>
+  <rect x="276" y="148" width="1.5" height="60" fill="#3D4045"/>
+  <!-- Focus ring -->
+  <rect x="188" y="215" width="104" height="32" rx="5" fill="#2E3237"/>
+  <!-- Front element -->
+  <circle cx="240" cy="75" r="40" fill="#1A1D20"/>
+  <circle cx="240" cy="75" r="35" fill="#1E2024"/>
+  <circle cx="240" cy="75" r="29" fill="#15171A"/>
+  <circle cx="240" cy="75" r="20" fill="#0E0F11"/>
+  <circle cx="240" cy="75" r="11" fill="#090A0C"/>
+  <!-- Glass shine -->
+  <ellipse cx="231" cy="66" rx="7" ry="4" fill="rgba(137,169,186,0.18)" transform="rotate(-25 231 66)"/>
+  <!-- Rear mount -->
+  <circle cx="240" cy="288" r="36" fill="#1A1D20"/>
+  <circle cx="240" cy="288" r="30" fill="#15171A"/>
+  <circle cx="240" cy="288" r="20" fill="#0E0F11"/>
+  <circle cx="240" cy="294" r="40" fill="none" stroke="#555" stroke-width="2.5"/>
+  <!-- G badge -->
+  <rect x="208" y="118" width="64" height="17" rx="4" fill="#1A1D20"/>
+  <text x="240" y="130" font-family="Helvetica Neue,Arial,sans-serif" font-size="7.5" font-weight="700" fill="#AAAAAA" letter-spacing="0.8" text-anchor="middle">G LENS</text>
+  <!-- Focal length label -->
+  <text x="240" y="107" font-family="Helvetica Neue,Arial,sans-serif" font-size="7.5" fill="#888" letter-spacing="0.5" text-anchor="middle">FE 24-105mm F4</text>
+  <!-- OIS switch -->
+  <rect x="193" y="230" width="26" height="9" rx="3" fill="#1E2226"/>
+  <text x="206" y="237" font-family="Helvetica Neue,Arial,sans-serif" font-size="5" fill="#777" text-anchor="middle">OSS</text>
+</svg>

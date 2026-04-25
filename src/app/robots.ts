@@ -20,6 +20,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/galleries/", "/services/photo/galerie/admin", "/services/photo/galerie/*"],
     },
     sitemap: `${baseUrl}/sitemap.xml`,
   };

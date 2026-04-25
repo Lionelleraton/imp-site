@@ -15,13 +15,11 @@ export default function GalleryViewClient({
   downloadAllUrl,
 }: GalleryViewClientProps) {
   const [images, setImages] = useState<string[]>(initialImages);
+  const [totalBytes, setTotalBytes] = useState<number | null>(null);
   const [loading, setLoading] = useState(Boolean(manifestUrl));
 
   useEffect(() => {
-    if (!manifestUrl) {
-      setLoading(false);
-      return;
-    }
+    if (!manifestUrl) return;
 
     let cancelled = false;
     fetch(manifestUrl)
@@ -31,6 +29,9 @@ export default function GalleryViewClient({
         const list = Array.isArray(data) ? data : data?.images;
         if (Array.isArray(list)) {
           setImages(list as string[]);
+        }
+        if (!Array.isArray(data) && typeof data?.totalBytes === "number") {
+          setTotalBytes(data.totalBytes);
         }
         setLoading(false);
       })
@@ -54,8 +55,8 @@ export default function GalleryViewClient({
   return (
     <PhotoGallery
       images={images}
-      unoptimized
       downloadAllUrl={downloadAllUrl}
+      totalBytes={totalBytes}
     />
   );
 }

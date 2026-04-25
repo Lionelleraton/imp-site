@@ -29,22 +29,22 @@ export default function SolutionsPage() {
               Nos solutions
             </p>
             <h1 className="mt-3 text-3xl font-semibold leading-tight sm:text-4xl md:text-6xl">
-              Des outils pensés pour les acteurs du nordique
+              Des solutions concrètes pour décider plus vite sur le terrain
             </h1>
             <p className="mt-4 max-w-2xl text-ink/70">
               Marques, fédérations, magasins et staffs : structurez les données
-              terrain, alignez les équipes et gagnez en lisibilité sur chaque
-              décision critique.
+              terrain, alignez les équipes et transformez vos analyses en décisions
+              opérationnelles.
             </p>
           </div>
 
           <div className="rounded-3xl border border-line bg-deep p-5 text-white shadow-[0_22px_60px_rgba(36,67,87,0.35)] sm:p-6">
             <p className="text-[10px] uppercase tracking-[0.25em] text-white/60 sm:text-[11px] sm:tracking-[0.3em]">
-              Mise en place
+              Déploiement rapide
             </p>
             <p className="mt-3 text-lg font-semibold">
-              Cartographier vos usages, importer les historiques, activer les
-              tableaux de bord en 2 semaines.
+              Cartographier vos usages, importer l’historique et activer des
+              tableaux de bord actionnables en 2 semaines.
             </p>
           </div>
         </div>
@@ -83,7 +83,7 @@ export default function SolutionsPage() {
               href="/choose-skis"
               className="mt-6 inline-flex rounded-full bg-deep px-5 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-deep/90"
             >
-              Ouvrir le configurateur
+              Tester le configurateur
             </Link>
           </div>
         </div>
@@ -91,9 +91,9 @@ export default function SolutionsPage() {
         <div className="mt-10">
           <Link
             href="/contact"
-            className="inline-flex rounded-full border border-deep bg-white/70 px-6 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep hover:text-white"
+            className="inline-flex w-full rounded-full border border-deep bg-white/70 px-6 py-3 text-center text-xs font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep hover:text-white sm:w-auto"
           >
-            Nous contacter
+            Parler de votre besoin
           </Link>
         </div>
 

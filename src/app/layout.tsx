@@ -20,7 +20,7 @@ const getBaseUrl = () => {
 const baseUrl = getBaseUrl();
 const siteName = "InMotion Performance";
 const siteDescription =
-  "Solutions numériques et outils terrain pour le ski nordique : applications, recommandations skis et tableaux de bord décisionnels.";
+  "Applications web/iOS, photo premium et impression 3D pour aider sportifs, staffs et marques à décider plus vite et mieux convertir.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     description: siteDescription,
     images: [
       {
-        url: "/hero.png",
+        url: "/hero-social.jpg",
         width: 1200,
         height: 630,
         alt: "InMotion Performance - solutions numériques ski nordique",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteName,
     description: siteDescription,
-    images: ["/hero.png"],
+    images: ["/hero-social.jpg"],
   },
   icons: {
     icon: [

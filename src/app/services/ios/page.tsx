@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesIosPage() {
-  const heroImage = "/hero.png";
+  const heroImage = "/hero-home.jpg";
 
   return (
     <main className="pb-24">
@@ -29,24 +29,24 @@ export default function ServicesIosPage() {
               Service iOS
             </p>
             <h1 className="mt-3 text-3xl font-semibold leading-tight sm:text-4xl md:text-6xl">
-              Des apps terrain robustes, pensées pour aller vite
+              Des apps iOS terrain robustes, pensées pour aller vite et décider juste
             </h1>
             <p className="mt-4 max-w-2xl text-ink/70">
               Offline-first, saisie rapide, synchronisation claire : on développe
-              des applications iOS fiables pour les usages réels sur le terrain.
+              des applications iOS fiables pour les usages réels des équipes terrain.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full bg-deep px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white shadow-[0_18px_45px_rgba(36,67,87,0.3)] transition hover:-translate-y-0.5"
+                className="inline-flex w-full items-center justify-center rounded-full bg-deep px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white shadow-[0_18px_45px_rgba(36,67,87,0.3)] transition hover:-translate-y-0.5 sm:w-auto"
               >
-                Prendre un RDV
+                Réserver un appel
               </Link>
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center rounded-full border border-deep/20 px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep/5"
+                className="inline-flex w-full items-center justify-center rounded-full border border-deep/20 px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep/5 sm:w-auto"
               >
-                Retour aux services
+                Voir tous les services
               </Link>
             </div>
           </div>
@@ -80,7 +80,7 @@ export default function ServicesIosPage() {
             <p className="text-[10px] uppercase tracking-[0.25em] text-ink/60">Rapidité</p>
             <h2 className="mt-3 text-lg font-semibold">Saisie fluide</h2>
             <p className="mt-3 text-sm text-ink/70">
-              Des flux courts pour capter l’info sans friction.
+              Des flux courts pour capter l’information sans friction.
             </p>
           </div>
           <div className="rounded-3xl border border-line bg-white/85 p-6 shadow-[0_18px_50px_rgba(35,48,54,0.1)]">
@@ -145,14 +145,14 @@ export default function ServicesIosPage() {
                 Une app fiable pour vos équipes terrain
               </h2>
               <p className="mt-3 text-sm text-ink/70">
-                On clarifie le besoin et on propose un plan d’action net.
+                On clarifie le besoin et on propose un plan d’action concret.
               </p>
             </div>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-full bg-deep px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5"
+              className="inline-flex w-full items-center justify-center rounded-full bg-deep px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 sm:w-auto"
             >
-              Réserver un créneau
+              Lancer mon projet iOS
             </Link>
           </div>
         </div>

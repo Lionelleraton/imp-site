@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesWebPage() {
-  const heroImage = "/hero.png";
+  const heroImage = "/hero-home.jpg";
 
   return (
     <main className="pb-24">
@@ -29,24 +29,24 @@ export default function ServicesWebPage() {
               Service web
             </p>
             <h1 className="mt-3 text-3xl font-semibold leading-tight sm:text-4xl md:text-6xl">
-              Des plateformes claires qui transforment les visites en décisions
+              Des plateformes web qui transforment les visites en demandes qualifiées
             </h1>
             <p className="mt-4 max-w-2xl text-ink/70">
               On conçoit des sites et outils web qui rendent l’information lisible,
-              fluidifient les parcours et améliorent la conversion, même quand tout va vite.
+              fluidifient le parcours et déclenchent l’action au bon moment.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center rounded-full bg-deep px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white shadow-[0_18px_45px_rgba(36,67,87,0.3)] transition hover:-translate-y-0.5"
+                className="inline-flex w-full items-center justify-center rounded-full bg-deep px-7 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white shadow-[0_18px_45px_rgba(36,67,87,0.3)] transition hover:-translate-y-0.5 sm:w-auto"
               >
-                Prendre un RDV
+                Réserver un appel
               </Link>
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center rounded-full border border-deep/20 px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep/5"
+                className="inline-flex w-full items-center justify-center rounded-full border border-deep/20 px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep/5 sm:w-auto"
               >
-                Retour aux services
+                Voir tous les services
               </Link>
             </div>
           </div>
@@ -142,17 +142,17 @@ export default function ServicesWebPage() {
                 Prêt à démarrer
               </p>
               <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">
-                Un site clair, rapide et crédible
+                Un site clair, rapide et orienté conversion
               </h2>
               <p className="mt-3 text-sm text-ink/70">
-                On vous propose un plan d’action clair dès le premier échange.
+                On vous propose un plan d’action concret dès le premier échange.
               </p>
             </div>
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center rounded-full bg-deep px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5"
+              className="inline-flex w-full items-center justify-center rounded-full bg-deep px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 sm:w-auto"
             >
-              Réserver un créneau
+              Lancer mon projet web
             </Link>
           </div>
         </div>
