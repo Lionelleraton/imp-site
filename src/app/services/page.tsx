@@ -2,6 +2,7 @@
 // Le seul header du site doit venir de src/app/layout.tsx via <SiteHeader />.
 
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { readdirSync } from "fs";
@@ -11,14 +12,14 @@ import ServicesExperience from "./ServicesExperience";
 export const metadata: Metadata = {
   title: "Nos services",
   description:
-    "Développement web/iOS, photo et 3D : des services premium, lisibles et orientés conversion pour les marques, clubs et structures sportives.",
+    "Solutions web/iOS orientées ski nordique et service photo premium pour athlètes, coachs, clubs et marques.",
   alternates: {
     canonical: "/services",
   },
   openGraph: {
     title: "Nos services",
     description:
-      "Développement web/iOS, photo et 3D : des services premium, lisibles et orientés conversion pour les marques, clubs et structures sportives.",
+      "Solutions web/iOS orientées ski nordique et service photo premium pour athlètes, coachs, clubs et marques.",
     url: "/services",
   },
 };
@@ -42,7 +43,11 @@ export default function ServicesPage() {
 
   return (
     <main className="pb-24">
-      <section className="mx-auto w-full max-w-[1440px] px-4 pt-10 sm:px-6 sm:pt-12 xl:px-10">
+      <section
+        className="mx-auto w-full max-w-[1440px] px-4 pt-10 sm:px-6 sm:pt-12 xl:px-10"
+        data-reveal
+        style={{ "--reveal-delay": "0ms" } as CSSProperties}
+      >
         <div className="relative overflow-hidden rounded-[38px] border border-white/10 bg-[#081019] shadow-[0_30px_90px_rgba(8,16,25,0.45)]">
           <Image
             src={heroImage}
@@ -55,17 +60,16 @@ export default function ServicesPage() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_10%,rgba(137,169,186,0.42),transparent_38%),radial-gradient(circle_at_88%_88%,rgba(137,169,186,0.24),transparent_45%),linear-gradient(130deg,rgba(8,16,25,0.95),rgba(11,25,38,0.82))]" />
 
           <div className="relative z-10 px-6 py-12 sm:px-10 sm:py-16 lg:px-14 lg:py-20">
-            <p className="text-[11px] uppercase tracking-[0.36em] text-white/55">
-              Nos services
-            </p>
+            <p className="text-[11px] uppercase tracking-[0.36em] text-white/55">Nos services</p>
             <h1 className="mt-4 max-w-4xl text-4xl font-semibold leading-[1.02] text-white sm:text-5xl md:text-6xl lg:text-7xl">
-              Des services pensés pour
+              Solutions digitales et photo
               <br className="hidden md:block" />
-              convertir, accélérer et décider.
+              pensées pour performer.
             </h1>
             <p className="mt-6 max-w-2xl text-base text-white/78 sm:text-lg">
-              Web, iOS, photo et 3D: chaque service est structuré pour rendre la valeur
-              claire en quelques secondes et pousser naturellement à l’action.
+              Le coeur: des applications web/iOS dédiées à la performance en ski nordique.
+              Le complément: un service photo premium pour valoriser vos athlètes, vos produits
+              et votre image de marque.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">

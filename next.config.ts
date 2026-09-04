@@ -10,6 +10,23 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/services/3d",
+        destination: "/services",
+        permanent: true,
+      },
+    ];
+  },
+  // Serve the new static homepage (public/home.html) at "/".
+  // beforeFiles runs before the App Router, so it overrides src/app/page.tsx
+  // without deleting it — remove this block to restore the old homepage.
+  async rewrites() {
+    return {
+      beforeFiles: [{ source: "/", destination: "/home.html" }],
+    };
+  },
 };
 
 export default nextConfig;

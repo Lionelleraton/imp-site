@@ -24,7 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services/web",
     "/services/ios",
     "/services/photo",
-    "/services/3d",
     "/solutions",
     "/skitrack",
     "/choose-skis",

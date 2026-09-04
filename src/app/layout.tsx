@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
+import ScrollReveal from "./components/ScrollReveal";
 
 const getBaseUrl = () => {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
@@ -20,7 +22,7 @@ const getBaseUrl = () => {
 const baseUrl = getBaseUrl();
 const siteName = "InMotion Performance";
 const siteDescription =
-  "Applications web/iOS, photo premium et impression 3D pour aider sportifs, staffs et marques à décider plus vite et mieux convertir.";
+  "Solutions numériques et photo premium pour optimiser la performance en ski nordique, guider les décisions terrain et renforcer l'image des marques.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -109,10 +111,23 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className="min-h-screen bg-surface text-ink antialiased">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-18PPKGV9T3"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-18PPKGV9T3');
+          `}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
+        <ScrollReveal />
         <SiteHeader />
         {children}
         <SiteFooter />

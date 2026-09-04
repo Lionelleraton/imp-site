@@ -1,0 +1,645 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+<title>In Motion Performance</title>
+<meta name="description" content="In Motion Performance — studio créatif & performance : photo, web & iOS, 3D. Annecy · Chamonix.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&family=Space+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  color-scheme: dark;
+  --bg:#0B1015; --bg-2:#121B23; --bg-3:#1A2530; --bg-4:#22303B;
+  --cream:#F4F1E8; --cream-ink:#1B2830;
+  --navy:#233036; --steel:#244C67; --sky:#89A9BA; --sky-hi:#AEC8D6;
+  --text:#EDF1F3; --muted:#93A0AB; --faint:#5C6873;
+  --line:rgba(237,241,243,.10); --line-2:rgba(237,241,243,.20);
+  --accent:#89A9BA; --accent-deep:#244C67; --accent-soft:rgba(137,169,186,.14);
+  --disp:"Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Space Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --maxw:1300px; --nav-h:70px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{margin:0; background:var(--bg); color:var(--text); font-family:var(--disp); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:hidden}
+img{display:block; max-width:100%}
+a{color:inherit; text-decoration:none}
+::selection{background:var(--sky); color:#0B1015}
+:focus-visible{outline:2px solid var(--sky); outline-offset:3px; border-radius:2px}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,64px)}
+.eyebrow{font-family:var(--mono); font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:var(--sky); margin:0 0 18px}
+.view{display:none}
+.view.active{display:block}
+
+h1,h2,h3{margin:0; text-wrap:balance}
+.display{font-weight:900; letter-spacing:-.02em; line-height:.98; text-transform:uppercase}
+.section-title{font-family:var(--disp); font-weight:800; font-size:clamp(28px,4.6vw,50px); line-height:1.02; letter-spacing:-.015em}
+
+/* ---------- NAV ---------- */
+.nav{position:fixed; inset:0 0 auto 0; height:var(--nav-h); z-index:60; display:flex; align-items:center;
+  justify-content:space-between; padding:0 clamp(20px,5vw,64px);
+  transition:background .4s, border-color .4s, backdrop-filter .4s; border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(11,16,21,.78); backdrop-filter:blur(16px) saturate(1.2); border-bottom-color:var(--line)}
+.logo{display:flex; align-items:center; gap:10px; color:var(--text)}
+.logo svg{height:19px; width:auto; display:block; transition:color .3s}
+.logo:hover{color:var(--sky)}
+.nav-links{display:flex; align-items:center; gap:26px}
+.nav-links a{font-family:var(--mono); font-size:12px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted); transition:color .25s; cursor:pointer}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.lang{display:flex; align-items:center; gap:5px; font-family:var(--mono); font-size:12px; letter-spacing:.08em}
+.lang button{background:none;border:0;color:var(--faint);cursor:pointer;font:inherit;padding:4px 2px;transition:color .2s}
+.lang button.active{color:var(--sky)}
+.lang .sep{color:var(--faint)}
+.nav-cta{font-family:var(--mono); font-size:11.5px; letter-spacing:.12em; text-transform:uppercase; color:#0B1015;
+  background:var(--sky); padding:10px 16px; border-radius:100px; transition:transform .2s, background .2s; white-space:nowrap}
+.nav-cta:hover{transform:translateY(-1px); background:var(--sky-hi)}
+.menu-btn{display:none; background:none; border:1px solid var(--line-2); color:var(--text); width:40px;height:36px;border-radius:8px;cursor:pointer; align-items:center; justify-content:center}
+.menu-btn svg{width:18px;height:18px}
+.mobile-menu{position:fixed; inset:0; z-index:55; background:rgba(9,13,17,.98); backdrop-filter:blur(8px); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; opacity:0; pointer-events:none; transition:opacity .3s}
+.mobile-menu.open{opacity:1; pointer-events:auto}
+.mobile-menu a{font-weight:800; font-size:30px; text-transform:uppercase; letter-spacing:-.01em; color:var(--text); padding:10px; cursor:pointer}
+.mobile-menu a:hover{color:var(--sky)}
+@media(max-width:900px){ .nav-links{display:none} .menu-btn{display:flex} }
+
+/* ---------- HERO (home) ---------- */
+.hero{position:relative; min-height:640px; height:94vh; max-height:1000px; display:flex; align-items:flex-end; overflow:hidden; border-bottom:1px solid var(--line)}
+.hero-media{position:absolute; inset:0; z-index:0; overflow:hidden}
+.hero-media img{width:100%; height:100%; object-fit:cover; object-position:center 40%}
+.kenburns{animation:kb 34s ease-in-out infinite alternate}
+@keyframes kb{from{transform:scale(1.05)}to{transform:scale(1.16)}}
+.hero::after{content:""; position:absolute; inset:0; z-index:1;
+  background:linear-gradient(180deg, rgba(11,16,21,.55) 0%, rgba(11,16,21,.08) 24%, rgba(11,16,21,.35) 60%, rgba(11,16,21,.94) 100%)}
+.hero-inner{position:relative; z-index:2; width:100%; max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,64px) clamp(40px,7vw,80px)}
+.hero .kicker{font-family:var(--mono); font-size:12.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--sky); margin:0 0 20px}
+.hero h1{font-weight:800; text-transform:uppercase; letter-spacing:-.015em; line-height:1.02; font-size:clamp(28px,4.6vw,60px); max-width:20ch}
+.hero .sub{font-size:clamp(15px,2.3vw,21px); color:var(--text); margin:20px 0 0; max-width:42ch; font-weight:500}
+.hero-actions{display:flex; flex-wrap:wrap; gap:14px; margin-top:32px}
+.btn{display:inline-flex; align-items:center; gap:10px; font-family:var(--mono); font-size:12.5px; letter-spacing:.1em; text-transform:uppercase; padding:15px 26px; border-radius:100px; cursor:pointer; transition:transform .2s, background .25s, border-color .25s, color .25s; border:1px solid transparent}
+.btn svg{width:15px;height:15px}
+.btn-primary{background:var(--sky); color:#0B1015}
+.btn-primary:hover{transform:translateY(-2px); background:var(--sky-hi)}
+.btn-ghost{background:rgba(237,241,243,.04); border-color:var(--line-2); color:var(--text)}
+.btn-ghost:hover{transform:translateY(-2px); border-color:var(--sky); color:var(--sky)}
+.hero .coords{font-family:var(--mono); font-size:11.5px; letter-spacing:.16em; color:var(--muted); margin:26px 0 0; text-transform:uppercase}
+.scrollcue{position:absolute; z-index:3; right:clamp(20px,5vw,64px); bottom:32px; font-family:var(--mono); font-size:11px; letter-spacing:.2em; color:var(--muted); text-transform:uppercase; display:flex; align-items:center; gap:10px}
+.scrollcue .bar{width:1px; height:34px; background:linear-gradient(var(--muted),transparent); display:block; animation:cue 2.2s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:scaleY(.5);transform-origin:top;opacity:.5}50%{transform:scaleY(1);opacity:1}}
+.hla{opacity:0; transform:translateY(24px); animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+.hla.d1{animation-delay:.12s}.hla.d2{animation-delay:.26s}.hla.d3{animation-delay:.44s}.hla.d4{animation-delay:.6s}.hla.d5{animation-delay:.74s}
+@keyframes rise{to{opacity:1; transform:none}}
+@media (prefers-reduced-motion: reduce){ .hla{animation:none;opacity:1;transform:none} .kenburns{animation:none} .scrollcue .bar{animation:none} }
+
+/* ---------- MARQUEE ---------- */
+.marquee{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--bg-2); overflow:hidden; padding:16px 0}
+.marquee-track{display:flex; gap:0; white-space:nowrap; width:max-content; animation:scrollx 34s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee span{font-family:var(--mono); font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); padding:0 26px; position:relative}
+.marquee span::after{content:"◆"; color:var(--sky); position:absolute; right:-6px; top:50%; transform:translateY(-50%); font-size:7px}
+@keyframes scrollx{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){ .marquee-track{animation:none} }
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1; transform:none}
+.reveal.d1{transition-delay:.08s}.reveal.d2{transition-delay:.16s}.reveal.d3{transition-delay:.24s}
+@media (prefers-reduced-motion: reduce){ .reveal{opacity:1 !important; transform:none !important; transition:none} }
+
+/* ---------- INTRO ---------- */
+.intro{padding:clamp(72px,11vw,150px) 0 clamp(20px,5vw,50px)}
+.intro h2{font-weight:800; font-size:clamp(26px,4.6vw,50px); line-height:1.08; letter-spacing:-.02em; max-width:20ch; text-transform:uppercase}
+.intro h2 .hl{color:var(--sky)}
+.intro .lead{font-size:17px; line-height:1.75; color:var(--muted); max-width:58ch; margin:30px 0 0}
+
+/* ---------- SERVICES ---------- */
+.services{padding:clamp(56px,8vw,96px) 0}
+.svc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:44px}
+@media(max-width:860px){ .svc-grid{grid-template-columns:1fr} }
+.svc{position:relative; background:var(--bg-2); border:1px solid var(--line); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; transition:transform .35s, border-color .35s}
+.svc:hover{transform:translateY(-6px); border-color:var(--line-2)}
+.svc-media{position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--bg-3)}
+.svc-media img{width:100%; height:100%; object-fit:cover; transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.svc:hover .svc-media img{transform:scale(1.07)}
+.svc-media .num{position:absolute; top:14px; left:16px; font-family:var(--mono); font-size:11px; letter-spacing:.14em; color:var(--sky); z-index:2}
+.svc-body{padding:24px 24px 26px; display:flex; flex-direction:column; flex:1}
+.svc-body h3{font-weight:800; font-size:23px; text-transform:uppercase; letter-spacing:-.01em}
+.svc-body p{color:var(--muted); font-size:15px; line-height:1.65; margin:12px 0 20px; flex:1}
+.svc-link{font-family:var(--mono); font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--text); display:inline-flex; align-items:center; gap:8px; transition:gap .25s, color .25s; cursor:pointer}
+.svc:hover .svc-link{color:var(--sky); gap:14px}
+.svc-link svg{width:14px;height:14px}
+/* data mock (web/ios) */
+.mock{position:absolute; inset:0; padding:22px; display:flex; flex-direction:column; gap:10px; background:radial-gradient(120% 120% at 80% 0%, rgba(36,76,103,.35), transparent 60%)}
+.mock-row{height:9px; border-radius:5px; background:var(--bg-4)}
+.mock-row.s{width:52%} .mock-row.m{width:74%}
+.mock-chart{margin-top:auto; width:100%; height:52%}
+/* 3d globe */
+.globe-wrap{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:radial-gradient(120% 120% at 50% 40%, rgba(36,76,103,.28), transparent 62%)}
+.globe-wrap svg{width:72%; height:72%; color:var(--sky); opacity:.85; animation:spin 26s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){ .globe-wrap svg{animation:none} }
+
+/* ---------- SKITRACK ---------- */
+.skitrack{padding:clamp(56px,8vw,100px) 0; border-top:1px solid var(--line); background:var(--bg-2)}
+.st-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(32px,6vw,72px); align-items:center}
+@media(max-width:860px){ .st-grid{grid-template-columns:1fr; gap:44px} }
+.st-body h2{font-weight:800; font-size:clamp(28px,4.4vw,46px); line-height:1.04; text-transform:uppercase; letter-spacing:-.02em; margin-top:16px}
+.st-body p{color:var(--muted); font-size:16.5px; line-height:1.7; margin:22px 0 24px; max-width:52ch}
+.st-list{list-style:none; padding:0; margin:0 0 30px; display:flex; flex-direction:column; gap:12px}
+.st-list li{display:flex; align-items:center; gap:12px; font-size:15.5px; color:var(--text)}
+.st-list li svg{width:18px;height:18px; color:var(--sky); flex:none}
+.phone{position:relative; width:min(300px,78%); margin:0 auto; aspect-ratio:9/19; background:var(--bg-4); border:1px solid var(--line-2); border-radius:34px; padding:12px; box-shadow:0 40px 90px -30px rgba(0,0,0,.8)}
+.phone::before{content:""; position:absolute; top:14px; left:50%; transform:translateX(-50%); width:80px; height:6px; border-radius:6px; background:rgba(237,241,243,.18)}
+.phone-screen{width:100%; height:100%; border-radius:24px; background:linear-gradient(180deg,var(--bg-3),var(--navy)); overflow:hidden; padding:26px 16px 16px; display:flex; flex-direction:column; gap:12px}
+.ps-title{font-family:var(--mono); font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--sky)}
+.ps-kpi{display:flex; gap:10px}
+.ps-kpi div{flex:1; background:rgba(237,241,243,.05); border:1px solid var(--line); border-radius:10px; padding:9px 10px}
+.ps-kpi .n{font-weight:800; font-size:18px}
+.ps-kpi .l{font-family:var(--mono); font-size:8px; letter-spacing:.1em; color:var(--muted); text-transform:uppercase; margin-top:3px}
+.ps-chart{flex:1; background:rgba(237,241,243,.03); border:1px solid var(--line); border-radius:10px; padding:10px}
+.ps-bars{display:flex; align-items:flex-end; gap:6px; height:100%}
+.ps-bars span{flex:1; background:linear-gradient(var(--sky),var(--steel)); border-radius:3px 3px 0 0; transform-origin:bottom; transform:scaleY(.15)}
+.ps-bars.animate span{transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+
+/* ---------- BRANDS ---------- */
+.brands{border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+.brands .wrap{padding:clamp(42px,6vw,70px) clamp(20px,5vw,64px); text-align:center}
+.brands .blurb{color:var(--muted); max-width:52ch; margin:0 auto 36px; font-size:15px}
+.brandrow{display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:clamp(24px,5vw,60px)}
+.brandrow span{font-weight:700; font-size:clamp(16px,2.5vw,25px); letter-spacing:.03em; color:var(--muted); text-transform:uppercase; transition:color .3s; white-space:nowrap}
+.brandrow span:hover{color:var(--text)}
+.brandrow span b{color:inherit}
+
+/* ---------- TESTIMONIALS ---------- */
+.testi{padding:clamp(60px,9vw,110px) 0}
+.testi-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:44px}
+@media(max-width:760px){ .testi-grid{grid-template-columns:1fr} }
+.tcard{background:var(--bg-2); border:1px solid var(--line); border-radius:14px; padding:30px 28px; transition:transform .3s, border-color .3s}
+.tcard:hover{transform:translateY(-4px); border-color:var(--line-2)}
+.tcard .q{font-size:18px; line-height:1.55; font-weight:500}
+.tcard .q::before{content:"“"; color:var(--sky); font-size:34px; line-height:0; vertical-align:-8px; margin-right:4px}
+.tcard .a{font-family:var(--mono); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--sky); margin-top:20px}
+
+/* ---------- ABOUT ---------- */
+.about{padding:clamp(60px,9vw,120px) 0; border-top:1px solid var(--line)}
+.about-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:clamp(32px,6vw,80px); align-items:center}
+@media(max-width:820px){ .about-grid{grid-template-columns:1fr; gap:40px} }
+.about-photo{position:relative}
+.about-photo img{width:100%; border-radius:12px}
+.about-photo .tag{position:absolute; bottom:14px; left:14px; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--text); background:rgba(11,16,21,.6); border:1px solid var(--line-2); padding:6px 11px; border-radius:100px; backdrop-filter:blur(4px)}
+.about-body p{color:var(--muted); font-size:16.5px; line-height:1.75; margin:22px 0 0; max-width:60ch}
+.about-body p strong{color:var(--text); font-weight:600}
+.stats{display:flex; flex-wrap:wrap; gap:clamp(22px,5vw,52px); margin-top:34px; padding-top:30px; border-top:1px solid var(--line)}
+.stat .n{font-weight:800; font-size:34px; line-height:1}
+.stat .l{font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); margin-top:8px}
+
+/* ---------- CTA ---------- */
+.cta-sec{position:relative; padding:clamp(72px,11vw,150px) 0 clamp(56px,8vw,90px); border-top:1px solid var(--line); overflow:hidden}
+.cta-bg{position:absolute; inset:0; z-index:0; opacity:.22; background-size:cover; background-position:center}
+.cta-sec::after{content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, var(--bg) 0%, rgba(11,16,21,.65) 45%, var(--bg) 100%)}
+.cta-inner{position:relative; z-index:2; text-align:center}
+.cta-inner h2{font-weight:900; font-size:clamp(30px,6vw,74px); line-height:1.02; letter-spacing:-.02em; text-transform:uppercase; max-width:18ch; margin:0 auto}
+.cta-inner .sub{color:var(--muted); font-size:clamp(15px,2.2vw,18px); max-width:56ch; margin:24px auto 0}
+.cta-actions{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:36px}
+.channels{display:flex; flex-wrap:wrap; justify-content:center; gap:clamp(20px,4vw,50px); margin-top:52px; padding-top:36px; border-top:1px solid var(--line)}
+.channel{text-align:center; min-width:130px}
+.channel .k{font-family:var(--mono); font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--faint); margin-bottom:8px}
+.channel a,.channel .v{font-size:15.5px; color:var(--text); transition:color .25s}
+.channel a:hover{color:var(--sky)}
+.channel .v.muted{color:var(--muted)}
+
+/* ---------- PORTFOLIO VIEW ---------- */
+.pf-hero{position:relative; min-height:420px; height:62vh; max-height:640px; display:flex; align-items:flex-end; overflow:hidden; border-bottom:1px solid var(--line)}
+.pf-hero img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 45%; z-index:0}
+.pf-hero::after{content:""; position:absolute; inset:0; z-index:1; background:linear-gradient(180deg, rgba(11,16,21,.5) 0%, transparent 35%, rgba(11,16,21,.9) 100%)}
+.pf-hero .inner{position:relative; z-index:2; width:100%; max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,64px) clamp(34px,6vw,60px)}
+.pf-hero h1{font-weight:900; text-transform:uppercase; letter-spacing:-.02em; font-size:clamp(40px,8vw,96px); line-height:.92}
+.pf-hero .sub{color:var(--text); font-size:clamp(14px,2vw,18px); margin-top:14px; max-width:46ch}
+.work{padding:clamp(44px,7vw,84px) 0 clamp(60px,9vw,110px)}
+.work-head{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:22px; margin-bottom:30px}
+.filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:clamp(36px,6vw,72px)}
+.filters button{font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); background:transparent; border:1px solid var(--line); padding:9px 15px; border-radius:100px; cursor:pointer; transition:all .22s}
+.filters button:hover{color:var(--text); border-color:var(--line-2)}
+.filters button.active{color:#0B1015; background:var(--sky); border-color:var(--sky)}
+.count{font-family:var(--mono); font-size:12px; color:var(--faint); letter-spacing:.1em}
+.grid{column-count:3; column-gap:14px}
+@media(max-width:900px){ .grid{column-count:2} }
+@media(max-width:540px){ .grid{column-count:1} }
+.tile{break-inside:avoid; margin:0 0 14px; position:relative; cursor:pointer; overflow:hidden; border-radius:6px; background:var(--bg-2)}
+.tile img{width:100%; height:auto; transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.tile:hover img{transform:scale(1.045)}
+.tile .cap{position:absolute; inset:auto 0 0 0; padding:44px 16px 15px; z-index:2; background:linear-gradient(transparent, rgba(9,13,17,.9)); opacity:0; transform:translateY(8px); transition:opacity .35s, transform .35s}
+.tile:hover .cap,.tile:focus-visible .cap{opacity:1; transform:none}
+.tile .cap .t{display:block; font-weight:700; font-size:18px}
+.tile .cap .m{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--sky); margin-top:6px}
+.tile .badge{position:absolute; top:12px; left:12px; z-index:2; font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--text); background:rgba(9,13,17,.5); border:1px solid var(--line-2); padding:4px 9px; border-radius:100px; backdrop-filter:blur(4px); opacity:0; transition:opacity .35s}
+.tile:hover .badge,.tile:focus-visible .badge{opacity:1}
+.pf-cta{text-align:center; padding:clamp(40px,6vw,70px) 0 0; border-top:1px solid var(--line); margin-top:20px}
+.pf-cta h3{font-weight:800; font-size:clamp(22px,3.4vw,34px); text-transform:uppercase; letter-spacing:-.01em}
+.pf-cta p{color:var(--muted); margin:12px auto 24px; max-width:44ch}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--line); background:var(--bg)}
+footer .top{max-width:var(--maxw); margin:0 auto; padding:clamp(44px,6vw,64px) clamp(20px,5vw,64px) 30px; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:34px}
+@media(max-width:760px){ footer .top{grid-template-columns:1fr 1fr} }
+@media(max-width:480px){ footer .top{grid-template-columns:1fr} }
+footer .brandcol svg{height:22px; width:auto; color:var(--text); margin-bottom:16px}
+footer .brandcol .tl{font-family:var(--mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--sky)}
+footer .brandcol p{color:var(--muted); font-size:13.5px; margin:12px 0 0; max-width:34ch}
+footer .col h4{font-family:var(--mono); font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--faint); margin:0 0 14px; font-weight:400}
+footer .col a{display:block; color:var(--muted); font-size:14px; padding:5px 0; cursor:pointer; transition:color .2s}
+footer .col a:hover{color:var(--sky)}
+footer .bar{max-width:var(--maxw); margin:0 auto; padding:20px clamp(20px,5vw,64px); border-top:1px solid var(--line); display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px}
+footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; color:var(--faint)}
+
+/* ---------- LIGHTBOX ---------- */
+.lb{position:fixed; inset:0; z-index:100; background:rgba(6,9,12,.97); display:none; align-items:center; justify-content:center; opacity:0; transition:opacity .3s}
+.lb.open{display:flex; opacity:1}
+.lb-stage{position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:clamp(16px,4vw,60px)}
+.lb-img{max-width:100%; max-height:82vh; width:auto; height:auto; object-fit:contain; border-radius:3px; box-shadow:0 30px 80px -20px rgba(0,0,0,.85)}
+.lb-cap{position:absolute; inset:auto 0 clamp(14px,3vw,30px) 0; text-align:center; padding:0 20px}
+.lb-cap .t{font-weight:700; font-size:clamp(17px,2.4vw,23px)}
+.lb-cap .m{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--sky); margin-top:8px}
+.lb-nav{position:absolute; top:50%; transform:translateY(-50%); width:52px; height:52px; border-radius:50%; background:rgba(26,37,48,.6); border:1px solid var(--line-2); color:var(--text); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .25s, color .25s, border-color .25s}
+.lb-nav:hover{background:var(--sky); color:#0B1015; border-color:transparent}
+.lb-nav svg{width:22px;height:22px}
+.lb-prev{left:clamp(10px,2.5vw,34px)} .lb-next{right:clamp(10px,2.5vw,34px)}
+.lb-close{position:absolute; top:clamp(14px,2.5vw,26px); right:clamp(14px,2.5vw,26px); width:46px;height:46px}
+.lb-counter{position:absolute; top:clamp(20px,2.8vw,32px); left:clamp(16px,3vw,34px); font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--muted)}
+@media(max-width:600px){ .lb-nav{width:44px;height:44px} .lb-img{max-height:72vh} }
+</style>
+
+<!-- IMP logo (inline symbol) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="imp-logo" viewBox="0 0 2103 357"><path fill="currentColor" d="M1412.05 101.295C1431.3 98.4291 1459.7 100.722 1476.32 106.453C1510.13 118.203 1535.34 144.568 1546.84 179.817C1552.93 198.731 1554.87 213.92 1553.9 235.843C1552.38 272.524 1542.13 298.603 1520.38 321.243C1507.63 334.425 1498.21 341.16 1483.94 347.178C1468.57 353.626 1460.12 355.202 1438.64 355.919C1421.47 356.492 1415.51 356.062 1404.43 353.769C1380.18 348.611 1355.8 333.995 1341.26 315.798C1322.56 292.585 1314.94 270.232 1313.69 234.554C1312.58 201.311 1317.29 179.96 1331.14 155.888C1347.49 127.23 1378.52 106.31 1412.05 101.295ZM895.049 100.005C944.504 99.4316 984.678 123.792 1004.49 166.778C1012.11 183.399 1015.43 198.588 1016.4 221.657C1017.51 250.601 1012.66 275.964 1002 296.024C987.311 323.536 961.959 343.883 932.036 352.337C922.062 355.202 917.213 355.632 896.296 355.632C870.945 355.632 863.879 354.486 846.425 347.465C826.338 339.297 802.233 317.661 792.259 298.603C780.761 276.68 777.159 262.351 776.189 233.837C775.358 209.335 777.99 191.567 785.332 173.083C800.432 134.538 834.095 107.6 874.823 101.295C878.702 100.722 887.707 100.148 895.049 100.005ZM68.9893 177.524L68.5732 351.334L34.3564 351.764L0 352.05V3.85829H69.2656L68.9893 177.524ZM235.78 101.295C244.369 99.7187 263.764 100.578 274.431 102.871C304.769 109.606 325.825 133.535 333.167 169.5C334.829 177.524 335.245 195.722 335.245 265.646V352.05H270.413L269.858 273.528C269.304 195.437 269.304 195.149 266.118 186.695C262.378 176.808 255.313 168.211 247.417 163.912C242.568 161.19 239.521 160.76 226.36 160.76C212.092 160.76 210.567 161.046 202.948 165.058C193.39 170.074 185.909 179.244 182.03 190.707C179.675 197.441 179.398 204.606 178.982 275.104L178.566 352.05L145.735 351.764L112.903 351.334L112.487 228.391L112.211 105.594H178.705V143.278L182.308 137.69C194.637 118.633 214.031 105.45 235.78 101.295ZM430.139 3.85829C469.481 3.85829 480.98 4.28847 481.396 5.57801C481.673 6.58103 488.599 26.785 496.634 50.4276C504.807 74.0702 513.535 99.8622 516.167 107.743C518.938 115.624 522.262 125.224 523.647 129.236C532.098 152.592 540.964 180.39 549.969 212.344C553.016 223.377 556.895 236.846 558.558 242.434L561.467 252.321L563.406 245.3C576.29 198.444 588.065 159.613 604.688 110.608C615.632 78.2254 628.099 41.114 632.671 27.788L640.706 3.85829L691.27 4.1454L741.834 4.57508V351.334H673.953V265.36C673.953 218.075 674.369 158.467 674.923 132.818L675.893 86.2499L673.261 94.1307C671.875 98.4299 667.165 114.191 662.871 129.236C649.711 175.375 650.542 172.796 606.628 300.466C597.486 326.828 589.728 349.323 589.449 350.33C588.895 351.763 582.523 352.05 560.912 351.764L532.929 351.334L525.448 329.84C521.292 317.947 515.197 300.609 511.872 291.152C508.547 281.695 501.76 262.351 496.911 248.166C492.063 233.98 486.383 217.789 484.443 212.344C480.149 200.164 460.201 137.117 454.937 119.206C445.655 87.3959 446.486 76.3627 447.179 221.514L447.871 352.05L414.069 351.764L380.268 351.334L379.853 177.524L379.575 3.85829H430.139ZM1281.13 228.391L1280.72 351.334L1247.89 351.764L1214.92 352.05V105.594H1281.41L1281.13 228.391ZM1710.72 101.295C1720.28 99.7186 1740.5 100.865 1750.34 103.444C1779.43 111.325 1799.66 134.824 1806.44 168.641C1808.94 181.25 1809.21 188.414 1809.21 267.223V352.05L1776.38 351.764L1743.41 351.334L1742.72 271.808C1742.17 214.923 1741.47 190.85 1740.36 187.411C1736.07 175.088 1726.79 165.631 1715.57 162.049C1706.7 159.326 1690.63 159.47 1681.63 162.479C1671.52 165.775 1661.26 176.378 1656.69 187.984L1653.37 196.582L1651.98 351.334L1619.15 351.764L1586.18 352.05V105.594H1651.15L1651.57 124.508L1651.98 143.565L1656.28 137.117C1669.71 117.2 1688.42 104.877 1710.72 101.295ZM1137.34 105.594H1185.83V158.61H1137.34V221.944C1137.34 281.694 1137.48 285.707 1139.97 289.862C1143.43 295.737 1150.78 297.6 1170.59 297.6H1185.83L1185.55 324.395L1185.13 351.334L1169.2 351.764C1149.95 352.337 1120.99 349.9 1112.27 347.178C1089.13 339.87 1076.39 325.828 1072.23 303.332C1071.4 298.89 1070.84 267.223 1070.84 227.246V158.61H1029.29V105.594H1070.84V38.2479H1137.34V105.594ZM917.075 160.33C907.655 155.745 890.755 154.598 880.919 157.893C864.988 163.195 853.212 176.521 846.84 196.438C843.515 206.755 843.1 210.338 843.1 228.105C843.1 243.437 843.654 250.171 845.594 256.763C854.044 285.85 871.083 300.466 896.296 300.466C921.785 300.466 939.24 285.134 946.998 256.047C950.323 243.581 950.323 213.204 947.137 200.881C941.873 181.394 931.205 167.065 917.075 160.33ZM1436.01 156.175C1399.72 154.599 1377.55 186.122 1380.18 235.269C1381.43 257.479 1386.56 272.238 1397.08 284.418C1406.23 295.021 1415.93 299.463 1431.16 300.18C1445.57 300.896 1453.47 298.603 1463.44 290.723C1472.58 283.558 1478.68 273.957 1483.11 259.915C1486.3 249.742 1486.85 245.586 1486.85 229.538C1487.13 194.289 1476.6 171.506 1455.27 160.76C1448.9 157.464 1444.88 156.605 1436.01 156.175ZM1946.36 2.28212C1962.29 -1.3 1987.92 -0.583589 2004.54 3.85829C2027.4 10.0197 2045.13 20.3367 2063.14 38.1044C2079.49 54.1527 2090.71 73.3534 2098.05 96.996C2102.48 111.755 2104.15 139.982 2101.65 156.891C2096.8 188.844 2078.8 220.654 2053.72 241.001C2044.72 248.452 2022.14 261.348 2014.24 263.784C2012.3 264.357 2007.31 265.79 2003.16 267.08C1997.48 268.799 1989.58 269.516 1972.68 269.516C1952.87 269.659 1948.3 269.229 1938.74 266.363C1902.31 255.617 1872.11 229.825 1855.62 195.149C1851.47 186.409 1847.17 175.518 1846.06 170.79C1838.58 140.27 1841.08 106.454 1852.71 80.5184C1870.86 39.8245 1904.39 11.7392 1946.36 2.28212ZM2002.6 40.2538C1990.14 36.0985 1966.03 34.3794 1954.81 36.8153C1943.87 39.2512 1931.68 43.9791 1923.5 48.994C1880.28 75.9322 1863.93 130.095 1884.71 176.808C1896.21 202.599 1916.85 221.227 1944.97 231.114C1955.92 234.983 1987.92 234.983 1999.69 231.114C2030.73 220.941 2054.41 196.868 2064.67 165.345C2069.93 149.01 2069.93 121.785 2064.67 105.02C2055.11 74.7865 2031 49.7108 2002.6 40.2538ZM1956.41 66.62C1974.22 66.62 1986.83 66.7001 1988.09 66.8212C1992.01 67.1844 1995.37 67.6289 1996.73 67.9315C1997.06 68.0122 1998 68.1933 1998.84 68.3749C2000.36 68.6574 2001.76 69.0411 2004.41 69.8886C2006.48 70.5342 2007.44 70.8567 2007.86 71.0585C2008.08 71.1596 2009.19 71.7046 2010.34 72.2694C2011.47 72.813 2012.45 73.2761 2012.49 73.2782C2012.53 73.2782 2013.22 73.682 2014.03 74.1864C2014.81 74.6908 2015.52 75.0946 2015.56 75.0946C2015.68 75.0953 2018.61 77.2132 2020.05 78.3632C2021.82 79.7353 2025.18 83.2871 2026.5 85.1434C2027.12 85.9908 2027.84 87.0198 2028.13 87.4032C2028.67 88.17 2030.69 91.8418 2031.22 93.0526C2031.66 94.0614 2032.8 97.2288 2033.08 98.2987C2033.22 98.8032 2033.41 99.4293 2033.49 99.7118C2033.68 100.277 2034.1 102.295 2034.41 103.949C2034.96 106.956 2035.1 108.973 2035.1 114.341C2035.1 120.071 2034.93 121.968 2034.12 125.741C2033.97 126.468 2033.78 127.416 2033.68 127.86C2033.22 130.302 2032.2 133.127 2030.55 136.638C2029.71 138.454 2027.04 142.57 2025.73 144.103C2024.37 145.697 2021.72 148.361 2020.63 149.228C2020.05 149.672 2019.53 150.116 2019.48 150.177C2019.21 150.5 2016.14 152.618 2014.97 153.284C2014.24 153.708 2013.28 154.253 2012.85 154.495C2012.22 154.858 2010.61 155.565 2008.06 156.614C2007.46 156.856 2006.02 157.34 2005.08 157.623C2004.6 157.764 2004.01 157.946 2003.74 158.026C2003.47 158.127 2002.61 158.349 2001.82 158.53C2001.03 158.712 2000.03 158.934 1999.61 159.035C1994.64 160.185 1989.71 160.447 1973.08 160.447C1962.07 160.447 1959 160.508 1958.88 160.689C1958.81 160.831 1958.73 165.271 1958.71 170.537C1958.71 175.803 1958.69 184.782 1958.67 190.452L1958.63 200.804H1942.72C1928.92 200.804 1926.79 200.763 1926.71 200.501C1926.54 200.077 1926.54 73.379 1926.69 69.6864L1926.83 66.62H1956.41ZM1984.72 94.2841C1983.32 94.042 1959.18 93.961 1958.96 94.203C1958.88 94.2635 1958.82 103.041 1958.82 113.675V133.006H1971.26C1982.78 132.986 1984.72 132.924 1987.33 132.42C1991.13 131.693 1994.87 129.898 1997.31 127.658C2000.99 124.288 2002.68 119.95 2002.66 114.038C2002.66 109.74 2002.18 107.258 2000.82 104.392C1999.55 101.749 1997.46 99.3488 1995 97.7548C1992.28 95.9792 1989.73 95.1315 1984.72 94.2841ZM1237.22 2.42567C1244.84 0.849591 1257.72 1.85264 1264.1 4.57508C1277.12 10.3066 1284.6 22.1995 1284.74 37.5311C1284.87 53.2929 1278.09 64.04 1263.54 70.9179C1257.17 73.9268 1254.81 74.3562 1245.53 73.7831C1229.88 72.7801 1218.8 65.7589 1212.56 52.7196C1208.96 45.2684 1209.24 29.3636 1213.12 21.7694C1218.1 11.8827 1227.25 4.57498 1237.22 2.42567Z"/></symbol></svg>
+
+<!-- ================= NAV ================= -->
+<nav class="nav" id="nav">
+  <a class="logo" data-view="home" aria-label="In Motion Performance — accueil / home"><svg><use href="#imp-logo"/></svg></a>
+  <div class="nav-links" id="navLinks">
+    <a data-view="home" data-anchor="services" data-fr="Services" data-en="Services">Services</a>
+    <a data-view="home" data-anchor="skitrack" data-fr="SkiTrack" data-en="SkiTrack">SkiTrack</a>
+    <a data-view="portfolio" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
+    <a data-view="home" data-anchor="contact" data-fr="Contact" data-en="Contact">Contact</a>
+    <span class="lang" role="group" aria-label="Language"><button data-lang="fr" class="active">FR</button><span class="sep">/</span><button data-lang="en">EN</button></span>
+    <a class="nav-cta" data-view="home" data-anchor="contact" data-fr="Réserver un appel" data-en="Book a call">Réserver un appel</a>
+  </div>
+  <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a data-view="home" data-anchor="services" data-fr="Services" data-en="Services">Services</a>
+  <a data-view="home" data-anchor="skitrack" data-fr="SkiTrack" data-en="SkiTrack">SkiTrack</a>
+  <a data-view="portfolio" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
+  <a data-view="home" data-anchor="contact" data-fr="Contact" data-en="Contact">Contact</a>
+  <span class="lang" style="margin-top:18px;font-size:16px"><button data-lang="fr" class="active">FR</button><span class="sep">/</span><button data-lang="en">EN</button></span>
+</div>
+
+<main>
+<!-- ================= HOME VIEW ================= -->
+<div class="view active" id="view-home">
+  <header class="hero">
+    <div class="hero-media"><img class="kenburns" src="imp-images/homehero.jpg" alt="Athlète en montagne face aux Drus, massif du Mont-Blanc"></div>
+    <div class="hero-inner">
+      <p class="kicker hla d1" data-fr="Studio créatif & performance · Annecy–Chamonix" data-en="Creative & performance studio · Annecy–Chamonix">Studio créatif &amp; performance · Annecy–Chamonix</p>
+      <h1 class="hla d2" data-fr="Des visuels et des outils<br>qui font progresser." data-en="Visuals and tools<br>that drive progress.">Des visuels et des outils<br>qui font progresser.</h1>
+      <p class="sub hla d3" data-fr="Solutions numériques, photo et 3D pour sportifs, clubs et marques." data-en="Digital, photo and 3D solutions for athletes, clubs and brands.">Solutions numériques, photo et 3D pour sportifs, clubs et marques.</p>
+      <div class="hero-actions hla d4">
+        <a class="btn btn-primary" data-view="home" data-anchor="services" data-fr="Découvrir le studio" data-en="Explore the studio">Découvrir le studio
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+        <a class="btn btn-ghost" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <p class="coords hla d5">ANNECY · CHAMONIX — 45.90°N 6.13°E</p>
+    </div>
+    <div class="scrollcue" aria-hidden="true"><span data-fr="Défiler" data-en="Scroll">Défiler</span><span class="bar"></span></div>
+  </header>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-track" id="mq"></div></div>
+
+  <section class="intro"><div class="wrap reveal">
+    <h2 data-fr="Passe du ressenti aux <span class='hl'>décisions</span> qui font progresser." data-en="Turn feel into <span class='hl'>decisions</span> that drive progress.">Passe du ressenti aux <span class="hl">décisions</span> qui font progresser.</h2>
+    <p class="lead" data-fr="In Motion Performance conçoit des expériences web &amp; iOS, des visuels premium et des services 3D pour aider sportifs, clubs et marques à décider plus vite, mieux exécuter et passer un vrai cap." data-en="In Motion Performance builds web &amp; iOS experiences, premium visuals and 3D services to help athletes, clubs and brands decide faster, execute better and reach the next level.">In Motion Performance conçoit des expériences web &amp; iOS, des visuels premium et des services 3D pour aider sportifs, clubs et marques à décider plus vite, mieux exécuter et passer un vrai cap.</p>
+  </div></section>
+
+  <section class="services" id="services"><div class="wrap">
+    <div class="reveal"><p class="eyebrow" data-fr="Nos pôles" data-en="Our divisions">Nos pôles</p>
+    <h2 class="section-title" data-fr="Trois expertises, un même terrain." data-en="Three expertises, one field.">Trois expertises, un même terrain.</h2></div>
+    <div class="svc-grid">
+      <article class="svc reveal">
+        <div class="svc-media"><span class="num">01</span><img id="svcPhoto" alt="Photographie sportive outdoor"></div>
+        <div class="svc-body"><h3 data-fr="Photographie" data-en="Photography">Photographie</h3>
+          <p data-fr="Images premium pour valoriser vos produits, rassurer vos clients et renforcer votre marque — tournées en conditions réelles." data-en="Premium images to showcase your products, reassure clients and strengthen your brand — shot in real conditions.">Images premium pour valoriser vos produits, rassurer vos clients et renforcer votre marque — tournées en conditions réelles.</p>
+          <a class="svc-link" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+      <article class="svc reveal d1">
+        <div class="svc-media"><span class="num">02</span>
+          <div class="mock"><div class="mock-row m"></div><div class="mock-row s"></div>
+            <div class="mock-chart"><svg viewBox="0 0 300 150" preserveAspectRatio="none" style="width:100%;height:100%">
+              <polyline fill="none" stroke="#89A9BA" stroke-width="3" points="0,120 40,96 80,104 120,66 160,74 200,40 240,52 300,18"/>
+              <polygon fill="rgba(137,169,186,.14)" points="0,150 0,120 40,96 80,104 120,66 160,74 200,40 240,52 300,18 300,150"/>
+            </svg></div>
+          </div>
+        </div>
+        <div class="svc-body"><h3 data-fr="Web & iOS" data-en="Web & iOS">Web &amp; iOS</h3>
+          <p data-fr="Apps web et iOS pensées pour guider l'utilisateur, piloter vos chiffres clés et déclencher l'action au bon moment." data-en="Web & iOS apps designed to guide users, track your key metrics and trigger action at the right time.">Apps web et iOS pensées pour guider l'utilisateur, piloter vos chiffres clés et déclencher l'action au bon moment.</p>
+          <a class="svc-link" data-view="home" data-anchor="skitrack" data-fr="Découvrir" data-en="Discover">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+      <article class="svc reveal d2">
+        <div class="svc-media"><span class="num">03</span>
+          <div class="globe-wrap"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.4">
+            <ellipse cx="100" cy="100" rx="78" ry="78"/><ellipse cx="100" cy="100" rx="30" ry="78"/><ellipse cx="100" cy="100" rx="60" ry="78"/>
+            <ellipse cx="100" cy="100" rx="78" ry="30"/><ellipse cx="100" cy="100" rx="78" ry="60"/><line x1="22" y1="100" x2="178" y2="100"/><line x1="100" y1="22" x2="100" y2="178"/>
+          </svg></div>
+        </div>
+        <div class="svc-body"><h3 data-fr="3D" data-en="3D">3D</h3>
+          <p data-fr="Impression et modélisation 3D pour reproduire des pièces et prototyper vite, directement sur le terrain." data-en="3D printing and modeling to reproduce parts and prototype fast, right in the field.">Impression et modélisation 3D pour reproduire des pièces et prototyper vite, directement sur le terrain.</p>
+          <a class="svc-link" data-view="home" data-anchor="contact" data-fr="En savoir plus" data-en="Learn more">En savoir plus <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </div></section>
+
+  <section class="skitrack" id="skitrack"><div class="wrap"><div class="st-grid">
+    <div class="st-body reveal">
+      <p class="eyebrow" data-fr="Produit phare" data-en="Flagship product">Produit phare</p>
+      <h2 data-fr="SkiTrack — du terrain à la décision." data-en="SkiTrack — from the field to the decision.">SkiTrack — du terrain à la décision.</h2>
+      <p data-fr="L'app terrain qui structure les tests matériel et accélère l'analyse des staffs. Moins d'hésitation, plus de progression." data-en="The field app that structures equipment testing and speeds up staff analysis. Less hesitation, more progress.">L'app terrain qui structure les tests matériel et accélère l'analyse des staffs. Moins d'hésitation, plus de progression.</p>
+      <ul class="st-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span data-fr="Tests matériel structurés" data-en="Structured equipment tests">Tests matériel structurés</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span data-fr="Décisions staff accélérées" data-en="Faster staff decisions">Décisions staff accélérées</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span data-fr="Données claires, prêtes à l'action" data-en="Clear, action-ready data">Données claires, prêtes à l'action</span></li>
+      </ul>
+      <a class="btn btn-primary" data-view="home" data-anchor="contact" data-fr="Découvrir SkiTrack" data-en="Discover SkiTrack">Découvrir SkiTrack
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+    <div class="reveal d1"><div class="phone"><div class="phone-screen">
+      <div class="ps-title">SkiTrack · Analyse</div>
+      <div class="ps-kpi"><div><div class="n">+12%</div><div class="l" data-fr="Glisse" data-en="Glide">Glisse</div></div><div><div class="n">A/B</div><div class="l" data-fr="Tests" data-en="Tests">Tests</div></div></div>
+      <div class="ps-chart"><div class="ps-bars" id="psbars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+    </div></div></div>
+  </div></div></section>
+
+  <section class="brands"><div class="wrap reveal">
+    <p class="eyebrow" data-fr="Marques & collaborations" data-en="Brands & collaborations">Marques &amp; collaborations</p>
+    <p class="blurb" data-fr="Ils nous ont confié leurs images et leurs événements en montagne." data-en="They trusted us with their images and mountain events.">Ils nous ont confié leurs images et leurs événements en montagne.</p>
+    <div class="brandrow"><span>PÜLS</span><span>SHOKZ</span><span>ROSSIGNOL</span><span>MYNÉRAL</span><span>CSC</span></div>
+  </div></section>
+
+  <section class="testi"><div class="wrap">
+    <div class="reveal"><p class="eyebrow" data-fr="Preuves sociales" data-en="Social proof">Preuves sociales</p>
+    <h2 class="section-title" data-fr="Ce que le terrain dit vraiment." data-en="What the field actually says.">Ce que le terrain dit vraiment.</h2></div>
+    <div class="testi-grid">
+      <div class="tcard reveal"><p class="q" data-fr="Avec SkiTrack, je passe moins de temps à expliquer mes sensations et plus de temps à progresser." data-en="With SkiTrack, I spend less time explaining how it feels and more time improving.">Avec SkiTrack, je passe moins de temps à expliquer mes sensations et plus de temps à progresser.</p><p class="a" data-fr="Retour anonymisé · Biathlon" data-en="Anonymous feedback · Biathlon">Retour anonymisé · Biathlon</p></div>
+      <div class="tcard reveal d1"><p class="q" data-fr="Les retours sont plus clairs, les décisions plus rapides, et on évite beaucoup d'hésitations." data-en="The feedback is clearer, decisions are faster, and we avoid a lot of second-guessing.">Les retours sont plus clairs, les décisions plus rapides, et on évite beaucoup d'hésitations.</p><p class="a" data-fr="Retour anonymisé · Staff nordique" data-en="Anonymous feedback · Nordic staff">Retour anonymisé · Staff nordique</p></div>
+      <div class="tcard reveal"><p class="q" data-fr="Le service photo donne une image pro tout de suite. Les sponsors voient la différence." data-en="The photo service gives a pro image instantly. Sponsors see the difference.">Le service photo donne une image pro tout de suite. Les sponsors voient la différence.</p><p class="a" data-fr="Retour anonymisé · Athlète" data-en="Anonymous feedback · Athlete">Retour anonymisé · Athlète</p></div>
+      <div class="tcard reveal d1"><p class="q" data-fr="On sent une vraie logique produit : chaque page guide vers l'action au bon moment." data-en="You feel a real product logic: every page guides you to action at the right moment.">On sent une vraie logique produit : chaque page guide vers l'action au bon moment.</p><p class="a" data-fr="Retour anonymisé · Responsable club" data-en="Anonymous feedback · Club manager">Retour anonymisé · Responsable club</p></div>
+    </div>
+  </div></section>
+
+  <section class="about"><div class="wrap"><div class="about-grid">
+    <div class="about-photo reveal"><img src="imp-images/portrait.jpg" alt="Lionel Jouannaud, fondateur d'In Motion Performance"><span class="tag" data-fr="Lionel Jouannaud · fondateur" data-en="Lionel Jouannaud · founder">Lionel Jouannaud · fondateur</span></div>
+    <div class="about-body reveal d1">
+      <p class="eyebrow" data-fr="Le studio" data-en="The studio">Le studio</p>
+      <h2 class="section-title" data-fr="Fondé sur le terrain, taillé pour la performance." data-en="Born on the field, built for performance.">Fondé sur le terrain, taillé pour la performance.</h2>
+      <p data-fr="In Motion Performance réunit sport, data et image. Derrière l'objectif et le code : Lionel Jouannaud, photographe et créateur outdoor basé entre Annecy et Chamonix, qui accompagne athlètes, clubs et marques de l'idée au déploiement." data-en="In Motion Performance brings together sport, data and imagery. Behind the lens and the code: Lionel Jouannaud, an outdoor photographer and creator based between Annecy and Chamonix, supporting athletes, clubs and brands from idea to deployment."><strong>In Motion Performance réunit sport, data et image.</strong> Derrière l'objectif et le code : Lionel Jouannaud, photographe et créateur outdoor basé entre Annecy et Chamonix, qui accompagne athlètes, clubs et marques de l'idée au déploiement.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">2025</div><div class="l" data-fr="Fondé en" data-en="Founded">Fondé en</div></div>
+        <div class="stat"><div class="n">3</div><div class="l" data-fr="Pôles d'expertise" data-en="Divisions">Pôles d'expertise</div></div>
+        <div class="stat"><div class="n">100%</div><div class="l" data-fr="Terrain" data-en="Field-tested">Terrain</div></div>
+      </div>
+    </div>
+  </div></div></section>
+
+  <section class="cta-sec" id="contact">
+    <div class="cta-bg" id="ctaBg"></div>
+    <div class="wrap cta-inner reveal">
+      <p class="eyebrow" data-fr="Contact" data-en="Contact">Contact</p>
+      <h2 data-fr="Prêt à passer un cap ?" data-en="Ready to reach the next level?">Prêt à passer un cap ?</h2>
+      <p class="sub" data-fr="On reprend votre parcours actuel, on clarifie le message, on priorise les CTA et on transforme votre présence en vrai point d'entrée business." data-en="We rework your current journey, clarify the message, prioritise CTAs and turn your presence into a real business entry point.">On reprend votre parcours actuel, on clarifie le message, on priorise les CTA et on transforme votre présence en vrai point d'entrée business.</p>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="mailto:lioneljouannaud@gmail.com?subject=R%C3%A9server%20un%20appel%20-%20In%20Motion%20Performance" data-fr="Réserver un appel" data-en="Book a call">Réserver un appel
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="mailto:lioneljouannaud@gmail.com?subject=Mon%20projet%20-%20In%20Motion%20Performance" data-fr="Lancer mon projet" data-en="Start my project">Lancer mon projet</a>
+        <button class="btn btn-ghost" id="saveContact" type="button"><span data-fr="Enregistrer le contact" data-en="Save contact">Enregistrer le contact</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4v10m0 0l-4-4m4 4l4-4M5 19h14"/></svg></button>
+      </div>
+      <div class="channels">
+        <div class="channel"><div class="k">Email</div><a href="mailto:lioneljouannaud@gmail.com">lioneljouannaud@gmail.com</a></div>
+        <div class="channel"><div class="k">Instagram</div><a href="https://instagram.com/lionel_jouannaud" target="_blank" rel="noopener">@lionel_jouannaud</a></div>
+        <div class="channel"><div class="k" data-fr="Téléphone" data-en="Phone">Téléphone</div><a href="tel:+33665620084">06 65 62 00 84</a></div>
+        <div class="channel"><div class="k" data-fr="Localisation" data-en="Location">Localisation</div><span class="v">Annecy · Chamonix, FR</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================= PORTFOLIO VIEW ================= -->
+<div class="view" id="view-portfolio">
+  <header class="pf-hero">
+    <img src="imp-images/hero.jpg" alt="Crête au coucher du soleil, massif du Mont-Blanc">
+    <div class="inner">
+      <p class="eyebrow reveal" data-fr="Photographie · In Motion Performance" data-en="Photography · In Motion Performance">Photographie · In Motion Performance</p>
+      <h1 class="reveal d1">Portfolio</h1>
+      <p class="sub reveal d2" data-fr="Trail, faune et haute montagne — saisis dans la lumière du massif du Mont-Blanc." data-en="Trail, wildlife and high mountains — captured in the light of the Mont Blanc massif.">Trail, faune et haute montagne — saisis dans la lumière du massif du Mont-Blanc.</p>
+    </div>
+  </header>
+  <section class="work"><div class="wrap">
+    <div class="work-head reveal">
+      <div><p class="eyebrow" data-fr="Sélection" data-en="Selected work">Sélection</p>
+      <h2 class="section-title" data-fr="Le travail" data-en="The work">Le travail</h2></div>
+      <span class="count" id="count"></span>
+    </div>
+    <div class="filters reveal" id="filters">
+      <button class="active" data-filter="all" data-fr="Tout" data-en="All">Tout</button>
+      <button data-filter="trail" data-fr="Trail & course" data-en="Trail & running">Trail &amp; course</button>
+      <button data-filter="faune" data-fr="Faune" data-en="Wildlife">Faune</button>
+      <button data-filter="paysage" data-fr="Sommets & paysages" data-en="Peaks & landscapes">Sommets &amp; paysages</button>
+      <button data-filter="ski" data-fr="Ski & neige" data-en="Ski & snow">Ski &amp; neige</button>
+      <button data-filter="nuit" data-fr="Nuit & astro" data-en="Night & astro">Nuit &amp; astro</button>
+      <button data-filter="marque" data-fr="Marques" data-en="Brands">Marques</button>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="pf-cta reveal">
+      <h3 data-fr="Un projet photo ?" data-en="A photo project?">Un projet photo ?</h3>
+      <p data-fr="Parlons de vos images — produits, athlètes, événements, contenus de marque." data-en="Let's talk about your images — products, athletes, events, brand content.">Parlons de vos images — produits, athlètes, événements, contenus de marque.</p>
+      <a class="btn btn-primary" data-view="home" data-anchor="contact" data-fr="Me contacter" data-en="Get in touch">Me contacter
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div></section>
+</div>
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="top">
+    <div class="brandcol">
+      <svg><use href="#imp-logo"/></svg>
+      <div class="tl">Move better. Go further.</div>
+      <p data-fr="Studio créatif & performance — photo, web & iOS et 3D pour sportifs, clubs et marques." data-en="Creative & performance studio — photo, web & iOS and 3D for athletes, clubs and brands.">Studio créatif &amp; performance — photo, web &amp; iOS et 3D pour sportifs, clubs et marques.</p>
+    </div>
+    <div class="col"><h4 data-fr="Navigation" data-en="Navigation">Navigation</h4>
+      <a data-view="home" data-fr="Accueil" data-en="Home">Accueil</a>
+      <a data-view="home" data-anchor="services" data-fr="Services" data-en="Services">Services</a>
+      <a data-view="home" data-anchor="skitrack">SkiTrack</a>
+      <a data-view="portfolio">Portfolio</a>
+    </div>
+    <div class="col"><h4 data-fr="Contact" data-en="Contact">Contact</h4>
+      <a href="mailto:lioneljouannaud@gmail.com">lioneljouannaud@gmail.com</a>
+      <a href="https://instagram.com/lionel_jouannaud" target="_blank" rel="noopener">@lionel_jouannaud</a>
+      <a href="tel:+33665620084">06 65 62 00 84</a>
+      <a data-view="home" data-anchor="contact" data-fr="Réserver un appel" data-en="Book a call">Réserver un appel</a>
+    </div>
+  </div>
+  <div class="bar">
+    <span>© 2025 In Motion Performance · EST. 2025</span>
+    <span data-fr="Photographies : Lionel Jouannaud" data-en="Photography: Lionel Jouannaud">Photographies : Lionel Jouannaud</span>
+  </div>
+</footer>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo">
+  <span class="lb-counter" id="lbCount"></span>
+  <button class="lb-nav lb-close" id="lbClose" aria-label="Fermer / Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg></button>
+  <button class="lb-nav lb-prev" id="lbPrev" aria-label="Précédent / Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <button class="lb-nav lb-next" id="lbNext" aria-label="Suivant / Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6"/></svg></button>
+  <div class="lb-stage"><img class="lb-img" id="lbImg" src="" alt=""><div class="lb-cap"><div class="t" id="lbTitle"></div><div class="m" id="lbMeta"></div></div></div>
+</div>
+
+<script>
+const PHOTOS = [
+{u:"imp-images/g00.jpg",c:"trail",tf:"Dernière lueur",te:"Last light",lf:"Aiguilles Rouges, Chamonix",le:"Aiguilles Rouges, Chamonix",w:1125,h:2000},
+{u:"imp-images/g01.jpg",c:"faune",tf:"Bouquetin & Mont-Blanc",te:"Ibex & Mont Blanc",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
+{u:"imp-images/g02.jpg",c:"trail",tf:"Face aux Drus",te:"Facing Les Drus",lf:"Aiguille Verte, Chamonix",le:"Aiguille Verte, Chamonix",w:2000,h:1125},
+{u:"imp-images/g03.jpg",c:"paysage",tf:"Heure bleue",te:"Blue hour",lf:"Lac Blanc, Chamonix",le:"Lac Blanc, Chamonix",w:2000,h:1125},
+{u:"imp-images/g04.jpg",c:"faune",tf:"Le veilleur",te:"The watcher",lf:"Col du Brévent",le:"Col du Brévent",w:1125,h:2000},
+{u:"imp-images/g05.jpg",c:"trail",tf:"Vers le refuge",te:"Toward the refuge",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
+{u:"imp-images/g06.jpg",c:"nuit",tf:"Filé d'étoiles",te:"Star trails",lf:"35 mm · Chamonix",le:"35 mm · Chamonix",w:1125,h:2000},
+{u:"imp-images/g07.jpg",c:"ski",tf:"Ski de randonnée",te:"Ski touring",lf:"Vallée Blanche, Chamonix",le:"Vallée Blanche, Chamonix",w:1125,h:2000},
+{u:"imp-images/g08.jpg",c:"paysage",tf:"Aiguille du Midi",te:"Aiguille du Midi",lf:"3842 m, Chamonix",le:"3842 m, Chamonix",w:1125,h:2000},
+{u:"imp-images/g09.jpg",c:"faune",tf:"Heure dorée",te:"Golden hour",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
+{u:"imp-images/g10.jpg",c:"trail",tf:"L'ascension",te:"The climb",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
+{u:"imp-images/g11.jpg",c:"paysage",tf:"Immensité",te:"Vastness",lf:"Lac Blanc, Aiguilles Rouges",le:"Lac Blanc, Aiguilles Rouges",w:1125,h:2000},
+{u:"imp-images/g12.jpg",c:"faune",tf:"Silhouette au crépuscule",te:"Dusk silhouette",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
+{u:"imp-images/g13.jpg",c:"ski",tf:"Envol",te:"Airborne",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
+{u:"imp-images/g14.jpg",c:"trail",tf:"Objectif sommet",te:"Eyes on the summit",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
+{u:"imp-images/g15.jpg",c:"nuit",tf:"Aiguille du Midi, minuit",te:"Aiguille du Midi, midnight",lf:"3842 m, Chamonix",le:"3842 m, Chamonix",w:1125,h:2000},
+{u:"imp-images/g16.jpg",c:"marque",tf:"Shokz",te:"Shokz",lf:"Produit · Chamonix",le:"Product · Chamonix",w:1600,h:2000},
+{u:"imp-images/g17.jpg",c:"trail",tf:"Sourire d'altitude",te:"High-altitude smile",lf:"Le Brévent, Chamonix",le:"Le Brévent, Chamonix",w:1125,h:2000},
+{u:"imp-images/g18.jpg",c:"ski",tf:"Sommet",te:"Summit",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
+{u:"imp-images/g19.jpg",c:"marque",tf:"Rossignol",te:"Rossignol",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
+{u:"imp-images/g20.jpg",c:"faune",tf:"Roi des cimes",te:"King of the peaks",lf:"Col du Brévent",le:"Col du Brévent",w:1125,h:2000},
+{u:"imp-images/g21.jpg",c:"ski",tf:"Éclat d'hiver",te:"Winter spark",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
+{u:"imp-images/g22.jpg",c:"marque",tf:"Myneral",te:"Myneral",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
+{u:"imp-images/g23.jpg",c:"nuit",tf:"Lune montante",te:"Rising moon",lf:"Vallée de Chamonix",le:"Chamonix valley",w:1125,h:2000},
+{u:"imp-images/g24.jpg",c:"ski",tf:"Vers la lumière",te:"Into the light",lf:"Ski de randonnée",le:"Ski touring",w:1125,h:2000},
+{u:"imp-images/g25.jpg",c:"marque",tf:"HOKA Run Club",te:"HOKA Run Club",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
+{u:"imp-images/g26.jpg",c:"paysage",tf:"Contemplation",te:"Contemplation",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
+{u:"imp-images/g27.jpg",c:"trail",tf:"Plein été",te:"High summer",lf:"Alpages du Mont-Blanc",le:"Mont Blanc pastures",w:1600,h:2000},
+{u:"imp-images/g28.jpg",c:"marque",tf:"Püls Run Club",te:"Püls Run Club",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
+{u:"imp-images/g29.jpg",c:"faune",tf:"Repos",te:"At rest",lf:"Col du Brévent",le:"Col du Brévent",w:1125,h:2000},
+{u:"imp-images/g30.jpg",c:"trail",tf:"Ski-roues",te:"Roller-ski",lf:"Bessans, Haute-Maurienne",le:"Bessans, Haute-Maurienne",w:1125,h:2000},
+{u:"imp-images/g31.jpg",c:"marque",tf:"HOKA",te:"HOKA",lf:"Trail · Chamonix",le:"Trail · Chamonix",w:1125,h:2000},
+{u:"imp-images/g32.jpg",c:"marque",tf:"Shokz",te:"Shokz",lf:"Trail en forêt",le:"Forest trail",w:1125,h:2000},
+{u:"imp-images/g33.jpg",c:"marque",tf:"Run Club",te:"Run Club",lf:"Annecy",le:"Annecy",w:1125,h:2000}
+];
+const CATLABEL = {trail:{fr:"Trail & course",en:"Trail & running"},faune:{fr:"Faune",en:"Wildlife"},paysage:{fr:"Sommets & paysages",en:"Peaks & landscapes"},ski:{fr:"Ski & neige",en:"Ski & snow"},nuit:{fr:"Nuit & astro",en:"Night & astro"},marque:{fr:"Marques",en:"Brands"}};
+let lang='fr'; try{const s=localStorage.getItem('imp_lang'); if(s==='fr'||s==='en') lang=s;}catch(e){}
+let filter='all', visible=[], lbSet=[], lbIndex=0, current='home';
+
+/* marquee */
+(function(){const words=['Photographie','Web & iOS','3D','SkiTrack','Performance','Raw','Annecy','Chamonix','Move better','Go further','Sport','Data','Image'];
+  const t=document.getElementById('mq'); let html=''; for(let k=0;k<2;k++){words.forEach(w=>html+='<span>'+w+'</span>');} t.innerHTML=html;})();
+
+/* reuse gallery images for home visuals (no extra bytes) */
+if(PHOTOS[0]) document.getElementById('svcPhoto').src=PHOTOS[0].u;
+if(PHOTOS[6]) document.getElementById('ctaBg').style.backgroundImage='url('+PHOTOS[6].u+')';
+
+/* grid */
+const grid=document.getElementById('grid'), countEl=document.getElementById('count');
+function buildGrid(){
+  grid.innerHTML='';
+  PHOTOS.forEach((p,i)=>{
+    const fig=document.createElement('figure'); fig.className='tile'; fig.dataset.cat=p.c; fig.dataset.idx=i; fig.tabIndex=0; fig.setAttribute('role','button');
+    fig.innerHTML='<span class="badge">'+(CATLABEL[p.c]?CATLABEL[p.c][lang]:p.c)+'</span><img src="'+p.u+'" width="'+p.w+'" height="'+p.h+'" loading="lazy" alt="'+(lang==='fr'?p.tf:p.te)+'"><figcaption class="cap"><span class="t">'+(lang==='fr'?p.tf:p.te)+'</span><span class="m">'+(lang==='fr'?p.lf:p.le)+'</span></figcaption>';
+    fig.addEventListener('click',()=>openLB(i));
+    fig.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLB(i);}});
+    grid.appendChild(fig);
+  });
+}
+function applyFilter(){
+  visible=[];
+  [...grid.children].forEach(fig=>{const i=+fig.dataset.idx; const show=(filter==='all'||PHOTOS[i].c===filter); fig.style.display=show?'':'none'; if(show)visible.push(i);});
+  countEl.textContent=visible.length+' '+(lang==='fr'?'photos':'photos');
+}
+document.querySelectorAll('#filters button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;applyFilter();}));
+
+/* lightbox */
+const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbTitle=document.getElementById('lbTitle'),lbMeta=document.getElementById('lbMeta'),lbCount=document.getElementById('lbCount');
+function renderLB(){const p=PHOTOS[lbSet[lbIndex]];lbImg.src=p.u;lbImg.alt=(lang==='fr'?p.tf:p.te);lbTitle.textContent=(lang==='fr'?p.tf:p.te);lbMeta.textContent=((CATLABEL[p.c]?CATLABEL[p.c][lang]:p.c)+'  —  '+(lang==='fr'?p.lf:p.le));lbCount.textContent=String(lbIndex+1).padStart(2,'0')+' / '+String(lbSet.length).padStart(2,'0');}
+function openLB(i){const cat=PHOTOS[i].c;lbSet=PHOTOS.map((p,idx)=>idx).filter(idx=>PHOTOS[idx].c===cat);lbIndex=lbSet.indexOf(i);if(lbIndex<0)lbIndex=0;renderLB();lb.classList.add('open');document.body.style.overflow='hidden';}
+function closeLB(){lb.classList.remove('open');document.body.style.overflow='';}
+function step(d){lbIndex=(lbIndex+d+lbSet.length)%lbSet.length;renderLB();}
+document.getElementById('lbClose').addEventListener('click',closeLB);
+document.getElementById('lbPrev').addEventListener('click',e=>{e.stopPropagation();step(-1);});
+document.getElementById('lbNext').addEventListener('click',e=>{e.stopPropagation();step(1);});
+lb.addEventListener('click',e=>{if(e.target===lb||e.target.classList.contains('lb-stage'))closeLB();});
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLB();else if(e.key==='ArrowRight')step(1);else if(e.key==='ArrowLeft')step(-1);});
+let tx=0;lb.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});lb.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)step(dx<0?1:-1);},{passive:true});
+
+/* language */
+function applyLangText(){document.querySelectorAll('[data-fr]').forEach(el=>{const v=lang==='fr'?el.getAttribute('data-fr'):el.getAttribute('data-en');if(v==null)return;const icon=(el.lastElementChild&&el.lastElementChild.tagName.toLowerCase()==='svg')?el.lastElementChild:null;if(icon){el.textContent=v;el.appendChild(icon);}else{el.innerHTML=v;}});document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));document.documentElement.lang=lang;}
+function setLang(l){lang=l;try{localStorage.setItem('imp_lang',l);}catch(e){}applyLangText();buildGrid();applyFilter();if(lb.classList.contains('open'))renderLB();}
+document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{setLang(b.dataset.lang);closeMenu();}));
+
+/* view routing */
+function showView(v){document.querySelectorAll('.view').forEach(el=>el.classList.toggle('active',el.id==='view-'+v));current=v;document.querySelectorAll('.nav-links a[data-view]').forEach(a=>a.classList.toggle('active',a.dataset.view===v&&!a.dataset.anchor&&!a.classList.contains('nav-cta')));}
+function go(v,anchor){
+  showView(v);
+  window.scrollTo({top:0,behavior:'auto'});
+  if(anchor){const el=document.getElementById(anchor);if(el){requestAnimationFrame(()=>el.scrollIntoView({behavior:'smooth'}));}}
+  try{history.replaceState(null,'',v==='portfolio'?'#portfolio':(anchor?'#'+anchor:'#home'));}catch(e){}
+  requestAnimationFrame(checkReveals);
+}
+document.querySelectorAll('[data-view]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();go(a.dataset.view,a.dataset.anchor);closeMenu();});});
+window.addEventListener('hashchange',()=>{const h=location.hash.replace('#','');if(h==='portfolio')showView('portfolio');else showView('home');requestAnimationFrame(checkReveals);});
+
+/* nav + mobile menu */
+const nav=document.getElementById('nav');const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>40);onScroll();window.addEventListener('scroll',()=>{onScroll();checkReveals();},{passive:true});
+const mm=document.getElementById('mobileMenu'),mb=document.getElementById('menuBtn');
+function openMenu(){mm.classList.add('open');mb.setAttribute('aria-expanded','true');document.body.style.overflow='hidden';}
+function closeMenu(){mm.classList.remove('open');mb.setAttribute('aria-expanded','false');if(!lb.classList.contains('open'))document.body.style.overflow='';}
+mb.addEventListener('click',()=>mm.classList.contains('open')?closeMenu():openMenu());
+
+/* reveal on scroll (view-aware) */
+function checkReveals(){const vh=window.innerHeight;document.querySelectorAll('.view.active .reveal:not(.in)').forEach(el=>{const r=el.getBoundingClientRect();if(r.top<vh*0.92&&r.bottom>0)el.classList.add('in');});}
+window.addEventListener('resize',checkReveals);
+
+/* skitrack bars animate when in view */
+let barsDone=false;
+function animateBars(){if(barsDone)return;const bars=document.getElementById('psbars');if(!bars)return;const r=bars.getBoundingClientRect();if(r.top<window.innerHeight*0.9&&r.bottom>0){barsDone=true;const vals=[.35,.55,.4,.7,.6,.85,1];bars.classList.add('animate');[...bars.children].forEach((s,i)=>{setTimeout(()=>s.style.transform='scaleY('+vals[i]+')',i*90);});}}
+window.addEventListener('scroll',animateBars,{passive:true});
+
+/* save contact — real .vcf download on the live site; clipboard fallback inside the sandboxed preview */
+const vcard=["BEGIN:VCARD","VERSION:3.0","N:Jouannaud;Lionel;;;","FN:Lionel Jouannaud","ORG:In Motion Performance","TITLE:Photographe & créateur outdoor","TEL;TYPE=CELL:+33665620084","EMAIL:lioneljouannaud@gmail.com","URL:https://inmotionperformance.com","ADR;TYPE=WORK:;;;Chamonix;;;France","NOTE:Studio créatif & performance — photo, web & iOS, 3D","END:VCARD"].join("\r\n");
+const scBtn=document.getElementById('saveContact');
+function scFlash(msg){const s=scBtn.querySelector('span');if(!s)return;const of=s.getAttribute('data-fr'),oe=s.getAttribute('data-en');s.removeAttribute('data-fr');s.removeAttribute('data-en');s.textContent=msg;setTimeout(()=>{s.setAttribute('data-fr',of);s.setAttribute('data-en',oe);s.textContent=lang==='fr'?of:oe;},2200);}
+if(scBtn)scBtn.addEventListener('click',async()=>{
+  const inArtifact=!!(window.claude&&window.claude.use);
+  if(!inArtifact){try{const b=new Blob([vcard],{type:'text/vcard;charset=utf-8'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='Lionel Jouannaud.vcf';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1500);return;}catch(e){}}
+  try{await navigator.clipboard.writeText('Lionel Jouannaud\n06 65 62 00 84\nlioneljouannaud@gmail.com\n@lionel_jouannaud');scFlash(lang==='fr'?'Coordonnées copiées ✓':'Details copied ✓');return;}catch(e){}
+  window.location.href='tel:+33665620084';
+});
+
+/* init */
+buildGrid();applyFilter();applyLangText();
+(function(){const h=location.hash.replace('#','');if(h==='portfolio')showView('portfolio');else showView('home');})();
+checkReveals();animateBars();
+</script>
+
+</body>
+</html>
