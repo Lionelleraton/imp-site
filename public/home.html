@@ -231,13 +231,13 @@ h1,h2,h3{margin:0; text-wrap:balance}
 .filters button:hover{color:var(--text); border-color:var(--line-2)}
 .filters button.active{color:#0B1015; background:var(--sky); border-color:var(--sky)}
 .count{font-family:var(--mono); font-size:12px; color:var(--faint); letter-spacing:.1em}
-.grid{column-count:3; column-gap:14px}
-@media(max-width:900px){ .grid{column-count:2} }
-@media(max-width:359px){ .grid{column-count:1} }
-.tile{break-inside:avoid; margin:0 0 14px; position:relative; cursor:pointer; overflow:hidden; border-radius:6px; background:var(--bg-2); opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1)}
+.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+@media(max-width:900px){ .grid{grid-template-columns:repeat(2,1fr)} }
+@media(max-width:400px){ .grid{grid-template-columns:1fr} }
+.tile{position:relative; cursor:pointer; overflow:hidden; border-radius:6px; background:var(--bg-2); aspect-ratio:4/5; opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1)}
 .tile.t-in{opacity:1; transform:none}
 @media (prefers-reduced-motion: reduce){ .tile{opacity:1; transform:none; transition:none} }
-.tile img{width:100%; height:auto; transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.tile img{width:100%; height:100%; object-fit:cover; object-position:center; transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 .tile:hover img{transform:scale(1.045)}
 .tile .cap{position:absolute; inset:auto 0 0 0; padding:44px 16px 15px; z-index:2; background:linear-gradient(transparent, rgba(9,13,17,.9)); opacity:0; transform:translateY(8px); transition:opacity .35s, transform .35s}
 .tile:hover .cap,.tile:focus-visible .cap{opacity:1; transform:none}
@@ -481,7 +481,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
     <div class="inner">
       <p class="eyebrow reveal" data-fr="Photo de sport et de montagne" data-en="Sport and mountain photography">Photo de sport et de montagne</p>
       <h1 class="reveal d1">Portfolio</h1>
-      <p class="sub reveal d2" data-fr="Trail, faune et haute montagne, autour du massif du Mont-Blanc." data-en="Trail, wildlife and high mountains, around the Mont Blanc massif.">Trail, faune et haute montagne, autour du massif du Mont-Blanc.</p>
+      <p class="sub reveal d2" data-fr="Un best of, de la haute montagne aux grands espaces." data-en="A best-of, from high mountains to wide-open spaces.">Un best of, de la haute montagne aux grands espaces.</p>
     </div>
   </header>
   <section class="work"><div class="wrap">
@@ -489,15 +489,6 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
       <div><p class="eyebrow" data-fr="Sélection" data-en="Selected work">Sélection</p>
       <h2 class="section-title" data-fr="Le travail" data-en="The work">Le travail</h2></div>
       <span class="count" id="count"></span>
-    </div>
-    <div class="filters reveal" id="filters">
-      <button class="active" data-filter="all" data-fr="Tout" data-en="All">Tout</button>
-      <button data-filter="trail" data-fr="Trail & course" data-en="Trail & running">Trail &amp; course</button>
-      <button data-filter="faune" data-fr="Faune" data-en="Wildlife">Faune</button>
-      <button data-filter="paysage" data-fr="Sommets & paysages" data-en="Peaks & landscapes">Sommets &amp; paysages</button>
-      <button data-filter="ski" data-fr="Ski & neige" data-en="Ski & snow">Ski &amp; neige</button>
-      <button data-filter="nuit" data-fr="Nuit & astro" data-en="Night & astro">Nuit &amp; astro</button>
-      <button data-filter="marque" data-fr="Marques" data-en="Brands">Marques</button>
     </div>
     <div class="grid" id="grid"></div>
     <div class="pf-cta reveal">
@@ -548,50 +539,33 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
 
 <script>
 const PHOTOS = [
-{u:"imp-images/g00.jpg",c:"trail",tf:"Dernière lueur",te:"Last light",lf:"Aiguilles Rouges, Chamonix",le:"Aiguilles Rouges, Chamonix",w:1125,h:2000},
-{u:"imp-images/g01.jpg",c:"faune",tf:"Bouquetin & Mont-Blanc",te:"Ibex & Mont Blanc",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
-{u:"imp-images/g02.jpg",c:"paysage",tf:"Heure bleue",te:"Blue hour",lf:"Lac Blanc, Chamonix",le:"Lac Blanc, Chamonix",w:2000,h:1125},
-{u:"imp-images/g03.jpg",c:"ski",tf:"Ski de randonnée",te:"Ski touring",lf:"Vallée Blanche, Chamonix",le:"Vallée Blanche, Chamonix",w:1125,h:2000},
-{u:"imp-images/g04.jpg",c:"nuit",tf:"Filé d'étoiles",te:"Star trails",lf:"35 mm, Chamonix",le:"35 mm, Chamonix",w:1125,h:2000},
-{u:"imp-images/g05.jpg",c:"marque",tf:"Shokz",te:"Shokz",lf:"Produit, Chamonix",le:"Product, Chamonix",w:1600,h:2000},
-{u:"imp-images/g06.jpg",c:"trail",tf:"Face aux Drus",te:"Facing Les Drus",lf:"Aiguille Verte, Chamonix",le:"Aiguille Verte, Chamonix",w:2000,h:1125},
-{u:"imp-images/g07.jpg",c:"faune",tf:"Le veilleur",te:"The watcher",lf:"Col du Brévent",le:"Col du Brévent",w:1125,h:2000},
-{u:"imp-images/g08.jpg",c:"paysage",tf:"Aiguille du Midi",te:"Aiguille du Midi",lf:"3842 m, Chamonix",le:"3842 m, Chamonix",w:1125,h:2000},
-{u:"imp-images/g09.jpg",c:"ski",tf:"Envol",te:"Airborne",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
-{u:"imp-images/g10.jpg",c:"nuit",tf:"Aiguille du Midi, minuit",te:"Aiguille du Midi, midnight",lf:"3842 m, Chamonix",le:"3842 m, Chamonix",w:1125,h:2000},
-{u:"imp-images/g11.jpg",c:"marque",tf:"Rossignol",te:"Rossignol",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
-{u:"imp-images/g12.jpg",c:"trail",tf:"L'ascension",te:"The climb",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
-{u:"imp-images/g13.jpg",c:"faune",tf:"Heure dorée",te:"Golden hour",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
-{u:"imp-images/g14.jpg",c:"paysage",tf:"Immensité",te:"Vastness",lf:"Lac Blanc, Aiguilles Rouges",le:"Lac Blanc, Aiguilles Rouges",w:1125,h:2000},
-{u:"imp-images/g15.jpg",c:"ski",tf:"Sommet",te:"Summit",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
-{u:"imp-images/g16.jpg",c:"nuit",tf:"Lune montante",te:"Rising moon",lf:"Vallée de Chamonix",le:"Chamonix valley",w:1125,h:2000},
-{u:"imp-images/g17.jpg",c:"marque",tf:"Myneral",te:"Myneral",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
-{u:"imp-images/g18.jpg",c:"trail",tf:"Objectif sommet",te:"Eyes on the summit",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
-{u:"imp-images/g19.jpg",c:"faune",tf:"Silhouette au crépuscule",te:"Dusk silhouette",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
-{u:"imp-images/g20.jpg",c:"paysage",tf:"Contemplation",te:"Contemplation",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
-{u:"imp-images/g21.jpg",c:"ski",tf:"Vers la lumière",te:"Into the light",lf:"Ski de randonnée",le:"Ski touring",w:1125,h:2000},
-{u:"imp-images/g22.jpg",c:"nuit",tf:"Ciel étoilé",te:"Starry sky",lf:"35 mm, Chamonix",le:"35 mm, Chamonix",w:1125,h:2000},
-{u:"imp-images/g23.jpg",c:"marque",tf:"HOKA Run Club",te:"HOKA Run Club",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
-{u:"imp-images/g24.jpg",c:"trail",tf:"Sourire d'altitude",te:"High-altitude smile",lf:"Le Brévent, Chamonix",le:"Le Brévent, Chamonix",w:1125,h:2000},
-{u:"imp-images/g25.jpg",c:"faune",tf:"Roi des cimes",te:"King of the peaks",lf:"Col du Brévent",le:"Col du Brévent",w:1125,h:2000},
-{u:"imp-images/g26.jpg",c:"paysage",tf:"Premières lueurs",te:"First light",lf:"Aiguilles Rouges, Chamonix",le:"Aiguilles Rouges, Chamonix",w:2000,h:1125},
-{u:"imp-images/g27.jpg",c:"ski",tf:"Éclat d'hiver",te:"Winter spark",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
-{u:"imp-images/g28.jpg",c:"marque",tf:"Püls Run Club",te:"Püls Run Club",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
-{u:"imp-images/g29.jpg",c:"trail",tf:"Plein été",te:"High summer",lf:"Alpages du Mont-Blanc",le:"Mont Blanc pastures",w:1600,h:2000},
-{u:"imp-images/g30.jpg",c:"faune",tf:"Repos",te:"At rest",lf:"Col du Brévent",le:"Col du Brévent",w:1125,h:2000},
-{u:"imp-images/g31.jpg",c:"ski",tf:"Montée",te:"The ascent",lf:"Ski de randonnée",le:"Ski touring",w:2000,h:1125},
-{u:"imp-images/g32.jpg",c:"marque",tf:"HOKA",te:"HOKA",lf:"Trail, Chamonix",le:"Trail, Chamonix",w:1125,h:2000},
-{u:"imp-images/g33.jpg",c:"paysage",tf:"Heure bleue sur le Mont-Blanc",te:"Blue hour on Mont Blanc",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:2000,h:1125},
-{u:"imp-images/g34.jpg",c:"trail",tf:"Aube sur le massif",te:"Dawn over the massif",lf:"Lac Blanc, Chamonix",le:"Lac Blanc, Chamonix",w:2000,h:1125},
-{u:"imp-images/g35.jpg",c:"faune",tf:"Cornes",te:"Horns",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
-{u:"imp-images/g36.jpg",c:"ski",tf:"Skis sur le dos",te:"Skis on the back",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
-{u:"imp-images/g37.jpg",c:"marque",tf:"Shokz",te:"Shokz",lf:"Trail en forêt",le:"Forest trail",w:1125,h:2000},
-{u:"imp-images/g38.jpg",c:"paysage",tf:"Dans les nuages",te:"In the clouds",lf:"Aiguille du Midi, Chamonix",le:"Aiguille du Midi, Chamonix",w:1125,h:2000},
-{u:"imp-images/g39.jpg",c:"trail",tf:"Ski-roues",te:"Roller-ski",lf:"Bessans, Haute-Maurienne",le:"Bessans, Haute-Maurienne",w:1125,h:2000},
-{u:"imp-images/g40.jpg",c:"marque",tf:"Run Club",te:"Run Club",lf:"Annecy",le:"Annecy",w:1125,h:2000},
-{u:"imp-images/g41.jpg",c:"trail",tf:"Vers le refuge",te:"Toward the refuge",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
-{u:"imp-images/g42.jpg",c:"ski",tf:"Dernière pente",te:"Final slope",lf:"Ski de randonnée",le:"Ski touring",w:2000,h:1125},
-{u:"imp-images/g43.jpg",c:"trail",tf:"Run au lever du jour",te:"Sunrise run",lf:"Lac d'Annecy",le:"Lake Annecy",w:1600,h:2000}
+{u:"imp-images/g00.jpg",c:"trail",tf:"En duo",te:"Together",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
+{u:"imp-images/g01.jpg",c:"faune",tf:"Bouquetin et Mont-Blanc",te:"Ibex and Mont Blanc",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
+{u:"imp-images/g02.jpg",c:"voyage",tf:"Hoodoos",te:"Hoodoos",lf:"Bryce Canyon, USA",le:"Bryce Canyon, USA",w:1125,h:2000},
+{u:"imp-images/g03.jpg",c:"ski",tf:"Vers l'aiguille",te:"Toward the spire",lf:"Ski de randonnée",le:"Ski touring",w:1125,h:2000},
+{u:"imp-images/g04.jpg",c:"marque",tf:"adidas Terrex",te:"adidas Terrex",lf:"Hiver, Chamonix",le:"Winter, Chamonix",w:1125,h:2000},
+{u:"imp-images/g05.jpg",c:"paysage",tf:"Alpenglow",te:"Alpenglow",lf:"Aiguilles de Chamonix",le:"Aiguilles de Chamonix",w:1125,h:2000},
+{u:"imp-images/g06.jpg",c:"nuit",tf:"Filé d'étoiles",te:"Star trails",lf:"Aiguille du Midi, Chamonix",le:"Aiguille du Midi, Chamonix",w:1125,h:2000},
+{u:"imp-images/g07.jpg",c:"ski",tf:"À contre-jour",te:"Into the sun",lf:"Ski de randonnée",le:"Ski touring",w:1125,h:2000},
+{u:"imp-images/g08.jpg",c:"trail",tf:"Vers le Mont-Blanc",te:"Toward Mont Blanc",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
+{u:"imp-images/g09.jpg",c:"paysage",tf:"Noir et blanc",te:"Black and white",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1104,h:2000},
+{u:"imp-images/g10.jpg",c:"faune",tf:"Silhouette au crépuscule",te:"Dusk silhouette",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
+{u:"imp-images/g11.jpg",c:"voyage",tf:"Antelope Canyon",te:"Antelope Canyon",lf:"Arizona, USA",le:"Arizona, USA",w:2000,h:1125},
+{u:"imp-images/g12.jpg",c:"marque",tf:"Myneral",te:"Myneral",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
+{u:"imp-images/g13.jpg",c:"nuit",tf:"Étoile filante",te:"Shooting star",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
+{u:"imp-images/g14.jpg",c:"faune",tf:"Cornes",te:"Horns",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
+{u:"imp-images/g15.jpg",c:"ski",tf:"Envol",te:"Airborne",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
+{u:"imp-images/g16.jpg",c:"voyage",tf:"La route",te:"The road",lf:"Utah, USA",le:"Utah, USA",w:1125,h:2000},
+{u:"imp-images/g17.jpg",c:"paysage",tf:"Les aiguilles",te:"The spires",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
+{u:"imp-images/g18.jpg",c:"trail",tf:"En course",te:"Race day",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
+{u:"imp-images/g19.jpg",c:"marque",tf:"Été en montagne",te:"Mountain summer",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
+{u:"imp-images/g20.jpg",c:"nuit",tf:"Lune sur les cimes",te:"Moon over the peaks",lf:"Chamonix",le:"Chamonix",w:2000,h:1336},
+{u:"imp-images/g21.jpg",c:"voyage",tf:"Mont-Saint-Michel",te:"Mont-Saint-Michel",lf:"Normandie",le:"Normandy",w:1125,h:2000},
+{u:"imp-images/g22.jpg",c:"trail",tf:"Course dans la neige",te:"Running on snow",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
+{u:"imp-images/g23.jpg",c:"ski",tf:"Arrivée au cirque",te:"Into the cirque",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
+{u:"imp-images/g24.jpg",c:"faune",tf:"Heure dorée",te:"Golden hour",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
+{u:"imp-images/g25.jpg",c:"paysage",tf:"Aiguille du Midi et parapente",te:"Aiguille du Midi and paraglider",lf:"3842 m, Chamonix",le:"3842 m, Chamonix",w:1125,h:2000},
+{u:"imp-images/g26.jpg",c:"marque",tf:"Portrait",te:"Portrait",lf:"Ski et montagne",le:"Ski and mountain",w:1125,h:2000}
 ];
 const CATLABEL = {trail:{fr:"Trail & course",en:"Trail & running"},faune:{fr:"Faune",en:"Wildlife"},paysage:{fr:"Sommets & paysages",en:"Peaks & landscapes"},ski:{fr:"Ski & neige",en:"Ski & snow"},nuit:{fr:"Nuit & astro",en:"Night & astro"},marque:{fr:"Marques",en:"Brands"}};
 let lang='fr'; try{const s=localStorage.getItem('imp_lang'); if(s==='fr'||s==='en') lang=s;}catch(e){}
@@ -611,7 +585,7 @@ function buildGrid(){
   grid.innerHTML='';
   PHOTOS.forEach((p,i)=>{
     const fig=document.createElement('figure'); fig.className='tile'; fig.dataset.cat=p.c; fig.dataset.idx=i; fig.tabIndex=0; fig.setAttribute('role','button');
-    fig.innerHTML='<span class="badge">'+(CATLABEL[p.c]?CATLABEL[p.c][lang]:p.c)+'</span><img src="'+p.u+'" width="'+p.w+'" height="'+p.h+'" loading="lazy" decoding="async" alt="'+(lang==='fr'?p.tf:p.te)+'"><figcaption class="cap"><span class="t">'+(lang==='fr'?p.tf:p.te)+'</span><span class="m">'+(lang==='fr'?p.lf:p.le)+'</span></figcaption>';
+    fig.innerHTML='<img src="'+p.u+'" width="'+p.w+'" height="'+p.h+'" loading="lazy" decoding="async" alt="'+(lang==='fr'?p.tf:p.te)+'"><figcaption class="cap"><span class="t">'+(lang==='fr'?p.tf:p.te)+'</span><span class="m">'+(lang==='fr'?p.lf:p.le)+'</span></figcaption>';
     fig.addEventListener('click',()=>openLB(i));
     fig.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLB(i);}});
     grid.appendChild(fig);
@@ -635,8 +609,8 @@ document.querySelectorAll('#filters button').forEach(b=>b.addEventListener('clic
 
 /* lightbox */
 const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbTitle=document.getElementById('lbTitle'),lbMeta=document.getElementById('lbMeta'),lbCount=document.getElementById('lbCount');
-function renderLB(){const p=PHOTOS[lbSet[lbIndex]];lbImg.classList.remove('ready');lbImg.onload=()=>lbImg.classList.add('ready');lbImg.src=p.u;if(lbImg.complete)lbImg.classList.add('ready');lbImg.alt=(lang==='fr'?p.tf:p.te);lbTitle.textContent=(lang==='fr'?p.tf:p.te);lbMeta.textContent=((CATLABEL[p.c]?CATLABEL[p.c][lang]:p.c)+', '+(lang==='fr'?p.lf:p.le));lbCount.textContent=String(lbIndex+1).padStart(2,'0')+' / '+String(lbSet.length).padStart(2,'0');[1,-1].forEach(d=>{const n=lbSet[(lbIndex+d+lbSet.length)%lbSet.length];if(n!=null){const im=new Image();im.src=PHOTOS[n].u;}});}
-function openLB(i){const cat=PHOTOS[i].c;lbSet=PHOTOS.map((p,idx)=>idx).filter(idx=>PHOTOS[idx].c===cat);lbIndex=lbSet.indexOf(i);if(lbIndex<0)lbIndex=0;renderLB();lb.classList.add('open');document.body.style.overflow='hidden';}
+function renderLB(){const p=PHOTOS[lbSet[lbIndex]];lbImg.classList.remove('ready');lbImg.onload=()=>lbImg.classList.add('ready');lbImg.src=p.u;if(lbImg.complete)lbImg.classList.add('ready');lbImg.alt=(lang==='fr'?p.tf:p.te);lbTitle.textContent=(lang==='fr'?p.tf:p.te);lbMeta.textContent=(lang==='fr'?p.lf:p.le);lbCount.textContent=String(lbIndex+1).padStart(2,'0')+' / '+String(lbSet.length).padStart(2,'0');[1,-1].forEach(d=>{const n=lbSet[(lbIndex+d+lbSet.length)%lbSet.length];if(n!=null){const im=new Image();im.src=PHOTOS[n].u;}});}
+function openLB(i){lbSet=visible.slice();lbIndex=lbSet.indexOf(i);if(lbIndex<0)lbIndex=0;renderLB();lb.classList.add('open');document.body.style.overflow='hidden';}
 function closeLB(){lb.classList.remove('open');document.body.style.overflow='';}
 function step(d){lbIndex=(lbIndex+d+lbSet.length)%lbSet.length;renderLB();}
 document.getElementById('lbClose').addEventListener('click',closeLB);
