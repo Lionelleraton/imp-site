@@ -6,7 +6,7 @@
 </head>
 <body>
 <title>In Motion Performance</title>
-<meta name="description" content="In Motion Performance — studio créatif & performance : photo, web & iOS, 3D. Annecy · Chamonix.">
+<meta name="description" content="In Motion Performance : photo de sport, sites et applications, impression 3D. Basé à Annecy et Chamonix.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&family=Space+Mono:wght@400;700&display=swap">
@@ -74,7 +74,7 @@ h1,h2,h3{margin:0; text-wrap:balance}
 .kenburns{animation:kb 34s ease-in-out infinite alternate}
 @keyframes kb{from{transform:scale(1.05)}to{transform:scale(1.16)}}
 .hero::after{content:""; position:absolute; inset:0; z-index:1;
-  background:linear-gradient(180deg, rgba(11,16,21,.55) 0%, rgba(11,16,21,.08) 24%, rgba(11,16,21,.35) 60%, rgba(11,16,21,.94) 100%)}
+  background:linear-gradient(180deg, rgba(11,16,21,.60) 0%, rgba(11,16,21,.15) 26%, rgba(11,16,21,.55) 62%, rgba(11,16,21,.97) 100%)}
 .hero-inner{position:relative; z-index:2; width:100%; max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,64px) clamp(40px,7vw,80px)}
 .hero .kicker{font-family:var(--mono); font-size:12.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--sky); margin:0 0 20px}
 .hero h1{font-weight:800; text-transform:uppercase; letter-spacing:-.015em; line-height:1.02; font-size:clamp(28px,4.6vw,60px); max-width:20ch}
@@ -228,8 +228,10 @@ h1,h2,h3{margin:0; text-wrap:balance}
 .count{font-family:var(--mono); font-size:12px; color:var(--faint); letter-spacing:.1em}
 .grid{column-count:3; column-gap:14px}
 @media(max-width:900px){ .grid{column-count:2} }
-@media(max-width:540px){ .grid{column-count:1} }
-.tile{break-inside:avoid; margin:0 0 14px; position:relative; cursor:pointer; overflow:hidden; border-radius:6px; background:var(--bg-2)}
+@media(max-width:359px){ .grid{column-count:1} }
+.tile{break-inside:avoid; margin:0 0 14px; position:relative; cursor:pointer; overflow:hidden; border-radius:6px; background:var(--bg-2); opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1)}
+.tile.t-in{opacity:1; transform:none}
+@media (prefers-reduced-motion: reduce){ .tile{opacity:1; transform:none; transition:none} }
 .tile img{width:100%; height:auto; transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 .tile:hover img{transform:scale(1.045)}
 .tile .cap{position:absolute; inset:auto 0 0 0; padding:44px 16px 15px; z-index:2; background:linear-gradient(transparent, rgba(9,13,17,.9)); opacity:0; transform:translateY(8px); transition:opacity .35s, transform .35s}
@@ -260,7 +262,9 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
 .lb{position:fixed; inset:0; z-index:100; background:rgba(6,9,12,.97); display:none; align-items:center; justify-content:center; opacity:0; transition:opacity .3s}
 .lb.open{display:flex; opacity:1}
 .lb-stage{position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:clamp(16px,4vw,60px)}
-.lb-img{max-width:100%; max-height:82vh; width:auto; height:auto; object-fit:contain; border-radius:3px; box-shadow:0 30px 80px -20px rgba(0,0,0,.85)}
+.lb-img{max-width:100%; max-height:82vh; width:auto; height:auto; object-fit:contain; border-radius:3px; box-shadow:0 30px 80px -20px rgba(0,0,0,.85); opacity:0; transform:scale(.97); transition:opacity .4s ease, transform .5s cubic-bezier(.2,.7,.2,1)}
+.lb-img.ready{opacity:1; transform:none}
+@media (prefers-reduced-motion: reduce){ .lb-img{opacity:1 !important; transform:none !important; transition:none} }
 .lb-cap{position:absolute; inset:auto 0 clamp(14px,3vw,30px) 0; text-align:center; padding:0 20px}
 .lb-cap .t{font-weight:700; font-size:clamp(17px,2.4vw,23px)}
 .lb-cap .m{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--sky); margin-top:8px}
@@ -271,6 +275,32 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
 .lb-close{position:absolute; top:clamp(14px,2.5vw,26px); right:clamp(14px,2.5vw,26px); width:46px;height:46px}
 .lb-counter{position:absolute; top:clamp(20px,2.8vw,32px); left:clamp(16px,3vw,34px); font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--muted)}
 @media(max-width:600px){ .lb-nav{width:44px;height:44px} .lb-img{max-height:72vh} }
+
+/* ---------- MOBILE ---------- */
+@media(max-width:640px){
+  :root{ --nav-h:58px }
+  .hero{ height:auto; min-height:90svh; padding-top:var(--nav-h) }
+  .hero-inner{ padding-bottom:42px }
+  .hero h1{ font-size:clamp(30px,8.6vw,42px) }
+  .hero .sub{ font-size:16px; max-width:40ch }
+  .hero-actions{ flex-direction:column; gap:10px }
+  .hero-actions .btn{ width:100%; justify-content:center }
+  .scrollcue{ display:none }
+  .marquee span{ font-size:11px; padding:0 18px }
+  .intro{ padding-top:64px }
+  .intro h2{ font-size:clamp(23px,7.4vw,30px) }
+  .intro .lead{ font-size:15.5px }
+  .section-title{ font-size:clamp(24px,7.2vw,32px) }
+  .st-body h2{ font-size:clamp(24px,7vw,30px) }
+  .cta-inner h2{ font-size:clamp(28px,9vw,38px) }
+  .cta-inner .sub{ font-size:15.5px }
+  .cta-actions .btn{ width:100%; justify-content:center }
+  .about-photo{ max-width:300px; margin:0 auto }
+  .stats{ gap:20px 30px }
+  .pf-hero{ height:auto; min-height:56svh; padding-top:var(--nav-h) }
+  .pf-hero h1{ font-size:clamp(40px,15vw,64px) }
+  .work-head{ gap:8px }
+}
 </style>
 
 <!-- IMP logo (inline symbol) -->
@@ -278,7 +308,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
 
 <!-- ================= NAV ================= -->
 <nav class="nav" id="nav">
-  <a class="logo" data-view="home" aria-label="In Motion Performance — accueil / home"><svg><use href="#imp-logo"/></svg></a>
+  <a class="logo" data-view="home" aria-label="In Motion Performance, accueil"><svg><use href="#imp-logo"/></svg></a>
   <div class="nav-links" id="navLinks">
     <a data-view="home" data-anchor="services" data-fr="Services" data-en="Services">Services</a>
     <a data-view="home" data-anchor="skitrack" data-fr="SkiTrack" data-en="SkiTrack">SkiTrack</a>
@@ -303,16 +333,16 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
   <header class="hero">
     <div class="hero-media"><img class="kenburns" src="imp-images/homehero.jpg" alt="Athlète en montagne face aux Drus, massif du Mont-Blanc"></div>
     <div class="hero-inner">
-      <p class="kicker hla d1" data-fr="Studio créatif & performance · Annecy–Chamonix" data-en="Creative & performance studio · Annecy–Chamonix">Studio créatif &amp; performance · Annecy–Chamonix</p>
-      <h1 class="hla d2" data-fr="Des visuels et des outils<br>qui font progresser." data-en="Visuals and tools<br>that drive progress.">Des visuels et des outils<br>qui font progresser.</h1>
-      <p class="sub hla d3" data-fr="Solutions numériques, photo et 3D pour sportifs, clubs et marques." data-en="Digital, photo and 3D solutions for athletes, clubs and brands.">Solutions numériques, photo et 3D pour sportifs, clubs et marques.</p>
+      <p class="kicker hla d1" data-fr="Photo, web et 3D pour le sport" data-en="Photo, web and 3D for sport">Photo, web et 3D pour le sport</p>
+      <h1 class="hla d2" data-fr="Des images et des outils<br>pour le sport." data-en="Images and tools<br>for sport.">Des images et des outils<br>pour le sport.</h1>
+      <p class="sub hla d3" data-fr="Photo de sport, sites et applications, impression 3D. Basé entre Annecy et Chamonix." data-en="Sports photography, websites and apps, 3D printing. Based between Annecy and Chamonix.">Photo de sport, sites et applications, impression 3D. Basé entre Annecy et Chamonix.</p>
       <div class="hero-actions hla d4">
         <a class="btn btn-primary" data-view="home" data-anchor="services" data-fr="Découvrir le studio" data-en="Explore the studio">Découvrir le studio
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
         <a class="btn btn-ghost" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
-      <p class="coords hla d5">ANNECY · CHAMONIX — 45.90°N 6.13°E</p>
+      <p class="coords hla d5">CHAMONIX 45.90°N 6.13°E</p>
     </div>
     <div class="scrollcue" aria-hidden="true"><span data-fr="Défiler" data-en="Scroll">Défiler</span><span class="bar"></span></div>
   </header>
@@ -320,18 +350,18 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
   <div class="marquee" aria-hidden="true"><div class="marquee-track" id="mq"></div></div>
 
   <section class="intro"><div class="wrap reveal">
-    <h2 data-fr="Passe du ressenti aux <span class='hl'>décisions</span> qui font progresser." data-en="Turn feel into <span class='hl'>decisions</span> that drive progress.">Passe du ressenti aux <span class="hl">décisions</span> qui font progresser.</h2>
-    <p class="lead" data-fr="In Motion Performance conçoit des expériences web &amp; iOS, des visuels premium et des services 3D pour aider sportifs, clubs et marques à décider plus vite, mieux exécuter et passer un vrai cap." data-en="In Motion Performance builds web &amp; iOS experiences, premium visuals and 3D services to help athletes, clubs and brands decide faster, execute better and reach the next level.">In Motion Performance conçoit des expériences web &amp; iOS, des visuels premium et des services 3D pour aider sportifs, clubs et marques à décider plus vite, mieux exécuter et passer un vrai cap.</p>
+    <h2 data-fr="Je photographie le <span class='hl'>sport</span>, et je construis les outils autour." data-en="I shoot <span class='hl'>sport</span>, and I build the tools around it.">Je photographie le <span class="hl">sport</span>, et je construis les outils autour.</h2>
+    <p class="lead" data-fr="Derrière In Motion Performance, la même personne tient l'appareil photo et écrit le code. Photo, site, application ou impression 3D : vous avez un seul interlocuteur, du début à la fin." data-en="Behind In Motion Performance, the same person holds the camera and writes the code. Photo, website, app or 3D print: you deal with one person from start to finish.">Derrière In Motion Performance, la même personne tient l'appareil photo et écrit le code. Photo, site, application ou impression 3D : vous avez un seul interlocuteur, du début à la fin.</p>
   </div></section>
 
   <section class="services" id="services"><div class="wrap">
-    <div class="reveal"><p class="eyebrow" data-fr="Nos pôles" data-en="Our divisions">Nos pôles</p>
-    <h2 class="section-title" data-fr="Trois expertises, un même terrain." data-en="Three expertises, one field.">Trois expertises, un même terrain.</h2></div>
+    <div class="reveal"><p class="eyebrow" data-fr="Ce que je fais" data-en="What I do">Ce que je fais</p>
+    <h2 class="section-title" data-fr="Trois métiers, un seul interlocuteur." data-en="Three crafts, one person to talk to.">Trois métiers, un seul interlocuteur.</h2></div>
     <div class="svc-grid">
       <article class="svc reveal">
         <div class="svc-media"><span class="num">01</span><img id="svcPhoto" alt="Photographie sportive outdoor"></div>
         <div class="svc-body"><h3 data-fr="Photographie" data-en="Photography">Photographie</h3>
-          <p data-fr="Images premium pour valoriser vos produits, rassurer vos clients et renforcer votre marque — tournées en conditions réelles." data-en="Premium images to showcase your products, reassure clients and strengthen your brand — shot in real conditions.">Images premium pour valoriser vos produits, rassurer vos clients et renforcer votre marque — tournées en conditions réelles.</p>
+          <p data-fr="Des photos de sport prises sur le terrain, prêtes à publier pour vos produits et vos réseaux." data-en="Sports photos shot out in the field, ready to publish for your products and your socials.">Des photos de sport prises sur le terrain, prêtes à publier pour vos produits et vos réseaux.</p>
           <a class="svc-link" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
@@ -345,7 +375,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
           </div>
         </div>
         <div class="svc-body"><h3 data-fr="Web & iOS" data-en="Web & iOS">Web &amp; iOS</h3>
-          <p data-fr="Apps web et iOS pensées pour guider l'utilisateur, piloter vos chiffres clés et déclencher l'action au bon moment." data-en="Web & iOS apps designed to guide users, track your key metrics and trigger action at the right time.">Apps web et iOS pensées pour guider l'utilisateur, piloter vos chiffres clés et déclencher l'action au bon moment.</p>
+          <p data-fr="Des sites et des applications simples et rapides, construits pour vos besoins réels." data-en="Websites and apps that stay simple and fast, built around what you actually need.">Des sites et des applications simples et rapides, construits pour vos besoins réels.</p>
           <a class="svc-link" data-view="home" data-anchor="skitrack" data-fr="Découvrir" data-en="Discover">Découvrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
@@ -357,7 +387,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
           </svg></div>
         </div>
         <div class="svc-body"><h3 data-fr="3D" data-en="3D">3D</h3>
-          <p data-fr="Impression et modélisation 3D pour reproduire des pièces et prototyper vite, directement sur le terrain." data-en="3D printing and modeling to reproduce parts and prototype fast, right in the field.">Impression et modélisation 3D pour reproduire des pièces et prototyper vite, directement sur le terrain.</p>
+          <p data-fr="Modélisation et impression 3D pour reproduire une pièce ou tester un prototype rapidement." data-en="3D modeling and printing to reproduce a part or test a prototype quickly.">Modélisation et impression 3D pour reproduire une pièce ou tester un prototype rapidement.</p>
           <a class="svc-link" data-view="home" data-anchor="contact" data-fr="En savoir plus" data-en="Learn more">En savoir plus <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
@@ -367,50 +397,50 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
   <section class="skitrack" id="skitrack"><div class="wrap"><div class="st-grid">
     <div class="st-body reveal">
       <p class="eyebrow" data-fr="Produit phare" data-en="Flagship product">Produit phare</p>
-      <h2 data-fr="SkiTrack — du terrain à la décision." data-en="SkiTrack — from the field to the decision.">SkiTrack — du terrain à la décision.</h2>
-      <p data-fr="L'app terrain qui structure les tests matériel et accélère l'analyse des staffs. Moins d'hésitation, plus de progression." data-en="The field app that structures equipment testing and speeds up staff analysis. Less hesitation, more progress.">L'app terrain qui structure les tests matériel et accélère l'analyse des staffs. Moins d'hésitation, plus de progression.</p>
+      <h2 data-fr="SkiTrack, l'app de test matériel." data-en="SkiTrack, the gear-testing app.">SkiTrack, l'app de test matériel.</h2>
+      <p data-fr="Elle sert à organiser les tests de matériel et à comparer les résultats sans se prendre la tête. Les staffs décident plus vite, sur des données claires." data-en="It helps you organise gear tests and compare results without the hassle. Staff decide faster, from clear data.">Elle sert à organiser les tests de matériel et à comparer les résultats sans se prendre la tête. Les staffs décident plus vite, sur des données claires.</p>
       <ul class="st-list">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span data-fr="Tests matériel structurés" data-en="Structured equipment tests">Tests matériel structurés</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span data-fr="Décisions staff accélérées" data-en="Faster staff decisions">Décisions staff accélérées</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span data-fr="Données claires, prêtes à l'action" data-en="Clear, action-ready data">Données claires, prêtes à l'action</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span data-fr="Tous vos tests au même endroit" data-en="All your tests in one place">Tous vos tests au même endroit</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span data-fr="Des comparaisons claires" data-en="Clear comparisons">Des comparaisons claires</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span data-fr="Des données prêtes à partager" data-en="Data ready to share">Des données prêtes à partager</span></li>
       </ul>
       <a class="btn btn-primary" data-view="home" data-anchor="contact" data-fr="Découvrir SkiTrack" data-en="Discover SkiTrack">Découvrir SkiTrack
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
     <div class="reveal d1"><div class="phone"><div class="phone-screen">
-      <div class="ps-title">SkiTrack · Analyse</div>
+      <div class="ps-title">SkiTrack</div>
       <div class="ps-kpi"><div><div class="n">+12%</div><div class="l" data-fr="Glisse" data-en="Glide">Glisse</div></div><div><div class="n">A/B</div><div class="l" data-fr="Tests" data-en="Tests">Tests</div></div></div>
       <div class="ps-chart"><div class="ps-bars" id="psbars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
     </div></div></div>
   </div></div></section>
 
   <section class="brands"><div class="wrap reveal">
-    <p class="eyebrow" data-fr="Marques & collaborations" data-en="Brands & collaborations">Marques &amp; collaborations</p>
-    <p class="blurb" data-fr="Ils nous ont confié leurs images et leurs événements en montagne." data-en="They trusted us with their images and mountain events.">Ils nous ont confié leurs images et leurs événements en montagne.</p>
+    <p class="eyebrow" data-fr="Ils m'ont fait confiance" data-en="They trusted me">Ils m'ont fait confiance</p>
+    <p class="blurb" data-fr="Quelques marques et clubs avec qui j'ai travaillé." data-en="A few brands and clubs I've worked with.">Quelques marques et clubs avec qui j'ai travaillé.</p>
     <div class="brandrow"><span>PÜLS</span><span>SHOKZ</span><span>ROSSIGNOL</span><span>MYNÉRAL</span><span>CSC</span></div>
   </div></section>
 
   <section class="testi"><div class="wrap">
-    <div class="reveal"><p class="eyebrow" data-fr="Preuves sociales" data-en="Social proof">Preuves sociales</p>
-    <h2 class="section-title" data-fr="Ce que le terrain dit vraiment." data-en="What the field actually says.">Ce que le terrain dit vraiment.</h2></div>
+    <div class="reveal"><p class="eyebrow" data-fr="Ce qu'ils en disent" data-en="What they say">Ce qu'ils en disent</p>
+    <h2 class="section-title" data-fr="Ils en parlent mieux que moi." data-en="They say it better than I could.">Ils en parlent mieux que moi.</h2></div>
     <div class="testi-grid">
-      <div class="tcard reveal"><p class="q" data-fr="Avec SkiTrack, je passe moins de temps à expliquer mes sensations et plus de temps à progresser." data-en="With SkiTrack, I spend less time explaining how it feels and more time improving.">Avec SkiTrack, je passe moins de temps à expliquer mes sensations et plus de temps à progresser.</p><p class="a" data-fr="Retour anonymisé · Biathlon" data-en="Anonymous feedback · Biathlon">Retour anonymisé · Biathlon</p></div>
-      <div class="tcard reveal d1"><p class="q" data-fr="Les retours sont plus clairs, les décisions plus rapides, et on évite beaucoup d'hésitations." data-en="The feedback is clearer, decisions are faster, and we avoid a lot of second-guessing.">Les retours sont plus clairs, les décisions plus rapides, et on évite beaucoup d'hésitations.</p><p class="a" data-fr="Retour anonymisé · Staff nordique" data-en="Anonymous feedback · Nordic staff">Retour anonymisé · Staff nordique</p></div>
-      <div class="tcard reveal"><p class="q" data-fr="Le service photo donne une image pro tout de suite. Les sponsors voient la différence." data-en="The photo service gives a pro image instantly. Sponsors see the difference.">Le service photo donne une image pro tout de suite. Les sponsors voient la différence.</p><p class="a" data-fr="Retour anonymisé · Athlète" data-en="Anonymous feedback · Athlete">Retour anonymisé · Athlète</p></div>
-      <div class="tcard reveal d1"><p class="q" data-fr="On sent une vraie logique produit : chaque page guide vers l'action au bon moment." data-en="You feel a real product logic: every page guides you to action at the right moment.">On sent une vraie logique produit : chaque page guide vers l'action au bon moment.</p><p class="a" data-fr="Retour anonymisé · Responsable club" data-en="Anonymous feedback · Club manager">Retour anonymisé · Responsable club</p></div>
+      <div class="tcard reveal"><p class="q" data-fr="Avec SkiTrack, je passe moins de temps à expliquer mes sensations et plus de temps à progresser." data-en="With SkiTrack, I spend less time explaining how it feels and more time improving.">Avec SkiTrack, je passe moins de temps à expliquer mes sensations et plus de temps à progresser.</p><p class="a" data-fr="Biathlète" data-en="Biathlete">Biathlète</p></div>
+      <div class="tcard reveal d1"><p class="q" data-fr="Les retours sont plus clairs, les décisions plus rapides, et on évite beaucoup d'hésitations." data-en="The feedback is clearer, decisions are faster, and we avoid a lot of second-guessing.">Les retours sont plus clairs, les décisions plus rapides, et on évite beaucoup d'hésitations.</p><p class="a" data-fr="Staff nordique" data-en="Nordic staff">Staff nordique</p></div>
+      <div class="tcard reveal"><p class="q" data-fr="Le service photo donne une image pro tout de suite. Les sponsors voient la différence." data-en="The photo service gives a pro image instantly. Sponsors see the difference.">Le service photo donne une image pro tout de suite. Les sponsors voient la différence.</p><p class="a" data-fr="Athlète" data-en="Athlete">Athlète</p></div>
+      <div class="tcard reveal d1"><p class="q" data-fr="On sent une vraie logique produit : chaque page guide vers l'action au bon moment." data-en="You feel a real product logic: every page guides you to action at the right moment.">On sent une vraie logique produit : chaque page guide vers l'action au bon moment.</p><p class="a" data-fr="Responsable de club" data-en="Club manager">Responsable de club</p></div>
     </div>
   </div></section>
 
   <section class="about"><div class="wrap"><div class="about-grid">
-    <div class="about-photo reveal"><img src="imp-images/portrait.jpg" alt="Lionel Jouannaud, fondateur d'In Motion Performance"><span class="tag" data-fr="Lionel Jouannaud · fondateur" data-en="Lionel Jouannaud · founder">Lionel Jouannaud · fondateur</span></div>
+    <div class="about-photo reveal"><img src="imp-images/portrait.jpg" alt="Lionel Jouannaud, fondateur d'In Motion Performance"><span class="tag" data-fr="Lionel Jouannaud, fondateur" data-en="Lionel Jouannaud, founder">Lionel Jouannaud, fondateur</span></div>
     <div class="about-body reveal d1">
       <p class="eyebrow" data-fr="Le studio" data-en="The studio">Le studio</p>
-      <h2 class="section-title" data-fr="Fondé sur le terrain, taillé pour la performance." data-en="Born on the field, built for performance.">Fondé sur le terrain, taillé pour la performance.</h2>
-      <p data-fr="In Motion Performance réunit sport, data et image. Derrière l'objectif et le code : Lionel Jouannaud, photographe et créateur outdoor basé entre Annecy et Chamonix, qui accompagne athlètes, clubs et marques de l'idée au déploiement." data-en="In Motion Performance brings together sport, data and imagery. Behind the lens and the code: Lionel Jouannaud, an outdoor photographer and creator based between Annecy and Chamonix, supporting athletes, clubs and brands from idea to deployment."><strong>In Motion Performance réunit sport, data et image.</strong> Derrière l'objectif et le code : Lionel Jouannaud, photographe et créateur outdoor basé entre Annecy et Chamonix, qui accompagne athlètes, clubs et marques de l'idée au déploiement.</p>
+      <h2 class="section-title" data-fr="Un photographe qui code, basé en Haute-Savoie." data-en="A photographer who codes, based in the French Alps.">Un photographe qui code, basé en Haute-Savoie.</h2>
+      <p data-fr="<strong>Moi, c'est Lionel Jouannaud.</strong> Je suis photographe de sport et je développe aussi des sites et des applications. Je vis entre Annecy et Chamonix, et je travaille surtout avec des athlètes, des clubs et des marques de montagne." data-en="<strong>I'm Lionel Jouannaud.</strong> I'm a sports photographer, and I also build websites and apps. I live between Annecy and Chamonix, and I mostly work with mountain athletes, clubs and brands."><strong>Moi, c'est Lionel Jouannaud.</strong> Je suis photographe de sport et je développe aussi des sites et des applications. Je vis entre Annecy et Chamonix, et je travaille surtout avec des athlètes, des clubs et des marques de montagne.</p>
       <div class="stats">
         <div class="stat"><div class="n">2025</div><div class="l" data-fr="Fondé en" data-en="Founded">Fondé en</div></div>
-        <div class="stat"><div class="n">3</div><div class="l" data-fr="Pôles d'expertise" data-en="Divisions">Pôles d'expertise</div></div>
-        <div class="stat"><div class="n">100%</div><div class="l" data-fr="Terrain" data-en="Field-tested">Terrain</div></div>
+        <div class="stat"><div class="n">3</div><div class="l" data-fr="Métiers" data-en="Crafts">Métiers</div></div>
+        <div class="stat"><div class="n">100%</div><div class="l" data-fr="Sur le terrain" data-en="In the field">Sur le terrain</div></div>
       </div>
     </div>
   </div></div></section>
@@ -419,8 +449,8 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
     <div class="cta-bg" id="ctaBg"></div>
     <div class="wrap cta-inner reveal">
       <p class="eyebrow" data-fr="Contact" data-en="Contact">Contact</p>
-      <h2 data-fr="Prêt à passer un cap ?" data-en="Ready to reach the next level?">Prêt à passer un cap ?</h2>
-      <p class="sub" data-fr="On reprend votre parcours actuel, on clarifie le message, on priorise les CTA et on transforme votre présence en vrai point d'entrée business." data-en="We rework your current journey, clarify the message, prioritise CTAs and turn your presence into a real business entry point.">On reprend votre parcours actuel, on clarifie le message, on priorise les CTA et on transforme votre présence en vrai point d'entrée business.</p>
+      <h2 data-fr="Un projet en tête ?" data-en="Got something in mind?">Un projet en tête ?</h2>
+      <p class="sub" data-fr="Dites-moi en deux lignes ce dont vous avez besoin, je réponds vite. Photo, site, appli ou 3D, on regarde ensemble ce qui a du sens." data-en="Tell me in a line or two what you need and I'll get back to you quickly. Photo, website, app or 3D, we'll figure out what makes sense together.">Dites-moi en deux lignes ce dont vous avez besoin, je réponds vite. Photo, site, appli ou 3D, on regarde ensemble ce qui a du sens.</p>
       <div class="cta-actions">
         <a class="btn btn-primary" href="mailto:lioneljouannaud@gmail.com?subject=R%C3%A9server%20un%20appel%20-%20In%20Motion%20Performance" data-fr="Réserver un appel" data-en="Book a call">Réserver un appel
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -432,7 +462,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
         <div class="channel"><div class="k">Email</div><a href="mailto:lioneljouannaud@gmail.com">lioneljouannaud@gmail.com</a></div>
         <div class="channel"><div class="k">Instagram</div><a href="https://instagram.com/lionel_jouannaud" target="_blank" rel="noopener">@lionel_jouannaud</a></div>
         <div class="channel"><div class="k" data-fr="Téléphone" data-en="Phone">Téléphone</div><a href="tel:+33665620084">06 65 62 00 84</a></div>
-        <div class="channel"><div class="k" data-fr="Localisation" data-en="Location">Localisation</div><span class="v">Annecy · Chamonix, FR</span></div>
+        <div class="channel"><div class="k" data-fr="Localisation" data-en="Location">Localisation</div><span class="v">Annecy et Chamonix</span></div>
       </div>
     </div>
   </section>
@@ -441,11 +471,11 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
 <!-- ================= PORTFOLIO VIEW ================= -->
 <div class="view" id="view-portfolio">
   <header class="pf-hero">
-    <img src="imp-images/hero.jpg" alt="Crête au coucher du soleil, massif du Mont-Blanc">
+    <img class="kenburns" src="imp-images/hero.jpg" alt="Crête au coucher du soleil, massif du Mont-Blanc">
     <div class="inner">
-      <p class="eyebrow reveal" data-fr="Photographie · In Motion Performance" data-en="Photography · In Motion Performance">Photographie · In Motion Performance</p>
+      <p class="eyebrow reveal" data-fr="Photo de sport et de montagne" data-en="Sport and mountain photography">Photo de sport et de montagne</p>
       <h1 class="reveal d1">Portfolio</h1>
-      <p class="sub reveal d2" data-fr="Trail, faune et haute montagne — saisis dans la lumière du massif du Mont-Blanc." data-en="Trail, wildlife and high mountains — captured in the light of the Mont Blanc massif.">Trail, faune et haute montagne — saisis dans la lumière du massif du Mont-Blanc.</p>
+      <p class="sub reveal d2" data-fr="Trail, faune et haute montagne, autour du massif du Mont-Blanc." data-en="Trail, wildlife and high mountains, around the Mont Blanc massif.">Trail, faune et haute montagne, autour du massif du Mont-Blanc.</p>
     </div>
   </header>
   <section class="work"><div class="wrap">
@@ -466,7 +496,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
     <div class="grid" id="grid"></div>
     <div class="pf-cta reveal">
       <h3 data-fr="Un projet photo ?" data-en="A photo project?">Un projet photo ?</h3>
-      <p data-fr="Parlons de vos images — produits, athlètes, événements, contenus de marque." data-en="Let's talk about your images — products, athletes, events, brand content.">Parlons de vos images — produits, athlètes, événements, contenus de marque.</p>
+      <p data-fr="Dites-moi ce dont vous avez besoin en photo, je réponds vite." data-en="Tell me what you need in photos and I'll get back to you quickly.">Dites-moi ce dont vous avez besoin en photo, je réponds vite.</p>
       <a class="btn btn-primary" data-view="home" data-anchor="contact" data-fr="Me contacter" data-en="Get in touch">Me contacter
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
@@ -480,7 +510,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
     <div class="brandcol">
       <svg><use href="#imp-logo"/></svg>
       <div class="tl">Move better. Go further.</div>
-      <p data-fr="Studio créatif & performance — photo, web & iOS et 3D pour sportifs, clubs et marques." data-en="Creative & performance studio — photo, web & iOS and 3D for athletes, clubs and brands.">Studio créatif &amp; performance — photo, web &amp; iOS et 3D pour sportifs, clubs et marques.</p>
+      <p data-fr="Photo de sport, sites et applications, impression 3D. Annecy et Chamonix." data-en="Sports photography, websites and apps, 3D printing. Annecy and Chamonix.">Photo de sport, sites et applications, impression 3D. Annecy et Chamonix.</p>
     </div>
     <div class="col"><h4 data-fr="Navigation" data-en="Navigation">Navigation</h4>
       <a data-view="home" data-fr="Accueil" data-en="Home">Accueil</a>
@@ -496,7 +526,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
     </div>
   </div>
   <div class="bar">
-    <span>© 2025 In Motion Performance · EST. 2025</span>
+    <span>© 2025 In Motion Performance</span>
     <span data-fr="Photographies : Lionel Jouannaud" data-en="Photography: Lionel Jouannaud">Photographies : Lionel Jouannaud</span>
   </div>
 </footer>
@@ -514,38 +544,48 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
 const PHOTOS = [
 {u:"imp-images/g00.jpg",c:"trail",tf:"Dernière lueur",te:"Last light",lf:"Aiguilles Rouges, Chamonix",le:"Aiguilles Rouges, Chamonix",w:1125,h:2000},
 {u:"imp-images/g01.jpg",c:"faune",tf:"Bouquetin & Mont-Blanc",te:"Ibex & Mont Blanc",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
-{u:"imp-images/g02.jpg",c:"trail",tf:"Face aux Drus",te:"Facing Les Drus",lf:"Aiguille Verte, Chamonix",le:"Aiguille Verte, Chamonix",w:2000,h:1125},
-{u:"imp-images/g03.jpg",c:"paysage",tf:"Heure bleue",te:"Blue hour",lf:"Lac Blanc, Chamonix",le:"Lac Blanc, Chamonix",w:2000,h:1125},
-{u:"imp-images/g04.jpg",c:"faune",tf:"Le veilleur",te:"The watcher",lf:"Col du Brévent",le:"Col du Brévent",w:1125,h:2000},
-{u:"imp-images/g05.jpg",c:"trail",tf:"Vers le refuge",te:"Toward the refuge",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
-{u:"imp-images/g06.jpg",c:"nuit",tf:"Filé d'étoiles",te:"Star trails",lf:"35 mm · Chamonix",le:"35 mm · Chamonix",w:1125,h:2000},
-{u:"imp-images/g07.jpg",c:"ski",tf:"Ski de randonnée",te:"Ski touring",lf:"Vallée Blanche, Chamonix",le:"Vallée Blanche, Chamonix",w:1125,h:2000},
+{u:"imp-images/g02.jpg",c:"paysage",tf:"Heure bleue",te:"Blue hour",lf:"Lac Blanc, Chamonix",le:"Lac Blanc, Chamonix",w:2000,h:1125},
+{u:"imp-images/g03.jpg",c:"ski",tf:"Ski de randonnée",te:"Ski touring",lf:"Vallée Blanche, Chamonix",le:"Vallée Blanche, Chamonix",w:1125,h:2000},
+{u:"imp-images/g04.jpg",c:"nuit",tf:"Filé d'étoiles",te:"Star trails",lf:"35 mm, Chamonix",le:"35 mm, Chamonix",w:1125,h:2000},
+{u:"imp-images/g05.jpg",c:"marque",tf:"Shokz",te:"Shokz",lf:"Produit, Chamonix",le:"Product, Chamonix",w:1600,h:2000},
+{u:"imp-images/g06.jpg",c:"trail",tf:"Face aux Drus",te:"Facing Les Drus",lf:"Aiguille Verte, Chamonix",le:"Aiguille Verte, Chamonix",w:2000,h:1125},
+{u:"imp-images/g07.jpg",c:"faune",tf:"Le veilleur",te:"The watcher",lf:"Col du Brévent",le:"Col du Brévent",w:1125,h:2000},
 {u:"imp-images/g08.jpg",c:"paysage",tf:"Aiguille du Midi",te:"Aiguille du Midi",lf:"3842 m, Chamonix",le:"3842 m, Chamonix",w:1125,h:2000},
-{u:"imp-images/g09.jpg",c:"faune",tf:"Heure dorée",te:"Golden hour",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
-{u:"imp-images/g10.jpg",c:"trail",tf:"L'ascension",te:"The climb",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
-{u:"imp-images/g11.jpg",c:"paysage",tf:"Immensité",te:"Vastness",lf:"Lac Blanc, Aiguilles Rouges",le:"Lac Blanc, Aiguilles Rouges",w:1125,h:2000},
-{u:"imp-images/g12.jpg",c:"faune",tf:"Silhouette au crépuscule",te:"Dusk silhouette",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
-{u:"imp-images/g13.jpg",c:"ski",tf:"Envol",te:"Airborne",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
-{u:"imp-images/g14.jpg",c:"trail",tf:"Objectif sommet",te:"Eyes on the summit",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
-{u:"imp-images/g15.jpg",c:"nuit",tf:"Aiguille du Midi, minuit",te:"Aiguille du Midi, midnight",lf:"3842 m, Chamonix",le:"3842 m, Chamonix",w:1125,h:2000},
-{u:"imp-images/g16.jpg",c:"marque",tf:"Shokz",te:"Shokz",lf:"Produit · Chamonix",le:"Product · Chamonix",w:1600,h:2000},
-{u:"imp-images/g17.jpg",c:"trail",tf:"Sourire d'altitude",te:"High-altitude smile",lf:"Le Brévent, Chamonix",le:"Le Brévent, Chamonix",w:1125,h:2000},
-{u:"imp-images/g18.jpg",c:"ski",tf:"Sommet",te:"Summit",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
-{u:"imp-images/g19.jpg",c:"marque",tf:"Rossignol",te:"Rossignol",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
-{u:"imp-images/g20.jpg",c:"faune",tf:"Roi des cimes",te:"King of the peaks",lf:"Col du Brévent",le:"Col du Brévent",w:1125,h:2000},
-{u:"imp-images/g21.jpg",c:"ski",tf:"Éclat d'hiver",te:"Winter spark",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
-{u:"imp-images/g22.jpg",c:"marque",tf:"Myneral",te:"Myneral",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
-{u:"imp-images/g23.jpg",c:"nuit",tf:"Lune montante",te:"Rising moon",lf:"Vallée de Chamonix",le:"Chamonix valley",w:1125,h:2000},
-{u:"imp-images/g24.jpg",c:"ski",tf:"Vers la lumière",te:"Into the light",lf:"Ski de randonnée",le:"Ski touring",w:1125,h:2000},
-{u:"imp-images/g25.jpg",c:"marque",tf:"HOKA Run Club",te:"HOKA Run Club",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
-{u:"imp-images/g26.jpg",c:"paysage",tf:"Contemplation",te:"Contemplation",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
-{u:"imp-images/g27.jpg",c:"trail",tf:"Plein été",te:"High summer",lf:"Alpages du Mont-Blanc",le:"Mont Blanc pastures",w:1600,h:2000},
+{u:"imp-images/g09.jpg",c:"ski",tf:"Envol",te:"Airborne",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
+{u:"imp-images/g10.jpg",c:"nuit",tf:"Aiguille du Midi, minuit",te:"Aiguille du Midi, midnight",lf:"3842 m, Chamonix",le:"3842 m, Chamonix",w:1125,h:2000},
+{u:"imp-images/g11.jpg",c:"marque",tf:"Rossignol",te:"Rossignol",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
+{u:"imp-images/g12.jpg",c:"trail",tf:"L'ascension",te:"The climb",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
+{u:"imp-images/g13.jpg",c:"faune",tf:"Heure dorée",te:"Golden hour",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
+{u:"imp-images/g14.jpg",c:"paysage",tf:"Immensité",te:"Vastness",lf:"Lac Blanc, Aiguilles Rouges",le:"Lac Blanc, Aiguilles Rouges",w:1125,h:2000},
+{u:"imp-images/g15.jpg",c:"ski",tf:"Sommet",te:"Summit",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
+{u:"imp-images/g16.jpg",c:"nuit",tf:"Lune montante",te:"Rising moon",lf:"Vallée de Chamonix",le:"Chamonix valley",w:1125,h:2000},
+{u:"imp-images/g17.jpg",c:"marque",tf:"Myneral",te:"Myneral",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
+{u:"imp-images/g18.jpg",c:"trail",tf:"Objectif sommet",te:"Eyes on the summit",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
+{u:"imp-images/g19.jpg",c:"faune",tf:"Silhouette au crépuscule",te:"Dusk silhouette",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
+{u:"imp-images/g20.jpg",c:"paysage",tf:"Contemplation",te:"Contemplation",lf:"Face au Mont-Blanc",le:"Facing Mont Blanc",w:1125,h:2000},
+{u:"imp-images/g21.jpg",c:"ski",tf:"Vers la lumière",te:"Into the light",lf:"Ski de randonnée",le:"Ski touring",w:1125,h:2000},
+{u:"imp-images/g22.jpg",c:"nuit",tf:"Ciel étoilé",te:"Starry sky",lf:"35 mm, Chamonix",le:"35 mm, Chamonix",w:1125,h:2000},
+{u:"imp-images/g23.jpg",c:"marque",tf:"HOKA Run Club",te:"HOKA Run Club",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
+{u:"imp-images/g24.jpg",c:"trail",tf:"Sourire d'altitude",te:"High-altitude smile",lf:"Le Brévent, Chamonix",le:"Le Brévent, Chamonix",w:1125,h:2000},
+{u:"imp-images/g25.jpg",c:"faune",tf:"Roi des cimes",te:"King of the peaks",lf:"Col du Brévent",le:"Col du Brévent",w:1125,h:2000},
+{u:"imp-images/g26.jpg",c:"paysage",tf:"Premières lueurs",te:"First light",lf:"Aiguilles Rouges, Chamonix",le:"Aiguilles Rouges, Chamonix",w:2000,h:1125},
+{u:"imp-images/g27.jpg",c:"ski",tf:"Éclat d'hiver",te:"Winter spark",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
 {u:"imp-images/g28.jpg",c:"marque",tf:"Püls Run Club",te:"Püls Run Club",lf:"Chamonix",le:"Chamonix",w:1125,h:2000},
-{u:"imp-images/g29.jpg",c:"faune",tf:"Repos",te:"At rest",lf:"Col du Brévent",le:"Col du Brévent",w:1125,h:2000},
-{u:"imp-images/g30.jpg",c:"trail",tf:"Ski-roues",te:"Roller-ski",lf:"Bessans, Haute-Maurienne",le:"Bessans, Haute-Maurienne",w:1125,h:2000},
-{u:"imp-images/g31.jpg",c:"marque",tf:"HOKA",te:"HOKA",lf:"Trail · Chamonix",le:"Trail · Chamonix",w:1125,h:2000},
-{u:"imp-images/g32.jpg",c:"marque",tf:"Shokz",te:"Shokz",lf:"Trail en forêt",le:"Forest trail",w:1125,h:2000},
-{u:"imp-images/g33.jpg",c:"marque",tf:"Run Club",te:"Run Club",lf:"Annecy",le:"Annecy",w:1125,h:2000}
+{u:"imp-images/g29.jpg",c:"trail",tf:"Plein été",te:"High summer",lf:"Alpages du Mont-Blanc",le:"Mont Blanc pastures",w:1600,h:2000},
+{u:"imp-images/g30.jpg",c:"faune",tf:"Repos",te:"At rest",lf:"Col du Brévent",le:"Col du Brévent",w:1125,h:2000},
+{u:"imp-images/g31.jpg",c:"ski",tf:"Montée",te:"The ascent",lf:"Ski de randonnée",le:"Ski touring",w:2000,h:1125},
+{u:"imp-images/g32.jpg",c:"marque",tf:"HOKA",te:"HOKA",lf:"Trail, Chamonix",le:"Trail, Chamonix",w:1125,h:2000},
+{u:"imp-images/g33.jpg",c:"paysage",tf:"Heure bleue sur le Mont-Blanc",te:"Blue hour on Mont Blanc",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:2000,h:1125},
+{u:"imp-images/g34.jpg",c:"trail",tf:"Aube sur le massif",te:"Dawn over the massif",lf:"Lac Blanc, Chamonix",le:"Lac Blanc, Chamonix",w:2000,h:1125},
+{u:"imp-images/g35.jpg",c:"faune",tf:"Cornes",te:"Horns",lf:"Aiguilles Rouges",le:"Aiguilles Rouges",w:1125,h:2000},
+{u:"imp-images/g36.jpg",c:"ski",tf:"Skis sur le dos",te:"Skis on the back",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
+{u:"imp-images/g37.jpg",c:"marque",tf:"Shokz",te:"Shokz",lf:"Trail en forêt",le:"Forest trail",w:1125,h:2000},
+{u:"imp-images/g38.jpg",c:"paysage",tf:"Dans les nuages",te:"In the clouds",lf:"Aiguille du Midi, Chamonix",le:"Aiguille du Midi, Chamonix",w:1125,h:2000},
+{u:"imp-images/g39.jpg",c:"trail",tf:"Ski-roues",te:"Roller-ski",lf:"Bessans, Haute-Maurienne",le:"Bessans, Haute-Maurienne",w:1125,h:2000},
+{u:"imp-images/g40.jpg",c:"marque",tf:"Run Club",te:"Run Club",lf:"Annecy",le:"Annecy",w:1125,h:2000},
+{u:"imp-images/g41.jpg",c:"trail",tf:"Vers le refuge",te:"Toward the refuge",lf:"Massif du Mont-Blanc",le:"Mont Blanc massif",w:1125,h:2000},
+{u:"imp-images/g42.jpg",c:"ski",tf:"Dernière pente",te:"Final slope",lf:"Ski de randonnée",le:"Ski touring",w:2000,h:1125},
+{u:"imp-images/g43.jpg",c:"trail",tf:"Run au lever du jour",te:"Sunrise run",lf:"Lac d'Annecy",le:"Lake Annecy",w:1600,h:2000}
 ];
 const CATLABEL = {trail:{fr:"Trail & course",en:"Trail & running"},faune:{fr:"Faune",en:"Wildlife"},paysage:{fr:"Sommets & paysages",en:"Peaks & landscapes"},ski:{fr:"Ski & neige",en:"Ski & snow"},nuit:{fr:"Nuit & astro",en:"Night & astro"},marque:{fr:"Marques",en:"Brands"}};
 let lang='fr'; try{const s=localStorage.getItem('imp_lang'); if(s==='fr'||s==='en') lang=s;}catch(e){}
@@ -565,22 +605,26 @@ function buildGrid(){
   grid.innerHTML='';
   PHOTOS.forEach((p,i)=>{
     const fig=document.createElement('figure'); fig.className='tile'; fig.dataset.cat=p.c; fig.dataset.idx=i; fig.tabIndex=0; fig.setAttribute('role','button');
-    fig.innerHTML='<span class="badge">'+(CATLABEL[p.c]?CATLABEL[p.c][lang]:p.c)+'</span><img src="'+p.u+'" width="'+p.w+'" height="'+p.h+'" loading="lazy" alt="'+(lang==='fr'?p.tf:p.te)+'"><figcaption class="cap"><span class="t">'+(lang==='fr'?p.tf:p.te)+'</span><span class="m">'+(lang==='fr'?p.lf:p.le)+'</span></figcaption>';
+    fig.innerHTML='<span class="badge">'+(CATLABEL[p.c]?CATLABEL[p.c][lang]:p.c)+'</span><img src="'+p.u+'" width="'+p.w+'" height="'+p.h+'" loading="lazy" decoding="async" alt="'+(lang==='fr'?p.tf:p.te)+'"><figcaption class="cap"><span class="t">'+(lang==='fr'?p.tf:p.te)+'</span><span class="m">'+(lang==='fr'?p.lf:p.le)+'</span></figcaption>';
     fig.addEventListener('click',()=>openLB(i));
     fig.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openLB(i);}});
     grid.appendChild(fig);
   });
 }
 function applyFilter(){
-  visible=[];
-  [...grid.children].forEach(fig=>{const i=+fig.dataset.idx; const show=(filter==='all'||PHOTOS[i].c===filter); fig.style.display=show?'':'none'; if(show)visible.push(i);});
+  visible=[]; let vi=0;
+  [...grid.children].forEach(fig=>{
+    const i=+fig.dataset.idx, show=(filter==='all'||PHOTOS[i].c===filter);
+    if(show){ fig.style.display=''; fig.classList.remove('t-in'); fig.style.transitionDelay=(Math.min(vi,14)*0.03)+'s'; visible.push(i); vi++; requestAnimationFrame(()=>requestAnimationFrame(()=>fig.classList.add('t-in'))); }
+    else { fig.style.display='none'; fig.classList.remove('t-in'); fig.style.transitionDelay='0s'; }
+  });
   countEl.textContent=visible.length+' '+(lang==='fr'?'photos':'photos');
 }
 document.querySelectorAll('#filters button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.filter;applyFilter();}));
 
 /* lightbox */
 const lb=document.getElementById('lb'),lbImg=document.getElementById('lbImg'),lbTitle=document.getElementById('lbTitle'),lbMeta=document.getElementById('lbMeta'),lbCount=document.getElementById('lbCount');
-function renderLB(){const p=PHOTOS[lbSet[lbIndex]];lbImg.src=p.u;lbImg.alt=(lang==='fr'?p.tf:p.te);lbTitle.textContent=(lang==='fr'?p.tf:p.te);lbMeta.textContent=((CATLABEL[p.c]?CATLABEL[p.c][lang]:p.c)+'  —  '+(lang==='fr'?p.lf:p.le));lbCount.textContent=String(lbIndex+1).padStart(2,'0')+' / '+String(lbSet.length).padStart(2,'0');}
+function renderLB(){const p=PHOTOS[lbSet[lbIndex]];lbImg.classList.remove('ready');lbImg.onload=()=>lbImg.classList.add('ready');lbImg.src=p.u;if(lbImg.complete)lbImg.classList.add('ready');lbImg.alt=(lang==='fr'?p.tf:p.te);lbTitle.textContent=(lang==='fr'?p.tf:p.te);lbMeta.textContent=((CATLABEL[p.c]?CATLABEL[p.c][lang]:p.c)+', '+(lang==='fr'?p.lf:p.le));lbCount.textContent=String(lbIndex+1).padStart(2,'0')+' / '+String(lbSet.length).padStart(2,'0');[1,-1].forEach(d=>{const n=lbSet[(lbIndex+d+lbSet.length)%lbSet.length];if(n!=null){const im=new Image();im.src=PHOTOS[n].u;}});}
 function openLB(i){const cat=PHOTOS[i].c;lbSet=PHOTOS.map((p,idx)=>idx).filter(idx=>PHOTOS[idx].c===cat);lbIndex=lbSet.indexOf(i);if(lbIndex<0)lbIndex=0;renderLB();lb.classList.add('open');document.body.style.overflow='hidden';}
 function closeLB(){lb.classList.remove('open');document.body.style.overflow='';}
 function step(d){lbIndex=(lbIndex+d+lbSet.length)%lbSet.length;renderLB();}
@@ -624,8 +668,8 @@ let barsDone=false;
 function animateBars(){if(barsDone)return;const bars=document.getElementById('psbars');if(!bars)return;const r=bars.getBoundingClientRect();if(r.top<window.innerHeight*0.9&&r.bottom>0){barsDone=true;const vals=[.35,.55,.4,.7,.6,.85,1];bars.classList.add('animate');[...bars.children].forEach((s,i)=>{setTimeout(()=>s.style.transform='scaleY('+vals[i]+')',i*90);});}}
 window.addEventListener('scroll',animateBars,{passive:true});
 
-/* save contact — real .vcf download on the live site; clipboard fallback inside the sandboxed preview */
-const vcard=["BEGIN:VCARD","VERSION:3.0","N:Jouannaud;Lionel;;;","FN:Lionel Jouannaud","ORG:In Motion Performance","TITLE:Photographe & créateur outdoor","TEL;TYPE=CELL:+33665620084","EMAIL:lioneljouannaud@gmail.com","URL:https://inmotionperformance.com","ADR;TYPE=WORK:;;;Chamonix;;;France","NOTE:Studio créatif & performance — photo, web & iOS, 3D","END:VCARD"].join("\r\n");
+/* save contact: real .vcf download on the live site; clipboard fallback in the sandboxed preview */
+const vcard=["BEGIN:VCARD","VERSION:3.0","N:Jouannaud;Lionel;;;","FN:Lionel Jouannaud","ORG:In Motion Performance","TITLE:Photographe de sport","TEL;TYPE=CELL:+33665620084","EMAIL:lioneljouannaud@gmail.com","URL:https://inmotionperformance.com","ADR;TYPE=WORK:;;;Chamonix;;;France","NOTE:Photo de sport, sites et applications, impression 3D. Annecy et Chamonix.","END:VCARD"].join("\r\n");
 const scBtn=document.getElementById('saveContact');
 function scFlash(msg){const s=scBtn.querySelector('span');if(!s)return;const of=s.getAttribute('data-fr'),oe=s.getAttribute('data-en');s.removeAttribute('data-fr');s.removeAttribute('data-en');s.textContent=msg;setTimeout(()=>{s.setAttribute('data-fr',of);s.setAttribute('data-en',oe);s.textContent=lang==='fr'?of:oe;},2200);}
 if(scBtn)scBtn.addEventListener('click',async()=>{
@@ -637,7 +681,7 @@ if(scBtn)scBtn.addEventListener('click',async()=>{
 
 /* init */
 buildGrid();applyFilter();applyLangText();
-(function(){const h=location.hash.replace('#','');if(h==='portfolio')showView('portfolio');else showView('home');})();
+(function(){const h=location.hash.replace('#','');const pth=location.pathname.toLowerCase();if(h==='portfolio'||/portfolio\/?$/.test(pth))showView('portfolio');else showView('home');})();
 checkReveals();animateBars();
 </script>
 

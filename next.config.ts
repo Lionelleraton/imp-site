@@ -24,7 +24,10 @@ const nextConfig: NextConfig = {
   // without deleting it — remove this block to restore the old homepage.
   async rewrites() {
     return {
-      beforeFiles: [{ source: "/", destination: "/home.html" }],
+      beforeFiles: [
+        { source: "/", destination: "/home.html" },
+        { source: "/portfolio", destination: "/home.html" },
+      ],
     };
   },
 };
