@@ -528,6 +528,12 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
     <span>© 2025 In Motion Performance</span>
     <span data-fr="Photographies : Lionel Jouannaud" data-en="Photography: Lionel Jouannaud">Photographies : Lionel Jouannaud</span>
   </div>
+  <nav class="legalbar" aria-label="Liens légaux">
+    <a href="/mentions-legales" data-fr="Mentions légales" data-en="Legal notice">Mentions légales</a>
+    <a href="/cgu">CGU</a>
+    <a href="/confidentialite" data-fr="Confidentialité" data-en="Privacy">Confidentialité</a>
+    <button type="button" id="cookieManageBtn" data-fr="Gérer les cookies" data-en="Manage cookies">Gérer les cookies</button>
+  </nav>
 </footer>
 
 <!-- ================= LIGHTBOX ================= -->
@@ -703,5 +709,53 @@ buildGrid();applyFilter();applyLangText();
 checkReveals();animateBars();
 </script>
 
+<!-- ================= LÉGAL + COOKIES ================= -->
+<style>
+  .legalbar{max-width:var(--maxw);margin:0 auto;padding:0 clamp(20px,5vw,64px) 26px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;border-top:1px solid rgba(237,241,243,.08);padding-top:18px}
+  .legalbar a,.legalbar button{font-family:inherit;font-size:12px;letter-spacing:.02em;color:rgba(237,241,243,.55);text-decoration:none;background:none;border:0;padding:0;cursor:pointer;transition:color .2s}
+  .legalbar a:hover,.legalbar button:hover{color:#EDF1F3}
+  #cookieBanner{position:fixed;inset:auto 0 0 0;z-index:9999;padding:0 16px 16px;display:none}
+  #cookieBanner.show{display:block}
+  #cookieBanner .cc-card{max-width:1100px;margin:0 auto;background:#121B23;border:1px solid rgba(237,241,243,.16);border-radius:16px;padding:20px 22px;box-shadow:0 22px 60px rgba(0,0,0,.45);display:flex;flex-direction:column;gap:16px}
+  @media(min-width:640px){#cookieBanner .cc-card{flex-direction:row;align-items:center;gap:24px}}
+  #cookieBanner .cc-txt{font-size:13.5px;line-height:1.5;color:rgba(237,241,243,.78);margin:0}
+  #cookieBanner .cc-txt strong{color:#EDF1F3;font-weight:600}
+  #cookieBanner .cc-txt a{color:#89A9BA;text-decoration:underline;text-underline-offset:2px}
+  #cookieBanner .cc-actions{display:flex;gap:12px;flex-shrink:0}
+  #cookieBanner .cc-btn{font-family:inherit;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;border-radius:999px;padding:11px 20px;cursor:pointer;transition:transform .15s,background .2s;white-space:nowrap}
+  #cookieBanner .cc-btn:hover{transform:translateY(-1px)}
+  #cookieBanner .cc-refuse{background:transparent;border:1px solid rgba(237,241,243,.28);color:#EDF1F3}
+  #cookieBanner .cc-accept{background:#89A9BA;border:1px solid #89A9BA;color:#0B1015}
+</style>
+<div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Consentement aux cookies">
+  <div class="cc-card">
+    <p class="cc-txt"
+       data-fr='<strong>On respecte ta vie privée.</strong> On aimerait mesurer l&rsquo;audience du site avec Google Analytics (dépôt de cookies) pour l&rsquo;améliorer. Rien n&rsquo;est chargé sans ton accord. Détails dans la <a href="/confidentialite">politique de confidentialité</a>.'
+       data-en='<strong>We respect your privacy.</strong> We&rsquo;d like to measure site audience with Google Analytics (cookies) to improve it. Nothing loads without your consent. See our <a href="/confidentialite">privacy policy</a>.'>
+      <strong>On respecte ta vie privée.</strong> On aimerait mesurer l&rsquo;audience du site avec Google Analytics (dépôt de cookies) pour l&rsquo;améliorer. Rien n&rsquo;est chargé sans ton accord. Détails dans la <a href="/confidentialite">politique de confidentialité</a>.
+    </p>
+    <div class="cc-actions">
+      <button type="button" class="cc-btn cc-refuse" id="ccRefuse" data-fr="Refuser" data-en="Decline">Refuser</button>
+      <button type="button" class="cc-btn cc-accept" id="ccAccept" data-fr="Accepter" data-en="Accept">Accepter</button>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    var KEY = "imp-cookie-consent";
+    var banner = document.getElementById("cookieBanner");
+    function read(){ try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function write(v){ try { localStorage.setItem(KEY, v); } catch (e) {} }
+    function show(){ banner.classList.add("show"); }
+    function hide(){ banner.classList.remove("show"); }
+    if (read() !== "accepted" && read() !== "refused") show();
+    var accept = document.getElementById("ccAccept");
+    var refuse = document.getElementById("ccRefuse");
+    var manage = document.getElementById("cookieManageBtn");
+    if (accept) accept.addEventListener("click", function(){ write("accepted"); hide(); });
+    if (refuse) refuse.addEventListener("click", function(){ write("refused"); hide(); });
+    if (manage) manage.addEventListener("click", function(){ show(); });
+  })();
+</script>
 </body>
 </html>

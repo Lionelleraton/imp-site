@@ -71,6 +71,8 @@ export default function ContactForm() {
           name="name"
           autoComplete="name"
           required
+          minLength={2}
+          maxLength={120}
           value={form.name}
           onChange={(event) => updateField("name", event.target.value)}
           className="mt-1 w-full rounded-xl border border-line bg-white/70 px-3 py-3 text-base outline-none transition focus:border-sky focus:ring-4 focus:ring-sky/20 sm:text-sm"
@@ -88,6 +90,7 @@ export default function ContactForm() {
           name="email"
           autoComplete="email"
           required
+          maxLength={180}
           value={form.email}
           onChange={(event) => updateField("email", event.target.value)}
           className="mt-1 w-full rounded-xl border border-line bg-white/70 px-3 py-3 text-base outline-none transition focus:border-sky focus:ring-4 focus:ring-sky/20 sm:text-sm"
@@ -104,6 +107,7 @@ export default function ContactForm() {
           type="tel"
           name="phone"
           autoComplete="tel"
+          maxLength={40}
           value={form.phone}
           onChange={(event) => updateField("phone", event.target.value)}
           className="mt-1 w-full rounded-xl border border-line bg-white/70 px-3 py-3 text-base outline-none transition focus:border-sky focus:ring-4 focus:ring-sky/20 sm:text-sm"
@@ -133,6 +137,8 @@ export default function ContactForm() {
           name="message"
           rows={6}
           required
+          minLength={12}
+          maxLength={5000}
           value={form.message}
           onChange={(event) => updateField("message", event.target.value)}
           className="mt-1 w-full rounded-xl border border-line bg-white/70 px-3 py-3 text-base outline-none transition focus:border-sky focus:ring-4 focus:ring-sky/20 sm:text-sm"

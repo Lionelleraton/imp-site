@@ -156,7 +156,7 @@ function fallbackImages(images: string[]): string[] {
   const backups = [
     "/hero.jpg",
     "/hero-home.jpg",
-    "/DSC05240.ARW.png",
+    "/DSC05240.jpg",
     "/services/photo/24-DSC03738.JPG",
     "/services/photo/50-DSC03630.JPG",
     "/services/photo/51-DSC03624.JPG",

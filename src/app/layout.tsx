@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
 import ScrollReveal from "./components/ScrollReveal";
+import CookieConsent from "./components/CookieConsent";
 
 const getBaseUrl = () => {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
@@ -111,18 +111,6 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className="min-h-screen bg-surface text-ink antialiased">
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-18PPKGV9T3"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-18PPKGV9T3');
-          `}
-        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -131,6 +119,7 @@ export default function RootLayout({
         <SiteHeader />
         {children}
         <SiteFooter />
+        <CookieConsent />
       </body>
     </html>
   );

@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const routes = [
     "/",
+    "/portfolio",
     "/services",
     "/services/web",
     "/services/ios",
@@ -28,12 +29,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/skitrack",
     "/choose-skis",
     "/contact",
+    "/mentions-legales",
+    "/cgu",
+    "/confidentialite",
   ];
+
+  const lowPriority = new Set([
+    "/mentions-legales",
+    "/cgu",
+    "/confidentialite",
+  ]);
 
   return routes.map((path) => ({
     url: `${baseUrl}${path}`,
     lastModified: now,
-    changeFrequency: "weekly",
-    priority: path === "/" ? 1 : 0.7,
+    changeFrequency: lowPriority.has(path) ? "yearly" : "weekly",
+    priority: path === "/" ? 1 : lowPriority.has(path) ? 0.3 : 0.7,
   }));
 }

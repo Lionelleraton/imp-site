@@ -23,6 +23,27 @@ type ContactLead = {
   userAgent?: string;
 };
 
+// Rate-limit anti-spam simple, en mémoire (best-effort par instance).
+const RATE_LIMIT_WINDOW_MS = 60_000; // 1 minute
+const RATE_LIMIT_MAX = 5; // 5 envois / minute / IP
+const rateLimitHits = new Map<string, number[]>();
+
+function getClientIp(request: Request): string {
+  const forwarded = request.headers.get("x-forwarded-for");
+  if (forwarded) return forwarded.split(",")[0]?.trim() || "unknown";
+  return request.headers.get("x-real-ip")?.trim() || "unknown";
+}
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (rateLimitHits.get(ip) ?? []).filter(
+    (ts) => now - ts < RATE_LIMIT_WINDOW_MS
+  );
+  recent.push(now);
+  rateLimitHits.set(ip, recent);
+  return recent.length > RATE_LIMIT_MAX;
+}
+
 function sanitize(value: unknown): string {
   if (typeof value !== "string") return "";
   return value.trim();
@@ -109,6 +130,14 @@ async function archiveLeadLocally(lead: ContactLead): Promise<boolean> {
 }
 
 export async function POST(request: Request) {
+  // Anti-spam : limite le nombre d'envois par IP.
+  if (isRateLimited(getClientIp(request))) {
+    return NextResponse.json(
+      { error: "Trop de tentatives. Réessayez dans une minute." },
+      { status: 429 }
+    );
+  }
+
   let body: ContactPayload;
   try {
     body = (await request.json()) as ContactPayload;
@@ -116,7 +145,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Requête invalide." }, { status: 400 });
   }
 
-  // Honeypot anti-spam.
+  // Honeypot anti-spam : un bot remplira ce champ caché.
   if (sanitize(body.company)) {
     return NextResponse.json({ ok: true });
   }
@@ -126,14 +155,17 @@ export async function POST(request: Request) {
   const phone = sanitize(body.phone);
   const message = sanitize(body.message);
 
-  if (!name || name.length < 2) {
+  if (!name || name.length < 2 || name.length > 120) {
     return NextResponse.json({ error: "Nom invalide." }, { status: 400 });
   }
-  if (!isValidEmail(email)) {
+  if (!isValidEmail(email) || email.length > 180) {
     return NextResponse.json({ error: "Email invalide." }, { status: 400 });
   }
-  if (!message || message.length < 12) {
-    return NextResponse.json({ error: "Message trop court." }, { status: 400 });
+  if (phone.length > 40) {
+    return NextResponse.json({ error: "Téléphone invalide." }, { status: 400 });
+  }
+  if (!message || message.length < 12 || message.length > 5000) {
+    return NextResponse.json({ error: "Message trop court ou trop long." }, { status: 400 });
   }
 
   const lead: ContactLead = {

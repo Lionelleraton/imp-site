@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import CookiePreferencesButton from "./CookiePreferencesButton";
 
 const navColumns = [
   {
@@ -155,9 +156,23 @@ export default function SiteFooter() {
           {/* ── Bottom bar ── */}
           <div className="border-t border-line/50 px-6 py-4 sm:px-8 lg:px-10">
             <div className="flex flex-wrap items-center justify-between gap-4">
-              <p className="text-[10px] text-ink/38">
-                © {new Date().getFullYear()} InMotion Performance · Chamonix Mont-Blanc
-              </p>
+              <div className="flex flex-col gap-2">
+                <p className="text-[10px] text-ink/45">
+                  © {new Date().getFullYear()} InMotion Performance · Chamonix Mont-Blanc
+                </p>
+                <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-ink/60">
+                  <Link href="/mentions-legales" className="transition hover:text-deep">
+                    Mentions légales
+                  </Link>
+                  <Link href="/cgu" className="transition hover:text-deep">
+                    CGU
+                  </Link>
+                  <Link href="/confidentialite" className="transition hover:text-deep">
+                    Confidentialité
+                  </Link>
+                  <CookiePreferencesButton className="transition hover:text-deep" />
+                </nav>
+              </div>
               <div className="overflow-hidden rounded-xl border border-line/65">
                 <iframe
                   title="Carte Chamonix"

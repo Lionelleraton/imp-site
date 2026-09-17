@@ -152,7 +152,7 @@ export default function PhotoGallery({
               <div className="relative aspect-[4/5] w-full bg-mist/30">
                 <Image
                   src={src}
-                  alt="Photo terrain"
+                  alt={`Photo terrain InMotion Performance — image ${index + 1}`}
                   fill
                   sizes="(min-width: 1280px) 14vw, (min-width: 1024px) 16vw, (min-width: 768px) 22vw, (min-width: 640px) 30vw, 48vw"
                   unoptimized={unoptimized}
@@ -231,7 +231,7 @@ export default function PhotoGallery({
             <div className="pointer-events-auto w-full max-w-6xl">
               <Image
                 src={activeSrc ?? images[0]}
-                alt="Photo terrain"
+                alt={`Photo terrain InMotion Performance — image ${(activeIndex ?? 0) + 1}`}
                 width={2000}
                 height={1400}
                 unoptimized={unoptimized}
