@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Archivo, Space_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import CookiePreferencesButton from "./CookiePreferencesButton";
@@ -41,11 +42,15 @@ export default function LegalShell({
       {/* ── Header sombre ── */}
       <header className="sticky top-0 z-40 border-b border-[rgba(237,241,243,0.10)] bg-[#0B1015]/85 backdrop-blur">
         <div className="mx-auto flex h-[64px] max-w-[1000px] items-center justify-between px-5 sm:px-6">
-          <Link
-            href="/"
-            className="text-[18px] font-extrabold uppercase tracking-[-0.01em] text-[#EDF1F3]"
-          >
-            InMotion<sup className="ml-0.5 text-[10px] text-[#89A9BA]">®</sup>
+          <Link href="/" aria-label="InMotion Performance, accueil" className="flex items-center">
+            <Image
+              src="/brand/logo-grey.svg"
+              alt="InMotion Performance"
+              width={200}
+              height={34}
+              className="h-6 w-auto"
+              priority
+            />
           </Link>
           <nav className={`${mono} hidden items-center gap-6 text-[12px] uppercase tracking-[0.13em] sm:flex`}>
             <Link href="/" className="text-[#93A0AB] transition hover:text-[#EDF1F3]">
@@ -97,10 +102,14 @@ export default function LegalShell({
       <footer className="border-t border-[rgba(237,241,243,0.10)] bg-[#0B1015]">
         <div className="mx-auto flex max-w-[1000px] flex-col gap-6 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div>
-            <p className="text-[16px] font-extrabold uppercase tracking-[-0.01em]">
-              InMotion<sup className="ml-0.5 text-[9px] text-[#89A9BA]">®</sup>
-            </p>
-            <p className={`${mono} mt-2 text-[11px] uppercase tracking-[0.13em] text-[#5C6873]`}>
+            <Image
+              src="/brand/logo-grey.svg"
+              alt="InMotion Performance"
+              width={200}
+              height={34}
+              className="h-5 w-auto"
+            />
+            <p className={`${mono} mt-3 text-[11px] uppercase tracking-[0.13em] text-[#5C6873]`}>
               © {new Date().getFullYear()} InMotion Performance · Chamonix Mont-Blanc
             </p>
           </div>
