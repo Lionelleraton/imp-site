@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import LegalShell, { LegalSection, ToFill } from "../components/LegalShell";
+import LegalShell, { LegalSection } from "../components/LegalShell";
 
 export const metadata: Metadata = {
   title: "Conditions générales d'utilisation",
@@ -83,7 +83,7 @@ export default function CguPage() {
           Toute prestation (développement, photographie, impression 3D) fait l&apos;objet
           d&apos;un devis et, le cas échéant, de conditions contractuelles spécifiques
           distinctes des présentes CGU. Les modalités commerciales détaillées sont
-          précisées dans <ToFill>document contractuel — ex. CGV / devis signé</ToFill>.
+          précisées au devis.
         </p>
       </LegalSection>
 

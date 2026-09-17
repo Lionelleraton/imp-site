@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import LegalShell, { LegalSection, ToFill } from "../components/LegalShell";
+import LegalShell, { LegalSection } from "../components/LegalShell";
 
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
@@ -18,8 +18,9 @@ export default function ConfidentialitePage() {
     >
       <LegalSection heading="Responsable du traitement">
         <p>
-          Le responsable du traitement des données est InMotion Performance,{" "}
-          <ToFill>statut juridique et adresse</ToFill>, joignable à l&apos;adresse
+          Le responsable du traitement des données est Lionel Jouannaud, exerçant sous
+          le nom commercial InMotion Performance (micro-entreprise), 215 Chemin des
+          Favrands, 74400 Chamonix-Mont-Blanc, joignable à l&apos;adresse
           inmotionperformance@icloud.com.
         </p>
       </LegalSection>
@@ -80,8 +81,8 @@ export default function ConfidentialitePage() {
         <p>
           Les demandes de contact sont conservées le temps nécessaire au traitement de
           votre demande puis, le cas échéant, pendant la durée de la relation
-          commerciale, dans la limite de <ToFill>durée — ex. 3 ans</ToFill> à compter du
-          dernier contact. Les statistiques de fréquentation sont anonymes et agrégées.
+          commerciale, dans la limite de 2 ans à compter du dernier contact. Les
+          statistiques de fréquentation sont anonymes et agrégées.
         </p>
       </LegalSection>
 

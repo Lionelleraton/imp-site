@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import LegalShell, { LegalSection, ToFill } from "../components/LegalShell";
+import LegalShell, { LegalSection } from "../components/LegalShell";
 
 export const metadata: Metadata = {
   title: "Mentions légales",
@@ -20,21 +20,13 @@ export default function MentionsLegalesPage() {
         <p>Le site inmotionperformance.com est édité par&nbsp;:</p>
         <ul className="list-disc space-y-1 pl-5">
           <li>Nom commercial&nbsp;: InMotion Performance</li>
+          <li>Forme juridique&nbsp;: micro-entreprise (entrepreneur individuel)</li>
+          <li>Responsable de la publication&nbsp;: Lionel Jouannaud</li>
           <li>
-            Forme juridique&nbsp;: <ToFill>statut juridique — ex. micro-entreprise, SASU, EURL</ToFill>
+            Adresse&nbsp;: 215 Chemin des Favrands, 74400 Chamonix-Mont-Blanc, France
           </li>
-          <li>
-            Responsable de la publication&nbsp;: <ToFill>nom et prénom</ToFill>
-          </li>
-          <li>
-            Adresse&nbsp;: <ToFill>adresse postale complète</ToFill>, Chamonix-Mont-Blanc, France
-          </li>
-          <li>
-            SIRET&nbsp;: <ToFill>numéro SIRET</ToFill>
-          </li>
-          <li>
-            Numéro de TVA intracommunautaire&nbsp;: <ToFill>si applicable</ToFill>
-          </li>
+          <li>SIREN&nbsp;: 953 801 511</li>
+          <li>TVA&nbsp;: TVA non applicable, article 293 B du CGI</li>
           <li>Email&nbsp;: inmotionperformance@icloud.com</li>
           <li>Téléphone&nbsp;: +33 6 65 62 00 84</li>
         </ul>
