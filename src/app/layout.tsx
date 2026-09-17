@@ -4,6 +4,7 @@ import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
 import ScrollReveal from "./components/ScrollReveal";
 import CookieConsent from "./components/CookieConsent";
+import HideOnLegalRoutes from "./components/HideOnLegalRoutes";
 
 const getBaseUrl = () => {
   const explicit = process.env.NEXT_PUBLIC_SITE_URL;
@@ -116,9 +117,13 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <ScrollReveal />
-        <SiteHeader />
+        <HideOnLegalRoutes>
+          <SiteHeader />
+        </HideOnLegalRoutes>
         {children}
-        <SiteFooter />
+        <HideOnLegalRoutes>
+          <SiteFooter />
+        </HideOnLegalRoutes>
         <CookieConsent />
       </body>
     </html>
