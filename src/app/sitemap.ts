@@ -18,32 +18,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = getBaseUrl();
   const now = new Date();
 
-  const routes = [
-    "/",
-    "/portfolio",
-    "/services",
-    "/services/web",
-    "/services/ios",
-    "/services/photo",
-    "/solutions",
-    "/skitrack",
-    "/choose-skis",
-    "/contact",
-    "/mentions-legales",
-    "/cgu",
-    "/confidentialite",
+  // Site recentré sur la photographie : on expose en priorité les pages photo.
+  const entries: { path: string; priority: number; freq: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
+    { path: "/", priority: 1, freq: "weekly" },
+    { path: "/portfolio", priority: 0.9, freq: "weekly" },
+    { path: "/tarifs", priority: 0.9, freq: "monthly" },
+    { path: "/devis", priority: 0.8, freq: "monthly" },
+    { path: "/services/photo", priority: 0.8, freq: "monthly" },
+    { path: "/contact", priority: 0.6, freq: "yearly" },
+    { path: "/mentions-legales", priority: 0.2, freq: "yearly" },
+    { path: "/cgu", priority: 0.2, freq: "yearly" },
+    { path: "/confidentialite", priority: 0.2, freq: "yearly" },
   ];
 
-  const lowPriority = new Set([
-    "/mentions-legales",
-    "/cgu",
-    "/confidentialite",
-  ]);
-
-  return routes.map((path) => ({
-    url: `${baseUrl}${path}`,
+  return entries.map((e) => ({
+    url: `${baseUrl}${e.path}`,
     lastModified: now,
-    changeFrequency: lowPriority.has(path) ? "yearly" : "weekly",
-    priority: path === "/" ? 1 : lowPriority.has(path) ? 0.3 : 0.7,
+    changeFrequency: e.freq,
+    priority: e.priority,
   }));
 }

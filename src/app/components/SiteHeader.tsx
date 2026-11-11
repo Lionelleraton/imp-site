@@ -85,10 +85,9 @@ export default function SiteHeader() {
 
   const navLinks = [
     { href: "/", label: "Accueil" },
-    { href: "/services", label: "Nos services" },
-    { href: "/solutions", label: "Nos solutions" },
+    { href: "/portfolio", label: "Portfolio" },
+    { href: "/tarifs", label: "Tarifs" },
     { href: "/contact", label: "Contact" },
-    { href: "/choose-skis", label: "Choisir ses skis" },
   ];
 
   return (
@@ -164,11 +163,11 @@ export default function SiteHeader() {
                 ))}
               </nav>
               <Link
-                href="/contact"
+                href="/devis"
                 onClick={() => setMobileOpen(false)}
                 className="btn-shine mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-deep px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white shadow-[0_8px_24px_rgba(36,67,87,0.28)] transition hover:bg-deep/92"
               >
-                Réserver un appel
+                Faire un devis
                 <ArrowIcon />
               </Link>
             </div>
@@ -195,10 +194,10 @@ export default function SiteHeader() {
             </nav>
 
             <Link
-              href="/contact"
+              href="/devis"
               className="btn-shine ml-2 inline-flex items-center gap-2 rounded-full bg-deep px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white shadow-[0_8px_24px_rgba(36,67,87,0.26)] transition hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(36,67,87,0.36)]"
             >
-              Réserver un appel
+              Faire un devis
               <ArrowIcon />
             </Link>
           </div>

@@ -29,14 +29,24 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
+  // Site recentré 100 % photo : les anciennes pages non-photo renvoient vers
+  // l'accueil. Redirections temporaires (307) pour rester réversibles ;
+  // basculer en `permanent: true` une fois la décision figée (meilleur SEO).
   async redirects() {
-    return [
-      {
-        source: "/services/3d",
-        destination: "/services",
-        permanent: true,
-      },
+    const toHome = [
+      "/services",
+      "/services/web",
+      "/services/ios",
+      "/services/3d",
+      "/solutions",
+      "/skitrack",
+      "/choose-skis",
     ];
+    return toHome.map((source) => ({
+      source,
+      destination: "/",
+      permanent: false,
+    }));
   },
   // Serve the new static homepage (public/home.html) at "/".
   // beforeFiles runs before the App Router, so it overrides src/app/page.tsx

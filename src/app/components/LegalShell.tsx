@@ -1,23 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
-import { Archivo, Space_Mono } from "next/font/google";
 import type { ReactNode } from "react";
-import CookiePreferencesButton from "./CookiePreferencesButton";
-
-// Typographie de la nouvelle DA (cf. public/home.html) : Archivo + Space Mono.
-const archivo = Archivo({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-const spaceMono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"] });
+import DarkChrome, { spaceMono } from "./DarkChrome";
 
 const mono = spaceMono.className;
-
-const legalLinks = [
-  { href: "/mentions-legales", label: "Mentions légales" },
-  { href: "/cgu", label: "CGU" },
-  { href: "/confidentialite", label: "Confidentialité" },
-];
 
 type LegalShellProps = {
   title: string;
@@ -27,9 +12,8 @@ type LegalShellProps = {
 };
 
 /**
- * Habillage complet (header + contenu + footer) des pages légales,
- * calé sur la nouvelle direction artistique sombre du site (home.html).
- * Le header/footer clairs globaux sont masqués sur ces routes (cf. layout).
+ * Pages légales (confidentialité, CGU, mentions légales) dans la DA sombre,
+ * via le chrome partagé DarkChrome.
  */
 export default function LegalShell({
   title,
@@ -38,35 +22,7 @@ export default function LegalShell({
   children,
 }: LegalShellProps) {
   return (
-    <div className={`${archivo.className} min-h-screen bg-[#0B1015] text-[#EDF1F3]`}>
-      {/* ── Header sombre ── */}
-      <header className="sticky top-0 z-40 border-b border-[rgba(237,241,243,0.10)] bg-[#0B1015]/85 backdrop-blur">
-        <div className="mx-auto flex h-[64px] max-w-[1000px] items-center justify-between px-5 sm:px-6">
-          <Link href="/" aria-label="InMotion Performance, accueil" className="flex items-center">
-            <Image
-              src="/brand/logo-grey.svg"
-              alt="InMotion Performance"
-              width={200}
-              height={34}
-              className="h-6 w-auto"
-              priority
-            />
-          </Link>
-          <nav className={`${mono} hidden items-center gap-6 text-[12px] uppercase tracking-[0.13em] sm:flex`}>
-            <Link href="/" className="text-[#93A0AB] transition hover:text-[#EDF1F3]">
-              Accueil
-            </Link>
-            <Link
-              href="/contact"
-              className="text-[#93A0AB] transition hover:text-[#EDF1F3]"
-            >
-              Contact
-            </Link>
-          </nav>
-        </div>
-      </header>
-
-      {/* ── Contenu ── */}
+    <DarkChrome>
       <section className="mx-auto w-full max-w-[820px] px-5 pb-24 pt-14 sm:px-6 sm:pt-20">
         <p className={`${mono} text-[12px] uppercase tracking-[0.26em] text-[#89A9BA]`}>
           Informations légales
@@ -97,37 +53,7 @@ export default function LegalShell({
           </p>
         </div>
       </section>
-
-      {/* ── Footer sombre ── */}
-      <footer className="border-t border-[rgba(237,241,243,0.10)] bg-[#0B1015]">
-        <div className="mx-auto flex max-w-[1000px] flex-col gap-6 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <div>
-            <Image
-              src="/brand/logo-grey.svg"
-              alt="InMotion Performance"
-              width={200}
-              height={34}
-              className="h-5 w-auto"
-            />
-            <p className={`${mono} mt-3 text-[11px] uppercase tracking-[0.13em] text-[#5C6873]`}>
-              © {new Date().getFullYear()} InMotion Performance · Chamonix Mont-Blanc
-            </p>
-          </div>
-          <nav className={`${mono} flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.13em]`}>
-            {legalLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[#93A0AB] transition hover:text-[#EDF1F3]"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <CookiePreferencesButton className="uppercase tracking-[0.13em] text-[#93A0AB] transition hover:text-[#EDF1F3]" />
-          </nav>
-        </div>
-      </footer>
-    </div>
+    </DarkChrome>
   );
 }
 

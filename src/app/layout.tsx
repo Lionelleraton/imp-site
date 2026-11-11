@@ -22,17 +22,41 @@ const getBaseUrl = () => {
 
 const baseUrl = getBaseUrl();
 const siteName = "InMotion Performance";
+const siteTitle =
+  "Photographe outdoor, sportif & événementiel · Chamonix, Mont-Blanc, Annecy";
 const siteDescription =
-  "Solutions numériques et photo premium pour optimiser la performance en ski nordique, guider les décisions terrain et renforcer l'image des marques.";
+  "Lionel Jouannaud, photographe outdoor, sportif et événementiel à Chamonix, dans le Pays du Mont-Blanc et à Annecy : courses, trail, ski, biathlon, soirées de marque et shootings produits. Galeries privées et devis en ligne.";
+
+const keywords = [
+  "photographe outdoor",
+  "photographe événementiel",
+  "photographe sportif",
+  "photographe sport",
+  "photographe Chamonix",
+  "photographe Mont-Blanc",
+  "photographe Annecy",
+  "photographe Haute-Savoie",
+  "photographe trail",
+  "photographe ski",
+  "photographe biathlon",
+  "reportage sportif",
+  "photographe de marque outdoor",
+  "shooting produits outdoor",
+  "photographe montagne",
+];
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: siteName,
+    default: siteTitle,
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
   applicationName: siteName,
+  keywords,
+  authors: [{ name: "Lionel Jouannaud" }],
+  creator: "Lionel Jouannaud",
+  category: "Photography",
   alternates: {
     canonical: "/",
   },
@@ -41,20 +65,20 @@ export const metadata: Metadata = {
     locale: "fr_FR",
     url: baseUrl,
     siteName,
-    title: siteName,
+    title: siteTitle,
     description: siteDescription,
     images: [
       {
         url: "/hero-social.jpg",
         width: 1200,
         height: 630,
-        alt: "InMotion Performance - solutions numériques ski nordique",
+        alt: "Photographe outdoor et sportif — Chamonix, Mont-Blanc, Annecy",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteName,
+    title: siteTitle,
     description: siteDescription,
     images: ["/hero-social.jpg"],
   },
@@ -77,35 +101,57 @@ export default function RootLayout({
   const jsonLd = [
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": ["LocalBusiness", "ProfessionalService"],
+      "@id": `${baseUrl}/#photographe`,
       name: siteName,
-      url: baseUrl,
+      alternateName: "Lionel Jouannaud Photographe",
       description: siteDescription,
+      url: baseUrl,
+      image: `${baseUrl}/hero-social.jpg`,
+      telephone: "+33 6 65 62 00 84",
+      email: "inmotionperformance@icloud.com",
+      priceRange: "€€",
+      founder: { "@type": "Person", name: "Lionel Jouannaud" },
       address: {
         "@type": "PostalAddress",
+        streetAddress: "215 chemin des Favrands",
         addressLocality: "Chamonix-Mont-Blanc",
+        postalCode: "74400",
+        addressRegion: "Haute-Savoie",
         addressCountry: "FR",
       },
-      contactPoint: [
-        {
-          "@type": "ContactPoint",
-          contactType: "sales",
-          telephone: "+33 6 65 62 00 84",
-          email: "inmotionperformance@icloud.com",
-        },
+      areaServed: [
+        { "@type": "Place", name: "Chamonix-Mont-Blanc" },
+        { "@type": "Place", name: "Pays du Mont-Blanc" },
+        { "@type": "Place", name: "Annecy" },
+        { "@type": "Place", name: "Haute-Savoie" },
+      ],
+      knowsAbout: [
+        "Photographie outdoor",
+        "Photographie sportive",
+        "Photographie événementielle",
+        "Reportage de course",
+        "Trail",
+        "Ski",
+        "Biathlon",
+        "Shooting produits outdoor",
+      ],
+      sameAs: ["https://instagram.com/lionel_jouannaud"],
+      makesOffer: [
+        { "@type": "Offer", name: "Séance courte 2 h", price: "300", priceCurrency: "EUR" },
+        { "@type": "Offer", name: "Demi-journée", price: "450", priceCurrency: "EUR" },
+        { "@type": "Offer", name: "Journée", price: "750", priceCurrency: "EUR" },
+        { "@type": "Offer", name: "Shooting produits", price: "600", priceCurrency: "EUR" },
+        { "@type": "Offer", name: "Soirée de marque", price: "660", priceCurrency: "EUR" },
       ],
     },
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: siteName,
-      alternateName: "InMotion",
+      alternateName: "Lionel Jouannaud Photographe",
       url: baseUrl,
-      publisher: {
-        "@type": "Organization",
-        name: siteName,
-        url: baseUrl,
-      },
+      inLanguage: "fr-FR",
     },
   ];
 
