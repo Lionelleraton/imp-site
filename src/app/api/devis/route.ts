@@ -130,12 +130,18 @@ async function sendWebhook(lead: DevisLead, quoteText: string): Promise<boolean>
   }
 }
 
-async function sendEmail(to: string, subject: string, text: string): Promise<boolean> {
+async function sendEmail(
+  to: string,
+  subject: string,
+  text: string,
+  replyTo?: string
+): Promise<boolean> {
   const key = process.env.RESEND_API_KEY?.trim();
   if (!key) return false;
+  // Domaine inmotionperformance.com vérifié sur Resend : on envoie depuis lui.
   const from =
-    process.env.CONTACT_FROM_EMAIL?.trim() ??
-    "InMotion Performance <onboarding@resend.dev>";
+    process.env.CONTACT_FROM_EMAIL?.trim() ||
+    "InMotion Performance <contact@inmotionperformance.com>";
   try {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
@@ -143,7 +149,13 @@ async function sendEmail(to: string, subject: string, text: string): Promise<boo
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ from, to: [to], subject, text }),
+      body: JSON.stringify({
+        from,
+        to: [to],
+        subject,
+        text,
+        ...(replyTo ? { reply_to: replyTo } : {}),
+      }),
     });
     return res.ok;
   } catch {
@@ -245,7 +257,8 @@ export async function POST(request: Request) {
       ? sendEmail(
           to,
           `Nouveau devis ${lead.number} — ${name} (${formatEuro(quote.total)})`,
-          `Un visiteur a généré un devis via le site.\n\n${quoteText}`
+          `Un visiteur a généré un devis via le site.\n\n${quoteText}`,
+          email // répondre directement au client
         )
       : Promise.resolve(false),
     sendWebhook(lead, quoteText),
@@ -256,7 +269,8 @@ export async function POST(request: Request) {
   const copyToClient = await sendEmail(
     email,
     `Votre devis ${EMETTEUR.name} — ${lead.number}`,
-    `Bonjour ${name},\n\nVoici le récapitulatif de votre devis. Il ne vous engage pas : je reviens vers vous sous 24 h ouvrées pour le finaliser ensemble.\n\n${quoteText}\n\nÀ très vite,\n${EMETTEUR.contact} — ${EMETTEUR.name}`
+    `Bonjour ${name},\n\nVoici le récapitulatif de votre devis. Il ne vous engage pas : je reviens vers vous sous 24 h ouvrées pour le finaliser ensemble.\n\n${quoteText}\n\nÀ très vite,\n${EMETTEUR.contact} — ${EMETTEUR.name}`,
+    to || EMETTEUR.email // le client peut répondre directement à Lionel
   );
 
   await archiveLead(lead);
