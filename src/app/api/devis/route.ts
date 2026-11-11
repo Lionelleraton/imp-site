@@ -113,6 +113,23 @@ function buildQuoteText(lead: DevisLead): string {
     .join("\n");
 }
 
+// Notification via webhook (Zapier / Make / n8n / Discord…), si configuré.
+// Permet de recevoir les devis sans dépendre de Resend.
+async function sendWebhook(lead: DevisLead, quoteText: string): Promise<boolean> {
+  const url = process.env.CONTACT_WEBHOOK_URL?.trim();
+  if (!url) return false;
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event: "devis_submitted", lead, quoteText }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 async function sendEmail(to: string, subject: string, text: string): Promise<boolean> {
   const key = process.env.RESEND_API_KEY?.trim();
   if (!key) return false;
@@ -221,15 +238,19 @@ export async function POST(request: Request) {
 
   const quoteText = buildQuoteText(lead);
 
-  // 1) Notification à Lionel (canal primaire).
+  // 1) Notification à l'éditeur — via e-mail (Resend) et/ou webhook.
   const to = process.env.CONTACT_TO_EMAIL?.trim();
-  const notif = to
-    ? await sendEmail(
-        to,
-        `Nouveau devis ${lead.number} — ${name} (${formatEuro(quote.total)})`,
-        `Un visiteur a généré un devis via le site.\n\n${quoteText}`
-      )
-    : false;
+  const [emailNotif, webhookNotif] = await Promise.all([
+    to
+      ? sendEmail(
+          to,
+          `Nouveau devis ${lead.number} — ${name} (${formatEuro(quote.total)})`,
+          `Un visiteur a généré un devis via le site.\n\n${quoteText}`
+        )
+      : Promise.resolve(false),
+    sendWebhook(lead, quoteText),
+  ]);
+  const notif = emailNotif || webhookNotif;
 
   // 2) Copie du devis au client (best-effort : nécessite un domaine vérifié sur Resend).
   const copyToClient = await sendEmail(
@@ -240,13 +261,13 @@ export async function POST(request: Request) {
 
   await archiveLead(lead);
 
-  if (!to || !notif) {
-    // La notification à l'éditeur est le canal essentiel : si elle échoue,
-    // on le signale (le lead reste archivé localement).
+  if (!notif) {
+    // Aucun canal de notification n'a abouti : le lead reste archivé localement,
+    // mais on signale qu'il faut configurer l'envoi côté serveur.
     return NextResponse.json(
       {
         error:
-          "Le devis n'a pas pu être transmis. Vérifiez RESEND_API_KEY et CONTACT_TO_EMAIL.",
+          "Le devis n'a pas pu être transmis. Configurez l'envoi : RESEND_API_KEY + CONTACT_TO_EMAIL, ou CONTACT_WEBHOOK_URL.",
       },
       { status: 503 }
     );
