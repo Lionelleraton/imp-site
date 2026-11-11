@@ -131,7 +131,7 @@ export function computeQuote(sel: DevisSelection): Quote {
   const billableKm = Math.max(0, km - KM_INCLUDED);
   if (billableKm > 0) {
     lines.push({
-      label: `Déplacement (${billableKm} km au-delà de 30 km)`,
+      label: `Déplacement A/R depuis Chamonix (${km} km)`,
       amount: round2(billableKm * KM_PRICE),
     });
   }

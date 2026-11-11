@@ -47,6 +47,14 @@ const fieldClass =
   "mt-1 w-full rounded-xl border border-[rgba(237,241,243,0.14)] bg-[#0F161D] px-3.5 py-3 text-[15px] text-[#EDF1F3] outline-none transition placeholder:text-[#5C6873] focus:border-[#89A9BA] focus:ring-2 focus:ring-[#89A9BA]/25";
 const labelClass = "text-[13px] font-medium text-[#C7D0D7]";
 
+// Distances aller-retour indicatives depuis Chamonix (30 km inclus).
+const DISTANCE_PRESETS = [
+  { label: "Vallée de Chamonix · inclus", km: 0 },
+  { label: "Genève · ~160 km", km: 160 },
+  { label: "Annecy · ~200 km", km: 200 },
+  { label: "Lyon · ~440 km", km: 440 },
+];
+
 export default function DevisForm() {
   const [selection, setSelection] = useState<DevisSelection>(INITIAL_SELECTION);
   const [contact, setContact] = useState<ContactState>(INITIAL_CONTACT);
@@ -186,42 +194,77 @@ export default function DevisForm() {
               price="−15 %"
             />
 
-            <div className="grid gap-3 sm:grid-cols-2">
-              <div className="rounded-xl border border-[rgba(237,241,243,0.10)] bg-[#121B23] px-4 py-3">
-                <label className={labelClass} htmlFor="hours">
-                  Heures supplémentaires
-                </label>
-                <input
-                  id="hours"
-                  type="number"
-                  min={0}
-                  max={12}
-                  value={selection.extraHours || ""}
-                  onChange={(e) => setSel("extraHours", Number(e.target.value))}
-                  className={fieldClass}
-                  placeholder="0"
-                />
-                <p className={`${mono} mt-1.5 text-[10px] uppercase tracking-[0.1em] text-[#5C6873]`}>
+            {/* Heures supplémentaires — compteur cliquable */}
+            <div className="flex items-center justify-between gap-4 rounded-xl border border-[rgba(237,241,243,0.10)] bg-[#121B23] px-4 py-3">
+              <div>
+                <p className="text-[14px] text-[#C7D0D7]">Heures supplémentaires</p>
+                <p className={`${mono} mt-0.5 text-[10px] uppercase tracking-[0.1em] text-[#5C6873]`}>
                   100 € / heure
                 </p>
               </div>
-              <div className="rounded-xl border border-[rgba(237,241,243,0.10)] bg-[#121B23] px-4 py-3">
-                <label className={labelClass} htmlFor="km">
-                  Distance aller-retour (km)
-                </label>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  aria-label="Retirer une heure"
+                  onClick={() => setSel("extraHours", Math.max(0, (selection.extraHours || 0) - 1))}
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(237,241,243,0.2)] text-[18px] text-[#EDF1F3] transition hover:border-[#89A9BA] hover:text-[#AEC8D6]"
+                >
+                  −
+                </button>
+                <span className="w-7 text-center text-[16px] font-bold tabular-nums">
+                  {selection.extraHours || 0}
+                </span>
+                <button
+                  type="button"
+                  aria-label="Ajouter une heure"
+                  onClick={() => setSel("extraHours", Math.min(12, (selection.extraHours || 0) + 1))}
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(237,241,243,0.2)] text-[18px] text-[#EDF1F3] transition hover:border-[#89A9BA] hover:text-[#AEC8D6]"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            {/* Déplacement — aller-retour depuis Chamonix, choix cliquables */}
+            <div className="rounded-xl border border-[rgba(237,241,243,0.10)] bg-[#121B23] px-4 py-3">
+              <p className="text-[14px] text-[#C7D0D7]">
+                Déplacement — aller-retour depuis Chamonix
+              </p>
+              <p className={`${mono} mt-0.5 text-[10px] uppercase tracking-[0.1em] text-[#5C6873]`}>
+                30 km inclus, puis 0,50 €/km
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {DISTANCE_PRESETS.map((p) => {
+                  const active = (selection.kmAllerRetour || 0) === p.km;
+                  return (
+                    <button
+                      key={p.label}
+                      type="button"
+                      onClick={() => setSel("kmAllerRetour", p.km)}
+                      className={`rounded-full border px-3 py-1.5 text-[12px] transition ${
+                        active
+                          ? "border-[#89A9BA] bg-[#89A9BA] text-[#0B1015]"
+                          : "border-[rgba(237,241,243,0.2)] text-[#C7D0D7] hover:border-[#89A9BA]"
+                      }`}
+                    >
+                      {p.label}
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="mt-3 flex items-center gap-2">
                 <input
-                  id="km"
                   type="number"
                   min={0}
                   max={2000}
                   value={selection.kmAllerRetour || ""}
                   onChange={(e) => setSel("kmAllerRetour", Number(e.target.value))}
-                  className={fieldClass}
-                  placeholder="0"
+                  className="w-32 rounded-lg border border-[rgba(237,241,243,0.14)] bg-[#0F161D] px-3 py-2 text-[14px] text-[#EDF1F3] outline-none transition placeholder:text-[#5C6873] focus:border-[#89A9BA]"
+                  placeholder="Autre"
                 />
-                <p className={`${mono} mt-1.5 text-[10px] uppercase tracking-[0.1em] text-[#5C6873]`}>
-                  30 km inclus, puis 0,50 €/km
-                </p>
+                <span className={`${mono} text-[11px] uppercase tracking-[0.1em] text-[#5C6873]`}>
+                  km aller-retour
+                </span>
               </div>
             </div>
           </div>
