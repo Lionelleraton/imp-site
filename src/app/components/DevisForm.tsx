@@ -44,8 +44,8 @@ const INITIAL_SELECTION: DevisSelection = {
 };
 
 const fieldClass =
-  "mt-1 w-full rounded-xl border border-[rgba(237,241,243,0.14)] bg-[#0F161D] px-3.5 py-3 text-[15px] text-[#EDF1F3] outline-none transition placeholder:text-[#5C6873] focus:border-[#89A9BA] focus:ring-2 focus:ring-[#89A9BA]/25";
-const labelClass = "text-[13px] font-medium text-[#C7D0D7]";
+  "mt-1 w-full rounded-xl border border-[rgba(31,39,36,0.14)] bg-[#E3DBC8] px-3.5 py-3 text-[15px] text-[#1F2724] outline-none transition placeholder:text-[#8A8475] focus:border-[#B15F38] focus:ring-2 focus:ring-[#B15F38]/25";
+const labelClass = "text-[13px] font-medium text-[#44504A]";
 
 // Distances aller-retour indicatives depuis Chamonix (30 km inclus).
 const DISTANCE_PRESETS = [
@@ -105,15 +105,15 @@ export default function DevisForm() {
 
   if (success) {
     return (
-      <div className="rounded-2xl border border-[#89A9BA]/40 bg-[#121B23] p-8 text-center">
-        <p className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#89A9BA]`}>
+      <div className="rounded-2xl border border-[#B15F38]/40 bg-[#ECE6D7] p-8 text-center">
+        <p className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#B15F38]`}>
           Estimation {success.number}
         </p>
         <h2 className="mt-4 text-[clamp(1.6rem,3.5vw,2.2rem)] font-extrabold uppercase tracking-[-0.02em]">
           Merci, c&apos;est envoyé&nbsp;!
         </h2>
-        <p className="mx-auto mt-4 max-w-[46ch] text-[15px] leading-[1.6] text-[#93A0AB]">
-          Votre estimation à <strong className="text-[#EDF1F3]">{formatEuro(success.total)}</strong>{" "}
+        <p className="mx-auto mt-4 max-w-[46ch] text-[15px] leading-[1.6] text-[#5E655D]">
+          Votre estimation à <strong className="text-[#1F2724]">{formatEuro(success.total)}</strong>{" "}
           vous a été envoyée par e-mail. Je reviens vers vous sous 24 h ouvrées pour
           finaliser le devis ensemble.
         </p>
@@ -127,7 +127,7 @@ export default function DevisForm() {
       <div className="space-y-10">
         {/* Formules */}
         <fieldset>
-          <legend className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#5C6873]`}>
+          <legend className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#8A8475]`}>
             1 · Votre formule
           </legend>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -138,8 +138,8 @@ export default function DevisForm() {
                   key={f.id}
                   className={`flex cursor-pointer flex-col rounded-xl border p-4 transition ${
                     active
-                      ? "border-[#89A9BA] bg-[#141f29]"
-                      : "border-[rgba(237,241,243,0.10)] bg-[#121B23] hover:border-[rgba(237,241,243,0.22)]"
+                      ? "border-[#B15F38] bg-[#E3DBC8]"
+                      : "border-[rgba(31,39,36,0.12)] bg-[#ECE6D7] hover:border-[rgba(31,39,36,0.2)]"
                   }`}
                 >
                   <input
@@ -153,14 +153,14 @@ export default function DevisForm() {
                     <span className="text-[15px] font-extrabold uppercase tracking-[-0.01em]">
                       {f.name.split(" · ")[0]}
                     </span>
-                    <span className="text-[15px] font-bold text-[#AEC8D6]">
+                    <span className="text-[15px] font-bold text-[#B15F38]">
                       {formatEuro(f.price)}
                     </span>
                   </div>
-                  <span className={`${mono} mt-1 text-[10px] uppercase tracking-[0.12em] text-[#5C6873]`}>
+                  <span className={`${mono} mt-1 text-[10px] uppercase tracking-[0.12em] text-[#8A8475]`}>
                     {f.tag}
                   </span>
-                  <span className="mt-2 text-[12.5px] leading-[1.5] text-[#93A0AB]">
+                  <span className="mt-2 text-[12.5px] leading-[1.5] text-[#5E655D]">
                     {f.deliver}
                   </span>
                 </label>
@@ -171,7 +171,7 @@ export default function DevisForm() {
 
         {/* Options */}
         <fieldset>
-          <legend className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#5C6873]`}>
+          <legend className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#8A8475]`}>
             2 · Options
           </legend>
           <div className="mt-4 space-y-3">
@@ -195,10 +195,10 @@ export default function DevisForm() {
             />
 
             {/* Heures supplémentaires : compteur cliquable */}
-            <div className="flex items-center justify-between gap-4 rounded-xl border border-[rgba(237,241,243,0.10)] bg-[#121B23] px-4 py-3">
+            <div className="flex items-center justify-between gap-4 rounded-xl border border-[rgba(31,39,36,0.12)] bg-[#ECE6D7] px-4 py-3">
               <div>
-                <p className="text-[14px] text-[#C7D0D7]">Heures supplémentaires</p>
-                <p className={`${mono} mt-0.5 text-[10px] uppercase tracking-[0.1em] text-[#5C6873]`}>
+                <p className="text-[14px] text-[#44504A]">Heures supplémentaires</p>
+                <p className={`${mono} mt-0.5 text-[10px] uppercase tracking-[0.1em] text-[#8A8475]`}>
                   100 € / heure
                 </p>
               </div>
@@ -207,7 +207,7 @@ export default function DevisForm() {
                   type="button"
                   aria-label="Retirer une heure"
                   onClick={() => setSel("extraHours", Math.max(0, (selection.extraHours || 0) - 1))}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(237,241,243,0.2)] text-[18px] text-[#EDF1F3] transition hover:border-[#89A9BA] hover:text-[#AEC8D6]"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(31,39,36,0.18)] text-[18px] text-[#1F2724] transition hover:border-[#B15F38] hover:text-[#B15F38]"
                 >
                   −
                 </button>
@@ -218,7 +218,7 @@ export default function DevisForm() {
                   type="button"
                   aria-label="Ajouter une heure"
                   onClick={() => setSel("extraHours", Math.min(12, (selection.extraHours || 0) + 1))}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(237,241,243,0.2)] text-[18px] text-[#EDF1F3] transition hover:border-[#89A9BA] hover:text-[#AEC8D6]"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(31,39,36,0.18)] text-[18px] text-[#1F2724] transition hover:border-[#B15F38] hover:text-[#B15F38]"
                 >
                   +
                 </button>
@@ -226,11 +226,11 @@ export default function DevisForm() {
             </div>
 
             {/* Déplacement : aller-retour depuis Chamonix, choix cliquables */}
-            <div className="rounded-xl border border-[rgba(237,241,243,0.10)] bg-[#121B23] px-4 py-3">
-              <p className="text-[14px] text-[#C7D0D7]">
+            <div className="rounded-xl border border-[rgba(31,39,36,0.12)] bg-[#ECE6D7] px-4 py-3">
+              <p className="text-[14px] text-[#44504A]">
                 Déplacement : aller-retour depuis Chamonix
               </p>
-              <p className={`${mono} mt-0.5 text-[10px] uppercase tracking-[0.1em] text-[#5C6873]`}>
+              <p className={`${mono} mt-0.5 text-[10px] uppercase tracking-[0.1em] text-[#8A8475]`}>
                 30 km inclus, puis 0,50 €/km
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
@@ -243,8 +243,8 @@ export default function DevisForm() {
                       onClick={() => setSel("kmAllerRetour", p.km)}
                       className={`rounded-full border px-3 py-1.5 text-[12px] transition ${
                         active
-                          ? "border-[#89A9BA] bg-[#89A9BA] text-[#0B1015]"
-                          : "border-[rgba(237,241,243,0.2)] text-[#C7D0D7] hover:border-[#89A9BA]"
+                          ? "border-[#B15F38] bg-[#B15F38] text-[#FBF9F3]"
+                          : "border-[rgba(31,39,36,0.18)] text-[#44504A] hover:border-[#B15F38]"
                       }`}
                     >
                       {p.label}
@@ -259,10 +259,10 @@ export default function DevisForm() {
                   max={2000}
                   value={selection.kmAllerRetour || ""}
                   onChange={(e) => setSel("kmAllerRetour", Number(e.target.value))}
-                  className="w-32 rounded-lg border border-[rgba(237,241,243,0.14)] bg-[#0F161D] px-3 py-2 text-[14px] text-[#EDF1F3] outline-none transition placeholder:text-[#5C6873] focus:border-[#89A9BA]"
+                  className="w-32 rounded-lg border border-[rgba(31,39,36,0.14)] bg-[#E3DBC8] px-3 py-2 text-[14px] text-[#1F2724] outline-none transition placeholder:text-[#8A8475] focus:border-[#B15F38]"
                   placeholder="Autre"
                 />
-                <span className={`${mono} text-[11px] uppercase tracking-[0.1em] text-[#5C6873]`}>
+                <span className={`${mono} text-[11px] uppercase tracking-[0.1em] text-[#8A8475]`}>
                   km aller-retour
                 </span>
               </div>
@@ -272,12 +272,12 @@ export default function DevisForm() {
 
         {/* Coordonnées */}
         <fieldset>
-          <legend className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#5C6873]`}>
+          <legend className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#8A8475]`}>
             3 · Vos coordonnées
           </legend>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div>
-              <label className={labelClass} htmlFor="name">Nom <span className="text-[#89A9BA]">*</span></label>
+              <label className={labelClass} htmlFor="name">Nom <span className="text-[#B15F38]">*</span></label>
               <input id="name" required minLength={2} maxLength={120} value={contact.name} onChange={(e) => setField("name", e.target.value)} className={fieldClass} placeholder="Nom et prénom" />
             </div>
             <div>
@@ -285,7 +285,7 @@ export default function DevisForm() {
               <input id="structure" maxLength={120} value={contact.structure} onChange={(e) => setField("structure", e.target.value)} className={fieldClass} placeholder="Club, marque, événement…" />
             </div>
             <div>
-              <label className={labelClass} htmlFor="email">E-mail <span className="text-[#89A9BA]">*</span></label>
+              <label className={labelClass} htmlFor="email">E-mail <span className="text-[#B15F38]">*</span></label>
               <input id="email" type="email" required maxLength={180} value={contact.email} onChange={(e) => setField("email", e.target.value)} className={fieldClass} placeholder="vous@email.com" />
             </div>
             <div>
@@ -315,46 +315,46 @@ export default function DevisForm() {
 
       {/* Colonne droite : récap sticky */}
       <aside className="lg:sticky lg:top-[88px]">
-        <div className="rounded-2xl border border-[rgba(237,241,243,0.12)] bg-[#121B23] p-6">
-          <h2 className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#89A9BA]`}>
+        <div className="rounded-2xl border border-[rgba(31,39,36,0.14)] bg-[#ECE6D7] p-6">
+          <h2 className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#B15F38]`}>
             Votre estimation
           </h2>
           {quote.valid ? (
             <ul className="mt-4 space-y-2.5">
               {quote.lines.map((l, i) => (
                 <li key={i} className="flex items-baseline justify-between gap-3 text-[13.5px]">
-                  <span className="text-[#93A0AB]">{l.label}</span>
-                  <span className="shrink-0 font-semibold text-[#EDF1F3]">{formatEuro(l.amount)}</span>
+                  <span className="text-[#5E655D]">{l.label}</span>
+                  <span className="shrink-0 font-semibold text-[#1F2724]">{formatEuro(l.amount)}</span>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="mt-4 text-[13.5px] text-[#5C6873]">
+            <p className="mt-4 text-[13.5px] text-[#8A8475]">
               Sélectionnez une formule pour voir le montant.
             </p>
           )}
 
-          <div className="mt-5 flex items-baseline justify-between border-t border-[rgba(237,241,243,0.12)] pt-4">
-            <span className="text-[13px] font-semibold uppercase tracking-[0.1em] text-[#C7D0D7]">Total estimé</span>
+          <div className="mt-5 flex items-baseline justify-between border-t border-[rgba(31,39,36,0.14)] pt-4">
+            <span className="text-[13px] font-semibold uppercase tracking-[0.1em] text-[#44504A]">Total estimé</span>
             <span className="text-[26px] font-extrabold tracking-[-0.02em]">{formatEuro(quote.total)}</span>
           </div>
-          <p className={`${mono} mt-1 text-right text-[10px] uppercase tracking-[0.1em] text-[#5C6873]`}>
+          <p className={`${mono} mt-1 text-right text-[10px] uppercase tracking-[0.1em] text-[#8A8475]`}>
             TVA non applicable · estimation
           </p>
 
           <button
             type="submit"
             disabled={submitting}
-            className={`${mono} mt-6 w-full rounded-full bg-[#89A9BA] px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-[#0B1015] transition hover:bg-[#AEC8D6] disabled:cursor-not-allowed disabled:opacity-60`}
+            className={`${mono} mt-6 w-full rounded-full bg-[#B15F38] px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-[#FBF9F3] transition hover:bg-[#C4773F] disabled:cursor-not-allowed disabled:opacity-60`}
           >
             {submitting ? "Envoi…" : "Recevoir mon estimation par e-mail"}
           </button>
-          <p className="mt-3 text-[11.5px] leading-[1.5] text-[#5C6873]">
-            <strong className="font-semibold text-[#93A0AB]">Estimation indicative, pas un devis définitif.</strong>{" "}
+          <p className="mt-3 text-[11.5px] leading-[1.5] text-[#8A8475]">
+            <strong className="font-semibold text-[#5E655D]">Estimation indicative, pas un devis définitif.</strong>{" "}
             Le devis final vous est confirmé sous 24 h ouvrées. Remontées, hébergement et
             repas éventuels facturés au réel.
           </p>
-          {error ? <p className="mt-3 text-[13px] text-[#ff9b9b]">{error}</p> : null}
+          {error ? <p className="mt-3 text-[13px] text-[#B4332B]">{error}</p> : null}
         </div>
       </aside>
     </form>
@@ -376,22 +376,22 @@ function OptionToggle({
     <label
       className={`flex cursor-pointer items-center justify-between gap-4 rounded-xl border px-4 py-3 transition ${
         checked
-          ? "border-[#89A9BA] bg-[#141f29]"
-          : "border-[rgba(237,241,243,0.10)] bg-[#121B23] hover:border-[rgba(237,241,243,0.22)]"
+          ? "border-[#B15F38] bg-[#E3DBC8]"
+          : "border-[rgba(31,39,36,0.12)] bg-[#ECE6D7] hover:border-[rgba(31,39,36,0.2)]"
       }`}
     >
       <span className="flex items-center gap-3">
         <span
           className={`flex h-5 w-5 flex-none items-center justify-center rounded border transition ${
-            checked ? "border-[#89A9BA] bg-[#89A9BA] text-[#0B1015]" : "border-[rgba(237,241,243,0.3)]"
+            checked ? "border-[#B15F38] bg-[#B15F38] text-[#FBF9F3]" : "border-[rgba(31,39,36,0.25)]"
           }`}
           aria-hidden="true"
         >
           {checked ? "✓" : ""}
         </span>
-        <span className="text-[14px] leading-[1.4] text-[#C7D0D7]">{label}</span>
+        <span className="text-[14px] leading-[1.4] text-[#44504A]">{label}</span>
       </span>
-      <span className="shrink-0 text-[14px] font-bold text-[#AEC8D6]">{price}</span>
+      <span className="shrink-0 text-[14px] font-bold text-[#B15F38]">{price}</span>
       <input type="checkbox" className="sr-only" checked={checked} onChange={(e) => onChange(e.target.checked)} />
     </label>
   );

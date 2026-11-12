@@ -101,27 +101,27 @@ export default function TarifsPage() {
     <DarkChrome>
       <main className="mx-auto w-full max-w-[1100px] px-5 pb-24 pt-14 sm:px-6 sm:pt-20">
         {/* Hero */}
-        <p className={`${mono} text-[12px] uppercase tracking-[0.26em] text-[#89A9BA]`}>
+        <p className={`${mono} text-[12px] uppercase tracking-[0.26em] text-[#B15F38]`}>
           Grille tarifaire · Saison 2026–2027 · Pays du Mont-Blanc
         </p>
         <h1 className="mt-5 text-[clamp(2.2rem,6.5vw,4rem)] font-extrabold uppercase leading-[0.98] tracking-[-0.025em] text-balance">
           Tarifs photographie
         </h1>
-        <p className="mt-6 max-w-[62ch] text-[17px] leading-[1.7] text-[#93A0AB]">
+        <p className="mt-6 max-w-[62ch] text-[17px] leading-[1.7] text-[#5E655D]">
           Photographie outdoor &amp; événementielle, sport, montagne et marques, du
-          terrain jusqu&apos;à la soirée. Prix TTC, montant HT indiqué sous chaque
-          formule.
+          terrain jusqu&apos;à la soirée. Prix TTC, TVA non applicable (art. 293 B du
+          CGI).
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link
             href="/devis"
-            className={`${mono} inline-flex items-center justify-center rounded-full bg-[#89A9BA] px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-[#0B1015] transition hover:bg-[#AEC8D6]`}
+            className={`${mono} inline-flex items-center justify-center rounded-full bg-[#B15F38] px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-[#FBF9F3] transition hover:bg-[#C4773F]`}
           >
             Faire mon devis en ligne
           </Link>
           <Link
-            href="/contact"
-            className={`${mono} inline-flex items-center justify-center rounded-full border border-[rgba(237,241,243,0.25)] px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-[#EDF1F3] transition hover:border-[#89A9BA] hover:text-[#AEC8D6]`}
+            href="/#contact"
+            className={`${mono} inline-flex items-center justify-center rounded-full border border-[rgba(31,39,36,0.22)] px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-[#1F2724] transition hover:border-[#B15F38] hover:text-[#B15F38]`}
           >
             Me contacter
           </Link>
@@ -129,7 +129,7 @@ export default function TarifsPage() {
 
         {/* Formules */}
         <section className="mt-16">
-          <h2 className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#5C6873]`}>
+          <h2 className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#8A8475]`}>
             Les formules
           </h2>
           <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -138,16 +138,16 @@ export default function TarifsPage() {
                 key={f.name}
                 className={`flex flex-col rounded-2xl border p-6 ${
                   f.featured
-                    ? "border-[#89A9BA]/60 bg-[#141f29]"
-                    : "border-[rgba(237,241,243,0.10)] bg-[#121B23]"
+                    ? "border-[#B15F38]/60 bg-[#E3DBC8]"
+                    : "border-[rgba(31,39,36,0.12)] bg-[#ECE6D7]"
                 }`}
               >
                 <div className="flex items-center justify-between gap-3">
-                  <span className={`${mono} text-[11px] uppercase tracking-[0.14em] text-[#89A9BA]`}>
+                  <span className={`${mono} text-[11px] uppercase tracking-[0.14em] text-[#B15F38]`}>
                     {f.tag}
                   </span>
                   {f.badge ? (
-                    <span className={`${mono} rounded-full bg-[#89A9BA]/15 px-2.5 py-1 text-[9px] uppercase tracking-[0.14em] text-[#AEC8D6]`}>
+                    <span className={`${mono} rounded-full bg-[#B15F38]/15 px-2.5 py-1 text-[9px] uppercase tracking-[0.14em] text-[#B15F38]`}>
                       {f.badge}
                     </span>
                   ) : null}
@@ -155,19 +155,16 @@ export default function TarifsPage() {
                 <h3 className="mt-3 text-[22px] font-extrabold uppercase leading-[1.05] tracking-[-0.01em]">
                   {f.name}
                 </h3>
-                <p className="mt-2 text-[13.5px] font-medium text-[#AEC8D6]">{f.target}</p>
-                <p className="mt-3 flex-1 text-[14px] leading-[1.6] text-[#93A0AB]">
+                <p className="mt-2 text-[13.5px] font-medium text-[#B15F38]">{f.target}</p>
+                <p className="mt-3 flex-1 text-[14px] leading-[1.6] text-[#5E655D]">
                   {f.deliver}
                 </p>
-                <div className="mt-5 border-t border-[rgba(237,241,243,0.10)] pt-4">
+                <div className="mt-5 border-t border-[rgba(31,39,36,0.12)] pt-4">
                   <p className="text-[30px] font-extrabold leading-none tracking-[-0.02em]">
-                    {f.price} <span className="text-[15px] font-semibold text-[#93A0AB]">TTC</span>
-                  </p>
-                  <p className={`${mono} mt-1.5 text-[11px] uppercase tracking-[0.1em] text-[#5C6873]`}>
-                    {Math.round(parseInt(f.price, 10) / 1.2)} € HT
+                    {f.price} <span className="text-[15px] font-semibold text-[#5E655D]">TTC</span>
                   </p>
                   {f.note ? (
-                    <p className={`${mono} mt-1 text-[11px] uppercase tracking-[0.1em] text-[#5C6873]`}>
+                    <p className={`${mono} mt-1.5 text-[11px] uppercase tracking-[0.1em] text-[#8A8475]`}>
                       {f.note}
                     </p>
                   ) : null}
@@ -176,14 +173,14 @@ export default function TarifsPage() {
             ))}
 
             {/* Carte "inclus" intégrée à la grille */}
-            <article className="flex flex-col rounded-2xl border border-[rgba(237,241,243,0.10)] bg-transparent p-6">
-              <h3 className={`${mono} text-[11px] uppercase tracking-[0.16em] text-[#89A9BA]`}>
+            <article className="flex flex-col rounded-2xl border border-[rgba(31,39,36,0.12)] bg-transparent p-6">
+              <h3 className={`${mono} text-[11px] uppercase tracking-[0.16em] text-[#B15F38]`}>
                 Inclus dans chaque formule
               </h3>
-              <ul className="mt-4 space-y-3 text-[14px] leading-[1.55] text-[#93A0AB]">
+              <ul className="mt-4 space-y-3 text-[14px] leading-[1.55] text-[#5E655D]">
                 {inclus.map((item) => (
                   <li key={item} className="flex gap-2.5">
-                    <span className="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-[#89A9BA]" />
+                    <span className="mt-[7px] h-1.5 w-1.5 flex-none rounded-full bg-[#B15F38]" />
                     {item}
                   </li>
                 ))}
@@ -194,20 +191,20 @@ export default function TarifsPage() {
 
         {/* Options */}
         <section className="mt-16">
-          <h2 className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#5C6873]`}>
+          <h2 className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#8A8475]`}>
             Options
           </h2>
-          <ul className="mt-6 divide-y divide-[rgba(237,241,243,0.08)] overflow-hidden rounded-2xl border border-[rgba(237,241,243,0.10)] bg-[#121B23]">
+          <ul className="mt-6 divide-y divide-[rgba(31,39,36,0.08)] overflow-hidden rounded-2xl border border-[rgba(31,39,36,0.12)] bg-[#ECE6D7]">
             {options.map((opt) => (
               <li
                 key={opt.label}
                 className="flex flex-col gap-1 px-5 py-4 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
               >
-                <span className="text-[14.5px] leading-[1.5] text-[#C7D0D7]">{opt.label}</span>
+                <span className="text-[14.5px] leading-[1.5] text-[#44504A]">{opt.label}</span>
                 <span className="flex shrink-0 items-baseline gap-2">
                   <span className="text-[16px] font-bold tracking-[-0.01em]">{opt.price}</span>
                   {opt.note ? (
-                    <span className={`${mono} text-[10.5px] uppercase tracking-[0.08em] text-[#5C6873]`}>
+                    <span className={`${mono} text-[10.5px] uppercase tracking-[0.08em] text-[#8A8475]`}>
                       {opt.note}
                     </span>
                   ) : null}
@@ -218,46 +215,46 @@ export default function TarifsPage() {
         </section>
 
         {/* Tarif associatif */}
-        <section className="mt-10 rounded-2xl border border-[#89A9BA]/35 bg-[#89A9BA]/[0.07] p-6 sm:flex sm:items-center sm:justify-between sm:gap-6">
+        <section className="mt-10 rounded-2xl border border-[#B15F38]/35 bg-[#B15F38]/[0.07] p-6 sm:flex sm:items-center sm:justify-between sm:gap-6">
           <div>
             <h2 className="text-[20px] font-extrabold uppercase tracking-[-0.01em]">
               Tarif associatif · −15 %
             </h2>
-            <p className="mt-2 text-[14px] text-[#93A0AB]">
+            <p className="mt-2 text-[14px] text-[#5E655D]">
               Pour les clubs, comités et associations loi 1901.
             </p>
           </div>
-          <p className={`${mono} mt-4 text-[11px] uppercase tracking-[0.12em] text-[#5C6873] sm:mt-0 sm:text-right`}>
+          <p className={`${mono} mt-4 text-[11px] uppercase tracking-[0.12em] text-[#8A8475] sm:mt-0 sm:text-right`}>
             Références&nbsp;: Terrex · Comité Mont Blanc Biathlon
           </p>
         </section>
 
         {/* Conditions */}
         <section className="mt-16">
-          <h2 className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#5C6873]`}>
+          <h2 className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#8A8475]`}>
             Conditions
           </h2>
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             {conditions.map((c) => (
               <div
                 key={c.heading}
-                className="rounded-2xl border border-[rgba(237,241,243,0.10)] bg-[#121B23] p-5"
+                className="rounded-2xl border border-[rgba(31,39,36,0.12)] bg-[#ECE6D7] p-5"
               >
-                <h3 className="text-[16px] font-extrabold uppercase tracking-[-0.01em] text-[#EDF1F3]">
+                <h3 className="text-[16px] font-extrabold uppercase tracking-[-0.01em] text-[#1F2724]">
                   {c.heading}
                 </h3>
-                <p className="mt-2 text-[14px] leading-[1.65] text-[#93A0AB]">{c.body}</p>
+                <p className="mt-2 text-[14px] leading-[1.65] text-[#5E655D]">{c.body}</p>
               </div>
             ))}
-            <div className="rounded-2xl border border-[rgba(237,241,243,0.10)] bg-[#121B23] p-5">
-              <h3 className="text-[16px] font-extrabold uppercase tracking-[-0.01em] text-[#EDF1F3]">
+            <div className="rounded-2xl border border-[rgba(31,39,36,0.12)] bg-[#ECE6D7] p-5">
+              <h3 className="text-[16px] font-extrabold uppercase tracking-[-0.01em] text-[#1F2724]">
                 Annulation de votre part
               </h3>
               <ul className="mt-3 space-y-2.5">
                 {annulation.map((a) => (
                   <li key={a.when} className="flex items-baseline justify-between gap-4 text-[13.5px]">
-                    <span className="text-[#C7D0D7]">{a.when}</span>
-                    <span className="text-right text-[#93A0AB]">{a.what}</span>
+                    <span className="text-[#44504A]">{a.when}</span>
+                    <span className="text-right text-[#5E655D]">{a.what}</span>
                   </li>
                 ))}
               </ul>
@@ -266,24 +263,24 @@ export default function TarifsPage() {
         </section>
 
         {/* CTA */}
-        <section className="mt-16 rounded-3xl border border-[rgba(237,241,243,0.12)] bg-[#121B23] p-8 text-center sm:p-12">
+        <section className="mt-16 rounded-3xl border border-[rgba(31,39,36,0.14)] bg-[#ECE6D7] p-8 text-center sm:p-12">
           <h2 className="text-[clamp(1.8rem,4vw,2.6rem)] font-extrabold uppercase leading-[1.02] tracking-[-0.02em]">
             Estimez votre devis en 1 minute
           </h2>
-          <p className="mx-auto mt-4 max-w-[48ch] text-[15.5px] leading-[1.6] text-[#93A0AB]">
+          <p className="mx-auto mt-4 max-w-[48ch] text-[15.5px] leading-[1.6] text-[#5E655D]">
             Choisissez votre formule et vos options, obtenez le montant, et recevez
             votre devis par e-mail, réponse sous 24 h ouvrées.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
               href="/devis"
-              className={`${mono} inline-flex items-center justify-center rounded-full bg-[#89A9BA] px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-[#0B1015] transition hover:bg-[#AEC8D6]`}
+              className={`${mono} inline-flex items-center justify-center rounded-full bg-[#B15F38] px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-[#FBF9F3] transition hover:bg-[#C4773F]`}
             >
               Faire mon devis
             </Link>
             <a
               href="tel:+33665620084"
-              className={`${mono} inline-flex items-center justify-center rounded-full border border-[rgba(237,241,243,0.25)] px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-[#EDF1F3] transition hover:border-[#89A9BA] hover:text-[#AEC8D6]`}
+              className={`${mono} inline-flex items-center justify-center rounded-full border border-[rgba(31,39,36,0.22)] px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-[#1F2724] transition hover:border-[#B15F38] hover:text-[#B15F38]`}
             >
               +33 6 65 62 00 84
             </a>

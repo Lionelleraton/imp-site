@@ -24,29 +24,29 @@ export default function LegalShell({
   return (
     <DarkChrome>
       <section className="mx-auto w-full max-w-[820px] px-5 pb-24 pt-14 sm:px-6 sm:pt-20">
-        <p className={`${mono} text-[12px] uppercase tracking-[0.26em] text-[#89A9BA]`}>
+        <p className={`${mono} text-[12px] uppercase tracking-[0.26em] text-[#B15F38]`}>
           Informations légales
         </p>
         <h1 className="mt-5 text-[clamp(2rem,6vw,3.4rem)] font-extrabold uppercase leading-[1.02] tracking-[-0.02em] text-balance">
           {title}
         </h1>
-        <p className={`${mono} mt-5 text-[12px] uppercase tracking-[0.16em] text-[#5C6873]`}>
+        <p className={`${mono} mt-5 text-[12px] uppercase tracking-[0.16em] text-[#8A8475]`}>
           Dernière mise à jour&nbsp;: {updatedAt}
         </p>
         {intro ? (
-          <p className="mt-8 max-w-[62ch] text-[17px] leading-[1.75] text-[#93A0AB]">
+          <p className="mt-8 max-w-[62ch] text-[17px] leading-[1.75] text-[#5E655D]">
             {intro}
           </p>
         ) : null}
 
         <div className="mt-14 space-y-12">{children}</div>
 
-        <div className="mt-16 border-t border-[rgba(237,241,243,0.12)] pt-8">
-          <p className={`${mono} text-[13px] text-[#93A0AB]`}>
+        <div className="mt-16 border-t border-[rgba(31,39,36,0.14)] pt-8">
+          <p className={`${mono} text-[13px] text-[#5E655D]`}>
             Une question sur ce document&nbsp;?{" "}
             <Link
               href="/contact"
-              className="text-[#89A9BA] underline underline-offset-4 transition hover:text-[#AEC8D6]"
+              className="text-[#B15F38] underline underline-offset-4 transition hover:text-[#B15F38]"
             >
               Contactez-nous
             </Link>
@@ -67,10 +67,10 @@ export function LegalSection({
 }) {
   return (
     <section className="legal-section">
-      <h2 className="text-[clamp(1.25rem,2.6vw,1.6rem)] font-extrabold uppercase leading-[1.1] tracking-[-0.01em] text-[#EDF1F3]">
+      <h2 className="text-[clamp(1.25rem,2.6vw,1.6rem)] font-extrabold uppercase leading-[1.1] tracking-[-0.01em] text-[#1F2724]">
         {heading}
       </h2>
-      <div className="mt-4 space-y-4 text-[15.5px] leading-[1.75] text-[#93A0AB] [&_a]:text-[#89A9BA] [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-[#AEC8D6] [&_strong]:font-semibold [&_strong]:text-[#EDF1F3] [&_li::marker]:text-[#5C6873]">
+      <div className="mt-4 space-y-4 text-[15.5px] leading-[1.75] text-[#5E655D] [&_a]:text-[#B15F38] [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-[#B15F38] [&_strong]:font-semibold [&_strong]:text-[#1F2724] [&_li::marker]:text-[#8A8475]">
         {children}
       </div>
     </section>
@@ -80,7 +80,7 @@ export function LegalSection({
 /** Marqueur visuel pour les informations que l'éditeur doit compléter. */
 export function ToFill({ children }: { children: ReactNode }) {
   return (
-    <mark className="rounded bg-[#89A9BA]/20 px-1.5 py-0.5 font-medium text-[#AEC8D6]">
+    <mark className="rounded bg-[#B15F38]/20 px-1.5 py-0.5 font-medium text-[#B15F38]">
       [À COMPLÉTER : {children}]
     </mark>
   );

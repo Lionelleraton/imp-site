@@ -42,11 +42,15 @@ const nextConfig: NextConfig = {
       "/skitrack",
       "/choose-skis",
     ];
-    return toHome.map((source) => ({
-      source,
-      destination: "/",
-      permanent: false,
-    }));
+    return [
+      ...toHome.map((source) => ({
+        source,
+        destination: "/",
+        permanent: false,
+      })),
+      // L'ancienne page /contact est remplacée par la section contact de la home.
+      { source: "/contact", destination: "/#contact", permanent: false },
+    ];
   },
   // Serve the new static homepage (public/home.html) at "/".
   // beforeFiles runs before the App Router, so it overrides src/app/page.tsx

@@ -25,7 +25,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/tarifs", priority: 0.9, freq: "monthly" },
     { path: "/devis", priority: 0.8, freq: "monthly" },
     { path: "/services/photo", priority: 0.8, freq: "monthly" },
-    { path: "/contact", priority: 0.6, freq: "yearly" },
     { path: "/mentions-legales", priority: 0.2, freq: "yearly" },
     { path: "/cgu", priority: 0.2, freq: "yearly" },
     { path: "/confidentialite", priority: 0.2, freq: "yearly" },
