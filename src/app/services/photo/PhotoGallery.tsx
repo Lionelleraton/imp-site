@@ -1,7 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type PhotoGalleryProps = {
   images: string[];
@@ -10,11 +9,17 @@ type PhotoGalleryProps = {
   totalBytes?: number | null;
 };
 
-// Pour les sources proxy (Drive/Dropbox) la miniature est servie par défaut ;
+// Pour les sources proxy (Dropbox/Drive) la miniature est servie par défaut ;
 // on demande l'original en pleine résolution pour le téléchargement (dl=1).
 function fullResUrl(src: string): string {
   if (!src.startsWith("/api/gallery/")) return src;
   return src + (src.includes("?") ? "&" : "?") + "dl=1";
+}
+
+function fileNameFromSrc(src: string, index: number): string {
+  return decodeURIComponent(
+    src.split("/").pop()?.split("?")[0] ?? `image-${index + 1}.jpg`
+  );
 }
 
 function formatBytes(bytes: number): string {
@@ -30,27 +35,65 @@ function formatBytes(bytes: number): string {
   return `${value.toFixed(precision)} ${units[index]}`;
 }
 
+const IconDownload = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className={className} aria-hidden="true">
+    <path d="M12 4v11m0 0l-4-4m4 4l4-4M5 19h14" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+const IconClose = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className={className} aria-hidden="true">
+    <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+  </svg>
+);
+const IconChevron = ({ className = "", dir = "left" }: { className?: string; dir?: "left" | "right" }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className={className} aria-hidden="true">
+    <path d={dir === "left" ? "M15 6l-6 6 6 6" : "M9 6l6 6-6 6"} strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 export default function PhotoGallery({
   images,
-  unoptimized,
   downloadAllUrl,
   totalBytes,
 }: PhotoGalleryProps) {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [active, setActive] = useState<number | null>(null);
   const [isZipping, setIsZipping] = useState(false);
   const [zipProgress, setZipProgress] = useState(0);
-  const activeSrc = activeIndex !== null ? images[activeIndex] : null;
+  const touchStartX = useRef<number | null>(null);
+
+  const close = useCallback(() => setActive(null), []);
+  const prev = useCallback(
+    () => setActive((i) => (i === null ? i : (i + images.length - 1) % images.length)),
+    [images.length]
+  );
+  const next = useCallback(
+    () => setActive((i) => (i === null ? i : (i + 1) % images.length)),
+    [images.length]
+  );
+
+  useEffect(() => {
+    if (active === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft") prev();
+      else if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [active, close, prev, next]);
 
   const downloadSingle = async (src: string, index: number) => {
     try {
       const response = await fetch(fullResUrl(src));
       const blob = await response.blob();
-      const filename = decodeURIComponent(
-        src.split("/").pop()?.split("?")[0] ?? `image-${index + 1}.jpg`
-      );
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
-      link.download = filename || "";
+      link.download = fileNameFromSrc(src, index);
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -60,15 +103,6 @@ export default function PhotoGallery({
     }
   };
 
-  const close = () => setActiveIndex(null);
-  const showPrev = () => {
-    if (activeIndex === null) return;
-    setActiveIndex((activeIndex + images.length - 1) % images.length);
-  };
-  const showNext = () => {
-    if (activeIndex === null) return;
-    setActiveIndex((activeIndex + 1) % images.length);
-  };
   const downloadAll = async () => {
     if (isZipping) return;
     setIsZipping(true);
@@ -76,26 +110,15 @@ export default function PhotoGallery({
     try {
       const JSZip = (await import("jszip")).default;
       const zip = new JSZip();
-      const total = images.length;
-
-      for (let index = 0; index < total; index += 1) {
-        const src = images[index];
-        const response = await fetch(fullResUrl(src));
+      for (let i = 0; i < images.length; i += 1) {
+        const response = await fetch(fullResUrl(images[i]));
         const blob = await response.blob();
-        const filename = decodeURIComponent(
-          src.split("/").pop()?.split("?")[0] ?? `image-${index + 1}.jpg`
-        );
-        zip.file(filename, blob);
-        setZipProgress(Math.round(((index + 1) / total) * 100));
+        zip.file(fileNameFromSrc(images[i], i), blob);
+        setZipProgress(Math.round(((i + 1) / images.length) * 100));
       }
-
-      const zipBlob = await zip.generateAsync(
-        { type: "blob" },
-        (metadata) => {
-          setZipProgress(Math.round(metadata.percent));
-        }
+      const zipBlob = await zip.generateAsync({ type: "blob" }, (m) =>
+        setZipProgress(Math.round(m.percent))
       );
-
       const link = document.createElement("a");
       link.href = URL.createObjectURL(zipBlob);
       link.download = "galerie.zip";
@@ -112,151 +135,154 @@ export default function PhotoGallery({
 
   if (images.length === 0) {
     return (
-      <div className="rounded-2xl border border-line bg-white/90 p-6 text-sm text-ink/70">
-        Aucune image disponible pour le moment.
+      <div className="rounded-2xl border border-line bg-panel/80 p-8 text-center text-sm text-ink/70">
+        Aucune photo pour le moment. Elles apparaîtront ici dès leur mise en ligne.
       </div>
     );
   }
 
+  const activeSrc = active !== null ? images[active] : null;
+  const btnBase =
+    "inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] transition";
+
   return (
     <div>
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <p className="text-xs uppercase tracking-[0.25em] text-ink/50">
-          {images.length} photos disponibles
-          {typeof totalBytes === "number" ? ` • ${formatBytes(totalBytes)}` : ""}
+      {/* Barre d'actions */}
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3 border-b border-line pb-4">
+        <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/55">
+          {images.length} photo{images.length > 1 ? "s" : ""}
+          {typeof totalBytes === "number" && totalBytes > 0 ? ` · ${formatBytes(totalBytes)}` : ""}
         </p>
         {downloadAllUrl ? (
-          <a
-            href={downloadAllUrl}
-            download
-            className="inline-flex items-center justify-center rounded-full border border-deep/20 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep/5"
-          >
-            Télécharger tout
+          <a href={downloadAllUrl} download className={`${btnBase} bg-deep text-white hover:brightness-110`}>
+            <IconDownload className="h-4 w-4" /> Tout télécharger
           </a>
         ) : (
           <button
             type="button"
             onClick={downloadAll}
             disabled={isZipping}
-            className="inline-flex items-center justify-center rounded-full border border-deep/20 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep/5 disabled:cursor-not-allowed disabled:opacity-60"
+            className={`${btnBase} bg-deep text-white hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60`}
           >
-            {isZipping ? `Création du ZIP… ${zipProgress}%` : "Télécharger tout"}
+            <IconDownload className="h-4 w-4" />
+            {isZipping ? `ZIP… ${zipProgress}%` : "Tout télécharger"}
           </button>
         )}
       </div>
 
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-6">
-        {images.map((src, index) => (
+      {/* Mosaïque */}
+      <div className="columns-2 gap-3 sm:columns-3 sm:gap-4 lg:columns-4 [&>*]:mb-3 sm:[&>*]:mb-4">
+        {images.map((src, i) => (
           <div
             key={src}
-            className="overflow-hidden rounded-2xl border border-line bg-white/90 shadow-[0_10px_30px_rgba(35,48,54,0.08)]"
+            className="group relative block break-inside-avoid overflow-hidden rounded-xl bg-mist/40 shadow-[0_2px_10px_rgba(31,39,36,0.06)] transition duration-300 hover:shadow-[0_14px_40px_rgba(31,39,36,0.16)]"
           >
             <button
               type="button"
-              onClick={() => setActiveIndex(index)}
-              className="group w-full"
+              onClick={() => setActive(i)}
+              className="block w-full cursor-zoom-in"
+              aria-label={`Agrandir la photo ${i + 1}`}
             >
-              <div className="relative aspect-[4/5] w-full bg-mist/30">
-                <Image
-                  src={src}
-                  alt={`Photo terrain InMotion Performance — image ${index + 1}`}
-                  fill
-                  sizes="(min-width: 1280px) 14vw, (min-width: 1024px) 16vw, (min-width: 768px) 22vw, (min-width: 640px) 30vw, 48vw"
-                  unoptimized={unoptimized}
-                  quality={100}
-                  className="object-cover transition duration-300 group-hover:scale-[1.05]"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={src}
+                alt={`Photo ${i + 1}`}
+                loading="lazy"
+                decoding="async"
+                className="h-auto w-full object-cover transition duration-500 ease-out group-hover:scale-[1.04]"
+              />
             </button>
-            <div className="flex items-center justify-between border-t border-line/70 px-3 py-2 text-[10px] uppercase tracking-[0.2em] text-ink/50">
-              <span>Image {index + 1}</span>
-              <button
-                type="button"
-                onClick={(event) => {
-                  event.preventDefault();
-                  event.stopPropagation();
-                  downloadSingle(src, index);
-                }}
-                className="rounded-full border border-deep/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep/5"
-                aria-label={`Télécharger l'image ${index + 1}`}
-              >
-                <span className="hidden sm:inline">Télécharger</span>
-                <span className="sm:hidden">↓</span>
-              </button>
-            </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                downloadSingle(src, i);
+              }}
+              aria-label={`Télécharger la photo ${i + 1}`}
+              className="absolute right-2.5 top-2.5 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-ink shadow-sm backdrop-blur transition hover:bg-white hover:text-deep opacity-100 sm:opacity-0 sm:group-hover:opacity-100"
+            >
+              <IconDownload className="h-[18px] w-[18px]" />
+            </button>
           </div>
         ))}
       </div>
 
-      {activeIndex !== null && (
-        <div className="fixed inset-0 z-50 bg-black/90">
-          <button
-            type="button"
-            onClick={close}
-            className="absolute inset-0 h-full w-full cursor-zoom-out"
-            aria-label="Fermer"
-          />
-          <div className="pointer-events-none absolute left-0 right-0 top-0 flex items-center justify-between px-6 py-5">
-            <p className="text-xs uppercase tracking-[0.25em] text-white/70">
-              Galerie privée
-            </p>
-            <div className="pointer-events-auto flex items-center gap-3">
-              {activeSrc ? (
-                <button
-                  type="button"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    downloadSingle(activeSrc, activeIndex ?? 0);
-                  }}
-                  className="rounded-full border border-white/40 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur"
-                >
-                  <span className="hidden sm:inline">Télécharger</span>
-                  <span className="sm:hidden">↓</span>
-                </button>
-              ) : null}
+      {/* Visionneuse plein écran */}
+      {active !== null && activeSrc && (
+        <div
+          className="fixed inset-0 z-[100] flex flex-col bg-black/95 backdrop-blur-sm"
+          onTouchStart={(e) => {
+            touchStartX.current = e.touches[0]?.clientX ?? null;
+          }}
+          onTouchEnd={(e) => {
+            if (touchStartX.current === null) return;
+            const dx = (e.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
+            if (Math.abs(dx) > 50) (dx > 0 ? prev : next)();
+            touchStartX.current = null;
+          }}
+        >
+          {/* Barre haut */}
+          <div className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
+            <span className="font-mono text-xs uppercase tracking-[0.18em] text-white/70">
+              {String(active + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
+            </span>
+            <div className="flex items-center gap-2.5">
+              <button
+                type="button"
+                onClick={() => downloadSingle(activeSrc, active)}
+                className="flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-white/20"
+              >
+                <IconDownload className="h-4 w-4" />
+                <span className="hidden sm:inline">Télécharger</span>
+              </button>
               <button
                 type="button"
                 onClick={close}
-                className="rounded-full border border-white/40 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white backdrop-blur"
+                aria-label="Fermer"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition hover:bg-white/20"
               >
-                Fermer
+                <IconClose className="h-5 w-5" />
               </button>
             </div>
           </div>
-          {images.length > 1 ? (
+
+          {/* Image */}
+          <div className="relative flex flex-1 items-center justify-center overflow-hidden px-3 pb-4 sm:px-16">
             <button
               type="button"
-              onClick={showPrev}
-              className="absolute left-5 top-1/2 -translate-y-1/2 rounded-full border border-white/40 bg-white/10 px-3 py-2 text-sm font-semibold text-white backdrop-blur"
-              aria-label="Image précédente"
-            >
-              ◀
-            </button>
-          ) : null}
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-6 pb-10 pt-16">
-            <div className="pointer-events-auto w-full max-w-6xl">
-              <Image
-                src={activeSrc ?? images[0]}
-                alt={`Photo terrain InMotion Performance — image ${(activeIndex ?? 0) + 1}`}
-                width={2000}
-                height={1400}
-                unoptimized={unoptimized}
-                quality={100}
-                className="max-h-[80vh] w-full rounded-3xl object-contain shadow-[0_30px_120px_rgba(0,0,0,0.45)]"
-              />
-            </div>
+              onClick={close}
+              aria-label="Fermer"
+              className="absolute inset-0 cursor-zoom-out"
+              tabIndex={-1}
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={activeSrc}
+              alt={`Photo ${active + 1}`}
+              className="relative max-h-full max-w-full rounded-lg object-contain shadow-[0_30px_120px_rgba(0,0,0,0.5)]"
+            />
+            {images.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={prev}
+                  aria-label="Précédente"
+                  className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white transition hover:bg-black/70 sm:left-5 sm:h-12 sm:w-12"
+                >
+                  <IconChevron dir="left" className="h-6 w-6" />
+                </button>
+                <button
+                  type="button"
+                  onClick={next}
+                  aria-label="Suivante"
+                  className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white transition hover:bg-black/70 sm:right-5 sm:h-12 sm:w-12"
+                >
+                  <IconChevron dir="right" className="h-6 w-6" />
+                </button>
+              </>
+            )}
           </div>
-          {images.length > 1 ? (
-            <button
-              type="button"
-              onClick={showNext}
-              className="absolute right-5 top-1/2 -translate-y-1/2 rounded-full border border-white/40 bg-white/10 px-3 py-2 text-sm font-semibold text-white backdrop-blur"
-              aria-label="Image suivante"
-            >
-              ▶
-            </button>
-          ) : null}
         </div>
       )}
     </div>
