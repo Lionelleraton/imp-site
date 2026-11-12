@@ -151,7 +151,7 @@ export default function DevisForm() {
                   />
                   <div className="flex items-center justify-between gap-2">
                     <span className="text-[15px] font-extrabold uppercase tracking-[-0.01em]">
-                      {f.name.split(" — ")[0]}
+                      {f.name.split(" · ")[0]}
                     </span>
                     <span className="text-[15px] font-bold text-[#AEC8D6]">
                       {formatEuro(f.price)}
@@ -178,7 +178,7 @@ export default function DevisForm() {
             <OptionToggle
               checked={selection.express}
               onChange={(v) => setSel("express", v)}
-              label="Livraison express — 20 photos le soir même"
+              label="Livraison express : 20 photos le soir même"
               price="+100 €"
             />
             <OptionToggle
@@ -190,11 +190,11 @@ export default function DevisForm() {
             <OptionToggle
               checked={selection.associatif}
               onChange={(v) => setSel("associatif", v)}
-              label="Tarif associatif — club / comité / association loi 1901"
+              label="Tarif associatif : club, comité ou association loi 1901"
               price="−15 %"
             />
 
-            {/* Heures supplémentaires — compteur cliquable */}
+            {/* Heures supplémentaires : compteur cliquable */}
             <div className="flex items-center justify-between gap-4 rounded-xl border border-[rgba(237,241,243,0.10)] bg-[#121B23] px-4 py-3">
               <div>
                 <p className="text-[14px] text-[#C7D0D7]">Heures supplémentaires</p>
@@ -225,10 +225,10 @@ export default function DevisForm() {
               </div>
             </div>
 
-            {/* Déplacement — aller-retour depuis Chamonix, choix cliquables */}
+            {/* Déplacement : aller-retour depuis Chamonix, choix cliquables */}
             <div className="rounded-xl border border-[rgba(237,241,243,0.10)] bg-[#121B23] px-4 py-3">
               <p className="text-[14px] text-[#C7D0D7]">
-                Déplacement — aller-retour depuis Chamonix
+                Déplacement : aller-retour depuis Chamonix
               </p>
               <p className={`${mono} mt-0.5 text-[10px] uppercase tracking-[0.1em] text-[#5C6873]`}>
                 30 km inclus, puis 0,50 €/km

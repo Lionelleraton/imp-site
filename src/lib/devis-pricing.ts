@@ -21,7 +21,7 @@ export type Formule = {
 export const FORMULES: Formule[] = [
   {
     id: "seance-courte",
-    name: "Séance courte — 2 h terrain",
+    name: "Séance courte · 2 h terrain",
     tag: "2 h terrain",
     target: "Athlètes, clubs, petites marques",
     deliver: "30 à 40 photos retouchées · livraison sous 72 h",
@@ -29,7 +29,7 @@ export const FORMULES: Formule[] = [
   },
   {
     id: "demi-journee",
-    name: "Demi-journée — jusqu'à 4 h",
+    name: "Demi-journée · jusqu'à 4 h",
     tag: "Jusqu'à 4 h",
     target: "Courses, événements, marques",
     deliver: "100 à 150 photos retouchées · livraison sous 72 h",
@@ -37,7 +37,7 @@ export const FORMULES: Formule[] = [
   },
   {
     id: "journee",
-    name: "Journée — jusqu'à 8 h",
+    name: "Journée · jusqu'à 8 h",
     tag: "Jusqu'à 8 h",
     target: "Courses, campagnes, grands événements",
     deliver: "250 à 400 photos retouchées · 15 photos livrées le soir même",
@@ -45,7 +45,7 @@ export const FORMULES: Formule[] = [
   },
   {
     id: "shooting-produits",
-    name: "Shooting produits — demi-journée",
+    name: "Shooting produits · demi-journée",
     tag: "Demi-journée terrain",
     target: "Marques et équipementiers outdoor",
     deliver: "Produits portés ou utilisés en action · 30 visuels retouchés",
@@ -53,7 +53,7 @@ export const FORMULES: Formule[] = [
   },
   {
     id: "soiree-marque",
-    name: "Soirée de marque — 4 h",
+    name: "Soirée de marque · 4 h",
     tag: "4 h",
     target: "Lancements, soirées partenaires, salons",
     deliver: "≈ 100 photos retouchées · livraison sous 72 h",

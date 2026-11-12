@@ -3,7 +3,7 @@ import Link from "next/link";
 import DarkChrome, { spaceMono } from "../components/DarkChrome";
 
 export const metadata: Metadata = {
-  title: "Tarifs photographie — Saison 2026-2027",
+  title: "Tarifs photographie · Saison 2026-2027",
   description:
     "Grille tarifaire photographie outdoor & événementielle (sport, montagne, marques) : formules 2h, demi-journée, journée, shooting produits et soirée de marque. Prix nets, options et conditions. Devis en ligne.",
   alternates: { canonical: "/tarifs" },
@@ -57,22 +57,22 @@ const formules: Formule[] = [
     target: "Lancements, soirées partenaires, salons",
     deliver: "≈ 100 photos retouchées · livraison sous 72 h",
     price: "660 €",
-    note: "Version 3 h : 540 € HT",
+    note: "Version 3 h : 540 € TTC",
   },
 ];
 
 const inclus = [
   "Tri et retouche de chaque photo livrée",
   "Galerie privée en ligne, fichiers HD",
-  "Droits pour votre communication : site, réseaux, presse — France, 2 ans",
+  "Droits pour votre communication : site, réseaux, presse (France, 2 ans)",
 ];
 
 const options = [
-  { label: "Livraison express — 20 photos envoyées le soir même", price: "100 €" },
-  { label: "Heure supplémentaire — au-delà de la formule réservée", price: "100 €" },
-  { label: "Licence publicité ou print — ads, catalogue, affichage", price: "+30 %", note: "du prix de la formule" },
-  { label: "Déplacement — inclus jusqu'à 30 km, puis aller-retour", price: "0,50 € / km" },
-  { label: "Remontées, hébergement, repas — si la mission l'exige", price: "Au réel" },
+  { label: "Livraison express : 20 photos envoyées le soir même", price: "100 €" },
+  { label: "Heure supplémentaire : au-delà de la formule réservée", price: "100 €" },
+  { label: "Licence publicité ou print (ads, catalogue, affichage)", price: "+30 %", note: "du prix de la formule" },
+  { label: "Déplacement : inclus jusqu'à 30 km, puis aller-retour", price: "0,50 € / km" },
+  { label: "Remontées, hébergement, repas : si la mission l'exige", price: "Au réel" },
 ];
 
 const conditions = [
@@ -108,8 +108,9 @@ export default function TarifsPage() {
           Tarifs photographie
         </h1>
         <p className="mt-6 max-w-[62ch] text-[17px] leading-[1.7] text-[#93A0AB]">
-          Photographie outdoor &amp; événementielle — sport, montagne et marques, du
-          terrain jusqu&apos;à la soirée. Tarifs indiqués en HT.
+          Photographie outdoor &amp; événementielle, sport, montagne et marques, du
+          terrain jusqu&apos;à la soirée. Prix TTC, montant HT indiqué sous chaque
+          formule.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link
@@ -160,10 +161,13 @@ export default function TarifsPage() {
                 </p>
                 <div className="mt-5 border-t border-[rgba(237,241,243,0.10)] pt-4">
                   <p className="text-[30px] font-extrabold leading-none tracking-[-0.02em]">
-                    {f.price} <span className="text-[16px] font-bold text-[#93A0AB]">HT</span>
+                    {f.price} <span className="text-[15px] font-semibold text-[#93A0AB]">TTC</span>
+                  </p>
+                  <p className={`${mono} mt-1.5 text-[11px] uppercase tracking-[0.1em] text-[#5C6873]`}>
+                    {Math.round(parseInt(f.price, 10) / 1.2)} € HT
                   </p>
                   {f.note ? (
-                    <p className={`${mono} mt-1.5 text-[11px] uppercase tracking-[0.1em] text-[#5C6873]`}>
+                    <p className={`${mono} mt-1 text-[11px] uppercase tracking-[0.1em] text-[#5C6873]`}>
                       {f.note}
                     </p>
                   ) : null}
@@ -268,7 +272,7 @@ export default function TarifsPage() {
           </h2>
           <p className="mx-auto mt-4 max-w-[48ch] text-[15.5px] leading-[1.6] text-[#93A0AB]">
             Choisissez votre formule et vos options, obtenez le montant, et recevez
-            votre devis par e-mail — réponse sous 24 h ouvrées.
+            votre devis par e-mail, réponse sous 24 h ouvrées.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link

@@ -82,16 +82,16 @@ function buildQuoteText(lead: DevisLead): string {
   return [
     `ESTIMATION ${lead.number}`,
     `Date : ${new Date(lead.createdAt).toLocaleDateString("fr-FR")}`,
-    "Estimation indicative — ne constitue pas un devis définitif.",
+    "Estimation indicative, ne constitue pas un devis définitif.",
     "",
     "ÉMETTEUR",
-    `${EMETTEUR.name} — ${EMETTEUR.contact}`,
+    `${EMETTEUR.name}, ${EMETTEUR.contact}`,
     EMETTEUR.address,
     `${EMETTEUR.email} · ${EMETTEUR.phone}`,
     `SIREN ${EMETTEUR.siren}`,
     "",
     "CLIENT",
-    `${lead.name}${lead.structure ? ` — ${lead.structure}` : ""}`,
+    `${lead.name}${lead.structure ? `, ${lead.structure}` : ""}`,
     lead.email,
     lead.phone || "",
     lead.eventDate ? `Date souhaitée : ${lead.eventDate}` : "",
@@ -219,7 +219,7 @@ function buildHtml(lead: DevisLead, forClient: boolean): string {
       ${header}
       <div style="border:1px solid #eceef0;border-top:0;border-radius:0 0 14px 14px;padding:24px">
         <p style="font-size:14px;line-height:1.6;margin:0 0 6px"><strong>Nouvelle demande de devis</strong> via le site (estimation à confirmer).</p>
-        <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6b7076;margin:18px 0 8px">Contact — pour le rappeler</div>
+        <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6b7076;margin:18px 0 8px">Contact à rappeler</div>
         ${contactCard}
         ${messageBlock}
         <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6b7076;margin:22px 0 8px">Prestation estimée</div>
@@ -230,13 +230,13 @@ function buildHtml(lead: DevisLead, forClient: boolean): string {
   }
 
   // ── E-mail reçu par le client. ──
-  const intro = `Bonjour ${escapeHtml(lead.name)},<br><br>Merci pour votre demande. Voici votre <strong>estimation ${lead.number}</strong> — il s'agit d'une estimation indicative qui ne vous engage pas et ne constitue pas un devis définitif. Je reviens vers vous sous 24 h ouvrées pour la confirmer ensemble. Le PDF est en pièce jointe.`;
+  const intro = `Bonjour ${escapeHtml(lead.name)},<br><br>Merci pour votre demande. Voici votre <strong>estimation ${lead.number}</strong>. Il s'agit d'une estimation indicative qui ne vous engage pas et ne constitue pas un devis définitif. Je reviens vers vous sous 24 h ouvrées pour la confirmer ensemble. Le PDF est en pièce jointe.`;
   return `<div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#233036">
     ${header}
     <div style="border:1px solid #eceef0;border-top:0;border-radius:0 0 14px 14px;padding:24px">
       <p style="font-size:14px;line-height:1.6;margin:0 0 18px">${intro}</p>
       ${quoteTable}
-      <p style="font-size:13px;line-height:1.6;color:#6b7076;margin:0">Lionel Jouannaud — InMotion Performance<br>
+      <p style="font-size:13px;line-height:1.6;color:#6b7076;margin:0">Lionel Jouannaud, InMotion Performance<br>
       <a href="mailto:${EMETTEUR.email}" style="color:#244357">${EMETTEUR.email}</a> · ${EMETTEUR.phone}</p>
     </div>
   </div>`;
@@ -346,14 +346,14 @@ export async function POST(request: Request) {
     attachments = undefined;
   }
 
-  // 1) Notification à l'éditeur — via e-mail (Resend) et/ou webhook.
+  // 1) Notification à l'éditeur via e-mail (Resend) et/ou webhook.
   const to = process.env.CONTACT_TO_EMAIL?.trim();
   const [emailNotif, webhookNotif] = await Promise.all([
     to
       ? sendEmail({
           to,
-          subject: `Demande de devis — ${name}${phone ? ` · ${phone}` : ""} (${formatEuro(quote.total)})`,
-          text: `Nouvelle demande de devis via le site (estimation à confirmer).\n\nCONTACT\n${name}${structure ? ` — ${structure}` : ""}\nEmail : ${email}\nTéléphone : ${phone || "—"}\n${eventDate ? `Date souhaitée : ${eventDate}\n` : ""}${place ? `Lieu : ${place}\n` : ""}${message ? `\nMessage :\n${message}\n` : ""}\n${quoteText}`,
+          subject: `Demande de devis : ${name}${phone ? ` · ${phone}` : ""} (${formatEuro(quote.total)})`,
+          text: `Nouvelle demande de devis via le site (estimation à confirmer).\n\nCONTACT\n${name}${structure ? `, ${structure}` : ""}\nEmail : ${email}\nTéléphone : ${phone || "non renseigné"}\n${eventDate ? `Date souhaitée : ${eventDate}\n` : ""}${place ? `Lieu : ${place}\n` : ""}${message ? `\nMessage :\n${message}\n` : ""}\n${quoteText}`,
           html: buildHtml(lead, false),
           replyTo: email, // répondre directement au client
           attachments,
@@ -366,8 +366,8 @@ export async function POST(request: Request) {
   // 2) Copie du devis au client (avec le PDF).
   const copyToClient = await sendEmail({
     to: email,
-    subject: `Votre estimation ${EMETTEUR.name} — ${lead.number}`,
-    text: `Bonjour ${name},\n\nVoici votre estimation (PDF en pièce jointe). Il s'agit d'une estimation indicative : elle ne vous engage pas et ne constitue pas un devis définitif. Je reviens vers vous sous 24 h ouvrées pour la confirmer ensemble.\n\n${quoteText}\n\nÀ très vite,\n${EMETTEUR.contact} — ${EMETTEUR.name}`,
+    subject: `Votre estimation ${EMETTEUR.name} · ${lead.number}`,
+    text: `Bonjour ${name},\n\nVoici votre estimation (PDF en pièce jointe). Il s'agit d'une estimation indicative : elle ne vous engage pas et ne constitue pas un devis définitif. Je reviens vers vous sous 24 h ouvrées pour la confirmer ensemble.\n\n${quoteText}\n\nÀ très vite,\n${EMETTEUR.contact}, ${EMETTEUR.name}`,
     html: buildHtml(lead, true),
     replyTo: to || EMETTEUR.email, // le client peut répondre directement à Lionel
     attachments,

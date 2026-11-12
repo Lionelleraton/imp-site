@@ -61,7 +61,7 @@ export async function buildDevisPdf(data: DevisPdfData): Promise<Uint8Array> {
   const doc = await PDFDocument.create();
   doc.setTitle(`Devis ${data.number}`);
   doc.setAuthor(EMETTEUR.name);
-  doc.setSubject("Estimation en ligne — InMotion Performance");
+  doc.setSubject("Estimation en ligne · InMotion Performance");
   const page = doc.addPage([A4.w, A4.h]);
   const font = await doc.embedFont(StandardFonts.Helvetica);
   const bold = await doc.embedFont(StandardFonts.HelveticaBold);
@@ -145,7 +145,7 @@ export async function buildDevisPdf(data: DevisPdfData): Promise<Uint8Array> {
     GREY
   );
   right("ÉCHÉANCE : À réception", CMR, 132, 10.5, font, GREY);
-  right("ESTIMATION — À CONFIRMER", CMR, 150, 9, bold, INK);
+  right("ESTIMATION À CONFIRMER", CMR, 150, 9, bold, INK);
 
   // ── ÉMETTEUR / DESTINATAIRE ──
   const blockTop = 182;
@@ -160,7 +160,7 @@ export async function buildDevisPdf(data: DevisPdfData): Promise<Uint8Array> {
     EMETTEUR.phone,
   ];
   const destinataire = [
-    data.structure ? `${data.name} — ${data.structure}` : data.name,
+    data.structure ? `${data.name}, ${data.structure}` : data.name,
     data.email,
     data.phone || "",
     data.eventDate ? `Date souhaitée : ${data.eventDate}` : "",
@@ -175,7 +175,7 @@ export async function buildDevisPdf(data: DevisPdfData): Promise<Uint8Array> {
   // ── Bandeau « estimation » (insistance) ──
   const noteTop = lineStart + 5 * lh + 20;
   center(
-    "Estimation indicative générée en ligne — elle ne constitue pas un devis définitif et reste à confirmer.",
+    "Estimation indicative générée en ligne. Elle ne constitue pas un devis définitif et reste à confirmer.",
     A4.w / 2,
     noteTop,
     9,
@@ -240,7 +240,7 @@ export async function buildDevisPdf(data: DevisPdfData): Promise<Uint8Array> {
     "TVA non applicable, art. 293 B du Code général des impôts.",
     "Déplacement inclus jusqu'à 30 km, puis 0,50 €/km aller-retour depuis Chamonix.",
     "Réservation : acompte de 30 % à la signature, solde à la livraison des photos.",
-    "Droits de communication inclus (web, réseaux, presse) — France, 2 ans. Crédit photo obligatoire.",
+    "Droits de communication inclus (web, réseaux, presse), France, 2 ans. Crédit photo obligatoire.",
   ];
   drawParagraphs(page, font, termes, {
     x: colR,

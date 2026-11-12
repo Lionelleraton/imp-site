@@ -5,7 +5,7 @@ import DevisForm from "../components/DevisForm";
 const mono = spaceMono.className;
 
 export const metadata: Metadata = {
-  title: "Devis photo en ligne — estimez votre prestation",
+  title: "Devis photo en ligne, estimez votre prestation",
   description:
     "Estimez votre devis de photographe sport, outdoor et événementiel en 1 minute : choisissez votre formule et vos options, recevez votre devis par e-mail. Chamonix, Pays du Mont-Blanc, Annecy.",
   alternates: { canonical: "/devis" },
@@ -23,7 +23,7 @@ export default function DevisPage() {
         </h1>
         <p className="mt-6 max-w-[62ch] text-[17px] leading-[1.7] text-[#93A0AB]">
           Choisissez votre formule et vos options : le montant se calcule en direct.
-          Laissez vos coordonnées et recevez votre estimation par e-mail — je reviens
+          Laissez vos coordonnées et recevez votre estimation par e-mail. Je reviens
           vers vous sous 24 h ouvrées pour établir le devis définitif ensemble.
         </p>
 

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
 <body>
-<title>Photographe outdoor, sportif & événementiel · Chamonix, Mont-Blanc, Annecy — InMotion Performance</title>
+<title>Photographe outdoor, sportif & événementiel · Chamonix, Mont-Blanc, Annecy · InMotion Performance</title>
 <meta name="description" content="Lionel Jouannaud, photographe outdoor, sportif et événementiel à Chamonix, dans le Pays du Mont-Blanc et à Annecy : courses, trail, ski, biathlon, soirées de marque et shootings produits. Portfolio, tarifs et devis en ligne.">
 <meta name="keywords" content="photographe outdoor, photographe sportif, photographe événementiel, photographe Chamonix, photographe Mont-Blanc, photographe Annecy, photographe trail, photographe ski, photographe biathlon, reportage sportif, photographe de marque, shooting produits outdoor, photographe montagne Haute-Savoie">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -90,11 +90,11 @@ h1,h2,h3{margin:0; text-wrap:balance}
 /* ---------- HERO (home) ---------- */
 .hero{position:relative; min-height:640px; height:94vh; max-height:1000px; display:flex; align-items:flex-end; overflow:hidden; border-bottom:1px solid var(--line)}
 .hero-media{position:absolute; inset:0; z-index:0; overflow:hidden}
-.hero-media img{width:100%; height:100%; object-fit:cover; object-position:center 40%}
+.hero-media img{width:100%; height:100%; object-fit:cover; object-position:center 50%}
 .kenburns{animation:kb 34s ease-in-out infinite alternate}
 @keyframes kb{from{transform:scale(1.05)}to{transform:scale(1.16)}}
 .hero::after{content:""; position:absolute; inset:0; z-index:1;
-  background:linear-gradient(180deg, rgba(11,16,21,.60) 0%, rgba(11,16,21,.15) 26%, rgba(11,16,21,.55) 62%, rgba(11,16,21,.97) 100%)}
+  background:linear-gradient(90deg, rgba(11,16,21,.80) 0%, rgba(11,16,21,.34) 42%, rgba(11,16,21,.05) 72%, rgba(11,16,21,0) 100%), linear-gradient(180deg, rgba(11,16,21,.42) 0%, rgba(11,16,21,.12) 26%, rgba(11,16,21,.48) 62%, rgba(11,16,21,.95) 100%)}
 .hero-inner{position:relative; z-index:2; width:100%; max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,64px) clamp(40px,7vw,80px)}
 .hero .kicker{font-family:var(--mono); font-size:12.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--sky-hi); margin:0 0 20px; text-shadow:0 1px 12px rgba(0,0,0,.45)}
 .hero h1{font-weight:800; text-transform:uppercase; letter-spacing:-.015em; line-height:1.02; font-size:clamp(28px,4.6vw,60px); max-width:20ch; color:var(--onhero); text-shadow:0 2px 24px rgba(0,0,0,.4)}
@@ -305,6 +305,8 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
 @media(max-width:640px){
   :root{ --nav-h:58px }
   .hero{ height:auto; min-height:90svh; padding-top:var(--nav-h) }
+  .hero-media img{ object-position:center 42% }
+  .hero::after{ background:linear-gradient(180deg, rgba(11,16,21,.5) 0%, rgba(11,16,21,.12) 18%, rgba(11,16,21,.5) 46%, rgba(11,16,21,.78) 66%, rgba(11,16,21,.97) 100%) }
   .hero-inner{ padding-bottom:42px }
   .hero h1{ font-size:clamp(30px,8.6vw,42px) }
   .hero .sub{ font-size:16px; max-width:40ch }
@@ -355,11 +357,11 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
 <!-- ================= HOME VIEW ================= -->
 <div class="view active" id="view-home">
   <header class="hero">
-    <div class="hero-media"><img class="kenburns" src="imp-images/g22.jpg" alt="Aiguille dorée au lever du soleil, aiguilles de Chamonix, massif du Mont-Blanc"></div>
+    <div class="hero-media"><img class="kenburns" src="imp-images/hero-stage.jpg" alt="Athlètes célébrant à contre-jour sur scène lors d'un événement sportif"></div>
     <div class="hero-inner">
       <p class="kicker hla d1" data-fr="Photographe outdoor, sportif &amp; événementiel" data-en="Outdoor, sports &amp; event photographer">Photographe outdoor, sportif &amp; événementiel</p>
       <h1 class="hla d2" data-fr="Photographe de sport,<br>outdoor &amp; événementiel." data-en="Sport, outdoor &amp;<br>event photographer.">Photographe de sport,<br>outdoor &amp; événementiel.</h1>
-      <p class="sub hla d3" data-fr="Courses, trail, ski, biathlon, soirées de marque et shootings produits — à Chamonix, dans le Pays du Mont-Blanc et à Annecy." data-en="Races, trail, ski, biathlon, brand events and product shoots — in Chamonix, the Mont-Blanc area and Annecy.">Courses, trail, ski, biathlon, soirées de marque et shootings produits — à Chamonix, dans le Pays du Mont-Blanc et à Annecy.</p>
+      <p class="sub hla d3" data-fr="Courses, trail, ski, biathlon, soirées de marque et shootings produits, à Chamonix, dans le Pays du Mont-Blanc et à Annecy." data-en="Races, trail, ski, biathlon, brand events and product shoots, in Chamonix, the Mont-Blanc area and Annecy.">Courses, trail, ski, biathlon, soirées de marque et shootings produits, à Chamonix, dans le Pays du Mont-Blanc et à Annecy.</p>
       <div class="hero-actions hla d4">
         <a class="btn btn-primary" href="/devis" data-fr="Faire mon devis" data-en="Get my quote">Faire mon devis
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -383,21 +385,21 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
     <h2 class="section-title" data-fr="Le sport, l'outdoor, la marque." data-en="Sport, outdoors, brands.">Le sport, l'outdoor, la marque.</h2></div>
     <div class="svc-grid">
       <article class="svc reveal">
-        <div class="svc-media"><span class="num">01</span><img id="svcPhoto" src="imp-images/g15.jpg" alt="Photographe de sport — trail en montagne face au massif du Mont-Blanc"></div>
+        <div class="svc-media"><span class="num">01</span><img id="svcPhoto" src="imp-images/g15.jpg" alt="Photographe de sport, trail en montagne face au massif du Mont-Blanc"></div>
         <div class="svc-body"><h3 data-fr="Sport &amp; course" data-en="Sport &amp; racing">Sport &amp; course</h3>
           <p data-fr="Trail, ski, biathlon, cyclisme : l'intensité de la course captée au bon instant, prête à publier pour vos réseaux et vos sponsors." data-en="Trail, ski, biathlon, cycling: the intensity of the race caught at the right moment, ready to publish for your socials and sponsors.">Trail, ski, biathlon, cyclisme : l'intensité de la course captée au bon instant, prête à publier pour vos réseaux et vos sponsors.</p>
           <a class="svc-link" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
       <article class="svc reveal d1">
-        <div class="svc-media"><span class="num">02</span><img src="imp-images/g39.jpg" alt="Photographe outdoor — bouquetin au coucher de soleil sur une crête du massif du Mont-Blanc"></div>
+        <div class="svc-media"><span class="num">02</span><img src="imp-images/g39.jpg" alt="Photographe outdoor, bouquetin au coucher de soleil sur une crête du massif du Mont-Blanc"></div>
         <div class="svc-body"><h3 data-fr="Outdoor &amp; montagne" data-en="Outdoor &amp; mountain">Outdoor &amp; montagne</h3>
           <p data-fr="Portraits et grands espaces : l'athlète dans son terrain de jeu, du lever du jour au coucher de soleil sur les sommets." data-en="Portraits and wide-open spaces: the athlete in their playground, from first light to sunset over the peaks.">Portraits et grands espaces : l'athlète dans son terrain de jeu, du lever du jour au coucher de soleil sur les sommets.</p>
           <a class="svc-link" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
       <article class="svc reveal d2">
-        <div class="svc-media"><span class="num">03</span><img src="imp-images/g01.jpg" alt="Photographe événementiel et de marque outdoor — adidas Terrex à Chamonix"></div>
+        <div class="svc-media"><span class="num">03</span><img src="imp-images/g01.jpg" alt="Photographe événementiel et de marque outdoor, adidas Terrex à Chamonix"></div>
         <div class="svc-body"><h3 data-fr="Marque &amp; événementiel" data-en="Brand &amp; events">Marque &amp; événementiel</h3>
           <p data-fr="Soirées, lancements, salons et shootings produits portés en action : des visuels qui valorisent votre marque et vos partenaires." data-en="Launch nights, trade shows and product shoots worn in action: visuals that showcase your brand and your partners.">Soirées, lancements, salons et shootings produits portés en action : des visuels qui valorisent votre marque et vos partenaires.</p>
           <a class="svc-link" href="/tarifs" data-fr="Voir les tarifs" data-en="See pricing">Voir les tarifs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -421,13 +423,13 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
     </div>
     <div class="reveal d1">
       <div style="border:1px solid var(--line);border-radius:18px;background:var(--bg-3);padding:22px 24px">
-        <p style="font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sky);margin:0 0 14px">Formules · prix HT</p>
+        <p style="font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sky);margin:0 0 14px">Formules · prix TTC</p>
         <ul style="list-style:none;margin:0;padding:0">
-          <li style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)"><span style="color:var(--muted)">Séance courte · 2 h</span><strong style="font-weight:700">300 € HT</strong></li>
-          <li style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)"><span style="color:var(--muted)">Demi-journée · 4 h</span><strong style="font-weight:700">450 € HT</strong></li>
-          <li style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)"><span style="color:var(--muted)">Journée · 8 h</span><strong style="font-weight:700">750 € HT</strong></li>
-          <li style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)"><span style="color:var(--muted)">Shooting produits</span><strong style="font-weight:700">600 € HT</strong></li>
-          <li style="display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)"><span style="color:var(--muted)">Soirée de marque · 4 h</span><strong style="font-weight:700">660 € HT</strong></li>
+          <li style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)"><span style="color:var(--muted)">Séance courte · 2 h</span><span style="text-align:right;white-space:nowrap"><strong style="font-weight:700">300 €</strong><br><span style="font-size:11px;color:var(--faint)">250 € HT</span></span></li>
+          <li style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)"><span style="color:var(--muted)">Demi-journée · 4 h</span><span style="text-align:right;white-space:nowrap"><strong style="font-weight:700">450 €</strong><br><span style="font-size:11px;color:var(--faint)">375 € HT</span></span></li>
+          <li style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)"><span style="color:var(--muted)">Journée · 8 h</span><span style="text-align:right;white-space:nowrap"><strong style="font-weight:700">750 €</strong><br><span style="font-size:11px;color:var(--faint)">625 € HT</span></span></li>
+          <li style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)"><span style="color:var(--muted)">Shooting produits</span><span style="text-align:right;white-space:nowrap"><strong style="font-weight:700">600 €</strong><br><span style="font-size:11px;color:var(--faint)">500 € HT</span></span></li>
+          <li style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:11px 0;border-top:1px solid var(--line)"><span style="color:var(--muted)">Soirée de marque · 4 h</span><span style="text-align:right;white-space:nowrap"><strong style="font-weight:700">660 €</strong><br><span style="font-size:11px;color:var(--faint)">550 € HT</span></span></li>
         </ul>
         <a href="/tarifs" style="display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text);text-decoration:none" data-fr="Tous les tarifs &amp; options" data-en="All pricing &amp; options">Tous les tarifs &amp; options <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
@@ -459,7 +461,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
     <div class="wrap cta-inner reveal">
       <p class="eyebrow" data-fr="Contact" data-en="Contact">Contact</p>
       <h2 data-fr="Un projet en tête ?" data-en="Got something in mind?">Un projet en tête ?</h2>
-      <p class="sub" data-fr="Dites-moi en deux lignes votre projet photo — course, événement, marque ou shooting produits — je réponds sous 24 h ouvrées." data-en="Tell me in a line or two about your photo project — race, event, brand or product shoot — I reply within one business day.">Dites-moi en deux lignes votre projet photo — course, événement, marque ou shooting produits — je réponds sous 24 h ouvrées.</p>
+      <p class="sub" data-fr="Dites-moi en deux lignes votre projet photo : course, événement, marque ou shooting produits. Je réponds sous 24 h ouvrées." data-en="Tell me in a line or two about your photo project: race, event, brand or product shoot. I reply within one business day.">Dites-moi en deux lignes votre projet photo : course, événement, marque ou shooting produits. Je réponds sous 24 h ouvrées.</p>
       <div class="cta-actions">
         <a class="btn btn-primary" href="mailto:lioneljouannaud@gmail.com?subject=R%C3%A9server%20un%20appel%20(In%20Motion%20Performance)" data-fr="Réserver un appel" data-en="Book a call">Réserver un appel
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
