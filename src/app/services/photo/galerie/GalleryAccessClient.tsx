@@ -39,23 +39,24 @@ export default function GalleryAccessClient() {
   };
 
   return (
-    <form onSubmit={submit} className="mt-6 flex flex-col gap-4">
-      <label className="text-sm font-semibold text-ink/80" htmlFor="gallery-code">
+    <form onSubmit={submit} className="mt-7 flex flex-col gap-4">
+      <label className="text-sm font-semibold text-[#1F2724]" htmlFor="gallery-code">
         Code d’accès
       </label>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+      <div className="flex flex-col gap-3">
         <input
           id="gallery-code"
           type="text"
           value={code}
           onChange={(event) => setCode(event.target.value)}
           placeholder="Ex: RAE-17"
-          className="w-full rounded-2xl border border-line bg-white/90 px-4 py-3 text-base text-ink shadow-[0_10px_30px_rgba(35,48,54,0.08)] focus:border-deep/40 focus:outline-none sm:text-sm"
+          autoComplete="off"
+          className="w-full rounded-xl border border-[#1F2724]/20 bg-[#FBF9F3] px-4 py-4 text-base text-[#1F2724] focus:border-[#B15F38] focus:outline-none"
         />
         <button
           type="submit"
           disabled={isSubmitting}
-          className="inline-flex w-full items-center justify-center rounded-full bg-deep px-6 py-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 sm:w-auto"
+          className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[#B15F38] px-6 py-3 text-[11px] font-bold uppercase tracking-[0.16em] text-white transition hover:bg-[#8A4A2B] disabled:opacity-60 sm:w-fit"
         >
           {isSubmitting ? "Ouverture..." : "Ouvrir la galerie"}
         </button>

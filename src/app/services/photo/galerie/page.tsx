@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import GalleryAccessClient from "./GalleryAccessClient";
+import { spaceMono } from "../../../components/DarkChrome";
 
 export const metadata: Metadata = {
   title: "Accès galerie photo",
@@ -24,34 +25,20 @@ export const metadata: Metadata = {
 
 export default function GalleryAccessPage() {
   return (
-    <main className="pb-24">
-      <section className="mx-auto w-full max-w-[1200px] px-4 pt-10 sm:px-6 sm:pt-12 xl:px-10">
-        <div className="rounded-3xl border border-line bg-white/85 p-8 shadow-[0_18px_50px_rgba(35,48,54,0.1)]">
-          <p className="text-[10px] uppercase tracking-[0.25em] text-ink/60">
-            Accès client
-          </p>
-          <h1 className="mt-3 text-3xl font-semibold leading-tight sm:text-4xl">
-            Accédez à votre galerie photo privée
-          </h1>
-          <p className="mt-4 text-sm text-ink/70 sm:text-base">
-            Saisissez le code transmis après la livraison pour visualiser et
-            télécharger vos images en qualité maximale.
-          </p>
-          <GalleryAccessClient />
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link
-              href="/services/photo"
-              className="inline-flex w-full items-center justify-center rounded-full border border-deep/20 px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep/5 sm:w-auto"
-            >
-              Retour au service photo
-            </Link>
-            <Link
-              href="/contact"
-              className="inline-flex w-full items-center justify-center rounded-full bg-deep px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition hover:-translate-y-0.5 sm:w-auto"
-            >
-              Réserver un appel
-            </Link>
+    <main className="mx-auto w-full max-w-[1300px] px-[clamp(20px,5vw,64px)] pb-24 pt-14 sm:pt-20">
+      <section className="grid gap-12 lg:grid-cols-[1fr_0.8fr] lg:items-start lg:gap-20">
+        <div>
+          <p className={`${spaceMono.className} text-[12px] uppercase tracking-[0.26em] text-[#B15F38]`}>Espace client · Galerie privée</p>
+          <h1 className="mt-5 max-w-[12ch] text-[clamp(2.2rem,6.5vw,4rem)] font-extrabold uppercase leading-[0.98] tracking-[-0.02em]">Vos images, votre histoire.</h1>
+          <p className="mt-6 max-w-[50ch] text-[17px] leading-[1.7] text-[#5E655D]">Entrez le code reçu pour retrouver votre galerie privée et télécharger vos photos en qualité maximale.</p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/portfolio" className={`${spaceMono.className} inline-flex items-center justify-center rounded-full border border-[#1F2724]/20 px-6 py-3 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1F2724] transition hover:border-[#B15F38] hover:text-[#B15F38]`}>Voir le portfolio</Link>
+            <Link href="/#contact" className={`${spaceMono.className} inline-flex items-center justify-center rounded-full border border-[#1F2724]/20 px-6 py-3 text-[11px] font-bold uppercase tracking-[0.14em] text-[#1F2724] transition hover:border-[#B15F38] hover:text-[#B15F38]`}>Besoin d’aide ?</Link>
           </div>
+        </div>
+        <div className="border-t border-[#1F2724]/20 pt-6 lg:mt-1">
+          <p className={`${spaceMono.className} text-[11px] uppercase tracking-[0.2em] text-[#B15F38]`}>01 / Accéder à ma galerie</p>
+          <GalleryAccessClient />
         </div>
       </section>
     </main>

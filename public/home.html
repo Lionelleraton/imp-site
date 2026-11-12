@@ -244,6 +244,24 @@ h1,h2,h3{margin:0; text-wrap:balance}
 .pf-hero h1,.pf-hero .sub{text-shadow:0 2px 22px rgba(0,0,0,.45)}
 .work{padding:clamp(44px,7vw,84px) 0 clamp(60px,9vw,110px)}
 .work-head{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:22px; margin-bottom:30px}
+.collections{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(12px,1.5vw,22px); margin-bottom:clamp(48px,7vw,84px)}
+.collection{position:relative; display:block; width:100%; aspect-ratio:4/5; overflow:hidden; border:0; border-radius:6px; background:var(--bg-3); color:var(--cream); text-align:left; cursor:pointer}
+.collection:nth-child(4n+2){transform:translateY(20px)}
+.collection img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.collection:hover img,.collection:focus-visible img{transform:scale(1.055)}
+.collection::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(11,16,21,.05) 25%,rgba(11,16,21,.82) 100%)}
+.collection-copy{position:absolute; z-index:1; inset:auto 0 0; padding:clamp(16px,2vw,25px)}
+.collection-kicker{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:#f0bd9a}
+.collection-title{display:block; margin-top:9px; font-size:clamp(20px,2.4vw,30px); font-weight:800; line-height:1.02; text-transform:uppercase}
+.collection-arrow{position:absolute; right:0; bottom:0; font-size:24px; font-weight:400}
+.collection-panel[hidden]{display:none}
+.collection-panel{padding:12px 0 34px; scroll-margin-top:90px}
+.collection-heading{display:flex; justify-content:space-between; align-items:end; gap:16px; flex-wrap:wrap; margin-bottom:24px}
+.collection-back{border:0; padding:8px 0; background:none; color:var(--sky); font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; cursor:pointer}
+.collection-back:hover{text-decoration:underline}
+@media(max-width:900px){.collections{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:500px){.collections{gap:10px}.collection-copy{padding:14px}.collection-title{font-size:18px}.collection-kicker{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.collection img{transition:none}.collection:hover img,.collection:focus-visible img{transform:none}}
 .filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:clamp(36px,6vw,72px)}
 .filters button{font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); background:transparent; border:1px solid var(--line); padding:9px 15px; border-radius:100px; cursor:pointer; transition:all .22s}
 .filters button:hover{color:var(--text); border-color:var(--line-2)}
@@ -493,11 +511,15 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
   </header>
   <section class="work"><div class="wrap">
     <div class="work-head reveal">
-      <div><p class="eyebrow" data-fr="Sélection" data-en="Selected work">Sélection</p>
-      <h2 class="section-title" data-fr="Le travail" data-en="The work">Le travail</h2></div>
-      <span class="count" id="count"></span>
+      <div><p class="eyebrow" data-fr="Explorer les collections" data-en="Explore the collections">Explorer les collections</p>
+      <h2 class="section-title" data-fr="Des histoires en images." data-en="Stories in pictures.">Des histoires en images.</h2></div>
+      <span class="count" data-fr="Choisissez un univers" data-en="Choose a collection">Choisissez un univers</span>
     </div>
-    <div class="grid" id="grid"></div>
+    <div class="collections" id="collections" aria-label="Collections photo"></div>
+    <div class="collection-panel" id="collectionPanel" hidden>
+      <div class="collection-heading"><div><button class="collection-back" type="button" id="collectionBack" data-fr="← Toutes les collections" data-en="← All collections">← Toutes les collections</button><h2 class="section-title" id="collectionTitle"></h2></div><span class="count" id="count"></span></div>
+      <div class="grid" id="grid"></div>
+    </div>
     <div class="pf-cta reveal">
       <h3 data-fr="Un projet photo ?" data-en="A photo project?">Un projet photo ?</h3>
       <p data-fr="Dites-moi ce dont vous avez besoin en photo, je réponds vite." data-en="Tell me what you need in photos and I'll get back to you quickly.">Dites-moi ce dont vous avez besoin en photo, je réponds vite.</p>
@@ -613,6 +635,20 @@ document.getElementById('ctaBg').style.backgroundImage="url('imp-images/g27.jpg'
 
 /* grid */
 const grid=document.getElementById('grid'), countEl=document.getElementById('count');
+const collections=document.getElementById('collections'),collectionPanel=document.getElementById('collectionPanel'),collectionTitle=document.getElementById('collectionTitle');
+const collectionOrder=['trail','ski','evenement','marque','paysage','voyage','faune','nuit'];
+function buildCollections(){
+  collections.innerHTML='';
+  collectionOrder.forEach((cat,index)=>{
+    const photos=PHOTOS.filter(p=>p.c===cat); if(!photos.length)return;
+    const label=CATLABEL[cat][lang],button=document.createElement('button');
+    button.type='button';button.className='collection';button.setAttribute('aria-label',label+' — '+photos.length+' photos');
+    button.innerHTML='<img src="'+photos[0].u+'" alt="" loading="lazy" decoding="async"><span class="collection-copy"><span class="collection-kicker">'+String(index+1).padStart(2,'0')+' / '+photos.length+' photos</span><span class="collection-title">'+label+'</span><span class="collection-arrow" aria-hidden="true">↗</span></span>';
+    button.addEventListener('click',()=>{filter=cat;collectionTitle.textContent=CATLABEL[cat][lang];collectionPanel.hidden=false;applyFilter();collectionPanel.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});});
+    collections.appendChild(button);
+  });
+}
+document.getElementById('collectionBack').addEventListener('click',()=>{collectionPanel.hidden=true;collections.scrollIntoView({behavior:RM?'auto':'smooth',block:'start'});});
 function buildGrid(){
   grid.innerHTML='';
   PHOTOS.forEach((p,i)=>{
@@ -654,7 +690,7 @@ let tx=0;lb.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive
 
 /* language */
 function applyLangText(){document.querySelectorAll('[data-fr]').forEach(el=>{const v=lang==='fr'?el.getAttribute('data-fr'):el.getAttribute('data-en');if(v==null)return;const icon=(el.lastElementChild&&el.lastElementChild.tagName.toLowerCase()==='svg')?el.lastElementChild:null;if(icon){el.textContent=v;el.appendChild(icon);}else{el.innerHTML=v;}});document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));document.documentElement.lang=lang;}
-function setLang(l){lang=l;try{localStorage.setItem('imp_lang',l);}catch(e){}applyLangText();buildGrid();applyFilter();if(lb.classList.contains('open'))renderLB();}
+function setLang(l){lang=l;try{localStorage.setItem('imp_lang',l);}catch(e){}applyLangText();buildCollections();if(filter!=='all')collectionTitle.textContent=CATLABEL[filter][lang];buildGrid();applyFilter();if(lb.classList.contains('open'))renderLB();}
 document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{setLang(b.dataset.lang);closeMenu();}));
 
 /* view routing */
@@ -709,7 +745,7 @@ if(scBtn)scBtn.addEventListener('click',async()=>{
 });
 
 /* init */
-buildGrid();applyFilter();applyLangText();
+buildCollections();buildGrid();applyFilter();applyLangText();
 (function(){const h=location.hash.replace('#','');const pth=location.pathname.toLowerCase();if(h==='portfolio'||/portfolio\/?$/.test(pth))showView('portfolio');else showView('home');})();
 checkReveals();animateBars();
 </script>
