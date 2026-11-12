@@ -2,20 +2,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f7f5;
-  --foreground: #233036;
+  --background: #f4f1e8;
+  --foreground: #1f2724;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-ink: #233036;
-  --color-deep: #244357;
-  --color-sky: #89a9ba;
-  --color-mist: #dbdcdc;
-  --color-surface: #f0f2f2;
-  --color-panel: #ffffff;
-  --color-line: rgba(35, 48, 54, 0.14);
+  --color-ink: #1f2724;
+  --color-deep: #b15f38;
+  --color-sky: #b15f38;
+  --color-mist: #e3dbc8;
+  --color-surface: #f4f1e8;
+  --color-panel: #fbf9f3;
+  --color-line: rgba(31, 39, 36, 0.14);
   --font-sans: "Manrope", system-ui, sans-serif;
   --font-display: "Space Grotesk", system-ui, sans-serif;
 }
@@ -38,11 +38,11 @@
     line-height: 1.5;
     overflow-x: hidden;
     background-image:
-      radial-gradient(ellipse 1500px 800px at 95% -5%, rgba(137, 169, 186, 0.48), transparent 72%),
-      radial-gradient(ellipse 900px 650px at -5% 22%, rgba(36, 67, 87, 0.13), transparent 68%),
-      radial-gradient(ellipse 700px 450px at 50% 105%, rgba(137, 169, 186, 0.18), transparent 70%),
-      linear-gradient(to right, rgba(35, 48, 54, 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(35, 48, 54, 0.05) 1px, transparent 1px);
+      radial-gradient(ellipse 1500px 800px at 95% -5%, rgba(177, 95, 56, 0.16), transparent 72%),
+      radial-gradient(ellipse 900px 650px at -5% 22%, rgba(138, 74, 43, 0.08), transparent 68%),
+      radial-gradient(ellipse 700px 450px at 50% 105%, rgba(177, 95, 56, 0.08), transparent 70%),
+      linear-gradient(to right, rgba(31, 39, 36, 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(31, 39, 36, 0.04) 1px, transparent 1px);
     background-size: auto, auto, auto, 88px 88px, 88px 88px;
     background-position: top right, top left, bottom center, 0 0, 0 0;
   }
@@ -56,7 +56,7 @@
   }
 
   ::selection {
-    background: rgba(137, 169, 186, 0.5);
+    background: rgba(177, 95, 56, 0.3);
     color: var(--color-ink);
   }
 }

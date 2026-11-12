@@ -15,6 +15,7 @@ const navLinks = [
   { href: "/", label: "Accueil" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/tarifs", label: "Tarifs" },
+  { href: "/services/photo/galerie", label: "Espace client" },
   { href: "/#contact", label: "Contact" },
 ];
 

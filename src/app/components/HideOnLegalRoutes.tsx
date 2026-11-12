@@ -11,6 +11,7 @@ const DARK_ROUTES = [
   "/confidentialite",
   "/tarifs",
   "/devis",
+  "/services/photo/galerie",
 ];
 
 export function isDarkRoute(pathname: string | null): boolean {
