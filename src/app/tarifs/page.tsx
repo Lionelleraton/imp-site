@@ -5,7 +5,7 @@ import DarkChrome, { spaceMono } from "../components/DarkChrome";
 export const metadata: Metadata = {
   title: "Tarifs photographie · Saison 2026-2027",
   description:
-    "Grille tarifaire photographie outdoor & événementielle (sport, montagne, marques) : formules 2h, demi-journée, journée, shooting produits et soirée de marque. Prix nets, options et conditions. Devis en ligne.",
+    "Tarifs photographe sportif et événementiel à Chamonix et Annecy : séances, reportages, shooting produits et événements. Formules et devis en ligne.",
   alternates: { canonical: "/tarifs" },
 };
 

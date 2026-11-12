@@ -6,6 +6,15 @@
 <title>Photographe outdoor, sportif & événementiel · Chamonix, Mont-Blanc, Annecy · InMotion Performance</title>
 <meta name="description" content="Lionel Jouannaud, photographe outdoor, sportif et événementiel à Chamonix, dans le Pays du Mont-Blanc et à Annecy : courses, trail, ski, biathlon, soirées de marque et shootings produits. Portfolio, tarifs et devis en ligne.">
 <link rel="canonical" href="https://www.inmotionperformance.com/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="InMotion Performance">
+<meta property="og:title" content="Photographe sportif et outdoor à Chamonix | InMotion Performance">
+<meta property="og:description" content="Photographie de sport, de montagne et d'événements à Chamonix, dans le Pays du Mont-Blanc et à Annecy.">
+<meta property="og:url" content="https://www.inmotionperformance.com/">
+<meta property="og:image" content="https://www.inmotionperformance.com/hero-social.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"ProfessionalService","name":"InMotion Performance","url":"https://www.inmotionperformance.com/","image":"https://www.inmotionperformance.com/hero-social.jpg","description":"Photographie sportive, outdoor et événementielle à Chamonix, dans le Pays du Mont-Blanc et à Annecy.","email":"lioneljouannaud@gmail.com","telephone":"+33665620084","areaServed":["Chamonix-Mont-Blanc","Pays du Mont-Blanc","Annecy"]}</script>
 <meta name="keywords" content="photographe outdoor, photographe sportif, photographe événementiel, photographe Chamonix, photographe Mont-Blanc, photographe Annecy, photographe trail, photographe ski, photographe biathlon, reportage sportif, photographe de marque, shooting produits outdoor, photographe montagne Haute-Savoie">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -246,21 +255,20 @@ h1,h2,h3{margin:0; text-wrap:balance}
 .work-head{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:22px; margin-bottom:30px}
 .collections{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(12px,1.5vw,22px); margin-bottom:clamp(48px,7vw,84px)}
 .collection{position:relative; display:block; width:100%; aspect-ratio:4/5; overflow:hidden; border:0; border-radius:6px; background:var(--bg-3); color:var(--cream); text-align:left; cursor:pointer}
-.collection:nth-child(4n+2){transform:translateY(20px)}
 .collection img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 .collection:hover img,.collection:focus-visible img{transform:scale(1.055)}
 .collection::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(11,16,21,.05) 25%,rgba(11,16,21,.82) 100%)}
-.collection-copy{position:absolute; z-index:1; inset:auto 0 0; padding:clamp(16px,2vw,25px)}
+.collection-copy{position:absolute; z-index:1; inset:auto 0 0; padding:clamp(16px,2vw,25px); padding-right:38px}
 .collection-kicker{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:#f0bd9a}
 .collection-title{display:block; margin-top:9px; font-size:clamp(20px,2.4vw,30px); font-weight:800; line-height:1.02; text-transform:uppercase}
-.collection-arrow{position:absolute; right:0; bottom:0; font-size:24px; font-weight:400}
+.collection-arrow{position:absolute; right:12px; bottom:10px; font-size:24px; font-weight:400}
 .collection-panel[hidden]{display:none}
 .collection-panel{padding:12px 0 34px; scroll-margin-top:90px}
 .collection-heading{display:flex; justify-content:space-between; align-items:end; gap:16px; flex-wrap:wrap; margin-bottom:24px}
 .collection-back{border:0; padding:8px 0; background:none; color:var(--sky); font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; cursor:pointer}
 .collection-back:hover{text-decoration:underline}
 @media(max-width:900px){.collections{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:500px){.collections{gap:10px}.collection-copy{padding:14px}.collection-title{font-size:18px}.collection-kicker{font-size:9px}}
+@media(max-width:500px){.collections{gap:10px}.collection-copy{padding:14px 34px 14px 14px}.collection-title{font-size:clamp(13px,4vw,18px);overflow-wrap:anywhere}.collection-kicker{font-size:8px;letter-spacing:.06em;white-space:nowrap}.collection-arrow{right:9px;bottom:8px;font-size:20px}}
 @media(prefers-reduced-motion:reduce){.collection img{transition:none}.collection:hover img,.collection:focus-visible img{transform:none}}
 .filters{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:clamp(36px,6vw,72px)}
 .filters button{font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); background:transparent; border:1px solid var(--line); padding:9px 15px; border-radius:100px; cursor:pointer; transition:all .22s}
@@ -308,14 +316,14 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
 @media (prefers-reduced-motion: reduce){ .lb-img{opacity:1 !important; transform:none !important; transition:none} }
 .lb-cap{position:absolute; inset:auto 0 clamp(14px,3vw,30px) 0; text-align:center; padding:0 20px; opacity:0; transform:translateY(8px); transition:opacity .45s ease .12s, transform .5s cubic-bezier(.2,.7,.2,1) .12s}
 .lb-stage:has(.lb-img.ready) .lb-cap{opacity:1; transform:none}
-.lb-cap .t{font-weight:700; font-size:clamp(17px,2.4vw,23px)}
+.lb-cap .t{font-weight:700; font-size:clamp(17px,2.4vw,23px); color:var(--cream)}
 .lb-cap .m{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--sky); margin-top:8px}
-.lb-nav{position:absolute; z-index:3; top:50%; transform:translateY(-50%); width:52px; height:52px; border-radius:50%; background:rgba(18,27,35,.75); border:1px solid var(--line-2); color:var(--text); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .25s, color .25s, border-color .25s; backdrop-filter:blur(4px)}
+.lb-nav{position:absolute; z-index:3; top:50%; transform:translateY(-50%); width:52px; height:52px; border-radius:50%; background:rgba(18,27,35,.75); border:1px solid rgba(255,255,255,.4); color:var(--cream); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .25s, color .25s, border-color .25s; backdrop-filter:blur(4px)}
 .lb-nav:hover{background:var(--sky); color:var(--cream); border-color:transparent}
 .lb-nav svg{width:22px;height:22px}
 .lb-prev{left:clamp(10px,2.5vw,34px)} .lb-next{right:clamp(10px,2.5vw,34px)}
-.lb-close{position:absolute; top:clamp(14px,2.5vw,26px); right:clamp(14px,2.5vw,26px); width:46px;height:46px}
-.lb-counter{position:absolute; z-index:3; top:clamp(20px,2.8vw,32px); left:clamp(16px,3vw,34px); font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--muted)}
+.lb-close{position:absolute; top:max(14px,env(safe-area-inset-top)); right:clamp(14px,2.5vw,26px); width:46px;height:46px; transform:none}
+.lb-counter{position:absolute; z-index:3; top:max(20px,env(safe-area-inset-top)); left:clamp(16px,3vw,34px); font-family:var(--mono); font-size:12px; letter-spacing:.14em; color:var(--cream)}
 @media(max-width:600px){ .lb-nav{width:44px;height:44px} .lb-img{max-height:72vh} }
 
 /* ---------- MOBILE ---------- */
@@ -354,22 +362,22 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
 
 <!-- ================= NAV ================= -->
 <nav class="nav" id="nav">
-  <a class="logo" data-view="home" aria-label="In Motion Performance, accueil"><svg viewBox="0 0 2103 357"><use href="#imp-logo"/></svg></a>
+  <a class="logo" href="/" data-view="home" aria-label="In Motion Performance, accueil"><svg viewBox="0 0 2103 357"><use href="#imp-logo"/></svg></a>
   <div class="nav-links" id="navLinks">
-    <a data-view="portfolio" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
+    <a href="/portfolio" data-view="portfolio" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
     <a href="/tarifs" data-fr="Tarifs" data-en="Pricing">Tarifs</a>
     <a href="/services/photo/galerie" data-fr="Espace client" data-en="Client area">Espace client</a>
-    <a data-view="home" data-anchor="contact" data-fr="Contact" data-en="Contact">Contact</a>
+    <a href="/#contact" data-view="home" data-anchor="contact" data-fr="Contact" data-en="Contact">Contact</a>
     <a class="nav-cta" href="/devis" data-fr="Faire un devis" data-en="Get a quote">Faire un devis</a>
   </div>
   <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg></button>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a data-view="portfolio" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
+  <a href="/portfolio" data-view="portfolio" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
   <a href="/tarifs" data-fr="Tarifs" data-en="Pricing">Tarifs</a>
   <a href="/services/photo/galerie" data-fr="Espace client" data-en="Client area">Espace client</a>
   <a href="/devis" data-fr="Faire un devis" data-en="Get a quote">Faire un devis</a>
-  <a data-view="home" data-anchor="contact" data-fr="Contact" data-en="Contact">Contact</a>
+  <a href="/#contact" data-view="home" data-anchor="contact" data-fr="Contact" data-en="Contact">Contact</a>
 </div>
 
 <main>
@@ -384,7 +392,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
       <div class="hero-actions hla d4">
         <a class="btn btn-primary" href="/devis" data-fr="Faire mon devis" data-en="Get my quote">Faire mon devis
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio
+        <a class="btn btn-ghost" href="/portfolio" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <p class="coords hla d5">CHAMONIX 45.90°N 6.13°E</p>
@@ -407,14 +415,14 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
         <div class="svc-media"><span class="num">01</span><img id="svcPhoto" src="imp-images/g15.jpg" alt="Photographe de sport, trail en montagne face au massif du Mont-Blanc"></div>
         <div class="svc-body"><h3 data-fr="Sport &amp; course" data-en="Sport &amp; racing">Sport &amp; course</h3>
           <p data-fr="Trail, ski, biathlon, cyclisme : l'intensité de la course captée au bon instant, prête à publier pour vos réseaux et vos sponsors." data-en="Trail, ski, biathlon, cycling: the intensity of the race caught at the right moment, ready to publish for your socials and sponsors.">Trail, ski, biathlon, cyclisme : l'intensité de la course captée au bon instant, prête à publier pour vos réseaux et vos sponsors.</p>
-          <a class="svc-link" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="svc-link" href="/portfolio" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
       <article class="svc reveal d1">
         <div class="svc-media"><span class="num">02</span><img src="imp-images/g39.jpg" alt="Photographe outdoor, bouquetin au coucher de soleil sur une crête du massif du Mont-Blanc"></div>
         <div class="svc-body"><h3 data-fr="Outdoor &amp; montagne" data-en="Outdoor &amp; mountain">Outdoor &amp; montagne</h3>
           <p data-fr="Portraits et grands espaces : l'athlète dans son terrain de jeu, du lever du jour au coucher de soleil sur les sommets." data-en="Portraits and wide-open spaces: the athlete in their playground, from first light to sunset over the peaks.">Portraits et grands espaces : l'athlète dans son terrain de jeu, du lever du jour au coucher de soleil sur les sommets.</p>
-          <a class="svc-link" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="svc-link" href="/portfolio" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
       <article class="svc reveal d2">
@@ -523,7 +531,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
     <div class="pf-cta reveal">
       <h3 data-fr="Un projet photo ?" data-en="A photo project?">Un projet photo ?</h3>
       <p data-fr="Dites-moi ce dont vous avez besoin en photo, je réponds vite." data-en="Tell me what you need in photos and I'll get back to you quickly.">Dites-moi ce dont vous avez besoin en photo, je réponds vite.</p>
-      <a class="btn btn-primary" data-view="home" data-anchor="contact" data-fr="Me contacter" data-en="Get in touch">Me contacter
+      <a class="btn btn-primary" href="/#contact" data-view="home" data-anchor="contact" data-fr="Me contacter" data-en="Get in touch">Me contacter
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
   </div></section>
@@ -539,8 +547,8 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
       <p data-fr="Photographe de sport, d'outdoor et d'événementiel. Entre Annecy et Chamonix, Pays du Mont-Blanc." data-en="Sport, outdoor and event photographer. Between Annecy and Chamonix, Mont-Blanc area.">Photographe de sport, d'outdoor et d'événementiel. Entre Annecy et Chamonix, Pays du Mont-Blanc.</p>
     </div>
     <div class="col"><h4 data-fr="Navigation" data-en="Navigation">Navigation</h4>
-      <a data-view="home" data-fr="Accueil" data-en="Home">Accueil</a>
-      <a data-view="portfolio">Portfolio</a>
+      <a href="/" data-view="home" data-fr="Accueil" data-en="Home">Accueil</a>
+      <a href="/portfolio" data-view="portfolio">Portfolio</a>
       <a href="/tarifs" data-fr="Tarifs" data-en="Pricing">Tarifs</a>
       <a href="/services/photo/galerie" data-fr="Espace client" data-en="Client area">Espace client</a>
       <a href="/devis" data-fr="Faire un devis" data-en="Get a quote">Faire un devis</a>
@@ -549,7 +557,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
       <a href="mailto:lioneljouannaud@gmail.com">lioneljouannaud@gmail.com</a>
       <a href="https://instagram.com/lionel_jouannaud" target="_blank" rel="noopener">@lionel_jouannaud</a>
       <a href="tel:+33665620084">06 65 62 00 84</a>
-      <a data-view="home" data-anchor="contact" data-fr="Réserver un appel" data-en="Book a call">Réserver un appel</a>
+      <a href="/#contact" data-view="home" data-anchor="contact" data-fr="Réserver un appel" data-en="Book a call">Réserver un appel</a>
     </div>
   </div>
   <div class="bar">

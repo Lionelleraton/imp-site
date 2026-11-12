@@ -3,14 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Service photo — InMotion Performance",
+  title: "Photographe sportif et événementiel à Chamonix",
   description:
-    "Couverture photo terrain, shooting sport et événement. Sony A7C, A7 IV, 70-200 G Master — des images nettes, exploitables immédiatement.",
+    "Reportage photo sportif et événementiel à Chamonix, dans le Pays du Mont-Blanc et à Annecy : courses, trail, ski et images de marque.",
   alternates: { canonical: "/services/photo" },
   openGraph: {
-    title: "Service photo — InMotion Performance",
+    title: "Photographe sportif et événementiel à Chamonix | InMotion Performance",
     description:
-      "Couverture photo terrain, shooting sport et événement. Sony A7C, A7 IV, 70-200 G Master — des images nettes, exploitables immédiatement.",
+      "Reportage photo sportif et événementiel à Chamonix, dans le Pays du Mont-Blanc et à Annecy : courses, trail, ski et images de marque.",
     url: "/services/photo",
   },
 };
