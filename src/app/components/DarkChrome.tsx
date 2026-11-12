@@ -33,7 +33,7 @@ export default function DarkChrome({ children }: { children: ReactNode }) {
   return (
     <div className={`${archivo.className} min-h-screen bg-[#F4F1E8] text-[#1F2724]`}>
       <header className="sticky top-0 z-40 border-b border-[rgba(31,39,36,0.12)] bg-[#F4F1E8]/85 backdrop-blur">
-        <div className="mx-auto flex h-[70px] max-w-[1100px] items-center justify-between px-5 sm:px-6">
+        <div className="mx-auto flex h-[70px] max-w-[1300px] items-center justify-between px-[clamp(20px,5vw,64px)]">
           <Link href="/" aria-label="InMotion Performance, accueil" className="flex items-center">
             <Image
               src="/brand/logo-black.svg"
@@ -46,7 +46,7 @@ export default function DarkChrome({ children }: { children: ReactNode }) {
           </Link>
           <div className="flex items-center gap-5 sm:gap-6">
             <nav
-              className={`${spaceMono.className} hidden items-center gap-6 text-[12px] uppercase tracking-[0.13em] sm:flex`}
+              className={`${spaceMono.className} hidden items-center gap-6 text-[12px] uppercase tracking-[0.13em] min-[901px]:flex`}
             >
               {navLinks.map((link) => (
                 <Link
@@ -60,10 +60,19 @@ export default function DarkChrome({ children }: { children: ReactNode }) {
             </nav>
             <Link
               href="/devis"
-              className={`${spaceMono.className} whitespace-nowrap rounded-full bg-[#9E5230] px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[#FBF9F3] shadow-[0_6px_18px_rgba(31,39,36,0.2)] transition hover:-translate-y-px hover:bg-[#8A4A2B]`}
+              className={`${spaceMono.className} hidden whitespace-nowrap rounded-full bg-[#9E5230] px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[#FBF9F3] shadow-[0_6px_18px_rgba(31,39,36,0.2)] transition hover:-translate-y-px hover:bg-[#8A4A2B] min-[901px]:inline-flex`}
             >
               Faire un devis
             </Link>
+            <details className="relative min-[901px]:hidden">
+              <summary className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-lg border border-[#1F2724]/20 text-[#1F2724] [&::-webkit-details-marker]:hidden" aria-label="Ouvrir le menu">
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M3 7h18M3 12h18M3 17h18" /></svg>
+              </summary>
+              <nav className={`${spaceMono.className} absolute right-0 top-12 z-50 flex w-52 flex-col gap-4 rounded-xl border border-[#1F2724]/10 bg-[#F4F1E8] p-5 text-xs uppercase tracking-[0.13em] text-[#1F2724] shadow-xl`} aria-label="Navigation mobile">
+                {navLinks.map((link) => <Link key={link.href} href={link.href}>{link.label}</Link>)}
+                <Link href="/devis">Faire un devis</Link>
+              </nav>
+            </details>
           </div>
         </div>
       </header>
@@ -71,7 +80,7 @@ export default function DarkChrome({ children }: { children: ReactNode }) {
       {children}
 
       <footer className="border-t border-[rgba(31,39,36,0.12)] bg-[#F4F1E8]">
-        <div className="mx-auto flex max-w-[1100px] flex-col gap-6 px-5 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <div className="mx-auto flex max-w-[1300px] flex-col gap-6 px-[clamp(20px,5vw,64px)] py-10 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <Image
               src="/brand/logo-black.svg"

@@ -52,9 +52,8 @@ h1,h2,h3{margin:0; text-wrap:balance}
 
 /* ---------- NAV ---------- */
 .nav{position:fixed; inset:0 0 auto 0; height:var(--nav-h); z-index:60; display:flex; align-items:center;
-  justify-content:space-between; padding:0 max(20px,calc((100vw - 1100px)/2 + 20px));
+  justify-content:space-between; padding:0 max(clamp(20px,5vw,64px),calc((100vw - 1300px)/2 + clamp(20px,5vw,64px)));
   transition:background .4s, backdrop-filter .4s}
-@media(min-width:640px){.nav{padding-inline:max(24px,calc((100vw - 1100px)/2 + 24px))}}
 .nav::before{content:""; position:absolute; inset:0 0 auto 0; height:260%; z-index:-1; pointer-events:none;
   background:linear-gradient(180deg, rgba(11,16,21,.82) 0%, rgba(11,16,21,.42) 45%, rgba(11,16,21,0) 100%); transition:opacity .45s}
 .nav.scrolled{background:rgba(244,241,232,.88); backdrop-filter:blur(16px) saturate(1.1); border-bottom:1px solid var(--line)}

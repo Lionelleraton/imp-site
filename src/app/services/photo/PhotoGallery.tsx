@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 
 type PhotoGalleryProps = {
   images: string[];
@@ -209,9 +210,12 @@ export default function PhotoGallery({
       </div>
 
       {/* Visionneuse plein écran */}
-      {active !== null && activeSrc && (
+      {active !== null && activeSrc && createPortal(
         <div
-          className="fixed inset-0 z-[100] flex flex-col bg-black/95 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Photo ${active + 1} sur ${images.length}`}
+          className="fixed inset-0 z-[10000] flex h-[100dvh] flex-col overflow-hidden bg-black/95 backdrop-blur-sm"
           onTouchStart={(e) => {
             const t = e.touches[0];
             touchStart.current = t ? { x: t.clientX, y: t.clientY } : null;
@@ -231,22 +235,32 @@ export default function PhotoGallery({
           }}
         >
           {/* Barre haut */}
-          <div className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4">
+          <div className="flex shrink-0 items-center justify-between gap-3 px-4 pb-2 pt-[max(0.75rem,env(safe-area-inset-top))] sm:px-6 sm:pb-4">
             <span className="font-mono text-xs uppercase tracking-[0.18em] text-white/70">
               {String(active + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
             </span>
+            <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => downloadSingle(activeSrc, active)}
+              aria-label="Télécharger la photo"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition hover:bg-white/20"
+            >
+              <IconDownload className="h-5 w-5" />
+            </button>
             <button
               type="button"
               onClick={close}
               aria-label="Fermer"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition hover:bg-white/20"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition hover:bg-white/20"
             >
               <IconClose className="h-5 w-5" />
             </button>
+            </div>
           </div>
 
           {/* Image */}
-          <div className="relative flex min-h-0 flex-1 items-center justify-center overflow-hidden px-3 sm:px-16">
+          <div className="relative min-h-0 flex-1 overflow-hidden px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] sm:px-16">
             <button
               type="button"
               onClick={close}
@@ -258,7 +272,7 @@ export default function PhotoGallery({
             <img
               src={activeSrc}
               alt={`Photo ${active + 1}`}
-              className="relative max-h-full max-w-full rounded-lg object-contain shadow-[0_30px_120px_rgba(0,0,0,0.5)]"
+              className="pointer-events-none relative h-full w-full object-contain"
             />
             {images.length > 1 && (
               <>
@@ -282,20 +296,7 @@ export default function PhotoGallery({
             )}
           </div>
 
-          {/* Barre bas : bouton télécharger bien visible (iPhone friendly) */}
-          <div className="flex flex-col items-center gap-2 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2">
-            <button
-              type="button"
-              onClick={() => downloadSingle(activeSrc, active)}
-              className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-ink shadow-lg transition hover:bg-white/90"
-            >
-              <IconDownload className="h-4 w-4" /> Télécharger
-            </button>
-            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/40 sm:hidden">
-              Glissez pour changer · vers le bas pour fermer
-            </span>
-          </div>
-        </div>
+        </div>, document.body
       )}
     </div>
   );

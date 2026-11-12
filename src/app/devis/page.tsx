@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function DevisPage() {
   return (
     <DarkChrome>
-      <main className="mx-auto w-full max-w-[1100px] px-5 pb-24 pt-14 sm:px-6 sm:pt-20">
+      <main className="mx-auto w-full max-w-[1300px] px-[clamp(20px,5vw,64px)] pb-24 pt-14 sm:pt-20">
         <p className={`${mono} text-[12px] uppercase tracking-[0.26em] text-[#B15F38]`}>
           Simulateur d&apos;estimation · sans engagement
         </p>
