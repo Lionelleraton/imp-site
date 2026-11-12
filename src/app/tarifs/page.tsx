@@ -225,7 +225,7 @@ export default function TarifsPage() {
             </p>
           </div>
           <p className={`${mono} mt-4 text-[11px] uppercase tracking-[0.12em] text-[#8A8475] sm:mt-0 sm:text-right`}>
-            Références&nbsp;: Terrex · Comité Mont Blanc Biathlon
+            Référence&nbsp;: Comité Mont Blanc Biathlon
           </p>
         </section>
 
