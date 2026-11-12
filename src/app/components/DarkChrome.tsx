@@ -12,7 +12,6 @@ export const archivo = Archivo({
 export const spaceMono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"] });
 
 const navLinks = [
-  { href: "/", label: "Accueil" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/tarifs", label: "Tarifs" },
   { href: "/services/photo/galerie", label: "Espace client" },
@@ -45,19 +44,27 @@ export default function DarkChrome({ children }: { children: ReactNode }) {
               priority
             />
           </Link>
-          <nav
-            className={`${spaceMono.className} hidden items-center gap-6 text-[12px] uppercase tracking-[0.13em] sm:flex`}
-          >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[#5E655D] transition hover:text-[#1F2724]"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
+          <div className="flex items-center gap-5 sm:gap-6">
+            <nav
+              className={`${spaceMono.className} hidden items-center gap-6 text-[12px] uppercase tracking-[0.13em] sm:flex`}
+            >
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-[#5E655D] transition hover:text-[#1F2724]"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+            <Link
+              href="/devis"
+              className={`${spaceMono.className} whitespace-nowrap rounded-full bg-[#9E5230] px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[#FBF9F3] shadow-[0_6px_18px_rgba(31,39,36,0.2)] transition hover:-translate-y-px hover:bg-[#8A4A2B]`}
+            >
+              Faire un devis
+            </Link>
+          </div>
         </div>
       </header>
 

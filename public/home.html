@@ -342,7 +342,6 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
     <a href="/tarifs" data-fr="Tarifs" data-en="Pricing">Tarifs</a>
     <a href="/services/photo/galerie" data-fr="Espace client" data-en="Client area">Espace client</a>
     <a data-view="home" data-anchor="contact" data-fr="Contact" data-en="Contact">Contact</a>
-    <span class="lang" role="group" aria-label="Language"><button data-lang="fr" class="active">FR</button><span class="sep">/</span><button data-lang="en">EN</button></span>
     <a class="nav-cta" href="/devis" data-fr="Faire un devis" data-en="Get a quote">Faire un devis</a>
   </div>
   <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg></button>
@@ -353,7 +352,6 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
   <a href="/services/photo/galerie" data-fr="Espace client" data-en="Client area">Espace client</a>
   <a href="/devis" data-fr="Faire un devis" data-en="Get a quote">Faire un devis</a>
   <a data-view="home" data-anchor="contact" data-fr="Contact" data-en="Contact">Contact</a>
-  <span class="lang" style="margin-top:18px;font-size:16px"><button data-lang="fr" class="active">FR</button><span class="sep">/</span><button data-lang="en">EN</button></span>
 </div>
 
 <main>
@@ -603,7 +601,7 @@ const PHOTOS = [
 {u:"imp-images/g45.jpg",c:"trail",tf:"Flou de course",te:"Running blur",lf:"Chamonix",le:"Chamonix",w:1124,h:2000}
 ];
 const CATLABEL = {trail:{fr:"Trail & course",en:"Trail & running"},faune:{fr:"Faune",en:"Wildlife"},paysage:{fr:"Sommets & paysages",en:"Peaks & landscapes"},ski:{fr:"Ski & neige",en:"Ski & snow"},nuit:{fr:"Nuit & astro",en:"Night & astro"},marque:{fr:"Marques",en:"Brands"},voyage:{fr:"Voyage",en:"Travel"},evenement:{fr:"Événement",en:"Event"}};
-let lang='fr'; try{const s=localStorage.getItem('imp_lang'); if(s==='fr'||s==='en') lang=s;}catch(e){}
+let lang='fr';
 let filter='all', visible=[], lbSet=[], lbIndex=0, current='home';
 
 /* marquee */
