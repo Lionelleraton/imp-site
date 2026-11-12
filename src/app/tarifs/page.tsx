@@ -43,8 +43,6 @@ const formules: Formule[] = [
     target: "Courses, campagnes, grands événements",
     deliver: "250 à 400 photos retouchées · 15 photos livrées le soir même",
     price: "750 €",
-    featured: true,
-    badge: "Le plus complet",
   },
   {
     name: "Shooting produits",
@@ -59,7 +57,7 @@ const formules: Formule[] = [
     target: "Lancements, soirées partenaires, salons",
     deliver: "≈ 100 photos retouchées · livraison sous 72 h",
     price: "660 €",
-    note: "Version 3 h : 540 €",
+    note: "Version 3 h : 540 € HT",
   },
 ];
 
@@ -111,8 +109,7 @@ export default function TarifsPage() {
         </h1>
         <p className="mt-6 max-w-[62ch] text-[17px] leading-[1.7] text-[#93A0AB]">
           Photographie outdoor &amp; événementielle — sport, montagne et marques, du
-          terrain jusqu&apos;à la soirée. Prix nets, TVA non applicable (art. 293 B du
-          CGI).
+          terrain jusqu&apos;à la soirée. Tarifs indiqués en HT.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row">
           <Link
@@ -163,11 +160,13 @@ export default function TarifsPage() {
                 </p>
                 <div className="mt-5 border-t border-[rgba(237,241,243,0.10)] pt-4">
                   <p className="text-[30px] font-extrabold leading-none tracking-[-0.02em]">
-                    {f.price}
+                    {f.price} <span className="text-[16px] font-bold text-[#93A0AB]">HT</span>
                   </p>
-                  <p className={`${mono} mt-1.5 text-[11px] uppercase tracking-[0.1em] text-[#5C6873]`}>
-                    {f.note ?? "TVA non applicable"}
-                  </p>
+                  {f.note ? (
+                    <p className={`${mono} mt-1.5 text-[11px] uppercase tracking-[0.1em] text-[#5C6873]`}>
+                      {f.note}
+                    </p>
+                  ) : null}
                 </div>
               </article>
             ))}

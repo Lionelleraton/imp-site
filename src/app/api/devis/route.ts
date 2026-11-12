@@ -80,9 +80,9 @@ function buildQuoteText(lead: DevisLead): string {
     .map((l) => `  • ${l.label} : ${formatEuro(l.amount)}`)
     .join("\n");
   return [
-    `DEVIS ${lead.number}`,
+    `ESTIMATION ${lead.number}`,
     `Date : ${new Date(lead.createdAt).toLocaleDateString("fr-FR")}`,
-    "Échéance : à réception · Validité : 30 jours",
+    "Estimation indicative — ne constitue pas un devis définitif.",
     "",
     "ÉMETTEUR",
     `${EMETTEUR.name} — ${EMETTEUR.contact}`,
@@ -105,7 +105,8 @@ function buildQuoteText(lead: DevisLead): string {
     "",
     lead.message ? `Message du client :\n${lead.message}\n` : "",
     "CONDITIONS",
-    "Devis à confirmer. Réservation : acompte de 30 % à la signature, solde à la livraison.",
+    "Estimation à confirmer : ne constitue pas un devis définitif.",
+    "Réservation : acompte de 30 % à la signature, solde à la livraison.",
     "Déplacement : inclus jusqu'à 30 km, puis 0,50 €/km aller-retour.",
     "Remontées, hébergement et repas éventuels facturés au réel.",
     "RIB communiqué à la validation du devis.",
@@ -183,26 +184,58 @@ function buildHtml(lead: DevisLead, forClient: boolean): string {
         )}</td></tr>`
     )
     .join("");
-  const intro = forClient
-    ? `Bonjour ${escapeHtml(lead.name)},<br><br>Merci pour votre demande. Voici votre devis <strong>${lead.number}</strong> — il ne vous engage pas. Je reviens vers vous sous 24 h ouvrées pour le finaliser. Le PDF est en pièce jointe.`
-    : `Nouveau devis généré sur le site par <strong>${escapeHtml(lead.name)}</strong>${
-        lead.structure ? ` (${escapeHtml(lead.structure)})` : ""
-      }.<br>Contact : ${escapeHtml(lead.email)}${lead.phone ? ` · ${escapeHtml(lead.phone)}` : ""}${
-        lead.eventDate ? `<br>Date souhaitée : ${escapeHtml(lead.eventDate)}` : ""
-      }${lead.place ? ` · Lieu : ${escapeHtml(lead.place)}` : ""}. PDF joint.`;
-  return `<div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#233036">
-    <div style="background:#244357;color:#fff;padding:22px 24px;border-radius:14px 14px 0 0">
-      <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;opacity:.75">Devis ${lead.number}</div>
-      <div style="font-size:20px;font-weight:700;margin-top:4px">InMotion Performance</div>
-    </div>
-    <div style="border:1px solid #eceef0;border-top:0;border-radius:0 0 14px 14px;padding:24px">
-      <p style="font-size:14px;line-height:1.6;margin:0 0 18px">${intro}</p>
-      <table style="width:100%;border-collapse:collapse;font-size:14px">${rows}
-        <tr><td style="padding:14px 0 0;font-weight:700;font-size:15px">Total</td><td style="padding:14px 0 0;text-align:right;font-weight:700;font-size:18px;color:#244357">${formatEuro(
+
+  const quoteTable = `<table style="width:100%;border-collapse:collapse;font-size:14px">${rows}
+        <tr><td style="padding:14px 0 0;font-weight:700;font-size:15px">Total estimé</td><td style="padding:14px 0 0;text-align:right;font-weight:700;font-size:18px;color:#244357">${formatEuro(
           quote.total
         )}</td></tr>
       </table>
-      <p style="font-size:12px;color:#6b7076;margin:6px 0 20px">TVA non applicable, art. 293 B du CGI · estimation.</p>
+      <p style="font-size:12px;color:#6b7076;margin:6px 0 20px">TVA non applicable, art. 293 B du CGI · <strong>estimation indicative, non contractuelle</strong>.</p>`;
+
+  const header = `<div style="background:#244357;color:#fff;padding:22px 24px;border-radius:14px 14px 0 0">
+      <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;opacity:.75">Estimation ${lead.number}</div>
+      <div style="font-size:20px;font-weight:700;margin-top:4px">InMotion Performance</div>
+    </div>`;
+
+  if (!forClient) {
+    // ── E-mail reçu par Lionel : fiche contact complète + récap. ──
+    const contactRow = (label: string, value: string) =>
+      value
+        ? `<tr><td style="padding:6px 14px 6px 0;color:#6b7076;font-size:13px;white-space:nowrap;vertical-align:top">${label}</td><td style="padding:6px 0;color:#233036;font-size:14px;font-weight:600">${value}</td></tr>`
+        : "";
+    const contactCard = `<table style="width:100%;border-collapse:collapse">
+        ${contactRow("Nom", escapeHtml(lead.name))}
+        ${contactRow("Structure", escapeHtml(lead.structure))}
+        ${contactRow("Email", `<a href="mailto:${escapeHtml(lead.email)}" style="color:#244357">${escapeHtml(lead.email)}</a>`)}
+        ${contactRow("Téléphone", lead.phone ? `<a href="tel:${escapeHtml(lead.phone.replace(/\s+/g, ""))}" style="color:#244357">${escapeHtml(lead.phone)}</a>` : "")}
+        ${contactRow("Date souhaitée", escapeHtml(lead.eventDate))}
+        ${contactRow("Lieu", escapeHtml(lead.place))}
+      </table>`;
+    const messageBlock = lead.message
+      ? `<div style="margin:16px 0 0"><div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6b7076;margin-bottom:6px">Message du client</div>
+         <div style="background:#f6f7f8;border-radius:10px;padding:12px 14px;font-size:14px;line-height:1.55;color:#233036;white-space:pre-wrap">${escapeHtml(lead.message)}</div></div>`
+      : "";
+    return `<div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#233036">
+      ${header}
+      <div style="border:1px solid #eceef0;border-top:0;border-radius:0 0 14px 14px;padding:24px">
+        <p style="font-size:14px;line-height:1.6;margin:0 0 6px"><strong>Nouvelle demande de devis</strong> via le site (estimation à confirmer).</p>
+        <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6b7076;margin:18px 0 8px">Contact — pour le rappeler</div>
+        ${contactCard}
+        ${messageBlock}
+        <div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6b7076;margin:22px 0 8px">Prestation estimée</div>
+        ${quoteTable}
+        <p style="font-size:13px;color:#6b7076;margin:0">Le PDF de l'estimation est en pièce jointe. Réponds directement à cet e-mail pour écrire au client.</p>
+      </div>
+    </div>`;
+  }
+
+  // ── E-mail reçu par le client. ──
+  const intro = `Bonjour ${escapeHtml(lead.name)},<br><br>Merci pour votre demande. Voici votre <strong>estimation ${lead.number}</strong> — il s'agit d'une estimation indicative qui ne vous engage pas et ne constitue pas un devis définitif. Je reviens vers vous sous 24 h ouvrées pour la confirmer ensemble. Le PDF est en pièce jointe.`;
+  return `<div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:560px;margin:0 auto;color:#233036">
+    ${header}
+    <div style="border:1px solid #eceef0;border-top:0;border-radius:0 0 14px 14px;padding:24px">
+      <p style="font-size:14px;line-height:1.6;margin:0 0 18px">${intro}</p>
+      ${quoteTable}
       <p style="font-size:13px;line-height:1.6;color:#6b7076;margin:0">Lionel Jouannaud — InMotion Performance<br>
       <a href="mailto:${EMETTEUR.email}" style="color:#244357">${EMETTEUR.email}</a> · ${EMETTEUR.phone}</p>
     </div>
@@ -319,8 +352,8 @@ export async function POST(request: Request) {
     to
       ? sendEmail({
           to,
-          subject: `Nouveau devis ${lead.number} — ${name} (${formatEuro(quote.total)})`,
-          text: `Un visiteur a généré un devis via le site.\n\n${quoteText}`,
+          subject: `Demande de devis — ${name}${phone ? ` · ${phone}` : ""} (${formatEuro(quote.total)})`,
+          text: `Nouvelle demande de devis via le site (estimation à confirmer).\n\nCONTACT\n${name}${structure ? ` — ${structure}` : ""}\nEmail : ${email}\nTéléphone : ${phone || "—"}\n${eventDate ? `Date souhaitée : ${eventDate}\n` : ""}${place ? `Lieu : ${place}\n` : ""}${message ? `\nMessage :\n${message}\n` : ""}\n${quoteText}`,
           html: buildHtml(lead, false),
           replyTo: email, // répondre directement au client
           attachments,
@@ -333,8 +366,8 @@ export async function POST(request: Request) {
   // 2) Copie du devis au client (avec le PDF).
   const copyToClient = await sendEmail({
     to: email,
-    subject: `Votre devis ${EMETTEUR.name} — ${lead.number}`,
-    text: `Bonjour ${name},\n\nVoici le récapitulatif de votre devis (PDF en pièce jointe). Il ne vous engage pas : je reviens vers vous sous 24 h ouvrées pour le finaliser ensemble.\n\n${quoteText}\n\nÀ très vite,\n${EMETTEUR.contact} — ${EMETTEUR.name}`,
+    subject: `Votre estimation ${EMETTEUR.name} — ${lead.number}`,
+    text: `Bonjour ${name},\n\nVoici votre estimation (PDF en pièce jointe). Il s'agit d'une estimation indicative : elle ne vous engage pas et ne constitue pas un devis définitif. Je reviens vers vous sous 24 h ouvrées pour la confirmer ensemble.\n\n${quoteText}\n\nÀ très vite,\n${EMETTEUR.contact} — ${EMETTEUR.name}`,
     html: buildHtml(lead, true),
     replyTo: to || EMETTEUR.email, // le client peut répondre directement à Lionel
     attachments,

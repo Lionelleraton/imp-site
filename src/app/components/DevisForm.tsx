@@ -107,7 +107,7 @@ export default function DevisForm() {
     return (
       <div className="rounded-2xl border border-[#89A9BA]/40 bg-[#121B23] p-8 text-center">
         <p className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#89A9BA]`}>
-          Devis {success.number}
+          Estimation {success.number}
         </p>
         <h2 className="mt-4 text-[clamp(1.6rem,3.5vw,2.2rem)] font-extrabold uppercase tracking-[-0.02em]">
           Merci, c&apos;est envoyé&nbsp;!
@@ -317,7 +317,7 @@ export default function DevisForm() {
       <aside className="lg:sticky lg:top-[88px]">
         <div className="rounded-2xl border border-[rgba(237,241,243,0.12)] bg-[#121B23] p-6">
           <h2 className={`${mono} text-[12px] uppercase tracking-[0.2em] text-[#89A9BA]`}>
-            Votre devis
+            Votre estimation
           </h2>
           {quote.valid ? (
             <ul className="mt-4 space-y-2.5">
@@ -335,7 +335,7 @@ export default function DevisForm() {
           )}
 
           <div className="mt-5 flex items-baseline justify-between border-t border-[rgba(237,241,243,0.12)] pt-4">
-            <span className="text-[13px] font-semibold uppercase tracking-[0.1em] text-[#C7D0D7]">Total</span>
+            <span className="text-[13px] font-semibold uppercase tracking-[0.1em] text-[#C7D0D7]">Total estimé</span>
             <span className="text-[26px] font-extrabold tracking-[-0.02em]">{formatEuro(quote.total)}</span>
           </div>
           <p className={`${mono} mt-1 text-right text-[10px] uppercase tracking-[0.1em] text-[#5C6873]`}>
@@ -347,11 +347,12 @@ export default function DevisForm() {
             disabled={submitting}
             className={`${mono} mt-6 w-full rounded-full bg-[#89A9BA] px-6 py-3.5 text-[12px] font-bold uppercase tracking-[0.14em] text-[#0B1015] transition hover:bg-[#AEC8D6] disabled:cursor-not-allowed disabled:opacity-60`}
           >
-            {submitting ? "Envoi…" : "Recevoir mon devis par e-mail"}
+            {submitting ? "Envoi…" : "Recevoir mon estimation par e-mail"}
           </button>
           <p className="mt-3 text-[11.5px] leading-[1.5] text-[#5C6873]">
-            Estimation indicative, sans engagement. Le devis final vous est confirmé
-            sous 24 h ouvrées. Remontées, hébergement et repas éventuels facturés au réel.
+            <strong className="font-semibold text-[#93A0AB]">Estimation indicative, pas un devis définitif.</strong>{" "}
+            Le devis final vous est confirmé sous 24 h ouvrées. Remontées, hébergement et
+            repas éventuels facturés au réel.
           </p>
           {error ? <p className="mt-3 text-[13px] text-[#ff9b9b]">{error}</p> : null}
         </div>

@@ -291,3 +291,51 @@
     background-size: auto, auto, auto, 52px 52px, 52px 52px;
   }
 }
+
+/* ── Transitions entre les pages + entrée de page ── */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root) {
+  animation: vtOut 0.3s ease both;
+}
+::view-transition-new(root) {
+  animation: vtIn 0.42s ease both;
+}
+@keyframes vtOut {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes vtIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+main {
+  animation: pageEnter 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+  main {
+    animation: none;
+  }
+}
