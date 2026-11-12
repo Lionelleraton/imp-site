@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Archivo, Space_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import CookiePreferencesButton from "./CookiePreferencesButton";
+import PhotoMobileMenu from "./PhotoMobileMenu";
 
 // Typographie de la DA sombre (cf. public/home.html) : Archivo + Space Mono.
 export const archivo = Archivo({
@@ -40,7 +41,7 @@ export default function DarkChrome({ children }: { children: ReactNode }) {
               alt="InMotion Performance"
               width={200}
               height={34}
-              className="h-6 w-auto"
+              className="h-6 w-[141.4px]"
               priority
             />
           </Link>
@@ -64,15 +65,7 @@ export default function DarkChrome({ children }: { children: ReactNode }) {
             >
               Faire un devis
             </Link>
-            <details className="relative min-[901px]:hidden">
-              <summary className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-lg border border-[#1F2724]/20 text-[#1F2724] [&::-webkit-details-marker]:hidden" aria-label="Ouvrir le menu">
-                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"><path d="M3 7h18M3 12h18M3 17h18" /></svg>
-              </summary>
-              <nav className={`${spaceMono.className} absolute right-0 top-12 z-50 flex w-52 flex-col gap-4 rounded-xl border border-[#1F2724]/10 bg-[#F4F1E8] p-5 text-xs uppercase tracking-[0.13em] text-[#1F2724] shadow-xl`} aria-label="Navigation mobile">
-                {navLinks.map((link) => <Link key={link.href} href={link.href}>{link.label}</Link>)}
-                <Link href="/devis">Faire un devis</Link>
-              </nav>
-            </details>
+            <PhotoMobileMenu />
           </div>
         </div>
       </header>
