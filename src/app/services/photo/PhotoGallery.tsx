@@ -10,6 +10,13 @@ type PhotoGalleryProps = {
   totalBytes?: number | null;
 };
 
+// Pour les sources proxy (Drive/Dropbox) la miniature est servie par défaut ;
+// on demande l'original en pleine résolution pour le téléchargement (dl=1).
+function fullResUrl(src: string): string {
+  if (!src.startsWith("/api/gallery/")) return src;
+  return src + (src.includes("?") ? "&" : "?") + "dl=1";
+}
+
 function formatBytes(bytes: number): string {
   if (!Number.isFinite(bytes) || bytes <= 0) return "0 o";
   const units = ["o", "Ko", "Mo", "Go", "To"];
@@ -36,7 +43,7 @@ export default function PhotoGallery({
 
   const downloadSingle = async (src: string, index: number) => {
     try {
-      const response = await fetch(src);
+      const response = await fetch(fullResUrl(src));
       const blob = await response.blob();
       const filename = decodeURIComponent(
         src.split("/").pop()?.split("?")[0] ?? `image-${index + 1}.jpg`
@@ -73,7 +80,7 @@ export default function PhotoGallery({
 
       for (let index = 0; index < total; index += 1) {
         const src = images[index];
-        const response = await fetch(src);
+        const response = await fetch(fullResUrl(src));
         const blob = await response.blob();
         const filename = decodeURIComponent(
           src.split("/").pop()?.split("?")[0] ?? `image-${index + 1}.jpg`

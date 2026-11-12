@@ -14,6 +14,7 @@ import {
   verifyGallerySessionToken,
 } from "@/lib/security-tokens";
 import { isDriveConfigured } from "@/lib/drive";
+import { isDropboxConfigured } from "@/lib/dropbox";
 
 type GalleryPageProps = {
   params: Promise<{ code: string }>;
@@ -105,13 +106,13 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
   );
 
   if (!gallery) {
-    // Galerie non déclarée en dur : si Google Drive est configuré, on lit le
-    // dossier Drive nommé comme le code (aucune config à ajouter par client).
-    if (isDriveConfigured()) {
-      const manifestUrl = withCodeInManifestUrl(
-        "/api/gallery/drive/list",
-        normalizedCode
-      );
+    // Galerie non déclarée en dur : si Dropbox (ou Drive) est configuré, on lit
+    // le dossier distant nommé comme le code (aucune config à ajouter par client).
+    if (isDropboxConfigured() || isDriveConfigured()) {
+      const listEndpoint = isDropboxConfigured()
+        ? "/api/gallery/dropbox/list"
+        : "/api/gallery/drive/list";
+      const manifestUrl = withCodeInManifestUrl(listEndpoint, normalizedCode);
       return (
         <main className="pb-24">
           <section className="mx-auto w-full max-w-[1400px] px-4 pt-10 sm:px-6 sm:pt-12 xl:px-10">
