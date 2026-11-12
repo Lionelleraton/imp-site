@@ -59,7 +59,7 @@ export default function PhotoGallery({
   const [active, setActive] = useState<number | null>(null);
   const [isZipping, setIsZipping] = useState(false);
   const [zipProgress, setZipProgress] = useState(0);
-  const touchStartX = useRef<number | null>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
   const close = useCallback(() => setActive(null), []);
   const prev = useCallback(
@@ -213,13 +213,21 @@ export default function PhotoGallery({
         <div
           className="fixed inset-0 z-[100] flex flex-col bg-black/95 backdrop-blur-sm"
           onTouchStart={(e) => {
-            touchStartX.current = e.touches[0]?.clientX ?? null;
+            const t = e.touches[0];
+            touchStart.current = t ? { x: t.clientX, y: t.clientY } : null;
           }}
           onTouchEnd={(e) => {
-            if (touchStartX.current === null) return;
-            const dx = (e.changedTouches[0]?.clientX ?? 0) - touchStartX.current;
+            if (!touchStart.current) return;
+            const t = e.changedTouches[0];
+            const dx = (t?.clientX ?? 0) - touchStart.current.x;
+            const dy = (t?.clientY ?? 0) - touchStart.current.y;
+            touchStart.current = null;
+            // Glissement vers le bas = fermer ; horizontal = photo précédente/suivante.
+            if (Math.abs(dy) > Math.abs(dx) && dy > 80) {
+              close();
+              return;
+            }
             if (Math.abs(dx) > 50) (dx > 0 ? prev : next)();
-            touchStartX.current = null;
           }}
         >
           {/* Barre haut */}
@@ -227,28 +235,18 @@ export default function PhotoGallery({
             <span className="font-mono text-xs uppercase tracking-[0.18em] text-white/70">
               {String(active + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
             </span>
-            <div className="flex items-center gap-2.5">
-              <button
-                type="button"
-                onClick={() => downloadSingle(activeSrc, active)}
-                className="flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-white/20"
-              >
-                <IconDownload className="h-4 w-4" />
-                <span className="hidden sm:inline">Télécharger</span>
-              </button>
-              <button
-                type="button"
-                onClick={close}
-                aria-label="Fermer"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition hover:bg-white/20"
-              >
-                <IconClose className="h-5 w-5" />
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={close}
+              aria-label="Fermer"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition hover:bg-white/20"
+            >
+              <IconClose className="h-5 w-5" />
+            </button>
           </div>
 
           {/* Image */}
-          <div className="relative flex flex-1 items-center justify-center overflow-hidden px-3 pb-4 sm:px-16">
+          <div className="relative flex min-h-0 flex-1 items-center justify-center overflow-hidden px-3 sm:px-16">
             <button
               type="button"
               onClick={close}
@@ -268,7 +266,7 @@ export default function PhotoGallery({
                   type="button"
                   onClick={prev}
                   aria-label="Précédente"
-                  className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white transition hover:bg-black/70 sm:left-5 sm:h-12 sm:w-12"
+                  className="absolute left-2 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white transition hover:bg-black/70 sm:left-5 sm:flex sm:h-12 sm:w-12"
                 >
                   <IconChevron dir="left" className="h-6 w-6" />
                 </button>
@@ -276,12 +274,26 @@ export default function PhotoGallery({
                   type="button"
                   onClick={next}
                   aria-label="Suivante"
-                  className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white transition hover:bg-black/70 sm:right-5 sm:h-12 sm:w-12"
+                  className="absolute right-2 top-1/2 hidden h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 bg-black/40 text-white transition hover:bg-black/70 sm:right-5 sm:flex sm:h-12 sm:w-12"
                 >
                   <IconChevron dir="right" className="h-6 w-6" />
                 </button>
               </>
             )}
+          </div>
+
+          {/* Barre bas : bouton télécharger bien visible (iPhone friendly) */}
+          <div className="flex flex-col items-center gap-2 px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-2">
+            <button
+              type="button"
+              onClick={() => downloadSingle(activeSrc, active)}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-ink shadow-lg transition hover:bg-white/90"
+            >
+              <IconDownload className="h-4 w-4" /> Télécharger
+            </button>
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/40 sm:hidden">
+              Glissez pour changer · vers le bas pour fermer
+            </span>
           </div>
         </div>
       )}
