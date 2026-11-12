@@ -7,12 +7,14 @@ type GalleryViewClientProps = {
   manifestUrl?: string | null;
   initialImages?: string[];
   downloadAllUrl?: string;
+  unoptimized?: boolean;
 };
 
 export default function GalleryViewClient({
   manifestUrl,
   initialImages = [],
   downloadAllUrl,
+  unoptimized,
 }: GalleryViewClientProps) {
   const [images, setImages] = useState<string[]>(initialImages);
   const [totalBytes, setTotalBytes] = useState<number | null>(null);
@@ -57,6 +59,7 @@ export default function GalleryViewClient({
       images={images}
       downloadAllUrl={downloadAllUrl}
       totalBytes={totalBytes}
+      unoptimized={unoptimized}
     />
   );
 }
