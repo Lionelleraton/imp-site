@@ -33,7 +33,7 @@ export default function DarkChrome({ children }: { children: ReactNode }) {
   return (
     <div className={`${archivo.className} min-h-screen bg-[#F4F1E8] text-[#1F2724]`}>
       <header className="sticky top-0 z-40 border-b border-[rgba(31,39,36,0.12)] bg-[#F4F1E8]/85 backdrop-blur">
-        <div className="mx-auto flex h-[64px] max-w-[1100px] items-center justify-between px-5 sm:px-6">
+        <div className="mx-auto flex h-[70px] max-w-[1100px] items-center justify-between px-5 sm:px-6">
           <Link href="/" aria-label="InMotion Performance, accueil" className="flex items-center">
             <Image
               src="/brand/logo-black.svg"
