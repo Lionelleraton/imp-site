@@ -5,22 +5,9 @@ import SiteFooter from "./components/SiteFooter";
 import ScrollReveal from "./components/ScrollReveal";
 import CookieConsent from "./components/CookieConsent";
 import HideOnLegalRoutes from "./components/HideOnLegalRoutes";
+import { SITE_URL } from "./site-url";
 
-const getBaseUrl = () => {
-  const explicit = process.env.NEXT_PUBLIC_SITE_URL;
-  if (explicit && explicit.trim().length > 0) {
-    return explicit.replace(/\/+$/, "");
-  }
-
-  const vercelUrl = process.env.VERCEL_URL;
-  if (vercelUrl && vercelUrl.trim().length > 0) {
-    return `https://${vercelUrl.replace(/\/+$/, "")}`;
-  }
-
-  return "https://inmotionperformance.com";
-};
-
-const baseUrl = getBaseUrl();
+const baseUrl = SITE_URL;
 const siteName = "InMotion Performance";
 const siteTitle =
   "Photographe outdoor, sportif & événementiel · Chamonix, Mont-Blanc, Annecy";

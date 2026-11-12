@@ -15,7 +15,7 @@ import {
 } from "@/lib/security-tokens";
 
 type GalleryPageProps = {
-  params: { code: string } | Promise<{ code: string }>;
+  params: Promise<{ code: string }>;
 };
 
 export const dynamicParams = true;
