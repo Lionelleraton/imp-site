@@ -104,6 +104,18 @@ type ListEntry = {
   size?: number;
 };
 
+// Vérifie qu'un dossier existe bien (utilisé avant d'ouvrir une session).
+export async function folderExists(folderPath: string): Promise<boolean> {
+  try {
+    const res = await rpc("files/get_metadata", { path: folderPath });
+    if (!res.ok) return false;
+    const data = (await res.json()) as { ".tag"?: string };
+    return data[".tag"] === "folder";
+  } catch {
+    return false;
+  }
+}
+
 export async function listFolderImages(folderPath: string): Promise<DropboxFile[]> {
   const files: DropboxFile[] = [];
   let res = await rpc("files/list_folder", {

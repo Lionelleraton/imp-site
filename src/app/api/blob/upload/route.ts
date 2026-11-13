@@ -26,7 +26,7 @@ export async function POST(request: Request) {
     onBeforeGenerateToken: async () => {
       return {
         access: "public",
-        addRandomSuffix: false,
+        addRandomSuffix: true,
         allowedContentTypes: [
           "image/jpeg",
           "image/png",

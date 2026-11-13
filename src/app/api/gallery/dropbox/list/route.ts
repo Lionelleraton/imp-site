@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { normalizeGalleryCode } from "@/lib/gallery-code";
+import { isValidGalleryCode, normalizeGalleryCode } from "@/lib/gallery-code";
 import {
   getGallerySessionCookieName,
   verifyGallerySessionToken,
@@ -10,6 +10,7 @@ import {
   listFolderImages,
   resolveFolderPathForCode,
 } from "@/lib/dropbox";
+import { planZipParts } from "@/lib/gallery-zip";
 
 export const runtime = "nodejs";
 
@@ -32,7 +33,7 @@ export async function GET(request: Request) {
   }
 
   const code = normalizeGalleryCode(searchParams.get("code") || session.code);
-  if (!code || code !== session.code) {
+  if (!code || code !== session.code || !isValidGalleryCode(code)) {
     return NextResponse.json({ error: "Code galerie non autorisé." }, { status: 403 });
   }
 
@@ -56,8 +57,14 @@ export async function GET(request: Request) {
   );
   const totalBytes = files.reduce((sum, f) => sum + (f.size || 0), 0);
 
+  const zipParts = planZipParts(files).map((part, i) => ({
+    url: `/api/gallery/dropbox/zip?code=${encodedCode}&part=${i + 1}`,
+    bytes: part.bytes,
+    count: part.count,
+  }));
+
   if (includeMeta) {
-    return NextResponse.json({ images, count: images.length, totalBytes });
+    return NextResponse.json({ images, count: images.length, totalBytes, zipParts });
   }
   return NextResponse.json(images);
 }

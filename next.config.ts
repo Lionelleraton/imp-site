@@ -59,7 +59,6 @@ const nextConfig: NextConfig = {
     return {
       beforeFiles: [
         { source: "/", destination: "/home.html" },
-        { source: "/portfolio", destination: "/home.html" },
       ],
     };
   },

@@ -88,36 +88,28 @@ export default function CookieConsent() {
           role="dialog"
           aria-live="polite"
           aria-label="Consentement aux cookies"
-          className="fixed inset-x-0 bottom-0 z-[100] px-3 pb-3 sm:px-6 sm:pb-6"
+          className="fixed inset-x-0 bottom-0 z-[100] px-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] sm:px-6 sm:pb-6"
         >
-          <div className="mx-auto w-full max-w-[1100px] rounded-2xl border border-line bg-white/95 p-5 shadow-[0_22px_60px_rgba(35,48,54,0.22)] backdrop-blur sm:flex sm:items-center sm:gap-6 sm:p-6">
-            <div className="text-sm leading-relaxed text-ink/75">
-              <p className="font-semibold text-ink">On respecte ta vie privée.</p>
-              <p className="mt-1">
-                On aimerait mesurer l&apos;audience du site avec Google Analytics
-                (dépôt de cookies) pour l&apos;améliorer. Rien n&apos;est chargé sans
-                ton accord, et aucune donnée n&apos;est revendue. Détails dans la{" "}
-                <Link
-                  href="/confidentialite"
-                  className="font-medium text-deep underline underline-offset-2"
-                >
-                  politique de confidentialité
-                </Link>
-                .
-              </p>
-            </div>
-            <div className="mt-4 flex shrink-0 gap-3 sm:mt-0">
+          <div className="mx-auto w-full max-w-[1100px] rounded-2xl border border-line bg-white/95 p-3.5 shadow-[0_22px_60px_rgba(35,48,54,0.22)] backdrop-blur sm:flex sm:items-center sm:gap-6 sm:p-6">
+            <p className="text-[12.5px] leading-snug text-ink/75 sm:text-sm sm:leading-relaxed">
+              <span className="font-semibold text-ink">Cookies.</span> Google Analytics mesure
+              l&apos;audience du site, uniquement avec votre accord.{" "}
+              <Link href="/confidentialite" className="font-medium text-deep underline underline-offset-2">
+                En savoir plus
+              </Link>
+            </p>
+            <div className="mt-2.5 flex shrink-0 gap-2 sm:mt-0 sm:gap-3">
               <button
                 type="button"
                 onClick={() => choose("refused")}
-                className="tap-target inline-flex flex-1 items-center justify-center rounded-full border border-deep/25 px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-deep transition hover:bg-deep/5 sm:flex-none"
+                className="tap-target inline-flex flex-1 items-center justify-center rounded-full border border-deep/25 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-deep transition hover:bg-deep/5 sm:flex-none"
               >
                 Refuser
               </button>
               <button
                 type="button"
                 onClick={() => choose("accepted")}
-                className="tap-target inline-flex flex-1 items-center justify-center rounded-full bg-deep px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-deep/90 sm:flex-none"
+                className="tap-target inline-flex flex-1 items-center justify-center rounded-full bg-deep px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-deep/90 sm:flex-none"
               >
                 Accepter
               </button>

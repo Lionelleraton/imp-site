@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import {
@@ -5,14 +6,32 @@ import {
   getAdminSessionCookieName,
   getAdminSessionTtlSeconds,
 } from "@/lib/security-tokens";
+import { delay, getClientIp, hit, isLimited, reset } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
+
+const MAX_FAILURES = 5;
+const WINDOW_MS = 15 * 60 * 1000;
+
+function safeEqual(a: string, b: string): boolean {
+  const ha = crypto.createHash("sha256").update(a).digest();
+  const hb = crypto.createHash("sha256").update(b).digest();
+  return crypto.timingSafeEqual(ha, hb);
+}
 
 type AdminSessionBody = {
   password?: string;
 };
 
 export async function POST(request: Request) {
+  const key = `gallery-admin:${getClientIp(request)}`;
+  if (isLimited(key, MAX_FAILURES, WINDOW_MS)) {
+    return NextResponse.json(
+      { error: "Trop de tentatives. Réessayez dans 15 minutes." },
+      { status: 429 }
+    );
+  }
+
   let body: AdminSessionBody;
   try {
     body = (await request.json()) as AdminSessionBody;
@@ -29,9 +48,12 @@ export async function POST(request: Request) {
   }
 
   const providedPassword = body.password?.trim() ?? "";
-  if (!providedPassword || providedPassword !== expectedPassword) {
+  if (!providedPassword || !safeEqual(providedPassword, expectedPassword)) {
+    hit(key, WINDOW_MS);
+    await delay(700);
     return NextResponse.json({ error: "Mot de passe incorrect." }, { status: 401 });
   }
+  reset(key);
 
   const sessionToken = createAdminSessionToken();
   const cookieStore = await cookies();

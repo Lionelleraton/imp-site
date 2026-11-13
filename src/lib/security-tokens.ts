@@ -37,14 +37,26 @@ function base64UrlDecode(input: string): string {
   return Buffer.from(base64 + padding, "base64").toString("utf8");
 }
 
+// Secret aléatoire de secours, propre à l'instance (jamais une valeur connue).
+const RANDOM_FALLBACK_SECRET = crypto.randomBytes(32).toString("hex");
+
 function getSigningSecret(): string {
-  const explicit = process.env.GALLERY_SIGNING_SECRET?.trim();
-  if (explicit) return explicit;
-
-  const blobToken = process.env.BLOB_READ_WRITE_TOKEN?.trim();
-  if (blobToken) return blobToken;
-
-  return "imp-site-dev-gallery-secret";
+  // Ordre de préférence : secret dédié, puis secrets serveur déjà présents.
+  const candidates = [
+    process.env.GALLERY_SIGNING_SECRET,
+    process.env.DROPBOX_APP_SECRET,
+    process.env.BLOB_READ_WRITE_TOKEN,
+    process.env.RESEND_API_KEY,
+  ];
+  for (const value of candidates) {
+    const v = value?.trim();
+    if (v) return v;
+  }
+  // En développement uniquement, un secret fixe évite de perdre la session
+  // à chaque rechargement. En production, jamais de valeur écrite en dur :
+  // sinon n'importe qui pourrait fabriquer un jeton de galerie valide.
+  if (process.env.NODE_ENV !== "production") return "imp-site-dev-gallery-secret";
+  return RANDOM_FALLBACK_SECRET;
 }
 
 function signRaw(payloadBase64: string): string {

@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { normalizeGalleryCode } from "@/lib/gallery-code";
+import { isValidGalleryCode, normalizeGalleryCode } from "@/lib/gallery-code";
 import {
   getGallerySessionCookieName,
   verifyGallerySessionToken,
@@ -51,7 +51,7 @@ export async function GET(request: Request, context: Ctx) {
   }
 
   const code = normalizeGalleryCode(searchParams.get("code") || session.code);
-  if (!code || code !== session.code) {
+  if (!code || code !== session.code || !isValidGalleryCode(code)) {
     return NextResponse.json({ error: "Accès non autorisé." }, { status: 403 });
   }
 

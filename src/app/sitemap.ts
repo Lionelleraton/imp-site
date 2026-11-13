@@ -5,6 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Site recentré sur la photographie : on expose en priorité les pages photo.
   const entries: { path: string; priority: number; freq: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
     { path: "/", priority: 1, freq: "weekly" },
+    { path: "/portfolio", priority: 0.9, freq: "monthly" },
     { path: "/tarifs", priority: 0.9, freq: "monthly" },
     { path: "/devis", priority: 0.8, freq: "monthly" },
     { path: "/services/photo", priority: 0.8, freq: "monthly" },

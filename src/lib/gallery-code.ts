@@ -49,3 +49,10 @@ export function buildPrefixCandidates(raw: string): string[] {
   return Array.from(variants);
 }
 
+
+// Format autorisé pour un code galerie (après normalisation) : lettres,
+// chiffres, tirets et underscores, 3 à 64 caractères. Empêche tout caractère
+// de chemin (/, .., etc.) puisque le code sert à désigner un dossier.
+export function isValidGalleryCode(code: string): boolean {
+  return /^[A-Z0-9][A-Z0-9_-]{2,63}$/.test(code);
+}

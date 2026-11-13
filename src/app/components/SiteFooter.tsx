@@ -158,7 +158,7 @@ export default function SiteFooter() {
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex flex-col gap-2">
                 <p className="text-[10px] text-ink/45">
-                  © {new Date().getFullYear()} InMotion Performance · Chamonix Mont-Blanc
+                  © {new Date().getFullYear() > 2025 ? `2025-${new Date().getFullYear()}` : "2025"} InMotion Performance · Chamonix Mont-Blanc
                 </p>
                 <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-ink/60">
                   <Link href="/mentions-legales" className="transition hover:text-deep">
