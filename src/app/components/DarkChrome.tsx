@@ -85,7 +85,7 @@ export default function DarkChrome({ children }: { children: ReactNode }) {
             <p
               className={`${spaceMono.className} mt-3 text-[11px] uppercase tracking-[0.13em] text-[#8A8475]`}
             >
-              © {new Date().getFullYear()} InMotion Performance · Chamonix Mont-Blanc
+              © {new Date().getFullYear() > 2025 ? `2025-${new Date().getFullYear()}` : "2025"} InMotion Performance · Chamonix Mont-Blanc
             </p>
           </div>
           <nav

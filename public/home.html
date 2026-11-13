@@ -220,7 +220,7 @@ h1,h2,h3{margin:0; text-wrap:balance}
 @media(max-width:820px){ .about-grid{grid-template-columns:1fr; gap:40px} }
 .about-photo{position:relative}
 .about-photo img{width:100%; border-radius:12px}
-.about-photo .tag{position:absolute; bottom:14px; left:14px; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--text); background:rgba(11,16,21,.6); border:1px solid var(--line-2); padding:6px 11px; border-radius:100px; backdrop-filter:blur(4px)}
+.about-photo .tag{position:absolute; bottom:14px; left:14px; font-family:var(--mono); font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--onhero); background:rgba(11,16,21,.6); border:1px solid rgba(251,249,243,.3); padding:6px 11px; border-radius:100px; backdrop-filter:blur(4px)}
 .about-body p{color:var(--muted); font-size:16.5px; line-height:1.75; margin:22px 0 0; max-width:60ch}
 .about-body p strong{color:var(--text); font-weight:600}
 .stats{display:flex; flex-wrap:wrap; gap:clamp(22px,5vw,52px); margin-top:34px; padding-top:30px; border-top:1px solid var(--line)}
@@ -285,9 +285,10 @@ h1,h2,h3{margin:0; text-wrap:balance}
 .tile:hover img{transform:scale(1.045)}
 .tile .cap{position:absolute; inset:auto 0 0 0; padding:44px 16px 15px; z-index:2; background:linear-gradient(transparent, rgba(9,13,17,.9)); opacity:0; transform:translateY(8px); transition:opacity .35s, transform .35s}
 .tile:hover .cap,.tile:focus-visible .cap{opacity:1; transform:none}
-.tile .cap .t{display:block; font-weight:700; font-size:18px}
-.tile .cap .m{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--sky); margin-top:6px}
-.tile .badge{position:absolute; top:12px; left:12px; z-index:2; font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--text); background:rgba(9,13,17,.5); border:1px solid var(--line-2); padding:4px 9px; border-radius:100px; backdrop-filter:blur(4px); opacity:0; transition:opacity .35s}
+.tile .cap .t{display:block; font-weight:700; font-size:18px; color:var(--onhero)}
+.tile .cap .m{display:block; font-family:var(--mono); font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:#E8B28C; margin-top:6px}
+@media (hover:none){ .tile .cap{opacity:1; transform:none; padding:36px 12px 11px} .tile .cap .t{font-size:15px} }
+.tile .badge{position:absolute; top:12px; left:12px; z-index:2; font-family:var(--mono); font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--onhero); background:rgba(9,13,17,.5); border:1px solid rgba(251,249,243,.3); padding:4px 9px; border-radius:100px; backdrop-filter:blur(4px); opacity:0; transition:opacity .35s}
 .tile:hover .badge,.tile:focus-visible .badge{opacity:1}
 .pf-cta{text-align:center; padding:clamp(40px,6vw,70px) 0 0; border-top:1px solid var(--line); margin-top:20px}
 .pf-cta h3{font-weight:800; font-size:clamp(22px,3.4vw,34px); text-transform:uppercase; letter-spacing:-.01em}
@@ -317,7 +318,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
 .lb-cap{position:absolute; inset:auto 0 clamp(14px,3vw,30px) 0; text-align:center; padding:0 20px; opacity:0; transform:translateY(8px); transition:opacity .45s ease .12s, transform .5s cubic-bezier(.2,.7,.2,1) .12s}
 .lb-stage:has(.lb-img.ready) .lb-cap{opacity:1; transform:none}
 .lb-cap .t{font-weight:700; font-size:clamp(17px,2.4vw,23px); color:var(--cream)}
-.lb-cap .m{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--sky); margin-top:8px}
+.lb-cap .m{font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:#E8B28C; margin-top:8px}
 .lb-nav{position:absolute; z-index:3; top:50%; transform:translateY(-50%); width:52px; height:52px; border-radius:50%; background:rgba(18,27,35,.75); border:1px solid rgba(255,255,255,.4); color:var(--cream); cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .25s, color .25s, border-color .25s; backdrop-filter:blur(4px)}
 .lb-nav:hover{background:var(--sky); color:var(--cream); border-color:transparent}
 .lb-nav svg{width:22px;height:22px}
@@ -362,9 +363,9 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
 
 <!-- ================= NAV ================= -->
 <nav class="nav" id="nav">
-  <a class="logo" href="/" data-view="home" aria-label="In Motion Performance, accueil"><svg viewBox="0 0 2103 357"><use href="#imp-logo"/></svg></a>
+  <a class="logo" href="/" data-view="home" aria-label="InMotion Performance, accueil"><svg viewBox="0 0 2103 357"><use href="#imp-logo"/></svg></a>
   <div class="nav-links" id="navLinks">
-    <a href="/portfolio" data-view="portfolio" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
+    <a href="/portfolio" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
     <a href="/tarifs" data-fr="Tarifs" data-en="Pricing">Tarifs</a>
     <a href="/services/photo/galerie" data-fr="Espace client" data-en="Client area">Espace client</a>
     <a href="/#contact" data-view="home" data-anchor="contact" data-fr="Contact" data-en="Contact">Contact</a>
@@ -373,7 +374,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
   <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg></button>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="/portfolio" data-view="portfolio" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
+  <a href="/portfolio" data-fr="Portfolio" data-en="Portfolio">Portfolio</a>
   <a href="/tarifs" data-fr="Tarifs" data-en="Pricing">Tarifs</a>
   <a href="/services/photo/galerie" data-fr="Espace client" data-en="Client area">Espace client</a>
   <a href="/devis" data-fr="Faire un devis" data-en="Get a quote">Faire un devis</a>
@@ -392,7 +393,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
       <div class="hero-actions hla d4">
         <a class="btn btn-primary" href="/devis" data-fr="Faire mon devis" data-en="Get my quote">Faire mon devis
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <a class="btn btn-ghost" href="/portfolio" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio
+        <a class="btn btn-ghost" href="/portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
       <p class="coords hla d5">CHAMONIX 45.90°N 6.13°E</p>
@@ -415,14 +416,14 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
         <div class="svc-media"><span class="num">01</span><img id="svcPhoto" src="imp-images/g15.jpg" alt="Photographe de sport, trail en montagne face au massif du Mont-Blanc"></div>
         <div class="svc-body"><h3 data-fr="Sport &amp; course" data-en="Sport &amp; racing">Sport &amp; course</h3>
           <p data-fr="Trail, ski, biathlon, cyclisme : l'intensité de la course captée au bon instant, prête à publier pour vos réseaux et vos sponsors." data-en="Trail, ski, biathlon, cycling: the intensity of the race caught at the right moment, ready to publish for your socials and sponsors.">Trail, ski, biathlon, cyclisme : l'intensité de la course captée au bon instant, prête à publier pour vos réseaux et vos sponsors.</p>
-          <a class="svc-link" href="/portfolio" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="svc-link" href="/portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
       <article class="svc reveal d1">
         <div class="svc-media"><span class="num">02</span><img src="imp-images/g39.jpg" alt="Photographe outdoor, bouquetin au coucher de soleil sur une crête du massif du Mont-Blanc"></div>
         <div class="svc-body"><h3 data-fr="Outdoor &amp; montagne" data-en="Outdoor &amp; mountain">Outdoor &amp; montagne</h3>
           <p data-fr="Portraits et grands espaces : l'athlète dans son terrain de jeu, du lever du jour au coucher de soleil sur les sommets." data-en="Portraits and wide-open spaces: the athlete in their playground, from first light to sunset over the peaks.">Portraits et grands espaces : l'athlète dans son terrain de jeu, du lever du jour au coucher de soleil sur les sommets.</p>
-          <a class="svc-link" href="/portfolio" data-view="portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="svc-link" href="/portfolio" data-fr="Voir le portfolio" data-en="View portfolio">Voir le portfolio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
       </article>
       <article class="svc reveal d2">
@@ -471,7 +472,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
   </div></section>
 
   <section class="about"><div class="wrap"><div class="about-grid">
-    <div class="about-photo reveal"><img src="imp-images/portrait.jpg" alt="Lionel Jouannaud, fondateur d'In Motion Performance"><span class="tag" data-fr="Lionel Jouannaud, fondateur" data-en="Lionel Jouannaud, founder">Lionel Jouannaud, fondateur</span></div>
+    <div class="about-photo reveal"><img src="imp-images/portrait.jpg" alt="Lionel Jouannaud, fondateur d'InMotion Performance"><span class="tag" data-fr="Lionel Jouannaud, fondateur" data-en="Lionel Jouannaud, founder">Lionel Jouannaud, fondateur</span></div>
     <div class="about-body reveal d1">
       <p class="eyebrow" data-fr="Le studio" data-en="The studio">Le studio</p>
       <h2 class="section-title" data-fr="Photographe de sport &amp; d'outdoor, basé en Haute-Savoie." data-en="Sport &amp; outdoor photographer, based in the French Alps.">Photographe de sport &amp; d'outdoor, basé en Haute-Savoie.</h2>
@@ -548,7 +549,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
     </div>
     <div class="col"><h4 data-fr="Navigation" data-en="Navigation">Navigation</h4>
       <a href="/" data-view="home" data-fr="Accueil" data-en="Home">Accueil</a>
-      <a href="/portfolio" data-view="portfolio">Portfolio</a>
+      <a href="/portfolio">Portfolio</a>
       <a href="/tarifs" data-fr="Tarifs" data-en="Pricing">Tarifs</a>
       <a href="/services/photo/galerie" data-fr="Espace client" data-en="Client area">Espace client</a>
       <a href="/devis" data-fr="Faire un devis" data-en="Get a quote">Faire un devis</a>
@@ -561,7 +562,7 @@ footer .bar span{font-family:var(--mono); font-size:11px; letter-spacing:.08em; 
     </div>
   </div>
   <div class="bar">
-    <span>© 2025 In Motion Performance</span>
+    <span id="copyYears">© 2025-2026 InMotion Performance</span>
     <span data-fr="Photographies : Lionel Jouannaud" data-en="Photography: Lionel Jouannaud">Photographies : Lionel Jouannaud</span>
   </div>
   <nav class="legalbar" aria-label="Liens légaux">
@@ -711,7 +712,7 @@ function go(v,anchor){
   requestAnimationFrame(checkReveals);
 }
 document.querySelectorAll('[data-view]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();go(a.dataset.view,a.dataset.anchor);closeMenu();});});
-window.addEventListener('hashchange',()=>{const h=location.hash.replace('#','');if(h==='portfolio')showView('portfolio');else showView('home');requestAnimationFrame(checkReveals);});
+window.addEventListener('hashchange',()=>{const h=location.hash.replace('#','');if(h==='portfolio'){location.replace('/portfolio');return;}else showView('home');requestAnimationFrame(checkReveals);});
 
 /* nav + mobile menu */
 const nav=document.getElementById('nav');const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>40);onScroll();window.addEventListener('scroll',()=>{onScroll();checkReveals();},{passive:true});
@@ -742,7 +743,7 @@ function animateBars(){if(barsDone)return;const bars=document.getElementById('ps
 window.addEventListener('scroll',animateBars,{passive:true});
 
 /* save contact: real .vcf download on the live site; clipboard fallback in the sandboxed preview */
-const vcard=["BEGIN:VCARD","VERSION:3.0","N:Jouannaud;Lionel;;;","FN:Lionel Jouannaud","ORG:In Motion Performance","TITLE:Photographe de sport","TEL;TYPE=CELL:+33665620084","EMAIL:lioneljouannaud@gmail.com","URL:https://inmotionperformance.com","ADR;TYPE=WORK:;;;Chamonix;;;France","NOTE:Photographe de sport, outdoor et événementiel. Annecy et Chamonix.","END:VCARD"].join("\r\n");
+const vcard=["BEGIN:VCARD","VERSION:3.0","N:Jouannaud;Lionel;;;","FN:Lionel Jouannaud","ORG:InMotion Performance","TITLE:Photographe de sport","TEL;TYPE=CELL:+33665620084","EMAIL:lioneljouannaud@gmail.com","URL:https://inmotionperformance.com","ADR;TYPE=WORK:;;;Chamonix;;;France","NOTE:Photographe de sport, outdoor et événementiel. Annecy et Chamonix.","END:VCARD"].join("\r\n");
 const scBtn=document.getElementById('saveContact');
 function scFlash(msg){const s=scBtn.querySelector('span');if(!s)return;const of=s.getAttribute('data-fr'),oe=s.getAttribute('data-en');s.removeAttribute('data-fr');s.removeAttribute('data-en');s.textContent=msg;setTimeout(()=>{s.setAttribute('data-fr',of);s.setAttribute('data-en',oe);s.textContent=lang==='fr'?of:oe;},2200);}
 if(scBtn)scBtn.addEventListener('click',async()=>{
@@ -754,7 +755,8 @@ if(scBtn)scBtn.addEventListener('click',async()=>{
 
 /* init */
 buildCollections();buildGrid();applyFilter();applyLangText();
-(function(){const h=location.hash.replace('#','');const pth=location.pathname.toLowerCase();if(h==='portfolio'||/portfolio\/?$/.test(pth))showView('portfolio');else showView('home');})();
+(function(){if(location.hash==='#portfolio'){location.replace('/portfolio');return;}showView('home');})();
+(function(){var y=new Date().getFullYear(),el=document.getElementById('copyYears');if(el)el.textContent='\u00A9 '+(y>2025?'2025-'+y:'2025')+' InMotion Performance';})();
 checkReveals();animateBars();
 </script>
 
@@ -775,13 +777,20 @@ checkReveals();animateBars();
   #cookieBanner .cc-btn:hover{transform:translateY(-1px)}
   #cookieBanner .cc-refuse{background:transparent;border:1px solid var(--line-2);color:var(--text)}
   #cookieBanner .cc-accept{background:var(--sky);border:1px solid var(--sky);color:var(--cream)}
+  @media(max-width:639px){
+    #cookieBanner{padding:0 10px max(10px,env(safe-area-inset-bottom))}
+    #cookieBanner .cc-card{padding:12px 14px;gap:10px;border-radius:14px}
+    #cookieBanner .cc-txt{font-size:12.5px;line-height:1.45}
+    #cookieBanner .cc-actions{gap:8px}
+    #cookieBanner .cc-btn{flex:1;padding:10px 8px;font-size:10.5px;letter-spacing:.14em}
+  }
 </style>
 <div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Consentement aux cookies">
   <div class="cc-card">
     <p class="cc-txt"
-       data-fr='<strong>On respecte ta vie privée.</strong> On aimerait mesurer l&rsquo;audience du site avec Google Analytics (dépôt de cookies) pour l&rsquo;améliorer. Rien n&rsquo;est chargé sans ton accord. Détails dans la <a href="/confidentialite">politique de confidentialité</a>.'
-       data-en='<strong>We respect your privacy.</strong> We&rsquo;d like to measure site audience with Google Analytics (cookies) to improve it. Nothing loads without your consent. See our <a href="/confidentialite">privacy policy</a>.'>
-      <strong>On respecte ta vie privée.</strong> On aimerait mesurer l&rsquo;audience du site avec Google Analytics (dépôt de cookies) pour l&rsquo;améliorer. Rien n&rsquo;est chargé sans ton accord. Détails dans la <a href="/confidentialite">politique de confidentialité</a>.
+       data-fr='<strong>Cookies.</strong> Google Analytics mesure l&rsquo;audience du site, uniquement avec votre accord. <a href="/confidentialite">En savoir plus</a>'
+       data-en='<strong>Cookies.</strong> Google Analytics measures site traffic, only with your consent. <a href="/confidentialite">Learn more</a>'>
+      <strong>Cookies.</strong> Google Analytics mesure l&rsquo;audience du site, uniquement avec votre accord. <a href="/confidentialite">En savoir plus</a>
     </p>
     <div class="cc-actions">
       <button type="button" class="cc-btn cc-refuse" id="ccRefuse" data-fr="Refuser" data-en="Decline">Refuser</button>

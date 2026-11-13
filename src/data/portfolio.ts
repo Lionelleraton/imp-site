@@ -15,13 +15,13 @@ export type PortfolioPhoto = {
 
 export const PORTFOLIO_CATEGORIES: { id: PortfolioCategory; label: string }[] = [
   { id: "trail", label: "Trail & course" },
+  { id: "ski", label: "Ski & neige" },
   { id: "evenement", label: "Événement" },
   { id: "marque", label: "Marques" },
   { id: "paysage", label: "Sommets & paysages" },
-  { id: "faune", label: "Faune" },
-  { id: "ski", label: "Ski & neige" },
-  { id: "nuit", label: "Nuit & astro" },
   { id: "voyage", label: "Voyage" },
+  { id: "faune", label: "Faune" },
+  { id: "nuit", label: "Nuit & astro" },
 ];
 
 export const PORTFOLIO: PortfolioPhoto[] = [
